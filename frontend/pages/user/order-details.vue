@@ -1,134 +1,189 @@
 <template>
 <div>
-
-    <Navbar />
-
-    <div class="container">
-        <div class="row mobile_view">
-            <div class="col-md-12">
-
-                <div class="pay_m_title">
-                    <nuxt-link to="/user/profile" class="btn_back" type="button"> <i class="fa-solid fa-arrow-left-long"></i>
-                    </nuxt-link>
-                    <h6>Order Details </h6>
-
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xl-3 desktop_view">
-                <LeftsidebarDesktop />
-            </div>
-            <div class="col-xl-9">
-                <span v-if="loading">
-                    <Loader />
-                </span>
-
-                <div class="order_details">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="or_des" id="mobileScreen" style="background-color: #373737;">
-                                <div class="des_title">
-                                    <img src="/images/logo.png" class="img-fluid" loading="lazy" alt="">
-                                </div>
-                                <div class="des_body">
-                                    <div class="body_title">
-                                        <h1>Thank You For Your Order.</h1>
-                                        <div class="user_details">
-                                            <p><strong>Order Status:</strong>{{ orderstatus }}</p>
-                                            <p><strong>Order Id:</strong>#{{ orderId }}</p>
-                                            <p><strong>Payment With:</strong>{{ pay_msg }}</p>
-                                            <p><strong>Trx Id:</strong>{{ txtid }}</p>
-                                            <p><strong>Order date:</strong>{{ odate }}</p>
-                                        </div>
-
-                                    </div>
-                                    <ul>
-                                        <li v-for="(order, index) in orders" :key="index">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <div class="d_p_image">
-                                                        <img :src="order.thumbnail_img" class="img-fluid" loading="lazy" alt="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <div class="des_part">
-                                                        <div>
-                                                            <h1>{{ order.product_name }}</h1>
-                                                            <p><strong>Quantity: </strong>{{ order.quantity }}</p>
-                                                        </div>
-                                                        <div>
-                                                            <h6>{{ order.price }} TK.</h6>
-                                                        </div>
-                                                    </div>
-                                                    <div class="des_ticket">
-                                                        <div class="d-flex justify-content-between align-items-center">
-                                                            <div>
-                                                                <h3>
-                                                                    <span v-if="order.ticketName !==''">
-                                                                        <b><u style="color:rgb(178, 249, 37);">{{ order.ticketName }}</u></b>
-                                                                    </span></h3>
-                                                                <p><span>{{ order.ticketsNumber }}</span>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <div class="text-end mt-2">
-                                            <p>Item Subtotal : {{ itemstotal }} Tk</p>
-                                            <p>Shipping Fee : {{ shipping_fee }} Tk</p>
-                                            <p>VAT ({{ vat_percentage }} %): {{ percentageAmount }} Tk</p>
-                                            <p>Wallet Balance: -{{ walletBalance }} Tk</p>
-                                            <p>Promo DCF : -{{ copon_amount }} Tk</p>
-                                            <p>Total Ammount: {{ total }} Tk</p>
-
-                                        </div>
-                                    </ul>
-                                </div>
+    <LogoAndPayment />
+    <!-- navbar section start here  -->
+    <section class="search_bar">
+        <div class="container">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-lg-3 col-md-4 col-4">
+                    <div class="logo nav_tab">
+                        <!-- mobile view sidebar  -->
+                        <button type="button" class="btn_menu mobile_view" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i class="fa-solid fa-bars-staggered"></i></button>
+                        <!-- sidebar offcanvas  -->
+                        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                            <div class="offcanvas-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Ecommerce</h5>
+                            </div>
+                            <div class="offcanvas-body">
+                                <!-- offf canvas start here  -->
+                                <Common_MobileSidebar />
                             </div>
                         </div>
-
+                        <!-- mini tab view navbar here  -->
+                        <Common_MiniTabNavbar />
+                        <!-- nav end  -->
+                        <Nuxt-link to="/">Ecommerce <i class=" fa-regular fa-star"></i></Nuxt-link>
                     </div>
                 </div>
-                <div class="text-center">
-                    <button id="capture_btn" class="btn_submit m-auto mb-2" @click="captureBtn">Take screenshort</button>
+                <div class="col-6 desktop_view mini_tab_hide">
+                    <form action="" class="">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" name="" id="" placeholder="Search Product" class="form-control"> <button type="button">Search</button>
+                    </form>
                 </div>
-
+                <!-- desktop_view options  -->
+                <DesktopViewOption />
+                <!-- mobile view options  -->
+                <div class="col-4 ms-auto  mobile_view">
+                    <div class="mobile_nav_option">
+                        <a class="search_form"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    </div>
+                </div>
+                <!-- search modal  -->
+                <Common_MobileSearchProduct />
             </div>
         </div>
-    </div>
+    </section>
+    <!-- Main section start here  -->
 
+    <section class="main_content ">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="user_sidebar">
+
+                        <div class="user_page_list">
+                            <ul>
+                                <li>
+                                    <Nuxt-link to="/user/user-profile">User Account </Nuxt-link>
+                                </li>
+                                <li class="active">
+                                    <Nuxt-link to="/user/user-orders">My Orders </Nuxt-link>
+                                </li>
+                                <li class="">
+                                    <Nuxt-link to="/user/user-whichlist">Wishlist </Nuxt-link>
+                                </li>
+                                <li class="">
+                                    <Nuxt-link to="/user/user-mlm">MLM </Nuxt-link>
+                                </li>
+
+
+                                <li class="d-none">
+                                    <Nuxt-link to="/user/my-reviews">My Reviews </Nuxt-link>
+                                </li>
+                                <li class="">
+                                    <a href="#" @click="logout">LogOut </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-8">
+                    <div class="loading-indicator" v-if="loading">
+                        <div class="loader-container">
+                            <center class="loader-text">Loading...</center>
+                            <img src="/loader/loader.gif" alt="Loader" />
+                        </div>
+                    </div>
+                    <div class="main_profile">
+                        <div class="recent_orders">
+
+                            <div class="row">
+
+                                <div class="col">
+                                    <h4>Orders Details </h4>
+                                </div>
+
+                                <div class="col">
+                                    <strong>Order Status: {{ orderstatus }}</strong>
+                                </div>
+
+                            </div>
+
+                            <table width="100%" border="0" class="table table-bordered hover">
+                                <tr>
+                                    <td width="22">#</td>
+                                    <td width="916">Item Description </td>
+                                    <td width="63">
+                                        <div align="center">Qty</div>
+                                    </td>
+                                    <td width="80">
+                                        <div align="center">Price</div>
+                                    </td>
+                                    <td width="80">
+                                        <div align="center">Total</div>
+                                    </td>
+                                </tr>
+                                <tr v-for="(order, index) in orders" :key="index">
+                                    <td>{{ index + 1 }}</td>
+                                    <td>{{ order.product_name }}</td>
+                                    <td>
+                                        <div align="center">{{ order.quantity }}</div>
+                                    </td>
+                                    <td>
+                                        <div align="center">{{ order.price }}</div>
+                                    </td>
+                                    <td>
+                                        <div align="center">{{ order.total }}</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>
+                                        <div align="right">Total</div>
+                                    </td>
+                                    <td>
+                                        <div align="center">{{ totalQuantity }}</div>
+                                    </td>
+                                    <td>
+                                        <div align="center">{{ totalAmount }}</div>
+                                    </td>
+                                    <td>
+                                        <div align="center">{{ totalAmount }}</div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- END Main Section here -->
+    <!-- back to top button  -->
+    <div class="back_top">
+        <a href="#top"><i class="fa-solid fa-angle-up"></i></a>
+    </div>
     <Footer />
-    <MobileMenu/>
 </div>
 </template>
 
 <script>
+import $ from 'jquery';
+import Common_MobileSidebar from '~/components/Common_MobileSidebar.vue';
+import Common_MiniTabNavbar from '~/components/Common_MiniTabNavbar.vue';
+import Common_MobileSearchProduct from '~/components/Common_MobileSearchProduct.vue';
+
 export default {
-    middleware: "auth",
+
+    middleware: 'auth',
+    components: {
+        Common_MobileSidebar,
+        Common_MiniTabNavbar,
+        Common_MobileSearchProduct,
+
+    },
     head: {
-        title: 'Order Details',
+        title: 'My Orders',
     },
     data() {
         return {
             loading: false,
-            total: '',
-            txtid: '',
-            odate: '',
-            pay_msg: '',
-            itemstotal: 0,
-            percentageAmount: 0,
-            shipping_fee: 0,
-            walletBalance: 0,
-            copon_amount: 0,
-            vat_percentage: '',
             orderstatus: '',
-            orderId: '',
-            customername: '',
-            customeremail: '',
             orders: [],
             errors: {},
         }
@@ -137,9 +192,9 @@ export default {
         const orderId = this.$route.query.orderId;
         console.log("order I D: " + orderId);
         this.loadingOrders();
+
     },
     computed: {
-
         totalQuantity() {
             // Calculate total quantity
             return this.orders.reduce((total, order) => total + order.quantity, 0);
@@ -150,48 +205,12 @@ export default {
         },
     },
     methods: {
-
-        captureBtn() {
-            html2canvas($("#mobileScreen")[0], {
-                scale: 3, // Resolution scale (2 for 2x, 3 for 3x, and so on)
-            }).then(function (canvas) {
-                var imgData = canvas.toDataURL();
-                var downloadLink = document.createElement("a");
-                downloadLink.href = imgData;
-                downloadLink.download = "Order Details(winUp360.com).png";
-                document.body.appendChild(downloadLink);
-                downloadLink.click();
-                document.body.removeChild(downloadLink);
-            });
-
-        },
         async loadingOrders() {
             this.loading = true;
             const orderId = this.$route.query.orderId;
             await this.$axios.get(`/order/orderDetails/${orderId}`).then(response => {
-                    // this.orders = response.data.orderdata;
-                    // this.orderstatus = response.data.orderrow;
                     this.orders = response.data.orderdata;
                     this.orderstatus = response.data.orderrow;
-                    this.txtid = response.data.txtid;
-                    this.odate = response.data.odate;
-                    this.orderId = response.data.orderId;
-                    this.pay_msg = response.data.pay_msg;
-                    this.customername = response.data.customername;
-                    this.customeremail = response.data.customeremail;
-                    this.order_status = response.data.OrderStatus;
-                    this.total = response.data.total;
-                    this.itemstotal = response.data.itemstotal;
-                    this.shipping_fee = response.data.shipping_fee;
-
-                    this.shipping_fee = response.data.shipping_fee;
-                    this.vat_percentage = response.data.vat_percentage;
-
-                    this.percentageAmount = response.data.percentageAmount;
-                    this.walletBalance = response.data.walletBalance;
-                    this.copon_amount = response.data.copon_amount;
-
-                    this.insertdata.orderstatus = response.data.orderstatus_id;
                 })
                 .catch(error => {
                     // Handle error
@@ -201,8 +220,9 @@ export default {
                 });
 
         },
-        addtoCart() {
-            this.$router.push('/cart');
+        logout() {
+            localStorage.removeItem('jwtToken');
+            this.$router.push('/');
         },
 
     }
@@ -210,17 +230,39 @@ export default {
 </script>
 
 <style scoped>
-table {
-    background-color: #f2f2f2;
-    border-collapse: collapse;
-    border-spacing: 0;
+.loading-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    border: 1px solid #ddd;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
 }
 
-th,
-td {
-    text-align: left;
-    padding: 8px;
+/* For Loader */
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+.loader-text {
+    margin: 0;
+    /* Remove default margin */
+}
+
+.loader-top {
+    top: 0;
+}
+
+.loader-bottom {
+    bottom: 0;
 }
 </style>

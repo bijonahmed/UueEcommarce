@@ -2,7 +2,7 @@ import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Welcome to winup360',
+    title: 'Welcome to Ecommarce',
     htmlAttrs: {
       lang: 'en'
     },
@@ -13,28 +13,35 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/images/logo.png' },
-      { rel: "preconnect",href: "https://fonts.googleapis.com"},
-      { rel: "preconnect",href: "https://fonts.gstatic.com"},
-      { rel: "stylesheet",href: "https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap"},
-      { rel: "stylesheet",href: "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"},
-      { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/css/intlTelInput.css" },
-      { rel: "stylesheet", href: "/assets/bootstrap-5.3.2/css/bootstrap.min.css" },
-      { rel: "stylesheet", href: "/assets/fontawesome-free-6.4.2/css/all.min.css" },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: "stylesheet",href: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"},
+      { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" },
+      // { rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" },
+
+ 
       { rel: "stylesheet", href: "/css/styles.css" },
+      { rel: "stylesheet", href: "/css/storebtn.css" },
+      { rel: "stylesheet", href: "/css/owl.carousel.min.css" },
+      { rel: "stylesheet", href: "/css/owl.theme.default.min.css" },
+      { rel: "stylesheet", href: "/css/customslider.css" },
+
     ],
     script: [
       { src: "https://code.jquery.com/jquery-3.7.0.js" },
-      { src: "/assets/bootstrap-5.3.2/js/bootstrap.bundle.js" },
-      { src: "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" },
-      { src: "https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js" },
-      { src: "/js/countdown.js" },
-      { src: "/js/share_modal.js" },
-      { src: "/js/html2canvas.js" },
-      { src: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/intlTelInput.min.js" },
+      { src: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" },
+      { src: "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" },
+      { src: "https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" },
       { src: "https://cdn.jsdelivr.net/npm/sweetalert2@11" },
-
-   
+     // { src: "https://code.jquery.com/jquery-3.1.1.slim.min.js" },
+ 
+      //{ src: "/js/priceRange.js" },
+      { src: "/js/star-rating.js" },
+      { src: "/js/search_modal.js" },
+      { src: "/js/login_popup.js" },
+      { src: "/js/addActiveClass.js" },
+      { src: "/js/owl.carousel.min.js" },
+      { src: "/js/owl_carousel_plugin.js" },
+     // { src: "/js/customslider.js" },
     ],
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -44,6 +51,7 @@ export default {
   // ],
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/event-bus.js',
     { src: '~plugins/jquery.js', ssr: false }, // Import jQuery
     { src: '~plugins/vue-owl-carousel.js', ssr: false },
   ],
@@ -51,12 +59,13 @@ export default {
   components: true,
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-  
+    
   ],
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    "@nuxtjs/auth-next",
+    "@nuxtjs/auth-next"
+
   ],
   auth: {
     // Options
@@ -84,9 +93,11 @@ export default {
   },
    // Axios module configuration: https://go.nuxtjs.dev/config-axios
    axios: {
-    //baseURL: "http://127.0.0.1:8000/api",
-    baseURL: "https://api.winup360.com/api",
+    baseURL: "http://127.0.0.1:8000/api",
+   //baseURL: "https://ad-ecom.futuregenit.com/api",
     },
+
+    
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: ["defu"],

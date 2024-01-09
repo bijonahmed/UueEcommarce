@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Setting;
 use Validator;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -24,9 +23,9 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
     }
+
     public function login(Request $request)
     {
-        // Validate the request
         $this->validateLogin($request);
         $credentials = request(['email', 'password']);
         if (!$token = auth('api')->attempt($credentials)) {
@@ -38,97 +37,68 @@ class AuthController extends Controller
                 ]
             ], 422);
         }
-
-        $user = auth('api')->user();
-        if ($user && $user->status == 1) {
-            return $this->respondWithToken($token);
-        } elseif ($user && $user->status == 0) {
-            return response()->json([
-                'errors' => [
-                    'account' => [
-                        "Your Account is not verified"
-                    ]
-                ]
-            ], 401);
-        } else {
-            // User is not authenticated
-            return response()->json([
-                'errors' => [
-                    'account' => [
-                        "Authentication failed"
-                    ]
-                ]
-            ], 401);
-        }
-    }
-    function generateUniqueNumber()
-    {
-
-        $randomNumber = rand(1000, 9999);
-        return $randomNumber;
-    }
-
-
-    public function register(Request $request)
-    {
-        $setting = Setting::find(1);
-
-        if (!empty($setting)) {
-            $presetting =  (int) $setting->wallet_balance;
-        } else {
-            $presetting =  1;
-        }
-        $uniqueNumber = $this->generateUniqueNumber();
-
-        $this->validate($request, [
-            'name' => 'required',
-            'phone_number' => 'required|numeric|unique:users,phone_number',
-            'email' => 'required|unique:users,email',
-            'password' => 'required|min:6'
-        ]);
-        $user = User::create([
-            'name'     => $request->name,
-            'email'    => $request->email,
-            'role_id'  => 2,
-            'status'   => 0,
-            'wallet_balance' => $presetting,
-            'phone_number'   => $request->phone_number,
-            'password'       => bcrypt($request->password),
-            'show_password'  => $request->password,
-            'verifyCode'     => $uniqueNumber,
-
-        ]);
-        $this->sms_send($request->phone_number, $uniqueNumber);
-        $token = auth('api')->login($user);
         return $this->respondWithToken($token);
     }
 
-    function sms_send($phone_number, $uniqueNumber)
+    public function register(Request $request)
     {
-        $url = "http://139.99.39.237/api/smsapi";
-        $api_key  = "0YvO1UoW99Z4TprlGUr4";
-        $senderid = "8809604902507";
-        //$number = "88016xxxxxxxx,88019xxxxxxxx";
-        $number   = "88$phone_number";
-        $message  = "Your Winup360 verification code is $uniqueNumber. Please visit https://winup360.com/";
-        $data = [
-            "api_key" => $api_key,
-            "senderid" => $senderid,
-            "number" => $number,
-            "message" => $message
-        ];
+        // dd($request->all());
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|unique:users,email',
+            'password' => 'required|min:2|confirmed', // Add the 'confirmed' rule
+        ]);
 
-        //dd($data);
-        //exit; 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        $response = curl_exec($ch);
-        curl_close($ch);
-        return $response;
+        $ipaddress = request()->ip();
+        $t = microtime(true);
+        $createTimeStamp =  strtok($t, '.');
+        $code = $createTimeStamp; //uniqid().mt_rand(1, 999999);
+        $inviteCode = !empty($request->invite_code) ? $request->invite_code : "";
+        if (!empty($inviteCode)) {
+            $user = DB::table('users')->where('invite_code', $inviteCode)->first();
+
+            if (!empty($user->id)) {
+                $setting = DB::table('tbl_setting')->first();
+
+                // Update user data
+                $userData = [
+                    'reffer_bonus' => !empty($setting->reffer_bonus) ? $user->reffer_bonus + $setting->reffer_bonus : 0,
+                ];
+
+                DB::table('users')->where('invite_code', $inviteCode)->update($userData);
+
+                $inviteCode = $code;
+                $joinId = $user->id;
+            } else {
+                $errorMessage = "Invalid Code: The provided invite code does not exist.";
+                // You may want to log this error or return it to the client, depending on your application needs.
+            }
+        } else {
+            $inviteCode = $code;
+            $joinId = "";
+        }
+
+        // If you need to return a response, you can do it here.
+        // For example, return a JSON response:
+        if (isset($errorMessage)) {
+            return response()->json(['error' => $errorMessage], 400);
+        } else {
+
+            $user = User::create([
+                'name'          => $request->name,
+                'email'         => $request->email,
+                'role_id'       => 2,
+                'status'        => 1,
+                'ip'            => $ipaddress,
+                'invite_code'   => $inviteCode,
+                'join_id'       => $joinId,
+                'show_password' => $request->password,
+                'password' => bcrypt($request->password),
+            ]);
+            // Get the token
+            $token = auth('api')->login($user);
+            return $this->respondWithToken($token);
+        }
     }
     public function me()
     {
@@ -185,9 +155,7 @@ class AuthController extends Controller
             'name' => 'required',
             'email' => 'required',
             'phone_number' => 'required',
-            'address_1' => 'required',
-            'state_id' => 'required',
-            //'address' => 'required',
+            //  'address' => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
@@ -197,18 +165,16 @@ class AuthController extends Controller
             'name'              => !empty($request->name) ? $request->name : "",
             'email'             => !empty($request->email) ? $request->email : "",
             'phone_number'      => !empty($request->phone_number) ? $request->phone_number : "",
+            'address'           => !empty($request->address) ? $request->address : "",
             'address_1'         => !empty($request->address_1) ? $request->address_1 : "",
             'address_2'         => !empty($request->address_2) ? $request->address_2 : "",
-            'nationality_id'    => !empty($request->nationality_id) ? $request->nationality_id : "",
-            'state_id'          => !empty($request->state_id) ? $request->state_id : "",
-            'address'           => !empty($request->address) ? $request->address : "",
+            'address_3'         => !empty($request->address_3) ? $request->address_3 : "",
+
             'website'           => !empty($request->website) ? $request->website : "",
             'github'            => !empty($request->github) ? $request->github : "",
             'twitter'           => !empty($request->twitter) ? $request->twitter : "",
             'instagram'         => !empty($request->instagram) ? $request->instagram : "",
             'facebook'          => !empty($request->facebook) ? $request->facebook : "",
-            'gender'            => !empty($request->gender) ? $request->gender : "",
-            'date_of_birth'     => !empty($request->date_of_birth) ? $request->date_of_birth : "",
         );
         if (!empty($request->file('file'))) {
             $documents = $request->file('file');

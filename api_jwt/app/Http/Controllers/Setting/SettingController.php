@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Setting;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
@@ -10,12 +8,10 @@ use Helper;
 use App\Models\User;
 use App\Models\Setting;
 use App\Models\Profile;
-use App\Models\Sliders;
 use Illuminate\Support\Str;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use DB;
-
 class SettingController extends Controller
 {
     protected $userid;
@@ -25,56 +21,6 @@ class SettingController extends Controller
         $id = auth('api')->user();
         $user = User::find($id->id);
         $this->userid = $user->id;
-    }
-
-    public function insertSlider(Request $request)
-    {
-        if (empty($request->id)) {
-            $validator = Validator::make($request->all(), [
-                'files'         => 'required',
-                'redirect_url'  => 'required',
-            ]);
-            if ($validator->fails()) {
-                return response()->json(['errors' => $validator->errors()], 422);
-            }
-        } else {
-
-            $validator = Validator::make($request->all(), [
-                //  'files'         => 'required',
-                'redirect_url'  => 'required',
-            ]);
-            if ($validator->fails()) {
-                return response()->json(['errors' => $validator->errors()], 422);
-            }
-        }
-
-        $data = array(
-            'redirect_url'               => $request->redirect_url,
-            'status'                     => !empty($request->status) ? $request->status : "",
-        );
-
-        // dd($data);
-        if (!empty($request->file('files'))) {
-            $files = $request->file('files');
-            $fileName = Str::random(20);
-            $ext = strtolower($files->getClientOriginalExtension());
-            $path = $fileName . '.' . $ext;
-            $uploadPath = '/backend/slider_imaes/';
-            $upload_url = $uploadPath . $path;
-            $files->move(public_path('/backend/slider_imaes/'), $upload_url);
-            $file_url = $uploadPath . $path;
-            $data['images'] = $file_url;
-        }
-
-        if (empty($request->id)) {
-            Sliders::insert($data);
-        } else {
-            DB::table('sliders')->where('id', $request->id)->update($data);
-        }
-        $response = [
-            'message' => 'Successfull',
-        ];
-        return response()->json($response);
     }
     public function insertEmployeeType(Request $request)
     {
@@ -201,53 +147,6 @@ class SettingController extends Controller
         ];
         return response()->json($response);
     }
-
-
-    public function upateSetting(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'name'      => 'required',
-            'email'     => 'required',
-            'wallet_balance'    => 'required',
-            'shipping_fee'      => 'required',
-            'vat_percentage'    => 'required',
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-        $data = array(
-            'name'              => !empty($request->name) ? $request->name : "",
-            'email'             => !empty($request->email) ? $request->email : "",
-            'address'           => !empty($request->address) ? $request->address : "",
-            'whatsApp'          => !empty($request->whatsApp) ? $request->whatsApp : "",
-            'description'       => !empty($request->description) ? $request->description : "",
-            'copyright'         => !empty($request->copyright) ? $request->copyright : "",
-            'currency'          => !empty($request->currency) ? $request->currency : "",
-            'fblink'            => !empty($request->fblink) ? $request->fblink : "",
-            'website'           => !empty($request->website) ? $request->website : "",
-            'bkash_number'      => !empty($request->bkash_number) ? $request->bkash_number : "",
-            'bkash_fee'         => !empty($request->bkash_fee) ? $request->bkash_fee : "",
-            'nagad_fee'         => !empty($request->nagad_fee) ? $request->nagad_fee : "",
-            'rocket_number'     => !empty($request->rocket_number) ? $request->rocket_number : "",
-            'rocket_fee'        => !empty($request->rocket_fee) ? $request->rocket_fee : "",
-            'upay_number'       => !empty($request->upay_number) ? $request->upay_number : "",
-            'upay_fee'          => !empty($request->upay_fee) ? $request->upay_fee : "",
-            'wallet_balance'    => !empty($request->wallet_balance) ? $request->wallet_balance : "",
-            'shipping_fee'      => !empty($request->shipping_fee) ? $request->shipping_fee : "",
-            'vat_percentage'    => !empty($request->vat_percentage) ? $request->vat_percentage : "",
-        );
-        DB::table('setting')->where('id', 1)->update($data);
-
-        $response = [
-            'message' => 'Successfull',
-        ];
-        return response()->json($response);
-    }
-
-
-
-
-
     public function insertPayItem(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -442,23 +341,6 @@ class SettingController extends Controller
         }
         return response()->json($response, 200);
     }
-
-    public function slidersImages()
-    {
-        $data = Sliders::all();
-
-        foreach ($data as $v) {
-            $result[] = [
-                'id'           => $v->id,
-
-                'images'       => !empty($v->images) ? url($v->images) : "",
-                'redirect_url' => $v->redirect_url,
-                'status'       => $v->status,
-            ];
-        }
-
-        return response()->json($result, 200);
-    }
     public function getWdges(Request $request)
     {
         try {
@@ -533,7 +415,6 @@ class SettingController extends Controller
         ];
         return response()->json($response, 200);
     }
-
     public function checkrowPayGroup($id)
     {
         $id = (int) $id;
@@ -612,21 +493,6 @@ class SettingController extends Controller
             'data' => $data,
             'message' => 'success'
         ];
-        return response()->json($response, 200);
-    }
-
-    public function sliderrow($id)
-    {
-        $id = (int) $id;
-        $data = Sliders::find($id);
-        $response = [
-            'id'           => $data->id,
-            'redirect_url' => $data->redirect_url,
-            'status'       => $data->status,
-            'images'       => !empty($data->images) ? url($data->images) : "",
-        ];
-
-        //dd($response);
         return response()->json($response, 200);
     }
 }

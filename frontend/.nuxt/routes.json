@@ -1,226 +1,272 @@
 [
   {
-    "name": "about",
-    "path": "/about",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\about.vue",
-    "chunkName": "pages/about",
-    "_name": "_d0344366"
-  },
-  {
-    "name": "agreement",
-    "path": "/agreement",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\agreement.vue",
-    "chunkName": "pages/agreement",
-    "_name": "_4ca8f24a"
-  },
-  {
     "name": "cart",
     "path": "/cart",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\cart.vue",
-    "chunkName": "pages/cart",
-    "_name": "_537edbe0"
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\cart.vue",
+    "chunkName": "pages/cart"
   },
   {
-    "name": "contact",
-    "path": "/contact",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\contact.vue",
-    "chunkName": "pages/contact",
-    "_name": "_38645360"
+    "name": "changepassword",
+    "path": "/changepassword",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\changepassword.vue",
+    "chunkName": "pages/changepassword"
   },
   {
-    "name": "download-app",
-    "path": "/download-app",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\download-app.vue",
-    "chunkName": "pages/download-app",
-    "_name": "_98c21768"
+    "name": "checkout",
+    "path": "/checkout",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\checkout.vue",
+    "chunkName": "pages/checkout"
   },
   {
-    "name": "faq",
-    "path": "/faq",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\faq.vue",
-    "chunkName": "pages/faq",
-    "_name": "_f7323954"
+    "name": "customer-review",
+    "path": "/customer-review",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\customer-review.vue",
+    "chunkName": "pages/customer-review"
+  },
+  {
+    "name": "flas-sale",
+    "path": "/flas-sale",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\flas-sale.vue",
+    "chunkName": "pages/flas-sale"
   },
   {
     "name": "forget-password",
     "path": "/forget-password",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\forget-password.vue",
-    "chunkName": "pages/forget-password",
-    "_name": "_6020cf8a"
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\forget-password.vue",
+    "chunkName": "pages/forget-password"
   },
   {
     "name": "login",
     "path": "/login",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\login.vue",
-    "chunkName": "pages/login",
-    "_name": "_fd7547ae"
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\login.vue",
+    "chunkName": "pages/login"
   },
   {
-    "name": "offer",
-    "path": "/offer",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\offer.vue",
-    "chunkName": "pages/offer",
-    "_name": "_5ba6d59c"
+    "name": "official-store",
+    "path": "/official-store",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\official-store.vue",
+    "chunkName": "pages/official-store"
+  },
+  {
+    "name": "official-store-grid",
+    "path": "/official-store-grid",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\official-store-grid.vue",
+    "chunkName": "pages/official-store-grid"
+  },
+  {
+    "name": "OfficialStoreFilter",
+    "path": "/OfficialStoreFilter",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\OfficialStoreFilter.vue",
+    "chunkName": "pages/OfficialStoreFilter"
+  },
+  {
+    "name": "OfficialStoreFilterGrid",
+    "path": "/OfficialStoreFilterGrid",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\OfficialStoreFilterGrid.vue",
+    "chunkName": "pages/OfficialStoreFilterGrid"
   },
   {
     "name": "payment",
     "path": "/payment",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\payment.vue",
-    "chunkName": "pages/payment",
-    "_name": "_4bb80374"
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\payment.vue",
+    "chunkName": "pages/payment"
   },
   {
-    "name": "privacy-policy",
-    "path": "/privacy-policy",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\privacy-policy.vue",
-    "chunkName": "pages/privacy-policy",
-    "_name": "_15e31887"
+    "name": "product-grid",
+    "path": "/product-grid",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\product-grid.vue",
+    "chunkName": "pages/product-grid"
   },
   {
-    "name": "products",
-    "path": "/products",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\products.vue",
-    "chunkName": "pages/products",
-    "_name": "_6fc18b58"
+    "name": "product-list",
+    "path": "/product-list",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\product-list.vue",
+    "chunkName": "pages/product-list"
   },
   {
-    "name": "register",
-    "path": "/register",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\register.vue",
-    "chunkName": "pages/register",
-    "_name": "_24d0e013"
+    "name": "refund",
+    "path": "/refund",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\refund.vue",
+    "chunkName": "pages/refund"
   },
   {
-    "name": "verification",
-    "path": "/verification",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\verification.vue",
-    "chunkName": "pages/verification",
-    "_name": "_1f03c0ea"
+    "name": "return-and-replacement",
+    "path": "/return-and-replacement",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\return-and-replacement.vue",
+    "chunkName": "pages/return-and-replacement"
   },
   {
-    "name": "winners",
-    "path": "/winners",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\winners.vue",
-    "chunkName": "pages/winners",
-    "_name": "_c333c558"
+    "name": "sell-on-ecommerce",
+    "path": "/sell-on-ecommerce",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\sell-on-ecommerce.vue",
+    "chunkName": "pages/sell-on-ecommerce"
   },
   {
-    "name": "user-message",
-    "path": "/user/message",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\user\\\\message.vue",
-    "chunkName": "pages/user/message",
-    "_name": "_01d93f48"
+    "name": "sell-on-filter",
+    "path": "/sell-on-filter",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\sell-on-filter.vue",
+    "chunkName": "pages/sell-on-filter"
   },
   {
-    "name": "user-notification",
-    "path": "/user/notification",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\user\\\\notification.vue",
-    "chunkName": "pages/user/notification",
-    "_name": "_d439fa34"
+    "name": "seller-form",
+    "path": "/seller-form",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\seller-form.vue",
+    "chunkName": "pages/seller-form"
   },
   {
-    "name": "user-offer",
-    "path": "/user/offer",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\user\\\\offer.vue",
-    "chunkName": "pages/user/offer",
-    "_name": "_38c07371"
+    "name": "service",
+    "path": "/service",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\service.vue",
+    "chunkName": "pages/service"
+  },
+  {
+    "name": "update-password",
+    "path": "/update-password",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\update-password.vue",
+    "chunkName": "pages/update-password"
+  },
+  {
+    "name": "affiliate-affiliate-dashboard",
+    "path": "/affiliate/affiliate-dashboard",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\affiliate\\\\affiliate-dashboard.vue",
+    "chunkName": "pages/affiliate/affiliate-dashboard"
+  },
+  {
+    "name": "affiliate-affiliate-programe",
+    "path": "/affiliate/affiliate-programe",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\affiliate\\\\affiliate-programe.vue",
+    "chunkName": "pages/affiliate/affiliate-programe"
+  },
+  {
+    "name": "affiliate-affiliate-programe-register",
+    "path": "/affiliate/affiliate-programe-register",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\affiliate\\\\affiliate-programe-register.vue",
+    "chunkName": "pages/affiliate/affiliate-programe-register"
+  },
+  {
+    "name": "affiliate-affiliate-transfer",
+    "path": "/affiliate/affiliate-transfer",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\affiliate\\\\affiliate-transfer.vue",
+    "chunkName": "pages/affiliate/affiliate-transfer"
+  },
+  {
+    "name": "category-all-categorys",
+    "path": "/category/all-categorys",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\category\\\\all-categorys.vue",
+    "chunkName": "pages/category/all-categorys"
+  },
+  {
+    "name": "category-category-grid",
+    "path": "/category/category-grid",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\category\\\\category-grid.vue",
+    "chunkName": "pages/category/category-grid"
+  },
+  {
+    "name": "category-category-list",
+    "path": "/category/category-list",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\category\\\\category-list.vue",
+    "chunkName": "pages/category/category-list"
+  },
+  {
+    "name": "seller-seller-account-setting",
+    "path": "/seller/seller-account-setting",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\seller\\\\seller-account-setting.vue",
+    "chunkName": "pages/seller/seller-account-setting"
+  },
+  {
+    "name": "seller-seller-customer-returns",
+    "path": "/seller/seller-customer-returns",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\seller\\\\seller-customer-returns.vue",
+    "chunkName": "pages/seller/seller-customer-returns"
+  },
+  {
+    "name": "seller-seller-inventories",
+    "path": "/seller/seller-inventories",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\seller\\\\seller-inventories.vue",
+    "chunkName": "pages/seller/seller-inventories"
+  },
+  {
+    "name": "seller-seller-inventory-post",
+    "path": "/seller/seller-inventory-post",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\seller\\\\seller-inventory-post.vue",
+    "chunkName": "pages/seller/seller-inventory-post"
+  },
+  {
+    "name": "seller-seller-message",
+    "path": "/seller/seller-message",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\seller\\\\seller-message.vue",
+    "chunkName": "pages/seller/seller-message"
+  },
+  {
+    "name": "seller-seller-orders",
+    "path": "/seller/seller-orders",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\seller\\\\seller-orders.vue",
+    "chunkName": "pages/seller/seller-orders"
+  },
+  {
+    "name": "seller-seller-profile",
+    "path": "/seller/seller-profile",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\seller\\\\seller-profile.vue",
+    "chunkName": "pages/seller/seller-profile"
+  },
+  {
+    "name": "seller-seller-wallet",
+    "path": "/seller/seller-wallet",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\seller\\\\seller-wallet.vue",
+    "chunkName": "pages/seller/seller-wallet"
+  },
+  {
+    "name": "user-my-reviews",
+    "path": "/user/my-reviews",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\user\\\\my-reviews.vue",
+    "chunkName": "pages/user/my-reviews"
   },
   {
     "name": "user-order-details",
     "path": "/user/order-details",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\user\\\\order-details.vue",
-    "chunkName": "pages/user/order-details",
-    "_name": "_410e2f58"
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\user\\\\order-details.vue",
+    "chunkName": "pages/user/order-details"
   },
   {
-    "name": "user-orderlist",
-    "path": "/user/orderlist",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\user\\\\orderlist.vue",
-    "chunkName": "pages/user/orderlist",
-    "_name": "_472c28fe"
+    "name": "user-user-mlm",
+    "path": "/user/user-mlm",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\user\\\\user-mlm.vue",
+    "chunkName": "pages/user/user-mlm"
   },
   {
-    "name": "user-payment",
-    "path": "/user/payment",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\user\\\\payment.vue",
-    "chunkName": "pages/user/payment",
-    "_name": "_51650a4a"
+    "name": "user-user-orders",
+    "path": "/user/user-orders",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\user\\\\user-orders.vue",
+    "chunkName": "pages/user/user-orders"
   },
   {
-    "name": "user-personal-details",
-    "path": "/user/personal-details",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\user\\\\personal-details.vue",
-    "chunkName": "pages/user/personal-details",
-    "_name": "_7c509730"
+    "name": "user-user-profile",
+    "path": "/user/user-profile",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\user\\\\user-profile.vue",
+    "chunkName": "pages/user/user-profile"
   },
   {
-    "name": "user-profile",
-    "path": "/user/profile",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\user\\\\profile.vue",
-    "chunkName": "pages/user/profile",
-    "_name": "_3db548fe"
-  },
-  {
-    "name": "user-settings",
-    "path": "/user/settings",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\user\\\\settings.vue",
-    "chunkName": "pages/user/settings",
-    "_name": "_527ac39e"
-  },
-  {
-    "name": "user-thankyou",
-    "path": "/user/thankyou",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\user\\\\thankyou.vue",
-    "chunkName": "pages/user/thankyou",
-    "_name": "_bd934920"
-  },
-  {
-    "name": "user-ticket",
-    "path": "/user/ticket",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\user\\\\ticket.vue",
-    "chunkName": "pages/user/ticket",
-    "_name": "_54d712c7"
-  },
-  {
-    "name": "user-wallet",
-    "path": "/user/wallet",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\user\\\\wallet.vue",
-    "chunkName": "pages/user/wallet",
-    "_name": "_6b60bd34"
-  },
-  {
-    "name": "user-wishlist",
-    "path": "/user/wishlist",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\user\\\\wishlist.vue",
-    "chunkName": "pages/user/wishlist",
-    "_name": "_21021c40"
+    "name": "user-user-whichlist",
+    "path": "/user/user-whichlist",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\user\\\\user-whichlist.vue",
+    "chunkName": "pages/user/user-whichlist"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "_name": "_90c48ddc"
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\index.vue",
+    "chunkName": "pages/index"
   },
   {
-    "name": "categories-slug",
-    "path": "/categories/:slug?",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\categories\\\\_slug.vue",
-    "chunkName": "pages/categories/_slug",
-    "_name": "_1d735ea4"
-  },
-  {
-    "name": "order-slug",
-    "path": "/order/:slug?",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\order\\\\_slug.vue",
-    "chunkName": "pages/order/_slug",
-    "_name": "_784ffdec"
+    "name": "user-invite-user-id",
+    "path": "/user/invite-user/:id?",
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\user\\\\invite-user\\\\_id.vue",
+    "chunkName": "pages/user/invite-user/_id"
   },
   {
     "name": "product-details-slug",
     "path": "/product-details/:slug?",
-    "component": "F:\\\\Server\\\\htdocs\\\\supper-ecommarce\\\\frontend\\\\pages\\\\product-details\\\\_slug.vue",
-    "chunkName": "pages/product-details/_slug",
-    "_name": "_408f6a16"
+    "component": "F:\\\\Server\\\\htdocs\\\\ecommarce_uae\\\\frontend\\\\pages\\\\product-details\\\\_slug.vue",
+    "chunkName": "pages/product-details/_slug"
   }
 ]

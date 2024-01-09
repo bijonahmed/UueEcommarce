@@ -16,7 +16,6 @@ class Sliders extends Authenticatable
   public $table = "sliders";
   
   protected $fillable = [
-    'redirect_url',
     'images',
     'status',
   ];

@@ -1,23 +1,52 @@
 // store/cart.js
+export const namespaced = true;
+
+export const state = () => ({
+  cartItems: [],
+});
+
+export const mutations = {
+  setCartItems(state, items) {
+    state.cartItems = items;
+  },
+};
 
 export const actions = {
-  addToCart({ commit, state }, product) {
-    const updatedCart = [...state.cart];
-
-    const existingProduct = updatedCart.find(item => item.id === product.id);
-
-    if (existingProduct) {
-      existingProduct.quantity += 1;
-    } else {
-      updatedCart.push({
-        ...product,
-        quantity: 1
-      });
+  async fetchCartItems({ commit }) {
+    try {
+      const response = await this.$http.get('/api/cart');
+      commit('setCartItems', response.data);
+    } catch (error) {
+      console.error('Error fetching cart items:', error);
     }
+  },
 
-    commit('setCart', updatedCart);
+  async addToCart({ dispatch }, { productId, quantity }) {
+   // alert("test...");
 
-    // Save the updated cart to localStorage
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
-  }
+    try {
+      await this.$http.post('/api/cart/add', { productId, quantity });
+      dispatch('fetchCartItems');
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+    }
+  },
+
+  async removeFromCart({ dispatch }, productId) {
+    try {
+      await this.$http.post('/api/cart/remove', { productId });
+      dispatch('fetchCartItems');
+    } catch (error) {
+      console.error('Error removing from cart:', error);
+    }
+  },
+
+  async updateCartItem({ dispatch }, { productId, quantity }) {
+    try {
+      await this.$http.post('/api/cart/update', { productId, quantity });
+      dispatch('fetchCartItems');
+    } catch (error) {
+      console.error('Error updating cart item:', error);
+    }
+  },
 };

@@ -12,20 +12,18 @@ use App\Models\User;
 use App\Models\ProductAttributeValue;
 use App\Models\ProductVarrientHistory;
 use App\Models\Categorys;
-use App\Models\TicketHistory;
 use App\Models\ProductAttributes;
 use App\Models\ProductCategory;
+use App\Models\OrderStatus;
 use App\Models\Product;
 use App\Models\ProductAdditionalImg;
 use App\Models\ProductVarrient;
 use App\Models\AttributeValues;
-use App\Models\AdditionalProducts;
 use Illuminate\Support\Str;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use Session;
 use DB;
-use PHPUnit\Framework\Attributes\Ticket;
 
 class ProductController extends Controller
 {
@@ -38,13 +36,20 @@ class ProductController extends Controller
         $this->userid = $user->id;
     }
 
+   
     public function productUpdate(Request $request)
     {
 
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'name'           => 'required',
             //  'category'       => 'required',
-
+            'price'          => 'required',
+            'stock_qty'      => 'required|integer',
+            'stock_mini_qty' => 'required|integer',
+            'shipping_days'  => 'required',
+            'status'         => 'required',
+            'sku'            => 'required',
             // 'files' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // max:2048 is the maximum file size in kilobytes (2MB)
         ]);
         if ($validator->fails()) {
@@ -54,7 +59,7 @@ class ProductController extends Controller
         $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $request->input('name'))));
         $data = array(
             'name'                       => $request->name,
-            'slug'                       => $slug,
+            'slug'                       => "$slug-$product_id",
             'description'                => !empty($request->description) ? $request->description : "",
             'meta_title'                 => !empty($request->meta_title) ? $request->meta_title : "",
             'meta_description'           => !empty($request->meta_description) ? $request->meta_description : "",
@@ -66,13 +71,12 @@ class ProductController extends Controller
             'cash_dev_status'            => !empty($request->cash_dev_status) ? $request->cash_dev_status : "",
             'price'                      => !empty($request->price) ? $request->price : 0,
             'unit'                       => !empty($request->unit) ? $request->unit : "",
-            // 'stock_qty'                  => !empty($request->stock_qty) ? $request->stock_qty : "",
+            'stock_qty'                  => !empty($request->stock_qty) ? $request->stock_qty : "",
             'stock_mini_qty'             => !empty($request->stock_mini_qty) ? $request->stock_mini_qty : 0,
             'stock_status'               => !empty($request->stock_status) ? $request->stock_status : "",
             'manufacturer'               => !empty($request->manufacturer) ? $request->manufacturer : "",
             'manufacturer'               => !empty($request->manufacturer) ? $request->manufacturer : "",
             'download_link'              => !empty($request->download_link) ? $request->download_link : "",
-            'year'                       => !empty($request->year) ? $request->year : "",
             'discount'                   => !empty($request->discount) ? $request->discount : "",
             'discount_status'            => !empty($request->discount_status) ? $request->discount_status : "",
             'shipping_days'              => !empty($request->shipping_days) ? $request->shipping_days : "",
@@ -83,65 +87,9 @@ class ProductController extends Controller
             'vat_status'                 => !empty($request->vat_status) ? $request->vat_status : "",
             'tax'                        => !empty($request->tax) ? $request->tax : 0,
             'tax_status'                 => !empty($request->tax_status) ? $request->tax_status : "",
-            'status'                     => 1, //!empty($request->status) ? $request->status : "",
+            'status'                     => !empty($request->status) ? $request->status : "",
             'entry_by'                   => $this->userid
         );
-
-        //insert ticket (category=27) 
-        $categoryId =  (int) $request->category_id;
-        $chkPoint = TicketHistory::where('product_id', $product_id)->first();
-        //dd($chkPoint);
-
-        if ($categoryId == 27) {
-            if (empty($chkPoint)) {
-                $stockQty = $request->stock_qty;
-                $maxValue = TicketHistory::max('id');
-                $counter = ($maxValue) ? (int) $maxValue : 0;
-                for ($i = 0; $i < $stockQty; $i++) {
-                    $counter++;
-                    $formattedNumber = sprintf('%09d', $counter);
-                    TicketHistory::create([
-                        'product_id' => $product_id,
-                        'status' => 1,
-                        'ticket_number' => $formattedNumber, // Example of generating a random number between 1000 and 9999
-                    ]);
-                }
-            }
-        } else {
-            $data['stock_qty']  = !empty($request->stock_qty) ? $request->stock_qty : "";
-        }
-
-        //start additional product 
-        $chk = AdditionalProducts::where('product_id', $product_id)->first();
-        if (empty($chk)) {
-            //start additional product 
-            if (!empty($request->referrance_product_id)) {
-                $additional_data = array(
-                    'product_id'                 => $product_id,
-                    'referrance_product_id'      => !empty($request->referrance_product_id) ? $request->referrance_product_id : "",
-                    'add_product_qty'            => !empty($request->add_product_qty) ? $request->add_product_qty : "",
-                    'add_product_price'          => !empty($request->add_product_price) ? $request->add_product_price : "",
-                    'final_price'                => !empty($request->final_price) ? $request->final_price : "",
-                );
-                AdditionalProducts::insert($additional_data);
-            }
-
-            //end additional product 
-
-        } else {
-            //update
-            $additional_data = array(
-                'product_id'                 => $product_id,
-                'referrance_product_id'      => !empty($request->referrance_product_id) ? $request->referrance_product_id : "",
-                'add_product_qty'            => !empty($request->add_product_qty) ? $request->add_product_qty : "",
-                'add_product_price'          => !empty($request->add_product_price) ? $request->add_product_price : "",
-                'final_price'                => !empty($request->final_price) ? $request->final_price : "",
-            );
-            AdditionalProducts::where('product_id', $product_id)->update($additional_data);
-        }
-
-        //end additional product 
-
         if (!empty($request->file('files'))) {
             $files = $request->file('files');
             $fileName = Str::random(20);
@@ -198,7 +146,7 @@ class ProductController extends Controller
             'name'           => 'required',
             'category'       => 'required',
             'price'          => 'required',
-            // 'sku'            => 'required',
+            'sku'            => 'required',
             'stock_qty'      => 'required|integer',
             'stock_mini_qty' => 'required|integer',
             'shipping_days'  => 'required',
@@ -242,7 +190,6 @@ class ProductController extends Controller
             'status'                     => !empty($request->status) ? $request->status : "",
             'entry_by'                   => $this->userid
         );
-
         // dd($data);
         if (!empty($request->file('files'))) {
             $files = $request->file('files');
@@ -255,76 +202,51 @@ class ProductController extends Controller
             $file_url = $uploadPath . $path;
             $data['thumnail_img'] = $file_url;
         }
-        //INSERT PRODUCT
-        $product_id = Product::insertGetId($data);
+        if (empty($request->id)) {
+            //INSERT PRODUCT
+            $product_id = Product::insertGetId($data);
 
-        //start additional product 
-        $additional_data = array(
-            'product_id'                 => $product_id,
-            'referrance_product_id'      => !empty($request->referrance_product_id) ? $request->referrance_product_id : "",
-            'add_product_qty'            => !empty($request->add_product_qty) ? $request->add_product_qty : "",
-            'add_product_price'          => !empty($request->add_product_price) ? $request->add_product_price : "",
-            'final_price'                => !empty($request->final_price) ? $request->final_price : "",
-        );
-        AdditionalProducts::insert($additional_data);
-        //end additional product 
-
-        if (!empty($product_id)) {
-            $slug                  = "$slug-$product_id";
-            DB::table('product')->where('id', $product_id)->update(['slug' => $slug]);
-        }
-        //INSERT MULTIPLE IMAGE
-        if (!empty($request->file('images'))) {
-            foreach ($request->file('images') as $file) {
-                $name = $file->getClientOriginalName();
-                $dic_name = uniqid() . $name;
-                $uploadPath = '/backend/files/';
-                $file->move(public_path() . '/backend/files/', $dic_name);
-                // $docs[] = $name;  
-                $img_data['images']       = $uploadPath . $dic_name;
-                $img_data['product_id']   = $product_id;
-                DB::table('produc_img_history')->insert($img_data);
+            if(!empty($product_id)){
+                $slug                  = "$slug-$product_id";
+                DB::table('product')->where('id', $product_id)->update(['slug' => $slug]);
             }
-        }
-
-        //insert ticket (category=27) ----
-        $categoryId =  (int) $request->category;
-        if ($categoryId == 27) {
-            $stockQty = $request->stock_qty;
-            $maxValue = TicketHistory::max('id');
-            $counter = ($maxValue) ? (int) $maxValue : 0;
-            for ($i = 0; $i < $stockQty; $i++) {
-                $counter++;
-                $formattedNumber = sprintf('%09d', $counter);
-                TicketHistory::create([
-                    'product_id' => $product_id,
-                    'status' => 1,
-                    'ticket_number' => $formattedNumber, // Example of generating a random number between 1000 and 9999
-                ]);
+            //INSERT MULTIPLE IMAGE
+            if (!empty($request->file('images'))) {
+                foreach ($request->file('images') as $file) {
+                    $name = $file->getClientOriginalName();
+                    $dic_name = uniqid() . $name;
+                    $uploadPath = '/backend/files/';
+                    $file->move(public_path() . '/backend/files/', $dic_name);
+                    // $docs[] = $name;  
+                    $img_data['images']       = $uploadPath . $dic_name;
+                    $img_data['product_id']   = $product_id;
+                    DB::table('produc_img_history')->insert($img_data);
+                }
             }
-        }
-
-        //INSERT MULTIPLE CATEGORY
-        $category     = $request->category;
-        $dynamicArray = explode(',', $category); // Convert the string to an array
-        $results      = Categorys::whereIn('id', $dynamicArray)->get();
-        $formattedResults = [];
-        foreach ($results as $result) {
-            $path = [];
-            $category = $result;
-            while ($category) {
-                array_unshift($path, $category->id);
-                $category = $category->parent;
+            //INSERT MULTIPLE CATEGORY
+            $category     = $request->category;
+            $dynamicArray = explode(',', $category); // Convert the string to an array
+            $results      = Categorys::whereIn('id', $dynamicArray)->get();
+            $formattedResults = [];
+            foreach ($results as $result) {
+                $path = [];
+                $category = $result;
+                while ($category) {
+                    array_unshift($path, $category->id);
+                    $category = $category->parent;
+                }
+                $formattedResults[] = [
+                    'product_id'   => $product_id,
+                    'category_id'  => $result->id,
+                    'parent_id'    => implode(',', $path)
+                ];
             }
-            $formattedResults[] = [
-                'product_id'   => $product_id,
-                'category_id'  => $result->id,
-                'parent_id'    => implode(',', $path)
-            ];
+            DB::table('produc_categories')->insert($formattedResults);
+            $resdata['product_id'] = $product_id;
+            return response()->json($resdata);
+        } else {
+            //update
         }
-        DB::table('produc_categories')->insert($formattedResults);
-        $resdata['product_id'] = $product_id;
-        return response()->json($resdata);
     }
 
     public function insertVarientGroup(Request $request)
@@ -538,15 +460,9 @@ class ProductController extends Controller
     public function productrow($id)
     {
 
-        $category_row      = ProductCategory::where('product_id', $id)->first();
-        $produCategory     = ProductCategory::where('product_id', $id)->get();
-        $ticketHistory     = TicketHistory::where('product_id', $id)->get();
-        $additionalProduct = AdditionalProducts::where('product_id', $id)
-            ->select('product.name as product_name', 'additional_product.referrance_product_id', 'additional_product.add_product_qty', 'additional_product.add_product_price', 'additional_product.final_price')
-            ->join('product', 'product.id', '=', 'additional_product.referrance_product_id')->first();
-
-        $prodimages        = ProductAdditionalImg::where('product_id', $id)->select('images', 'id')->get();
-        $prodImages        = Product::find($id);
+        $produCategory = ProductCategory::where('product_id', $id)->get();
+        $prodimages    = ProductAdditionalImg::where('product_id', $id)->select('images', 'id')->get();
+        $prodImages    = Product::find($id);
         $addiImg = [];
         foreach ($prodimages as $v) {
             $addiImg[] = [
@@ -568,84 +484,32 @@ class ProductController extends Controller
         $show_edit_cat = $concatenated_names; //implode("<br/>", $concatenated_names);
         //dd($resulting_string);
         $responseData['productImg']        = !empty($prodImages) ? url($prodImages->thumnail_img) : "";
-        $responseData['product']           = Product::where('product.id', $id)->first();
+        $responseData['product']           = Product::leftjoin('brands', 'brands.id', '=', 'product.brand')
+            ->leftjoin('manufacturers', 'manufacturers.id', '=', 'product.manufacturer')
+            ->select('product.*', 'brands.name as brand_name', 'manufacturers.name as manufac_name')
+            ->where('product.id', $id)->first();
         //dd($responseData['product']);
-        $responseData['product_cat']        = $resulting_string;
-        $responseData['product_edit_cat']   = $show_edit_cat;
-        $responseData['product_imgs']       = $addiImg;
-        $responseData['product_additional'] = $additionalProduct;
-        $responseData['category_id']        = $category_row->category_id;
-        $responseData['ticketHistory']      = $ticketHistory;
-        //dd($responseData['ticketHistory']);
+        $responseData['product_cat']       = $resulting_string;
+        $responseData['product_edit_cat']  = $show_edit_cat;
+        $responseData['product_imgs']      = $addiImg;
+        // dd($responseData);
         return response()->json($responseData);
-    }
-
-    public function getTicketList()
-    {
-
-        $data = TicketHistory::orderBy('id', 'desc')
-            ->select('ticket_history.id', 'ticket_history.product_id', 'product.name', 'ticket_history.ticket_number', 'ticket_history.orderId', 'ticket_history.status', 'ticket_history.customer_id', 'ticket_history.category_id', 'ticket_history.orderDate')
-            ->join('product', 'product.id', '=', 'ticket_history.product_id')
-
-            ->get();
-
-        $formatedData = [];
-        foreach ($data as $Key => $value) {
-            $category =  Categorys::where('id', $value->category_id)->first();
-            $formatedData[] = [
-                'id'               => $value->id,
-                'product_id'       => $value->product_id,
-                'name'             => $value->name,
-                'ticket_number'    => $value->ticket_number,
-                'orderId'          => $value->orderId,
-                'status'           => $value->status,
-                'customer_id'      => $value->customer_id,
-                'orderDate'        => $value->orderDate,
-                'category_name'    => !empty($category->name) ? $category->name : "",
-                'category_id'      => !empty($category->category_id) ? $category->category_id : "",
-            ];
-        }
-        //dd($formatedData);
-        return response()->json($formatedData);
     }
 
     public function getProductList()
     {
-        $data = Product::orderBy('id', 'desc')
-            ->select('product.id', 'product.name', 'product.stock_qty', 'product.sell_qty', 'product.status', 'produc_categories.category_id')
-            ->join('produc_categories', 'produc_categories.product_id', '=', 'product.id')
-            ->get();
-
+        $data = Product::orderBy('id', 'desc')->get();
         $collection = collect($data);
-        $groupedCollection = $collection->groupBy('id');
-        $modifiedCollection = $groupedCollection->map(function ($group) {
-
-            $firstItem = $group->first();
-
-            $total_tickets  = TicketHistory::where('product_id', $firstItem['id'])->count();
-            $total_selling  = TicketHistory::where('product_id', $firstItem['id'])->whereNotNull('orderId')->count();
-            $current_stock  = ($total_tickets - $total_selling);
-
-
-            if ($firstItem['category_id'] == 27) {
-                $tsell = !empty($total_selling) ? $total_selling : 0;
-                $cstock = $current_stock;
-            } else {
-                $tsell = "";
-                $cstock = "";
-            }
-
-
+        $modifiedCollection = $collection->map(function ($item) {
             return [
-                'id'              => $firstItem['id'],
-                'name'       => substr($firstItem['name'], 0, 250),
-                'stock_qty'  => !empty($total_tickets) ? $total_tickets : "",
-                'sell_qty'   => $tsell,
-                'currentstock'   => $cstock,
-                'category_id' => $firstItem['category_id'],
-                'status'     => $firstItem['status'],
+                'id'        => $item['id'],
+                'name'      => substr($item['name'], 0, 20),
+                'stock_qty' => $item['stock_qty'],
+                'status'    => $item['status'],
+
             ];
-        })->values(); // Use values() to reset keys if needed
+        });
+        //dd($modifiedCollection);
         return response()->json($modifiedCollection, 200);
     }
 
@@ -653,7 +517,6 @@ class ProductController extends Controller
     {
         //echo $id;exit; 
         if (!empty($id)) {
-            /*
             Product::where('id', $id)->delete();
             ProductAttributes::where('product_id', $id)->delete();
             ProductAttributeValue::where('product_id', $id)->delete();
@@ -661,53 +524,7 @@ class ProductController extends Controller
             ProductVarrientHistory::where('product_id', $id)->delete();
             ProductCategory::where('product_id', $id)->delete();
             ProductAdditionalImg::where('product_id', $id)->delete();
-            */
         }
         return response()->json("successfully delete product", 200);
-    }
-
-    public function autocompleteSearch(Request $request)
-    {
-        $query = $request->input('query');
-        $suggestions = Product::join('produc_categories', 'product.id', '=', 'produc_categories.product_id')
-            ->join('categorys', 'produc_categories.category_id', '=', 'categorys.id')
-            ->select('product.id', 'product.name', 'product.stock_qty', 'product.price')
-            ->where('product.name', 'like', '%' . $query . '%')
-            ->where('produc_categories.category_id', 27)
-            ->get();
-            return response()->json($suggestions);
-    }
-
-    public function summaryReportTickets()
-    {
-
-        $data = ProductCategory::orderBy('product.id', 'desc')
-            ->select(
-                'product.id',
-                'product.name',
-                'produc_categories.category_id',
-            )
-            ->join('product', 'product.id', '=', 'produc_categories.product_id')
-            ->leftJoin('ticket_history', 'ticket_history.product_id', '=', 'product.id')
-            ->where('produc_categories.category_id', 27)
-            ->groupBy('product.id', 'product.name', 'produc_categories.category_id')
-            ->get();
-
-        $formattedData = [];
-        foreach ($data as $key => $value) {
-            $total_tickets  = TicketHistory::where('product_id', $value->id)->count();
-            $total_selling  = TicketHistory::where('product_id', $value->id)->whereNotNull('orderId')->count();
-            $current_stock  = ($total_tickets - $total_selling);
-            $formattedData[] = [
-                'id'               => $value->id,
-                'name'             => $value->name,
-                'category_id'      => $value->category_id,
-                'total_tickets'    => $total_tickets,
-                'total_selling'    => $total_selling,
-                'current_stock'    => $current_stock,
-            ];
-        }
-        //dd($formattedData);
-        return response()->json($formattedData);
     }
 }

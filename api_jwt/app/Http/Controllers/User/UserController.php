@@ -6,9 +6,7 @@ use Auth;
 use Validator;
 use Helper;
 use App\Models\User;
-use App\Models\Setting;
 use App\Models\Profile;
-use App\Models\State;
 use Illuminate\Support\Str;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
@@ -29,21 +27,6 @@ class UserController extends Controller
         $this->userid = $user->id;
         $this->email = $user->email;
     }
-
-    public function preSetting()
-    {
-
-        $setting = Setting::find(1);
-        $id       =  $this->userid;
-        $response = User::find($id);
-        $walletAddress =  !empty($response->wallet_balance) ? $response->wallet_balance: 0;
-
-        $data['wallet_balance'] = $walletAddress;
-        $data['currency'] = $setting->currency;
-        $data['shipping_fee'] = $setting->shipping_fee;
-        return response()->json($data);
-    }
-
     public function saveRole(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -149,26 +132,6 @@ class UserController extends Controller
         }
         return response()->json($response, 200);
     }
-
-    public function checkStates($id)
-    {
-      
-        try {
-            $rows = State::where('country_id',$id)->get();
-            $response = [
-                'data' => $rows,
-                'message' => 'success'
-            ];
-        } catch (\Throwable $th) {
-            $response = [
-                'data' => [],
-                'message' => 'failed'
-            ];
-        }
-        return response()->json($response, 200);
-    }
-
-    
     public function AllUsersList(Request $request)
     {
         try {
@@ -389,8 +352,6 @@ class UserController extends Controller
     }
     public function saveUser(Request $request)
     {
-
-        //dd($request->all());
         $validator = Validator::make($request->all(), [
             'role_id'    => 'required',
             'name'       => 'required',
@@ -410,7 +371,6 @@ class UserController extends Controller
             'phone_number'  => !empty($request->phone) ? $request->phone : "",
             'email'         => !empty($request->email) ? $request->email : "",
             'password'      => !empty($request->password) ? Hash::make($request->password) : "",
-            'show_password' => !empty($request->password) ? $request->password : "",
             'status'        => $request->status,
             'entry_by'      => $this->userid,
         );
@@ -427,7 +387,6 @@ class UserController extends Controller
         }
         if (empty($request->id)) {
             $userId = DB::table('users')->insertGetId($data);
-          
         } else {
             $userId = $request->id;
             DB::table('users')->where('id', $request->id)->update($data);
