@@ -58,12 +58,25 @@
                                     </a>
                                 </li>
 
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#commissionlist" role="tab" aria-selected="false">
+                                        <div class="d-flex align-items-center">
+                                            <div class="tab-icon"><i class='bx bx-link font-18 me-1'></i>
+                                            </div>
+                                            <div class="tab-title">Commission List</div>
+                                        </div>
+                                    </a>
+                                </li>
+
                             </ul>
                             <div class="tab-content py-3">
                                 <div class="tab-pane fade show active" id="primaryhome" role="tabpanel">
                                     <ul>
                                         <li v-for="category in categories" :key="category.id">
                                             <span class="badge bg-dark">{{ category.name }} <span @click="editCategory(category.id)"><i class="bx bx-edit"></i></span></span>
+
+                                            <span style="font-size: 20px;font-weight: bold; color:#db0f0f;" v-if="category.commission !== null">[{{ category.commission }}%]</span>
+
                                             <TreeView :categories="category.children" v-if="category.children && category.children.length > 0" />
                                         </li>
                                     </ul>
@@ -73,6 +86,14 @@
                                         <li v-for="category in Inacategories" :key="category.id">
                                             <span class="badge bg-danger">{{ category.name }} <span @click="editCategory(category.id)"><i class="bx bx-edit"></i></span></span>
 
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="tab-pane fade" id="commissionlist" role="tabpanel">
+                                    <ul v-for="category in categories" :key="category.id" >
+                                        <li v-if="category.commission !== null">
+                                            <span style="font-size: 15px;">{{ category.name }} [{{ category.commission }}%]</span> <span @click="editCategory(category.id)"><i class="bx bx-edit"></i></span>
                                         </li>
                                     </ul>
                                 </div>

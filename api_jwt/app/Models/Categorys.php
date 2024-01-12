@@ -19,6 +19,7 @@ class Categorys extends Authenticatable
     'description',
     'meta_title',
     'meta_description',
+    'commission',
     'meta_keyword',
     'parent_id',
     'file',

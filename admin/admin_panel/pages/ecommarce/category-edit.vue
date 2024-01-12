@@ -114,6 +114,14 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
+
+
+                                                            <div class="row mb-3">
+                                                                <label for="input-meta-description-1" class="col-sm-2 col-form-label">Commission</label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" name="commission" @input="handleInput" pattern="[0-9]*" onkeypress="return isNumberKey(event)" id="commission" class="form-control" v-model="insertdata.commission" placeholder="0" />
+                                                                </div>
+                                                            </div>
                                                             <div class="row mb-3">
                                                                 <label for="input-meta-description-1" class="col-sm-2 col-form-label">Icon (100x100)</label>
                                                                 <div class="col-sm-10">
@@ -208,6 +216,7 @@ export default {
                 description: '',
                 meta_title: '',
                 meta_description: '',
+                commission: '',
                 meta_keyword: '',
                 parent_id: 0,
                 mobile_view_class: '',
@@ -229,6 +238,9 @@ export default {
     },
    
     methods: { 
+        handleInput() {
+            this.insertdata.commission = this.insertdata.commission.replace(/[^0-9]/g, "");
+        },
         async fetchDataParent() {
             try {
                 const response = await this.$axios.get(`/category/getCategoryListParent`);
@@ -266,6 +278,7 @@ export default {
             formData.append('meta_description', this.insertdata.meta_description);
             formData.append('meta_keyword', this.insertdata.meta_keyword);
             formData.append('parent_id', this.insertdata.parent_id);
+            formData.append('commission', this.insertdata.commission);
             formData.append('status', this.insertdata.status);
             formData.append('keyword', this.insertdata.keyword);
             // formData.append('status', this.insertdata.status);
@@ -296,6 +309,7 @@ export default {
                 this.insertdata.meta_title = response.data.data.meta_title;
                 this.insertdata.meta_description = response.data.data.meta_description;
                 this.insertdata.meta_keyword = response.data.data.meta_keyword;
+                this.insertdata.commission = response.data.data.commission;
                 this.insertdata.parent_id = response.data.data.parent_id;
                 this.insertdata.status = response.data.data.status;
                 this.insertdata.keyword = response.data.data.keyword;
