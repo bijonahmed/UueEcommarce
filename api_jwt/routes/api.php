@@ -35,6 +35,7 @@ Route::group([
     'prefix' => 'auth'
 ], function () {
     Route::post('register', [AuthController::class, 'register']);
+    Route::post('registerSeller', [AuthController::class, 'registerSeller']);
     Route::post('login', [AuthController::class, 'login']);
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
@@ -213,6 +214,7 @@ Route::group([
     Route::get('slidersImages', [UnauthenticatedController::class, 'slidersImages']);
     Route::get('topSellingProducts', [UnauthenticatedController::class, 'topSellProducts']);
     Route::get('limitedProducts', [UnauthenticatedController::class, 'limitedProducts']);
+    Route::get('pagniatedProducts', [UnauthenticatedController::class, 'pagniatedProducts']);
     Route::get('filterCategorys', [UnauthenticatedController::class, 'filterCategory']);
     Route::get('getCategoryList', [UnauthenticatedController::class, 'allCategory']);
     Route::get('findCategorys/{slug}', [UnauthenticatedController::class, 'findCategorys']);

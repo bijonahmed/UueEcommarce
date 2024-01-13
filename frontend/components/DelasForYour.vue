@@ -12,12 +12,12 @@
                             </div>
                             <div class="row">
                                 <div class="col-6">
-                                    <a href="product-list.html">
+                                    <a href="#">
                                         <img src="images/deal(1).jpg" class="img-fluid" alt="">
                                     </a>
                                 </div>
                                 <div class="col-6">
-                                    <a href="product-list.html">
+                                    <a href="#">
                                         <img src="images/deal(2).jpg" class="img-fluid" alt="">
                                     </a>
                                 </div>

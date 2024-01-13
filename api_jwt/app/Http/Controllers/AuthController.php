@@ -14,7 +14,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register', 'showProfileData', 'updateprofile', 'updatePassword']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'showProfileData', 'updateprofile', 'updatePassword', 'registerSeller']]);
     }
     protected function validateLogin(Request $request)
     {
@@ -100,6 +100,86 @@ class AuthController extends Controller
             return $this->respondWithToken($token);
         }
     }
+
+
+    public function registerSeller(Request $request)
+    {
+        //    dd($request->all());
+        $this->validate($request, [
+            'first_name'          => 'required',
+            'last_name'           => 'required',
+            'phone_number'        => 'required',
+            'business_name'       => 'required',
+            'business_address'    => 'required',
+            'business_email'      => 'required',
+            'business_phone'      => 'required',
+            'business_return_name'       => 'required',
+            'business_return_address'    => 'required',
+            'business_return_phone'      => 'required',
+            'business_warehouse_address' => 'required',
+            'business_owner_name'        => 'required',
+            'business_register_num'      => 'required',
+            'agree_with_terms'           => 'required',
+            'email' => 'required|unique:users,email',
+            'password' => 'required|min:2|confirmed', // Add the 'confirmed' rule
+        ], [
+            'required'  => 'The :attribute field is required.',
+            'unique'    => 'The :attribute has already been taken.',
+            'confirmed' => 'The :attribute confirmation does not match.',
+            'min'       => 'The :attribute must be at least :min characters.',
+        ], [
+            'first_name'             => 'First Name',
+            'last_name'              => 'Last Name',
+            'phone_number'           => 'Phone Number',
+            'business_name'          => 'Business Name',
+            'business_address'       => 'Business Address',
+            'business_email'         => 'Business Email',
+            'business_phone'         => 'Business Phone',
+            'business_return_name'   => 'Business Return Name',
+            'business_return_address'=> 'Business Return Address',
+            'business_return_phone'  => 'Business Return Phone',
+            'business_warehouse_address' => 'Business Warehouse Address',
+            'business_owner_name'        => 'Business Owner Name',
+            'business_register_num'      => 'Business Registration Number',
+            'agree_with_terms'           => 'Agree with Terms',
+            'email'                      => 'Email',
+            'password'                   => 'Password',
+        ]);
+
+
+        $ipaddress = request()->ip();
+        if (isset($errorMessage)) {
+            return response()->json(['error' => $errorMessage], 400);
+        } else {
+
+            $user = User::create([
+                'first_name'                => $request->first_name,
+                'last_name'                 => $request->last_name,
+                'name'                      => $request->first_name . '' . $request->last_name,
+                'email'                     => $request->email,
+                'role_id'                   => 3, // for seller
+                'status'                    => 1,
+                'ip'                        => $ipaddress,
+                'show_password'             => $request->password,
+                'phone_number'              => $request->phone_number,
+                'business_owner_name'       => $request->business_owner_name,
+                'business_name'             => $request->business_name,
+                'business_register_num'     => $request->business_register_num,
+                'business_address'          => $request->business_address,
+                'business_warehouse_address'=> $request->business_warehouse_address,
+                'business_email'            => $request->business_email,
+                'business_phone'            => $request->business_phone,
+                'business_return_name'      => $request->business_return_name,
+                'business_return_address'   => $request->business_return_address,
+                'business_return_phone'     => $request->business_return_phone,
+                'password'                  => bcrypt($request->password),
+            ]);
+
+
+           
+        }
+    }
+ 
     public function me()
     {
         return response()->json($this->guard('api')->user());
@@ -115,10 +195,12 @@ class AuthController extends Controller
     }
     protected function respondWithToken($token)
     {
+        $user = auth('api')->user();
         return response()->json([
             'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60
+            'role_id'      => $user->role_id,
+            'token_type'   => 'bearer',
+            'expires_in'   => auth('api')->factory()->getTTL() * 60
         ]);
     }
     public function guard()

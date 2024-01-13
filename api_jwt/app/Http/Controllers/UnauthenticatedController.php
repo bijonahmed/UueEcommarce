@@ -50,6 +50,36 @@ class UnauthenticatedController extends Controller
         return response()->json($modifiedCollection, 200);
     }
 
+
+    public function pagniatedProducts(Request $request)
+    {
+
+        $perPage = 12; // You can adjust the number of items per page as needed
+        $products = Product::where('status', 1)
+            ->select('id', 'discount', 'name as pro_name', 'description', 'price', 'thumnail_img', 'slug as pro_slug')
+            ->orderBy('created_at', 'desc') // Or use the appropriate column
+            ->paginate($perPage);
+
+        $result = [];
+        foreach ($products as $key => $v) {
+            $result[] = [
+                'id'           => $v->id,
+                'product_id'   => $v->id,
+                'product_name' => $v->pro_name,
+                'category_id'  => $v->category_id,
+                'discount'     => $v->discount,
+                'price'        => number_format($v->price, 2),
+                'thumnail_img' => url($v->thumnail_img),
+                'pro_slug'     => $v->pro_slug,
+
+            ];
+        }
+
+        $data['result']        = $result;
+        $data['pro_count']     = count($result);
+        return response()->json($data, 200);
+    }
+
     public function topSellProducts()
     {
         $data = Product::orderBy('id', 'desc')->select('id', 'name', 'thumnail_img', 'slug')->limit(12)->get();
@@ -117,13 +147,13 @@ class UnauthenticatedController extends Controller
     {
 
         $data['pro_row']  = Product::where('product.slug', $slug)
-                           ->select('product.id', 'product.id as product_id', 'product.name', 'product.slug as pro_slug', 'product.thumnail_img','description','product.price','product.discount','product.stock_qty','product.stock_mini_qty')
-                           ->first();
+            ->select('product.id', 'product.id as product_id', 'product.name', 'product.slug as pro_slug', 'product.thumnail_img', 'description', 'product.price', 'product.discount', 'product.stock_qty', 'product.stock_mini_qty')
+            ->first();
 
 
         $product_chk       = Product::where('product.slug', $slug)
-                           ->select('product.id', 'product.id as product_id', 'product.name', 'product.slug as pro_slug', 'product.thumnail_img','description','product.price','product.discount','product.stock_qty','product.stock_mini_qty')
-                           ->get();
+            ->select('product.id', 'product.id as product_id', 'product.name', 'product.slug as pro_slug', 'product.thumnail_img', 'description', 'product.price', 'product.discount', 'product.stock_qty', 'product.stock_mini_qty')
+            ->get();
         $products = [];
         foreach ($product_chk as $key => $v) {
             $products[] = [
@@ -136,7 +166,7 @@ class UnauthenticatedController extends Controller
                 'pro_slug'     => $v->pro_slug,
 
             ];
-        }                   
+        }
         $findproductrow   = $data['pro_row'];
         $data['att_img']  = ProductAdditionalImg::where('produc_img_history.product_id', $findproductrow->id)->get();
         foreach ($data['att_img'] as $v) {
@@ -145,7 +175,7 @@ class UnauthenticatedController extends Controller
                 'thumnail'     => !empty($v->images) ? url($v->images) : "",
             ];
         }
-        $data['slider_img']    = !empty($mul_slider_img) ? $mul_slider_img: "";
+        $data['slider_img']    = !empty($mul_slider_img) ? $mul_slider_img : "";
         $data['featuredImage'] = url($findproductrow->thumnail_img);
         $data['product']      = $products;
         return response()->json($data, 200);

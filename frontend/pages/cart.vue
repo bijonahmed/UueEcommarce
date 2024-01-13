@@ -55,7 +55,7 @@
                         <div class="side_title" v-if="itemCount !==0">
                             <h5>Cart({{ itemCount }})</h5>
                         </div>
-                        <div class="loading-indicator" v-if="loading">
+                        <div class="loading-indicator text-center" v-if="loading">
                             <div class="lodcontainer">
                                 <center class="loader-text">Loading...</center>
                                 <img src="/loader/loader.gif" alt="Loader" />

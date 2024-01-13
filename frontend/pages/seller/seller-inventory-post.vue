@@ -52,43 +52,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <div class="user_sidebar">
-                        <div class="user_page_title">
-                            <h3><Nuxt-link to="/seller/seller-wallet"><i class="fa-regular fa-star"></i>Wallet</Nuxt-link></h3>
-                        </div>
-                        <div class="user_page_list">
-                            <ul>
-                                <li>
-                                    <Nuxt-link to="/seller/seller-inventories">Inventories </Nuxt-link>
-                                </li>
-                                <li class="active">
-                                    <Nuxt-link to="/seller/seller-inventory-post">Add Inventory </Nuxt-link>
-                                </li>
-                                <li class="">
-                                    <Nuxt-link to="/seller/seller-orders">Orders </Nuxt-link>
-                                </li>
-                                <li class="">
-                                    <Nuxt-link to="/seller/seller-customer-returns">Customer Returns</Nuxt-link>
-                                </li>
-                                <li class="">
-                                    <Nuxt-link to="/seller/seller-wallet">Wallet</Nuxt-link>
-                                </li>
-                                <li>
-                                    <Nuxt-link to="/seller/seller-profile">Profile information</Nuxt-link>
-                                </li>
-                                <li class="">
-                                    <Nuxt-link to="/seller/seller-account-setting">Account Settings</Nuxt-link>
-                                </li>
-                                <li class="">
-                                    <Nuxt-link to="/seller/seller-message">Massages</Nuxt-link>
-                                </li>
-                                <li class="">
-                                    <Nuxt-link to="/login">LogOut </Nuxt-link>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
+                    <SellerLeftsidebar/>
                 </div>
                 <div class="col-md-8">
                     <section class="main_content ">
@@ -193,10 +157,20 @@
 
 <script>
 import $ from 'jquery';
+import Common_MobileSidebar from '~/components/Common_MobileSidebar.vue';
+import Common_MiniTabNavbar from '~/components/Common_MiniTabNavbar.vue';
+import Common_MobileSearchProduct from '~/components/Common_MobileSearchProduct.vue';
+import SellerLeftsidebar from '~/pages/seller/seller-leftsidebar.vue';
 export default {
-
+    middleware: 'auth',
+    components: {
+        Common_MobileSidebar,
+        Common_MiniTabNavbar,
+        Common_MobileSearchProduct,
+        SellerLeftsidebar,
+    },
     head: {
-        title: 'Seller Inventory Post',
+        title: 'Inventory',
     },
 
 }

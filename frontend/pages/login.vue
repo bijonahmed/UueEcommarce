@@ -228,9 +228,6 @@ export default {
                     headers
                 }).then((response) => {
 
-               // conosle.log("invalid code messages: " + response.data.error);
-                //return false; 
-                // Assuming your API returns a JWT token in the response
                 const token = response.data.access_token;
                 this.$auth.setUserToken(token);
                 const Toast = Swal.mixin({
@@ -280,7 +277,21 @@ export default {
                     data
                 } = await this.$axios.post('/auth/login', postData); //await this.login.post('/auth/login');
                 await this.$auth.setUserToken(data.access_token);
-                this.$router.push('/checkout');
+
+
+                if (data.role_id === 3) {
+                    return this.$router.push('/seller/seller-inventories');
+                } else if (data.role_id === 2) {
+                    return this.$router.push('/user/user-profile');
+                } else {
+                    console.warn('Unsupported role_id:', data.role_id);
+                }
+
+
+
+
+
+               // this.$router.push('/checkout');
                 //this.loginForm.reset();
 
             } catch (err) {

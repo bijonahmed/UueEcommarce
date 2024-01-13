@@ -142,14 +142,19 @@
                                 </span>
 
                                 <li v-if="loggedIn">
-                                    <Nuxt-link class="dropdown-item" to="/user/user-profile">MY Account</Nuxt-link>
+                                    <Nuxt-link class="dropdown-item" :to="getProfileLink()">MY Account</Nuxt-link>
                                 </li>
-                                <li v-if="loggedIn">
+
+                                <li v-if="loggedIn && userRole === 3">
+                                    <Nuxt-link class="dropdown-item" to="/seller/seller-orders">Orders</Nuxt-link>
+                                </li>
+                                <li v-if="loggedIn && userRole === 2">
                                     <Nuxt-link class="dropdown-item" to="/user/user-orders">Orders</Nuxt-link>
                                 </li>
-                                <li v-if="loggedIn">
+                                <li v-if="loggedIn && userRole === 2">
                                     <Nuxt-link class="dropdown-item" to="/user/user-whichlist">Wishlist</Nuxt-link>
                                 </li>
+
                             </ul>
                         </div>
                         <!-- help -->
@@ -234,10 +239,20 @@ export default {
         loggedIn() {
             return this.$auth.loggedIn;
         },
+        userRole() {
+            return this.$auth.loggedIn ? this.$auth.user.role_id : null;
+        },
     },
     methods: {
+        getProfileLink() {
+            // Generate the profile link based on the user's role_id
+            return this.userRole === 3 ? '/seller/seller-profile' : '/user/user-profile';
+        },
         openLoginModal() {
             $(".login_popup").fadeIn();
+        },
+        closePopup() {
+            $(".login_popup").fadeOut();
         },
         logout() {
             localStorage.removeItem('jwtToken');

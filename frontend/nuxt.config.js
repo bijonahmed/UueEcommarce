@@ -16,8 +16,6 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: "stylesheet",href: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"},
       { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" },
-      // { rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" },
-
  
       { rel: "stylesheet", href: "/css/styles.css" },
       { rel: "stylesheet", href: "/css/storebtn.css" },
@@ -32,16 +30,12 @@ export default {
       { src: "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" },
       { src: "https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" },
       { src: "https://cdn.jsdelivr.net/npm/sweetalert2@11" },
-     // { src: "https://code.jquery.com/jquery-3.1.1.slim.min.js" },
- 
-      //{ src: "/js/priceRange.js" },
       { src: "/js/star-rating.js" },
       { src: "/js/search_modal.js" },
       { src: "/js/login_popup.js" },
       { src: "/js/addActiveClass.js" },
       { src: "/js/owl.carousel.min.js" },
       { src: "/js/owl_carousel_plugin.js" },
-     // { src: "/js/customslider.js" },
     ],
   },
   // Global CSS: https://go.nuxtjs.dev/config-css

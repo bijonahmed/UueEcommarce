@@ -16,8 +16,8 @@
                         <div class="left_side_product">
                             <div class="category_list">
 
-                                <p>Query parameter 'slug': {{ $route.query.slug }}</p>
-                                <hr />
+                                <!-- <p>Query parameter 'slug': {{ $route.query.slug }}</p>
+                                <hr /> -->
                                 <h6>Category</h6>
                                 <ul>
                                     <li v-for="category in categories" :key="category.id"><a href="#" @click="fetchData(category.slug)">{{ category.name }}</a></li>

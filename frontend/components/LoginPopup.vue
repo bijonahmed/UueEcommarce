@@ -3,7 +3,7 @@
     <div class="login_popup">
         <div class="popup_box_modal">
             <div>
-                <div class="row">
+                <div class="row" @click="closePopup">
                     <div class="col-6 ms-auto text-end"> <button class="btn_edit close_login"><i class="fa-solid fa-x"></i></button></div>
                 </div>
             </div>
@@ -72,6 +72,10 @@ export default {
 
     },
     methods: {
+
+        closePopup() {
+            $(".login_popup").fadeOut();
+        },
         gotoCheckOut() {
             this.$router.push('/checkout');
         },
@@ -82,17 +86,19 @@ export default {
                 const postData = {
                     email: this.login.email,
                     password: this.login.password,
-                    // Add other parameters as needed
                 };
-                //console.log("==========login email:" +  this.login.email);
-                //console.log("==========login password:" +  this.login.password);
-                //return false; 
                 let {
                     data
                 } = await this.$axios.post('/auth/login', postData);
                 await this.$auth.setUserToken(data.access_token);
-                this.$router.push('/user/user-profile');
-               // $('.login_popup').modal('hide');
+
+                if (data.role_id === 3) {
+                    return this.$router.push('/seller/seller-inventories');
+                } else if (data.role_id === 2) {
+                    return this.$router.push('/user/user-profile');
+                } else {
+                    console.warn('Unsupported role_id:', data.role_id);
+                }
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -101,7 +107,6 @@ export default {
                     timer: 1500
                 });
 
-               
                 //this.loginForm.reset();
             } catch (err) {
                 console.log(err)

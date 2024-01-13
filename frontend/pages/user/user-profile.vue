@@ -391,6 +391,7 @@ export default {
             });
         },
         logout() {
+            this.$auth.logout();
             localStorage.removeItem('jwtToken');
             this.$router.push('/');
         },

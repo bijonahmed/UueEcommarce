@@ -148,20 +148,9 @@
                                 <Nuxt-link to="/login">Login & Signup </Nuxt-link>
                             </li>
                             <li>
-                                <Nuxt-link to="/seller_form">Seller Register </Nuxt-link>
+                                <Nuxt-link to="/seller-form">Seller Register </Nuxt-link>
                             </li>
-                            <li>
-                                <Nuxt-link to="/forget-password">Forget Password</Nuxt-link>
-                            </li>
-                            <li>
-                                <Nuxt-link to="/changepassword">Change Password</Nuxt-link>
-                            </li>
-                            <li>
-                                <Nuxt-link to="/update-password">Update Password</Nuxt-link>
-                            </li>
-                            <li>
-                                <Nuxt-link to="/service">Service</Nuxt-link>
-                            </li>
+                           
                             <li>
                                 <Nuxt-link to="/flas-sale">Flash Sale</Nuxt-link>
                             </li>
