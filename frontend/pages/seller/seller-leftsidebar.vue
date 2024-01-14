@@ -3,11 +3,11 @@
     <div class="user_sidebar">
         <div class="user_page_list">
             <ul>
-                <li :class="{ active: $route.path === '/seller/seller-inventories' }">
-                    <Nuxt-link to="/seller/seller-inventories" exact>Inventories </Nuxt-link>
+                <li :class="{ active: $route.path === '/seller/seller-products' }">
+                    <Nuxt-link to="/seller/seller-products" exact>Products </Nuxt-link>
                 </li>
-                <li :class="{ active: $route.path === '/seller/seller-inventory-post' }">
-                    <Nuxt-link to="/seller/seller-inventory-post" exact>Add Inventory </Nuxt-link>
+                <li :class="{ active: $route.path === '/seller/seller-products-post' }">
+                    <Nuxt-link to="/seller/seller-products-post" exact>Add Products </Nuxt-link>
                 </li>
                 <li :class="{ active: $route.path === '/seller/seller-orders' }">
                     <Nuxt-link to="/seller/seller-orders" exact>Orders </Nuxt-link>
@@ -21,9 +21,9 @@
                 <li :class="{ active: $route.path === '/seller/seller-account-setting' }">
                     <Nuxt-link to="/seller/seller-account-setting" exact>Account Settings</Nuxt-link>
                 </li>
-                <li :class="{ active: $route.path === '/seller/seller-message' }">
+                <!-- <li :class="{ active: $route.path === '/seller/seller-message' }">
                     <Nuxt-link to="/seller/seller-message" exact>Massages</Nuxt-link>
-                </li>
+                </li> -->
                 <li>
                     <a href="#" @click="logout">LogOut </a>
                 </li>

@@ -16,7 +16,7 @@
                         <li :key="category.id" v-if="index < limit">
                             <a href="#" class="d-flex justify-content-between align-items-center" @click="redirectCategory(category.slug)">
                                 <div class="d-flex align-items-center">
-                                  <!-- <img :src="images/cat_svg/icons8-apple-100.png" alt="">  -->
+                                    <i class="fa-solid fa-list" style="font-size: 10px;"></i>
                                      
                                     {{ category.name }}</div> <i class="fa-solid fa-angle-right"></i>
                             </a>

@@ -41,7 +41,9 @@ Route::group([
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('me', [AuthController::class, 'me']);
     Route::post('profile', [AuthController::class, 'profile']);
+    Route::post('updateLogo', [AuthController::class, 'updateLogo']);
     Route::post('updateprofile', [AuthController::class, 'updateprofile']);
+    Route::post('updateBusinessprofile', [AuthController::class, 'updateBusinessprofile']);
     Route::post('updatePassword', [AuthController::class, 'changesPassword']);
     Route::get('showProfileData', [AuthController::class, 'showProfileData']);
  

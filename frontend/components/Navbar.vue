@@ -53,7 +53,7 @@
                                             </div>
                                             <ul>
                                                 <li v-for="childCategory in category.children" :key="childCategory.id">
-                                                    <a href="#" @click="redirectCategory(category.slug)"><i class="fa-solid fa-mobile-screen-button"></i> {{ childCategory.name }}</a>
+                                                    <a href="#" @click="redirectCategory(category.slug)">  <i class="fa-solid fa-list" style="font-size: 10px;"></i>{{ childCategory.name }}</a>
                                                 </li>
 
                                             </ul>
@@ -85,7 +85,7 @@
                                         <li :key="category.id" v-if="index < limit">
                                             <a href="#" class="d-flex justify-content-between align-items-center" @click="redirectCategory(category.slug)">
                                                 <div class="d-flex align-items-center">
-                                                    <!-- <img src="/images/cat_svg/icons8-apple-100.png" alt=""> -->
+                                                    <i class="fa-solid fa-angle-right"></i>
                                                     {{ category.name }}</div> <i class="fa-solid fa-angle-right"></i>
                                             </a>
                                             <div class="sub_menu">
@@ -199,11 +199,11 @@
                         <ul>
                             <li>
                                 <img src="images/product(1).jpg" alt="">
-                                <a href="product-details.html">Cat ,Product or brand name here Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis rerum nemo iste hic nobis, porro iusto officiis eum sit eos!</a>
+                                <a href="#">Cat ,Product or brand name here Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis rerum nemo iste hic nobis, porro iusto officiis eum sit eos!</a>
                             </li>
                             <li>
                                 <img src="images/product(1).jpg" alt="">
-                                <a href="product-details.html">Cat ,Product or brand name here Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis rerum nemo iste hic nobis, porro iusto officiis eum sit eos!</a>
+                                <a href="#">Cat ,Product or brand name here Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis rerum nemo iste hic nobis, porro iusto officiis eum sit eos!</a>
                             </li>
 
                         </ul>

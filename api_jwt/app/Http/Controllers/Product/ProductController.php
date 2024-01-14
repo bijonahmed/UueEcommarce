@@ -159,6 +159,7 @@ class ProductController extends Controller
         $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $request->input('name'))));
 
         $data = array(
+            'seller_id'                  => $this->userid,
             'name'                       => $request->name,
             'slug'                       => $slug,
             'description'                => !empty($request->description) ? $request->description : "",

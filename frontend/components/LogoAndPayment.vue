@@ -24,4 +24,14 @@
 </div>
 </div>
 </template>
- 
+ <style>
+ .payment_part a {
+	color: #000;
+	margin-right: 10px;
+	transition: .4s all ease-in-out;
+	text-transform: capitalize;
+	font-size: 12px;
+    font-weight: 400;
+	transition: .4s all ease-in-out;
+}
+</style>

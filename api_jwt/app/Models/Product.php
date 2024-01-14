@@ -14,6 +14,7 @@ class Product extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     public $table = "product";
     protected $fillable = [
+        'seller_id',
         'name',
         'slug',
         'description',

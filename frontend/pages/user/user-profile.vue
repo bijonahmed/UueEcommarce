@@ -299,7 +299,6 @@ export default {
                     headers
                 }).then((res) => {
                 $('#formrest')[0].reset();
-                alert("success");
                 this.$router.push('/user/user-profile');
 
             }).catch(error => {

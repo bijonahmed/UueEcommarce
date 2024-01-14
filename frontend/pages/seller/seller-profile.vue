@@ -89,26 +89,30 @@
                                                     <p>Update Seller Details </p>
                                                     <button type="button" class="btn-close btn_address_close" @click="sellerAccModalCls"></button>
                                                 </div>
-                                                <form action="">
+                                                <form @submit.prevent="profileupdate()" id="userSubmitFrm" class="forms-sample" enctype="multipart/form-data">
                                                     <div>
                                                         <label for="name">First Name</label>
                                                         <input type="text" class="form-control" v-model="userdata.first_name">
+                                                        <span class="text-danger" v-if="errors.first_name">{{ errors.first_name[0] }}</span>
                                                     </div>
                                                     <div>
                                                         <label for="name">Last Name</label>
                                                         <input type="text" class="form-control" v-model="userdata.last_name">
+                                                        <span class="text-danger" v-if="errors.last_name">{{ errors.last_name[0] }}</span>
                                                     </div>
                                                     <div>
                                                         <label for="">Email </label>
                                                         <input type="email" v-model="userdata.email" class="form-control">
+                                                        <span class="text-danger" v-if="errors.email">{{ errors.email[0] }}</span>
                                                     </div>
                                                     <div class="">
                                                         <label for="">Phone </label> <br>
                                                         <input type="text" class="form-control mobile_code" v-model="userdata.phone_number">
+                                                        <span class="text-danger" v-if="errors.phone_number">{{ errors.phone_number[0] }}</span>
 
                                                     </div>
                                                     <div class="mt-3">
-                                                        <button type="button" class="btn_cart mt-2" style="visibility: unset;">Save</button>
+                                                        <button type="submit" class="btn_cart mt-2" style="visibility: unset;">Save</button>
                                                     </div>
 
                                                 </form>
@@ -122,8 +126,12 @@
                                         <p>{{ userdata.id }}</p>
                                     </div>
                                     <div class="user_info">
-                                        <h5>Full Name </h5>
-                                        <p>{{ userdata.name }}</p>
+                                        <h5>First Name </h5>
+                                        <p>{{ userdata.first_name }}</p>
+                                    </div>
+                                    <div class="user_info">
+                                        <h5>Last Name </h5>
+                                        <p>{{ userdata.last_name }}</p>
                                     </div>
                                     <div class="user_info">
                                         <h5>Email</h5>
@@ -142,70 +150,41 @@
                                 <div class="user_details">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <h4>Business Information </h4>
-                                        <button type="button" class="btn_edit"><i class="fa-solid fa-pen"></i></button>
+                                        <button type="button" class="btn_edit"><i class="fa-solid fa-pen" @click="businessInfoModal"></i></button>
                                         <!-- profile update modal here  -->
                                         <div class="modal_address_here edit_div">
                                             <div class="address_form_modal">
                                                 <div class="d-flex justify-content-between">
                                                     <p>Update Business Information </p>
-                                                    <button type="button" class="btn-close btn_address_close"></button>
+                                                    <button type="button" class="btn-close btn_address_close" @click="businessInfoModalCls"></button>
                                                 </div>
-                                                <form action="">
+                                                <form @submit.prevent="businessInfoupdate()" id="userSubmitFrm" class="forms-sample" enctype="multipart/form-data">
+                                                    <div>
+                                                        <label for="name" class="d-flex">Business Owner Name<p class="text-danger d-block">*</p></label>
+                                                        <input type="text" class="form-control" v-model="userdata.business_owner_name">
+                                                        <span class="text-danger" v-if="errors.business_owner_name"><small>{{ errors.business_owner_name[0] }}</small></span>
+                                                    </div>
 
                                                     <div>
-                                                        <label for="name" class="d-flex">Legal Name/Business Owner<p class="text-danger d-block">*</p></label>
-                                                        <input type="text" name="name" id="name" class="form-control">
+                                                        <label for="name" class="d-flex">Business Name<p class="text-danger d-block">*</p></label>
+                                                        <input type="text" class="form-control" v-model="userdata.business_name">
+                                                        <span class="text-danger" v-if="errors.business_name"><small>{{ errors.business_name[0] }}</small></span>
                                                     </div>
-                                                    <div>
-                                                        <label for="" class="d-flex">Business Legal Form<p class="text-danger d-block">*</p> </label>
-                                                        <select name="" id="" class="form-control">
-                                                            <option value="" selected disabled>Select One</option>
-                                                            <option value="">Limited Liability Company</option>
-                                                            <option value="">Public Company</option>
-                                                            <option value="">No-minimum capital unlimited liabity of partners, Non-business </option>
-                                                        </select>
-                                                    </div>
+
                                                     <div>
                                                         <label for="" class="d-flex">Business Registration Number <p class="text-danger d-block">*</p></label>
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" class="form-control" v-model="userdata.business_register_num">
+                                                        <span class="text-danger" v-if="errors.business_register_num"><small>{{ errors.business_register_num[0] }}</small></span>
                                                     </div>
-                                                    <div>
-                                                        <label for="" class="d-flex">Country <p class="text-danger d-block">*</p></label>
-                                                        <select name="" id="country" class="form-control">
-                                                            <option value="" selected disabled>Select One</option>
 
-                                                        </select>
-                                                    </div>
                                                     <div>
-                                                        <label for="" class="d-flex">State<p class="text-danger d-block">*</p></label>
-                                                        <select name="" id="state" class="form-control">
-                                                            <option value="" selected disabled>Select One</option>
-                                                        </select>
-                                                    </div>
-                                                    <div>
-                                                        <label for="" class="d-flex">City/Town <p class="text-danger d-block">*</p></label>
-                                                        <input type="text" value="" class="form-control">
-                                                    </div>
-                                                    <div>
-                                                        <label for="" class="d-flex">Area <p class="text-danger d-block">*</p> </label>
-                                                        <input type="text" value="" class="form-control">
-                                                    </div>
-                                                    <div>
-                                                        <label for="" class="d-flex">Id Type <p class="text-danger d-block">*</p></label>
-                                                        <select name="" class="form-control" id="">
-                                                            <option value="" selected disabled>Select One </option>
-                                                            <option value="">National Id </option>
-                                                            <option value="">Driving Licence </option>
-                                                            <option value="">Passport Number</option>
-                                                        </select>
-                                                    </div>
-                                                    <div>
-                                                        <label for="" class="d-flex">Id Number <p class="text-danger d-block">*</p> </label>
-                                                        <input type="text" value="" class="form-control">
+                                                        <label for="" class="d-flex">Business Address <p class="text-danger d-block">*</p></label>
+                                                        <input type="text" class="form-control" v-model="userdata.business_address">
+                                                        <span class="text-danger" v-if="errors.business_address"><small>{{ errors.business_address[0] }}</small></span>
                                                     </div>
 
                                                     <div class="mt-3">
-                                                        <button type="button" class="btn_cart mt-2" style="visibility: unset;">Save</button>
+                                                        <button type="submit" class="btn_cart mt-2" style="visibility: unset;">Save</button>
                                                     </div>
 
                                                 </form>
@@ -215,27 +194,24 @@
                                         <!-- modal end  -->
                                     </div>
                                     <div class="user_info">
-                                        <h5>Legal Name/Business Owner</h5>
-                                        <p>Jhone Due </p>
+                                        <h5>Business Owner Name</h5>
+                                        <p>{{ userdata.business_owner_name }}</p>
                                     </div>
 
                                     <div class="user_info">
-                                        <h5>Business Legal Form </h5>
-                                        <p>Limited Liability Company</p>
+                                        <h5>Business Name </h5>
+                                        <p>{{ userdata.business_name }}</p>
                                     </div>
                                     <div class="user_info">
                                         <h5>Business Registration number</h5>
-                                        <p>74557411654</p>
+                                        <p>{{ userdata.business_register_num }}</p>
                                     </div>
                                     <div class="user_info">
                                         <h5>Address </h5>
-                                        <p>Road #12, House #ga-129, Banani </p>
-                                        <p>Banani, Dhaka-1212, Bangladesh </p>
+                                        <p>{{ userdata.business_address }}</p>
+
                                     </div>
-                                    <div class="user_info">
-                                        <h5>National Id</h5>
-                                        <p>74557411654</p>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -245,47 +221,30 @@
                                     <div class="user_details">
                                         <div class="d-flex align-items-center justify-content-between">
                                             <h4>WareHouse </h4>
-                                            <button type="button" class="btn_edit"><i class="fa-solid fa-pen"></i></button>
+                                            <button type="button" class="btn_edit" @click="whareHouseModal"><i class="fa-solid fa-pen"></i></button>
                                             <!-- profile update modal here  -->
                                             <div class="modal_address_here edit_div">
                                                 <div class="address_form_modal">
                                                     <div class="d-flex justify-content-between">
                                                         <p>WareHouse Address </p>
-                                                        <button type="button" class="btn-close btn_address_close"></button>
+                                                        <button type="button" class="btn-close btn_address_close" @click="whareHouseModalCls"></button>
                                                     </div>
-                                                    <form action="">
+                                                    <form @submit.prevent="profileupdate()" id="userSubmitFrm" class="forms-sample" enctype="multipart/form-data">
                                                         <div>
-                                                            <label for="name">Full Name </label>
-                                                            <input type="text" name="name" id="name" class="form-control">
-                                                        </div>
-                                                        <div>
-                                                            <label for="" class="d-flex">Country <p class="text-danger d-block">*</p></label>
-                                                            <select name="" id="country" class="form-control">
-                                                                <option value="" selected disabled>Select One</option>
-
-                                                            </select>
-                                                        </div>
-                                                        <div>
-                                                            <label for="" class="d-flex">State<p class="text-danger d-block">*</p></label>
-                                                            <select name="" id="state" class="form-control">
-                                                                <option value="" selected disabled>Select One</option>
-                                                            </select>
+                                                            <label for="name">Address </label>
+                                                            <input type="text" class="form-control" v-model="userdata.business_warehouse_address">
                                                         </div>
                                                         <div>
                                                             <label for="">Email </label>
-                                                            <input type="email" value="usermail@mail.com" class="form-control">
+                                                            <input type="email" class="form-control" v-model="userdata.business_email">
                                                         </div>
                                                         <div class="">
                                                             <label for="">Phone </label> <br>
-                                                            <input type="text" id="" class="form-control mobile_code" placeholder=" " name="name">
-                                                        </div>
-                                                        <div class="">
-                                                            <label for="">Postal Code </label> <br>
-                                                            <input type="text" id="" class="form-control " placeholder="Postal code" name="name">
+                                                            <input type="text" class="form-control mobile_code" v-model="userdata.business_phone">
                                                         </div>
 
                                                         <div class="mt-3">
-                                                            <button type="button" class="btn_cart mt-2" style="visibility: unset;">Save</button>
+                                                            <button type="submit" class="btn_cart mt-2" style="visibility: unset;">Save</button>
                                                         </div>
 
                                                     </form>
@@ -294,23 +253,19 @@
                                             </div>
                                             <!-- modal end  -->
                                         </div>
-                                        <div class="user_info">
-                                            <h5>Full Name</h5>
-                                            <p>Jhone Due</p>
-                                        </div>
+
                                         <div class="user_info">
                                             <h5>Address</h5>
-                                            <p>House #165, school road</p>
-                                            <p>Dhaka-1212, Bangladesh</p>
+                                            <p>{{ userdata.business_warehouse_address }}</p>
 
                                         </div>
                                         <div class="user_info">
                                             <h5>Email</h5>
-                                            <p>useremail@mail.com</p>
+                                            <p>{{ userdata.business_email }}</p>
                                         </div>
                                         <div class="user_info">
                                             <h5>Phone</h5>
-                                            <p>+880 15000000</p>
+                                            <p>{{ userdata.business_phone }}</p>
                                         </div>
 
                                     </div>
@@ -322,54 +277,36 @@
                                 <div class="user_details">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <h4>Return Address </h4>
-                                        <button type="button" class="btn_edit"><i class="fa-solid fa-pen"></i></button>
+                                        <button type="button" class="btn_edit" @click="returnaddresspopup"><i class="fa-solid fa-pen"></i></button>
                                         <!-- profile update modal here  -->
                                         <div class="modal_address_here edit_div">
                                             <div class="address_form_modal">
                                                 <div class="d-flex justify-content-between">
                                                     <p>Return Address </p>
-                                                    <button type="button" class="btn-close btn_address_close"></button>
+                                                    <button type="button" class="btn-close btn_address_close" @click="returnaddresspopupClose"></button>
                                                 </div>
-                                                <form action="">
-                                                    <div>
-                                                        <label for="name">As Warehouse Address </label>
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="me-2"><input type="radio" name="name" id="name"> <label for=""> Yes</label></div>
-                                                            <div><input type="radio" name="name" checked id="name"> <label for=""> No</label></div>
-                                                        </div>
-                                                    </div>
+                                                <form @submit.prevent="profileupdate()" id="userSubmitFrm" class="forms-sample" enctype="multipart/form-data">
                                                     <div>
                                                         <label for="name">Full Name </label>
-                                                        <input type="text" name="name" id="name" class="form-control">
+                                                        <input type="text" class="form-control" v-model="userdata.business_return_name">
                                                     </div>
-                                                    <div>
-                                                        <label for="" class="d-flex">Country <p class="text-danger d-block">*</p></label>
-                                                        <select name="" id="country" class="form-control">
-                                                            <option value="" selected disabled>Select One</option>
 
-                                                        </select>
-                                                    </div>
-                                                    <div>
-                                                        <label for="" class="d-flex">State<p class="text-danger d-block">*</p></label>
-                                                        <select name="" id="state" class="form-control">
-                                                            <option value="" selected disabled>Select One</option>
-                                                        </select>
-                                                    </div>
                                                     <div>
                                                         <label for="">Email </label>
-                                                        <input type="email" value="usermail@mail.com" class="form-control">
+                                                        <input type="text" v-model="userdata.business_return_email" class="form-control">
                                                     </div>
+
                                                     <div class="">
                                                         <label for="">Phone </label> <br>
-                                                        <input type="text" id="" class="form-control mobile_code" placeholder=" " name="name">
+                                                        <input type="text" class="form-control" v-model="userdata.business_return_phone">
                                                     </div>
                                                     <div class="">
-                                                        <label for="">Postal Code </label> <br>
-                                                        <input type="text" id="" class="form-control " placeholder="Postal code" name="name">
+                                                        <label for="">Address </label> <br>
+                                                        <input type="text" class="form-control" v-model="userdata.business_return_address">
                                                     </div>
 
                                                     <div class="mt-3">
-                                                        <button type="button" class="btn_cart mt-2" style="visibility: unset;">Save</button>
+                                                        <button type="submit" class="btn_cart mt-2" style="visibility: unset;">Save</button>
                                                     </div>
 
                                                 </form>
@@ -379,22 +316,21 @@
                                         <!-- modal end  -->
                                     </div>
                                     <div class="user_info">
-                                        <h5>Full Name</h5>
-                                        <p>Jhone Due</p>
+                                        <h5>Name</h5>
+                                        <p>{{ userdata.business_return_name }}</p>
                                     </div>
                                     <div class="user_info">
                                         <h5>Address</h5>
-                                        <p>House #165, school road</p>
-                                        <p>Dhaka-1212, Bangladesh</p>
+                                        <p>{{ userdata.business_return_address }}</p>
 
                                     </div>
                                     <div class="user_info">
                                         <h5>Email</h5>
-                                        <p>useremail@mail.com</p>
+                                        <p>{{ userdata.business_return_email }}</p>
                                     </div>
                                     <div class="user_info">
                                         <h5>Phone</h5>
-                                        <p>+880 15000000</p>
+                                        <p>{{ userdata.business_return_phone }}</p>
                                     </div>
 
                                 </div>
@@ -447,10 +383,20 @@ export default {
                 email: '',
                 phone_number: '',
                 address: '',
-                address_1: '',
-                address_2: '',
-                address_3: '',
-                created_at: null,
+                business_owner_name: '',
+                business_name: '',
+                business_register_num: '',
+                business_address: '',
+                //WareHouse Address
+                business_warehouse_address: '',
+                business_email: '',
+                business_phone: '',
+                //Return Address
+                business_return_name: '',
+                business_return_email: '',
+                business_return_address: '',
+                business_return_phone: '',
+
             },
             passdata: {
                 password: '',
@@ -462,48 +408,54 @@ export default {
         }
     },
     mounted() {
-
         this.defaultLoading();
-        this.loadingOrders();
-
     },
     methods: {
-        saveData() {
+        businessInfoupdate() {
             const formData = new FormData();
-            formData.append('password', this.passdata.password);
-            formData.append('password_confirmation', this.passdata.password_confirmation);
+            formData.append('business_owner_name', this.userdata.business_owner_name);
+            formData.append('business_name', this.userdata.business_name);
+            formData.append('business_register_num', this.userdata.business_register_num);
+            formData.append('business_address', this.userdata.business_address);
             const headers = {
                 'Content-Type': 'multipart/form-data'
             };
-            this.$axios.post('/auth/updatePassword',
+            this.$axios.post('/auth/updateBusinessprofile',
                 formData, {
                     headers
                 }).then((res) => {
-                $('#formrest')[0].reset();
-                alert("success");
-                this.$router.push('/user/user-profile');
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Business Info. has been successfully updated",
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+                this.sellerAccModalCls();
+                this.defaultLoading();
 
             }).catch(error => {
                 if (error.response.status === 422) {
                     this.errors = error.response.data.errors;
                 }
             });
-        },
-        sellerAccModal() {
-            $(".modal_address_here").fadeIn();
-        },
-        sellerAccModalCls() {
-            $(".modal_address_here").fadeOut();
+
         },
 
         profileupdate() {
             const formData = new FormData();
-            formData.append('name', this.userdata.name);
-            formData.append('email', this.userdata.email);
+            formData.append('first_name', this.userdata.first_name);
+            formData.append('last_name', this.userdata.last_name);
             formData.append('phone_number', this.userdata.phone_number);
-            formData.append('address_1', this.userdata.address_1);
-            formData.append('address_2', this.userdata.address_2);
-            formData.append('address_3', this.userdata.address_3);
+            formData.append('email', this.userdata.email);
+            formData.append('business_warehouse_address', this.userdata.business_warehouse_address);
+            formData.append('business_email', this.userdata.business_email);
+            formData.append('business_phone', this.userdata.business_phone);
+            formData.append('business_return_name', this.userdata.business_return_name);
+            formData.append('business_return_email', this.userdata.business_return_email);
+            formData.append('business_return_address', this.userdata.business_return_address);
+            formData.append('business_return_phone', this.userdata.business_return_phone);
+
             const headers = {
                 'Content-Type': 'multipart/form-data'
             };
@@ -511,7 +463,6 @@ export default {
                 formData, {
                     headers
                 }).then((res) => {
-                $(".profileupdate").fadeOut();
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -519,7 +470,13 @@ export default {
                     showConfirmButton: false,
                     timer: 1500
                 });
+                this.sellerAccModalCls();
+                this.defaultLoading();
 
+            }).catch(error => {
+                if (error.response.status === 422) {
+                    this.errors = error.response.data.errors;
+                }
             });
 
         },
@@ -527,6 +484,7 @@ export default {
 
             this.loading = true;
             await this.$axios.post(`/auth/me`).then(response => {
+                    // Seller Account Info
                     this.userdata.id = response.data.id;
                     this.userdata.first_name = response.data.first_name;
                     this.userdata.last_name = response.data.last_name;
@@ -534,22 +492,20 @@ export default {
                     this.userdata.email = response.data.email;
                     this.userdata.phone_number = response.data.phone_number;
                     this.userdata.address = response.data.address;
-                    this.userdata.address_1 = response.data.address_1;
-                    this.userdata.address_2 = response.data.address_2;
-                    this.userdata.address_3 = response.data.address_3;
-                    // Assuming response.data.created_at is a date string like "2023-11-18T03:04:53.000000Z"
-                    const createdAtDate = new Date(response.data.created_at);
-
-                    // Format the date as "YYYY-MM-DD"
-                    const formattedCreatedAt = createdAtDate.toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "2-digit",
-                        day: "2-digit"
-                    }).replace(/-/g, '');
-
-                    this.userdata.created_at = formattedCreatedAt;
-
-                    console.log("Formatted created_at: " + formattedCreatedAt);
+                    //Business Information 
+                    this.userdata.business_owner_name = response.data.business_owner_name;
+                    this.userdata.business_name = response.data.business_name;
+                    this.userdata.business_register_num = response.data.business_register_num;
+                    this.userdata.business_address = response.data.business_address;
+                    //WareHouse Address
+                    this.userdata.business_warehouse_address = response.data.business_warehouse_address;
+                    this.userdata.business_email = response.data.business_email;
+                    this.userdata.business_phone = response.data.business_phone;
+                    //Return Address
+                    this.userdata.business_return_name = response.data.business_return_name;
+                    this.userdata.business_return_email = response.data.business_return_email;
+                    this.userdata.business_return_address = response.data.business_return_address;
+                    this.userdata.business_return_phone = response.data.business_return_phone;
 
                 })
                 .catch(error => {
@@ -579,6 +535,33 @@ export default {
             localStorage.removeItem('jwtToken');
             this.$router.push('/');
         },
+        returnaddresspopup() {
+            $(".modal_address_here").fadeIn();
+        },
+
+        returnaddresspopupClose() {
+            $(".modal_address_here").fadeOut();
+        },
+        whareHouseModal() {
+            $(".modal_address_here").fadeIn();
+        },
+
+        whareHouseModalCls() {
+            $(".modal_address_here").fadeOut();
+        },
+        businessInfoModal() {
+            $(".modal_address_here").fadeIn();
+        },
+        businessInfoModalCls() {
+            $(".modal_address_here").fadeOut();
+        },
+        sellerAccModal() {
+            $(".modal_address_here").fadeIn();
+        },
+        sellerAccModalCls() {
+            $(".modal_address_here").fadeOut();
+        },
+
     }
 }
 </script>

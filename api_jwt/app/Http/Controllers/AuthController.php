@@ -14,7 +14,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register', 'showProfileData', 'updateprofile', 'updatePassword', 'registerSeller']]);
+        $this->middleware('auth:api', ['except' => ['updateLogo', 'login', 'register', 'showProfileData', 'updateprofile', 'updatePassword', 'registerSeller', 'updateBusinessprofile']]);
     }
     protected function validateLogin(Request $request)
     {
@@ -101,7 +101,6 @@ class AuthController extends Controller
         }
     }
 
-
     public function registerSeller(Request $request)
     {
         //    dd($request->all());
@@ -136,7 +135,7 @@ class AuthController extends Controller
             'business_email'         => 'Business Email',
             'business_phone'         => 'Business Phone',
             'business_return_name'   => 'Business Return Name',
-            'business_return_address'=> 'Business Return Address',
+            'business_return_address' => 'Business Return Address',
             'business_return_phone'  => 'Business Return Phone',
             'business_warehouse_address' => 'Business Warehouse Address',
             'business_owner_name'        => 'Business Owner Name',
@@ -145,7 +144,6 @@ class AuthController extends Controller
             'email'                      => 'Email',
             'password'                   => 'Password',
         ]);
-
 
         $ipaddress = request()->ip();
         if (isset($errorMessage)) {
@@ -166,7 +164,7 @@ class AuthController extends Controller
                 'business_name'             => $request->business_name,
                 'business_register_num'     => $request->business_register_num,
                 'business_address'          => $request->business_address,
-                'business_warehouse_address'=> $request->business_warehouse_address,
+                'business_warehouse_address' => $request->business_warehouse_address,
                 'business_email'            => $request->business_email,
                 'business_phone'            => $request->business_phone,
                 'business_return_name'      => $request->business_return_name,
@@ -174,15 +172,33 @@ class AuthController extends Controller
                 'business_return_phone'     => $request->business_return_phone,
                 'password'                  => bcrypt($request->password),
             ]);
-
-
-           
         }
     }
- 
+
     public function me()
     {
-        return response()->json($this->guard('api')->user());
+        //return response()->json($this->guard('api')->user());
+        $user = $this->guard('api')->user();
+
+        $response = [
+            'message' => 'User successfully retrieved',
+        ];
+
+        if (!empty($user)) {
+            // Fetch all columns dynamically from the user object
+            $userColumns = $user->getAttributes();
+
+            // Loop through each column and add it to the response
+            foreach ($userColumns as $column => $value) {
+                $response[$column] = $value;
+            }
+
+            // Add 'profileLogo' and 'businessLogo' columns specifically
+            $response['profileLogo'] = url(!empty($user->image) ? $user->image : '/profileLogo');
+            $response['businessLogo'] = url(!empty($user->business_logo) ? $user->business_logo : '/businessLogo');
+        }
+
+        return response()->json($response);
     }
     public function logout()
     {
@@ -229,15 +245,90 @@ class AuthController extends Controller
             'user' => $user
         ], 200);
     }
-    public function updateprofile(Request $request)
+
+    public function updateBusinessprofile(Request $request)
     {
+
         $user = auth('api')->user();
+
         $authId = $user->id;
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required',
+            'business_owner_name'       => 'required',
+            'business_name'             => 'required',
+            'business_register_num'     => 'required',
+            'business_address'          => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+        $data = array(
+            'id'                => $authId,
+            'business_owner_name'       => $request->business_owner_name,
+            'business_name'             => $request->business_name,
+            'business_register_num'     => $request->business_register_num,
+            'business_address'          => $request->business_address,
+
+        );
+
+        $response = [
+            'message' => 'Business Information successfully update'
+        ];
+        return response()->json($response);
+    }
+
+
+
+    public function updateLogo(Request $request)
+    {
+        $user       = auth('api')->user();
+        $authId     = $user->id;
+
+        if (!empty($request->file('file'))) {
+            $documents = $request->file('file');
+            $fileName = Str::random(20);
+            $ext = strtolower($documents->getClientOriginalExtension());
+            $path = $fileName . '.' . $ext;
+            $uploadPath = '/backend/files/';
+            $upload_url = $uploadPath . $path;
+            $documents->move(public_path('/backend/files/'), $upload_url);
+            $data['image'] = $upload_url;
+        }
+        //business logo 
+
+        if (!empty($request->file('business_logo'))) {
+            $documents = $request->file('business_logo');
+            $fileName = Str::random(20);
+            $ext = strtolower($documents->getClientOriginalExtension());
+            $path = $fileName . '.' . $ext;
+            $uploadPath = '/backend/files/';
+            $upload_url = $uploadPath . $path;
+            $documents->move(public_path('/backend/files/'), $upload_url);
+            $data['business_logo'] = $upload_url;
+        }
+
+
+
+
+        //dd($data);
+        DB::table('users')->where('id', $authId)->update($data);
+        $response = [
+            'profileLogo'  => !empty($user) ? url($user->image) : "",
+            'businessLogo' => !empty($user) ? url($user->business_logo) : "",
+            'message' => 'Logo successfully update'
+        ];
+        return response()->json($response);
+    }
+
+
+    public function updateprofile(Request $request)
+    {
+        $user       = auth('api')->user();
+        $authId     = $user->id;
+        $validator  = Validator::make($request->all(), [
+            'email'        => 'required',
+            'email'        => "required|unique:users,email, $user->id",
             'phone_number' => 'required',
-            //  'address' => 'required',
+
         ]);
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
@@ -251,13 +342,24 @@ class AuthController extends Controller
             'address_1'         => !empty($request->address_1) ? $request->address_1 : "",
             'address_2'         => !empty($request->address_2) ? $request->address_2 : "",
             'address_3'         => !empty($request->address_3) ? $request->address_3 : "",
-
             'website'           => !empty($request->website) ? $request->website : "",
             'github'            => !empty($request->github) ? $request->github : "",
             'twitter'           => !empty($request->twitter) ? $request->twitter : "",
             'instagram'         => !empty($request->instagram) ? $request->instagram : "",
             'facebook'          => !empty($request->facebook) ? $request->facebook : "",
+            'first_name'        => !empty($request->first_name) ? $request->first_name : "",
+            'last_name'         => !empty($request->last_name) ? $request->last_name : "",
+            'business_email'    => !empty($request->business_email) ? $request->business_email : "",
+            'business_phone'    => !empty($request->business_phone) ? $request->business_phone : "",
+            'business_warehouse_address'      => !empty($request->business_warehouse_address) ? $request->business_warehouse_address : "",
+
+            'business_return_name'    => !empty($request->business_return_name) ? $request->business_return_name : "",
+            'business_return_email'   => !empty($request->business_return_email) ? $request->business_return_email : "",
+            'business_return_address' => !empty($request->business_return_address) ? $request->business_return_address : "",
+            'business_return_phone'   => !empty($request->business_return_phone) ? $request->business_return_phone : "",
+
         );
+
         if (!empty($request->file('file'))) {
             $documents = $request->file('file');
             $fileName = Str::random(20);

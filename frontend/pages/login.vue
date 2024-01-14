@@ -280,7 +280,7 @@ export default {
 
 
                 if (data.role_id === 3) {
-                    return this.$router.push('/seller/seller-inventories');
+                    return this.$router.push('/seller/seller-profile');
                 } else if (data.role_id === 2) {
                     return this.$router.push('/user/user-profile');
                 } else {
