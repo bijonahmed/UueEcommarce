@@ -92,57 +92,77 @@
                         <form action="">
                             <div class="row">
                                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6">
-                                    <input type="text" placeholder="Product Id ">
+                                    <input type="text" placeholder="Product Id" v-model="productId" @change="applyFilters">
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6">
-                                    <input type="text" placeholder="Product Name ">
+                                    <input type="text" placeholder="Product Name " v-model="productName" @change="applyFilters">
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6">
-                                    <input type="text" placeholder="SKU ">
+                                    <input type="text" placeholder="SKU " v-model="sku" @change="applyFilters">
                                 </div>
 
                                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6">
-                                    <button type="button" class="btn_cart" style="visibility: unset; color: #fff; width: fit-content;">Search </button>
+                                    <button type="button" class="btn_cart" style="visibility: unset; color: #fff; width: fit-content;" @click="applyFilters">Search </button>
                                 </div>
 
                             </div>
                         </form>
+                    </div>
+                    <div class="loading-indicator" v-if="loading">
+                        <div class="loader-container">
+                            <center class="loader-text">Loading...</center>
+                            <img src="/loader/loader.gif" alt="Loader" />
+                        </div>
                     </div>
                     <div class="main_profile">
                         <div class="user_details order_details_table">
                             <table class="table">
                                 <thead>
                                     <tr>
+                                        <th>#</th>
                                         <th>Product ID</th>
+                                        <th>Name</th>
+                                        <th>SKU</th>
                                         <th>Price </th>
-                                        <th>Stock</th>
                                         <th>Status</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr v-for="(product, index) in products" :key="index">
+                                        <td>{{ index+1 }}</td>
+                                        <td>{{ product.id }}</td>
                                         <td class="table_product">
                                             <div>
-                                                <img src="/images/product(1).jpg" class="img-fluid" alt="">
-
+                                                <img :src="product.image" class="img-fluid" alt="">
                                             </div>
                                             <div>
-                                                <a href="/product-details.html">
-                                                    <h6>ID:101,Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni illo et amet perferendis mollitia excepturi similique numquam, possimus sit nesciunt repellat perspiciatis. Alias sunt iure nisi debitis adipisci molestias quod?</h6>
-                                                </a>
+                                                <nuxt-link :to="`/product-details/${product.slug}`">
+                                                    <h6>{{ product.name }}</h6>
+                                                </nuxt-link>
                                             </div>
                                         </td>
-
-                                        <td>199TK</td>
-                                        <td>122</td>
-                                        <td>Active</td>
-
+                                        <td>{{ product.sku }}</td>
+                                        <td>{{ `${product.price}TK` }}</td>
+                                        <td>{{ product.status }}</td>
+                                        <td>
+                                            <center>
+                                                <span @click="edit(product.id)"><button type="button"><i class="fa-solid fa-pen-to-square"></i></button></span>
+                                                <!-- <span @click="deleteProduct(product.id)"><button type="button"><i class="fa-solid fa-trash"></i></button></span> -->
+                                                <span @click="preview(product.id)"><button type="button"><i class="fa-solid fa-magnifying-glass-plus"></i></button></span>
+                                            </center>
+                                        </td>
                                     </tr>
 
                                 </tbody>
                             </table>
                             <!-- pagination -->
-                            <center><button class="btn_cart" style="visibility: unset; color: #fff; width: fit-content;">Load More...</button></center>
+                            <center>
+                                <button class="btn_cart" style="visibility: unset; color: #fff; width: fit-content;" @click="loadMore" :disabled="loading">
+                                    <span v-if="loading">Loading...</span>
+                                    <span v-else>Load More...</span>
+                                </button>
+                            </center>
                         </div>
                     </div>
 
@@ -177,6 +197,93 @@ export default {
     head: {
         title: 'Products List & Inventory',
     },
+    data() {
+        return {
+            loading: false,
+            searchCriteria: {
+                productName: '', // Add other filter criteria as needed
+            },
+            notifmsg: '',
+            products: [],
+            errors: {},
+            //
+            currentPage: 1,
+            totalPages: 1,
+            productId: null,
+            productName: null,
+            sku: null,
+
+        }
+    },
+    async mounted() {
+        await this.defaultLoading();
+    },
+    methods: {
+        edit(id) {
+            this.$router.push({
+                path: '/seller/products/product-edit',
+                query: {
+                    parameter: id
+                }
+            })
+        },
+        preview(id) {
+            this.$router.push({
+                path: '/seller/products/product-preview',
+                query: {
+                    parameter: id
+                }
+            })
+        },
+        async defaultLoading() {
+            this.loading = true;
+            try {
+                const response = await this.fetchProducts();
+                this.products = response.data.data;
+                this.currentPage = response.data.current_page;
+                this.totalPages = response.data.last_page;
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            } finally {
+                this.loading = false;
+            }
+        },
+        async fetchProducts() {
+            const params = {
+                page: this.currentPage,
+                productId: this.productId,
+                productName: this.productName,
+                sku: this.sku,
+            };
+
+            return this.$axios.get('/product/sellerProductList', {
+                params
+            });
+        },
+        async loadMore() {
+            if (this.currentPage < this.totalPages) {
+                this.loading = true;
+                try {
+                    this.currentPage += 1;
+                    const response = await this.fetchProducts();
+                    this.products = [...this.products, ...response.data.data];
+                } catch (error) {
+                    console.error('Error fetching more data:', error);
+                } finally {
+                    this.loading = false;
+                }
+            }
+        },
+        applyFilters() {
+            this.currentPage = 1; // Reset page when filters change
+            this.defaultLoading();
+        },
+    },
+    computed: {
+        hasMorePages() {
+            return this.currentPage < this.totalPages;
+        },
+    },
 
 }
 </script>
@@ -189,5 +296,41 @@ export default {
     border-radius: 5px;
     margin-bottom: 10px;
     margin-top: 10px;
+}
+
+.loading-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* For Loader */
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+.loader-text {
+    margin: 0;
+    /* Remove default margin */
+}
+
+.loader-top {
+    top: 0;
+}
+
+.loader-bottom {
+    bottom: 0;
 }
 </style>

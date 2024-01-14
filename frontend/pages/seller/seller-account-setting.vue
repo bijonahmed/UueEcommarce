@@ -297,7 +297,6 @@ export default {
                     this.profileLogo = response.data.profileLogo;
                     this.businessLogo = response.data.businessLogo;
                     this.message = response.data.message;
-
                 })
                 .catch(error => {
                     // Handle error

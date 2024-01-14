@@ -20,6 +20,7 @@ use App\Models\ProductAdditionalImg;
 use App\Models\ProductVarrient;
 use App\Models\AttributeValues;
 use Illuminate\Support\Str;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use Session;
@@ -36,7 +37,7 @@ class ProductController extends Controller
         $this->userid = $user->id;
     }
 
-   
+
     public function productUpdate(Request $request)
     {
 
@@ -207,7 +208,7 @@ class ProductController extends Controller
             //INSERT PRODUCT
             $product_id = Product::insertGetId($data);
 
-            if(!empty($product_id)){
+            if (!empty($product_id)) {
                 $slug                  = "$slug-$product_id";
                 DB::table('product')->where('id', $product_id)->update(['slug' => $slug]);
             }
@@ -513,6 +514,61 @@ class ProductController extends Controller
         //dd($modifiedCollection);
         return response()->json($modifiedCollection, 200);
     }
+
+
+    public function sellerProductList(Request $request)
+    {
+        $seller_id = $this->userid;
+        $query = Product::query();
+        // Apply filters
+        if ($request->has('productId')) {
+            $query->where('id', $request->input('productId'));
+        }
+
+        if ($request->has('productName')) {
+            $productName = $request->input('productName');
+            $query->where('name', 'like', '%' . $productName . '%');
+        }
+
+
+        if ($request->has('sku')) {
+            $sku = $request->input('sku');
+            $query->where('sku', 'like', '%' . $sku . '%');
+        }
+
+        $query->where('seller_id', $seller_id);
+
+        $perPage = 12;
+        $page = $request->input('page', 1);
+        $products = $query->paginate($perPage, ['*'], 'page', $page);
+
+        $modifiedCollection = $products->getCollection()->map(function ($item) {
+            return [
+                'id'        => $item->id,
+                'name'      => substr($item->name, 0, 20),
+                'stock_qty' => $item->stock_qty,
+                'slug'      => $item->slug,
+                'sku'       => $item->sku,
+                'price'     => $item->price,
+                'status'    => $item->status == 1 ? "Active" : "Inactive",
+                'image'     => url($item->thumnail_img),
+            ];
+        });
+
+        $response = new LengthAwarePaginator(
+            $modifiedCollection,
+            $products->total(),
+            $products->perPage(),
+            $page,
+            ['path' => url()->current()]
+        );
+
+        return response()->json($response, 200);
+    }
+
+
+
+
 
     public function removeProducts($id)
     {

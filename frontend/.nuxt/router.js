@@ -48,6 +48,7 @@ const _0754d196 = () => interopDefault(import('..\\pages\\user\\user-mlm.vue' /*
 const _7df9fbae = () => interopDefault(import('..\\pages\\user\\user-orders.vue' /* webpackChunkName: "pages/user/user-orders" */))
 const _904f15a0 = () => interopDefault(import('..\\pages\\user\\user-profile.vue' /* webpackChunkName: "pages/user/user-profile" */))
 const _925a51fc = () => interopDefault(import('..\\pages\\user\\user-whichlist.vue' /* webpackChunkName: "pages/user/user-whichlist" */))
+const _0d00a3ee = () => interopDefault(import('..\\pages\\seller\\products\\product-edit.vue' /* webpackChunkName: "pages/seller/products/product-edit" */))
 const _744f3ace = () => interopDefault(import('..\\pages\\seller\\products\\product-preview.vue' /* webpackChunkName: "pages/seller/products/product-preview" */))
 const _f212544c = () => interopDefault(import('..\\pages\\seller\\products\\product-varient.vue' /* webpackChunkName: "pages/seller/products/product-varient" */))
 const _4f6caec4 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
@@ -241,6 +242,10 @@ export const routerOptions = {
     path: "/user/user-whichlist",
     component: _925a51fc,
     name: "user-user-whichlist"
+  }, {
+    path: "/seller/products/product-edit",
+    component: _0d00a3ee,
+    name: "seller-products-product-edit"
   }, {
     path: "/seller/products/product-preview",
     component: _744f3ace,
