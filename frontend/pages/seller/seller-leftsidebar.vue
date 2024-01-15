@@ -3,6 +3,9 @@
     <div class="user_sidebar">
         <div class="user_page_list">
             <ul>
+                <li>
+                    <NuxtLink :to="'/business/' + business_name_slug" exact>My Shop</NuxtLink>
+                </li>
                 <li :class="{ active: $route.path === '/seller/seller-products' }">
                     <Nuxt-link to="/seller/seller-products" exact>Products </Nuxt-link>
                 </li>
@@ -37,8 +40,34 @@
 <script>
 export default {
     middleware: 'auth',
+    data() {
+        return {
+            loading: false,
+            business_name_slug:'',
+            notifmsg: '',
+            orders: [],
+            errors: {},
+        }
+    },
+    mounted() {
+        this.defaultLoading();
+    },
     methods: {
+        async defaultLoading() {
 
+            this.loading = true;
+            await this.$axios.post(`/auth/me`).then(response => {
+                    // Seller Account Info
+                    this.business_name_slug = response.data.business_name_slug;
+                })
+                .catch(error => {
+                    // Handle error
+                })
+                .finally(() => {
+                    this.loading = false; // Hide loader after response
+                });
+
+        },
         logout() {
             this.$auth.logout();
             localStorage.removeItem('jwtToken');
@@ -84,8 +113,4 @@ export default {
 .loader-bottom {
     bottom: 0;
 }
-</style>
-
-<style>
-
 </style>

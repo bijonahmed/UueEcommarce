@@ -9,16 +9,21 @@ use Auth;
 use Validator;
 use Helper;
 use App\Models\Product;
+use App\Models\User;
 use App\Models\Sliders;
 use App\Models\ProductCategory;
 use App\Models\ProductAdditionalImg;
 use App\Models\Categorys;
+use App\Models\User as ModelsUser;
 use Illuminate\Support\Str;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use DB;
 use File;
 use PhpParser\Node\Stmt\TryCatch;
+//use User;
+use Workbench\App\Models\User as AppModelsUser;
+
 use function Ramsey\Uuid\v1;
 
 class UnauthenticatedController extends Controller
@@ -141,6 +146,39 @@ class UnauthenticatedController extends Controller
     {
         $categories = Categorys::where('status', 1)->orderBy("name", "asc")->get();;
         return response()->json($categories);
+    }
+
+
+    public function getSeller($slug){
+
+        $row    = User::where('business_name_slug',$slug)->first();
+
+        $sliderImg = Product::where('seller_id',$row->id)->where('status',1)->limit(12)->get();
+
+        foreach ($sliderImg as $v) {
+            $slidersImg[] = [
+                'id'           => $v->id,
+                'name'         => substr($v->name, 0, 12) . '...',
+                'thumnail'     => !empty($v->thumnail_img) ? url($v->thumnail_img) : "",
+                'slug'         => $v->slug,
+                'price'        => $v->price,
+                'discount'     => $v->discount,
+            ];
+        }
+
+
+
+        $businessLogog = !empty($row) ? url($row->business_logo) : "";
+        $data['business_owner_name']     = !empty($row) ? $row->business_owner_name : "";
+        $data['business_name']           = !empty($row) ? $row->business_name : "";
+        $data['business_address']        = !empty($row) ? $row->business_address : "";
+        $data['business_register_num']   = !empty($row) ? $row->business_register_num : "";
+        $data['business_email']          = !empty($row) ? $row->business_email : "";
+        $data['business_phone']          = !empty($row) ? $row->business_phone : "";
+
+        $data['business_logo']           = $businessLogog;
+        $data['slidersImg']              = !empty($slidersImg) ? $slidersImg : "";  
+        return response()->json($data);
     }
 
     public function findProductSlug($slug)

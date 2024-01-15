@@ -1,395 +1,573 @@
 <template>
-<div>
-    <LogoAndPayment />
-    <!-- navbar section start here  -->
-    <section class="search_bar">
-        <div class="container">
-            <div class="row justify-content-between align-items-center">
-                <div class="col-lg-3 col-md-4 col-4">
-                    <div class="logo nav_tab">
-                        <!-- mobile view sidebar  -->
-                        <button type="button" class="btn_menu mobile_view" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i class="fa-solid fa-bars-staggered"></i></button>
-                        <!-- sidebar offcanvas  -->
-                        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-                            <div class="offcanvas-header">
-                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Ecommerce</h5>
+    <div>
+        <LogoAndPayment />
+        <!-- navbar section start here  -->
+        <section class="search_bar">
+            <div class="container">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-lg-3 col-md-4 col-4">
+                        <div class="logo nav_tab">
+                            <!-- mobile view sidebar  -->
+                            <button type="button" class="btn_menu mobile_view" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i
+                                    class="fa-solid fa-bars-staggered"></i></button>
+                            <!-- sidebar offcanvas  -->
+                            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+                                aria-labelledby="offcanvasExampleLabel">
+                                <div class="offcanvas-header">
+                                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                        aria-label="Close"></button>
+                                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Ecommerce</h5>
+                                </div>
+                                <div class="offcanvas-body">
+                                    <!-- offf canvas start here  -->
+                                    <Common_MobileSidebar />
+                                </div>
                             </div>
-                            <div class="offcanvas-body">
-                                <!-- offf canvas start here  -->
-                                <Common_MobileSidebar />
-                            </div>
+                            <!-- mini tab view navbar here  -->
+                            <Common_MiniTabNavbar />
+                            <!-- nav end  -->
+                            <Nuxt-link to="/">Ecommerce <i class=" fa-regular fa-star"></i></Nuxt-link>
                         </div>
-                        <!-- mini tab view navbar here  -->
-                        <Common_MiniTabNavbar />
-                        <!-- nav end  -->
-                        <Nuxt-link to="/">Ecommerce <i class=" fa-regular fa-star"></i></Nuxt-link>
                     </div>
-                </div>
-                <div class="col-6 desktop_view mini_tab_hide">
-                    <form action="" class="">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" name="" id="" placeholder="Search Product" class="form-control"> <button type="button">Search</button>
-                    </form>
-                </div>
-                <!-- desktop_view options  -->
-                <DesktopViewOption />
-                <!-- mobile view options  -->
-                <div class="col-4 ms-auto  mobile_view">
-                    <div class="mobile_nav_option">
-                        <a class="search_form"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    <div class="col-6 desktop_view mini_tab_hide">
+                        <form action="" class="">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" name="" id="" placeholder="Search Product" class="form-control"> <button
+                                type="button">Search</button>
+                        </form>
                     </div>
+                    <!-- desktop_view options  -->
+                    <DesktopViewOption />
+                    <!-- mobile view options  -->
+                    <div class="col-4 ms-auto  mobile_view">
+                        <div class="mobile_nav_option">
+                            <a class="search_form"><i class="fa-solid fa-magnifying-glass"></i></a>
+                        </div>
+                    </div>
+                    <!-- search modal  -->
+                    <Common_MobileSearchProduct />
                 </div>
-                <!-- search modal  -->
-                <Common_MobileSearchProduct />
             </div>
-        </div>
-    </section>
-    <!-- Main section start here  -->
+        </section>
+        <!-- Main section start here  -->
 
-    <!-- Main section start here  -->
-    <section class="main_content ">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <SellerLeftsidebar />
-                </div>
-                <div class="col-md-9">
-                    <div class="row">
-                        <div class="col-xl-12 mx-auto">
-                            <div class="card border-top border-0 border-4 border-info">
-                                <div class="card-body">
-                                    <div class="border p-4 rounded">
-                                        <div class="card">
-                                            <form @submit.prevent="saveData()" id="formrest" class="forms-sample" enctype="multipart/form-data">
-                                                <div class="card-body">
-                                                    <ul class="nav nav-pills mb-3" role="tablist">
-                                                        <li class="nav-item" role="presentation">
-                                                            <a class="nav-link active" data-bs-toggle="pill" href="#primary-pills-home" role="tab" aria-selected="true">
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="tab-icon"><i class='bx bx-home font-18 me-1'></i>
-                                                                    </div>
-                                                                    <div class="tab-title">General</div>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item" role="presentation">
-                                                            <a class="nav-link" data-bs-toggle="pill" href="#primary-pills-profile" role="tab" aria-selected="false">
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="tab-icon"><i class='bx bx-user-pin font-18 me-1'></i>
-                                                                    </div>
-                                                                    <div class="tab-title">Data</div>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item" role="presentation">
-                                                            <a class="nav-link" data-bs-toggle="pill" href="#primary-pills-contact" role="tab" aria-selected="false">
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="tab-icon"><i class='bx bx-link font-18 me-1'></i>
-                                                                    </div>
-                                                                    <div class="tab-title">Categories</div>
-                                                                </div>
-                                                            </a>
-                                                        </li>
+        <!-- Main section start here  -->
+        <section class="main_content ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <SellerLeftsidebar />
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="col-xl-12 mx-auto">
+                                <div class="card border-top border-0 border-4 border-info inventory_post_part">
+                                    <div class="card-body">
+                                        <div class="border p-4 rounded">
+                                            <div class="card">
+                                                <form @submit.prevent="saveData()" id="formrest" class="forms-sample"
+                                                    enctype="multipart/form-data">
+                                                    <div class="card-body ">
+                                                        <div class="form_buttons">
+                                                            <ul class="nav nav-pills mb-3" role="tablist">
+                                                                <li class="nav-item" role="presentation">
+                                                                    <a class="nav-link active" data-bs-toggle="pill"
+                                                                        href="#primary-pills-home" role="tab"
+                                                                        aria-selected="true">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <div class="tab-icon"><i
+                                                                                    class='bx bx-home font-18 me-1'></i>
+                                                                            </div>
+                                                                            <div class="tab-title">General</div>
+                                                                        </div>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="nav-item" role="presentation">
+                                                                    <a class="nav-link" data-bs-toggle="pill"
+                                                                        href="#primary-pills-profile" role="tab"
+                                                                        aria-selected="false">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <div class="tab-icon"><i
+                                                                                    class='bx bx-user-pin font-18 me-1'></i>
+                                                                            </div>
+                                                                            <div class="tab-title">Data</div>
+                                                                        </div>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="nav-item" role="presentation">
+                                                                    <a class="nav-link" data-bs-toggle="pill"
+                                                                        href="#primary-pills-contact" role="tab"
+                                                                        aria-selected="false">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <div class="tab-icon"><i
+                                                                                    class='bx bx-link font-18 me-1'></i>
+                                                                            </div>
+                                                                            <div class="tab-title">Categories</div>
+                                                                        </div>
+                                                                    </a>
+                                                                </li>
 
-                                                        <li class="nav-item" role="presentation">
-                                                            <a class="nav-link" data-bs-toggle="pill" href="#image" role="tab" aria-selected="false">
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="tab-icon"><i class='fadeIn animated bx bx-images font-18 me-1'></i>
-                                                                    </div>
-                                                                    <div class="tab-title">Images</div>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="tab-content" id="pills-tabContent">
-                                                        <div class="tab-pane fade show active" id="primary-pills-home" role="tabpanel">
-                                                            <!-- General  -->
-                                                            <div class="row mb-3 required">
-                                                                <label for="input-name-1" class="col-sm-2 col-form-label required-label">Product Name</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" name="name" placeholder="Product Name" v-model="insertdata.name" class="form-control" />
-                                                                    <input type="hidden" name="id" id="id" class="form-control" />
-                                                                    <span class="text-danger" v-if="errors.name">{{ errors.name[0] }}</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row mb-3 required">
-                                                                <label for="input-meta-title-1" class="col-sm-2 col-form-label">Meta Tag Title</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" name="meta_title" value placeholder="Meta Tag Title" v-model="insertdata.meta_title" class="form-control" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="row mb-3">
-                                                                <label for="input-meta-description-1" class="col-sm-2 col-form-label">Meta Tag Description</label>
-                                                                <div class="col-sm-10">
-                                                                    <textarea name="meta_description" rows="5" placeholder="Meta Tag Description" v-model="insertdata.meta_description" id="meta_description" class="form-control"></textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row mb-3">
-                                                                <label for="input-meta-description-1" class="col-sm-2 col-form-label">Meta Tag Keywords</label>
-                                                                <div class="col-sm-10">
-                                                                    <textarea name="meta_keyword" rows="5" placeholder="Meta Tag Keywords" class="form-control" v-model="insertdata.meta_keyword"></textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row mb-3 required">
-                                                                <label for="input-meta-title-1" class="col-sm-2 col-form-label">Product Tags</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" placeholder="Product Tags" v-model="insertdata.ptag" class="form-control" @input="addCommas" />
-                                                                    <input type="hidden" placeholder="Product Tags" v-model="insertdata.product_tag" class="form-control" />
-                                                                    {{product_tag_msg}}
-                                                                    <small>Comma separated</small>
-                                                                </div>
-                                                            </div>
+                                                                <li class="nav-item" role="presentation">
+                                                                    <a class="nav-link" data-bs-toggle="pill" href="#image"
+                                                                        role="tab" aria-selected="false">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <div class="tab-icon"><i
+                                                                                    class='fadeIn animated bx bx-images font-18 me-1'></i>
+                                                                            </div>
+                                                                            <div class="tab-title">Images</div>
+                                                                        </div>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
                                                         </div>
-                                                        <div class="tab-pane fade" id="primary-pills-profile" role="tabpanel">
-                                                            <!-- Data -->
-                                                            <div class="card">
-                                                                <div class="card-body">
-                                                                    <div class="row mb-3 required">
-                                                                        <label for="input-meta-title-1" class="col-sm-2 col-form-label">Brands</label>
-                                                                        <div class="col-sm-10">
-                                                                            <select v-model="insertdata.brand" class="form-select model">
-                                                                                <option value="" selected>Select Brand</option>
-                                                                                <option v-for='data in modelresults' :value='data.id'>{{data.name}}</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row mb-3 required">
-                                                                        <label for="input-meta-title-1" class="col-sm-2 col-form-label required-label">SKU</label>
-                                                                        <div class="col-sm-10">
-                                                                            <input type="text" placeholder="SKU" v-model="insertdata.sku" class="form-control" />
-                                                                            <span class="text-danger" v-if="errors.sku">{{ errors.sku[0] }}</span>
-                                                                            <small>Stock Keeping Unit</small>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row mb-3 required">
-                                                                        <label for="input-meta-title-1" class="col-sm-2 col-form-label">External Link</label>
-                                                                        <div class="col-sm-10">
-                                                                            <input type="text" placeholder="External Link" v-model="insertdata.external_link" class="form-control" />
-                                                                        </div>
-                                                                    </div>
-                                                                    <hr />
 
-                                                                    <div class="row mb-3">
-                                                                        <label for="input-description-1" class="col-sm-2 col-form-label">Description</label>
-                                                                        <div class="col-sm-10">
-                                                                            <client-only placeholder="loading...">
-                                                                                <textarea v-model="insertdata.description" class="form-control"></textarea>
-                                                                            </client-only>
-                                                                        </div>
+                                                        <div class="tab-content" id="pills-tabContent">
+                                                            <div class="tab-pane fade show active" id="primary-pills-home"
+                                                                role="tabpanel">
+                                                                <!-- General  -->
+                                                                <div class="row mb-3 required">
+                                                                    <label for="input-name-1"
+                                                                        class="col-sm-2 col-form-label required-label">Product
+                                                                        Name</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" name="name"
+                                                                            placeholder="Product Name"
+                                                                            v-model="insertdata.name"
+                                                                            class="form-control" />
+                                                                        <input type="hidden" name="id" id="id"
+                                                                            class="form-control" />
+                                                                        <span class="text-danger" v-if="errors.name">{{
+                                                                            errors.name[0] }}</span>
                                                                     </div>
-                                                                    <hr>
+                                                                </div>
+                                                                <div class="row mb-3 required">
+                                                                    <label for="input-meta-title-1"
+                                                                        class="col-sm-2 col-form-label">Meta Tag
+                                                                        Title</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" name="meta_title" value
+                                                                            placeholder="Meta Tag Title"
+                                                                            v-model="insertdata.meta_title"
+                                                                            class="form-control" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mb-3">
+                                                                    <label for="input-meta-description-1"
+                                                                        class="col-sm-2 col-form-label">Meta Tag
+                                                                        Description</label>
+                                                                    <div class="col-sm-10">
+                                                                        <textarea name="meta_description" rows="5"
+                                                                            placeholder="Meta Tag Description"
+                                                                            v-model="insertdata.meta_description"
+                                                                            id="meta_description"
+                                                                            class="form-control"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mb-3">
+                                                                    <label for="input-meta-description-1"
+                                                                        class="col-sm-2 col-form-label">Meta Tag
+                                                                        Keywords</label>
+                                                                    <div class="col-sm-10">
+                                                                        <textarea name="meta_keyword" rows="5"
+                                                                            placeholder="Meta Tag Keywords"
+                                                                            class="form-control"
+                                                                            v-model="insertdata.meta_keyword"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mb-3 required">
+                                                                    <label for="input-meta-title-1"
+                                                                        class="col-sm-2 col-form-label">Product Tags</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" placeholder="Product Tags"
+                                                                            v-model="insertdata.ptag" class="form-control"
+                                                                            @input="addCommas" />
+                                                                        <input type="hidden" placeholder="Product Tags"
+                                                                            v-model="insertdata.product_tag"
+                                                                            class="form-control" />
+                                                                        {{ product_tag_msg }}
+                                                                        <small>Comma separated</small>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="primary-pills-profile"
+                                                                role="tabpanel">
+                                                                <!-- Data -->
+                                                                <div class="card">
+                                                                    <div class="card-body">
+                                                                        <div class="row mb-3 required">
+                                                                            <label for="input-meta-title-1"
+                                                                                class="col-sm-2 col-form-label">Brands</label>
+                                                                            <div class="col-sm-10">
+                                                                                <select v-model="insertdata.brand"
+                                                                                    class="form-select model">
+                                                                                    <option value="" selected>Select Brand
+                                                                                    </option>
+                                                                                    <option v-for='data in modelresults'
+                                                                                        :value='data.id'>{{ data.name }}
+                                                                                    </option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row mb-3 required">
+                                                                            <label for="input-meta-title-1"
+                                                                                class="col-sm-2 col-form-label required-label">SKU</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text" placeholder="SKU"
+                                                                                    v-model="insertdata.sku"
+                                                                                    class="form-control" />
+                                                                                <span class="text-danger"
+                                                                                    v-if="errors.sku">{{ errors.sku[0]
+                                                                                    }}</span>
+                                                                                <small>Stock Keeping Unit</small>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row mb-3 required">
+                                                                            <label for="input-meta-title-1"
+                                                                                class="col-sm-2 col-form-label">External
+                                                                                Link</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text"
+                                                                                    placeholder="External Link"
+                                                                                    v-model="insertdata.external_link"
+                                                                                    class="form-control" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <hr />
 
-                                                                    <div class="row mb-3 required">
-                                                                        <label for="input-meta-title-1" class="col-sm-4 col-form-label required-label">Price</label>
-                                                                        <div class="col-sm-8">
-                                                                            <input type="text" placeholder="Price" v-model="insertdata.price" class="form-control" @input="validateInput" />
-                                                                            <span class="text-danger" v-if="errors.price">{{ errors.price[0] }}</span>
+                                                                        <div class="row mb-3">
+                                                                            <label for="input-description-1"
+                                                                                class="col-sm-2 col-form-label">Description</label>
+                                                                            <div class="col-sm-10">
+                                                                                <client-only placeholder="loading...">
+                                                                                    <textarea
+                                                                                        v-model="insertdata.description"
+                                                                                        class="form-control"></textarea>
+                                                                                </client-only>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="row mb-3 required">
-                                                                        <label for="input-meta-title-1" class="col-sm-4 col-form-label">Unit</label>
-                                                                        <div class="col-sm-8">
-                                                                            <input type="text" placeholder="Unit (e.g. KG, Pc etc)" v-model="insertdata.unit" class="form-control" />
+                                                                        <hr>
+
+                                                                        <div class="row mb-3 required">
+                                                                            <label for="input-meta-title-1"
+                                                                                class="col-sm-4 col-form-label required-label">Price</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" placeholder="Price"
+                                                                                    v-model="insertdata.price"
+                                                                                    class="form-control"
+                                                                                    @input="validateInput" />
+                                                                                <span class="text-danger"
+                                                                                    v-if="errors.price">{{ errors.price[0]
+                                                                                    }}</span>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="row mb-3 required">
-                                                                        <label for="input-meta-title-1" class="col-sm-4 col-form-label">Discount</label>
-                                                                        <div class="col-sm-4">
-                                                                            <input type="text" placeholder="0" v-model="insertdata.discount" class="form-control" @input="validateInput" />
+                                                                        <div class="row mb-3 required">
+                                                                            <label for="input-meta-title-1"
+                                                                                class="col-sm-4 col-form-label">Unit</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text"
+                                                                                    placeholder="Unit (e.g. KG, Pc etc)"
+                                                                                    v-model="insertdata.unit"
+                                                                                    class="form-control" />
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="col-sm-4">
-                                                                            <select class="form-select form-select-sm" aria-label=".form-select-sm example" v-model="insertdata.discount_status">
-                                                                                <option selected>Select</option>
-                                                                                <option value="1">Percent</option>
-                                                                                <option value="2">Flat</option>
-                                                                            </select>
+                                                                        <div class="row mb-3 required">
+                                                                            <label for="input-meta-title-1"
+                                                                                class="col-sm-4 col-form-label">Discount</label>
+                                                                            <div class="col-sm-4">
+                                                                                <input type="text" placeholder="0"
+                                                                                    v-model="insertdata.discount"
+                                                                                    class="form-control"
+                                                                                    @input="validateInput" />
+                                                                            </div>
+                                                                            <div class="col-sm-4">
+                                                                                <select class="form-select form-select-sm"
+                                                                                    aria-label=".form-select-sm example"
+                                                                                    v-model="insertdata.discount_status">
+                                                                                    <option selected>Select</option>
+                                                                                    <option value="1">Percent</option>
+                                                                                    <option value="2">Flat</option>
+                                                                                </select>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="row mb-3 required">
-                                                                        <label for="input-meta-title-1" class="col-sm-4 col-form-label required-label">Quantity</label>
-                                                                        <div class="col-sm-8">
-                                                                            <input type="text" placeholder="1" v-model="insertdata.stock_qty" class="form-control" @input="validateInput" />
+                                                                        <div class="row mb-3 required">
+                                                                            <label for="input-meta-title-1"
+                                                                                class="col-sm-4 col-form-label required-label">Quantity</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" placeholder="1"
+                                                                                    v-model="insertdata.stock_qty"
+                                                                                    class="form-control"
+                                                                                    @input="validateInput" />
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="row mb-3 required">
-                                                                        <label for="input-meta-title-1" class="col-sm-4 col-form-label required-label">Minimum Quantity</label>
-                                                                        <div class="col-sm-8">
-                                                                            <input type="text" v-model="insertdata.stock_mini_qty" class="form-control" @input="validateInput" />
+                                                                        <div class="row mb-3 required">
+                                                                            <label for="input-meta-title-1"
+                                                                                class="col-sm-4 col-form-label required-label">Minimum
+                                                                                Quantity</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text"
+                                                                                    v-model="insertdata.stock_mini_qty"
+                                                                                    class="form-control"
+                                                                                    @input="validateInput" />
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="row mb-3 required">
-                                                                        <label for="input-meta-title-1" class="col-sm-4 col-form-label">Out Of Stock Status</label>
-                                                                        <div class="col-sm-8">
-                                                                            <select class="form-select form-select-sm" aria-label=".form-select-sm example" v-model="insertdata.stock_status">
-                                                                                <option selected>Select</option>
-                                                                                <!-- categories -->
-                                                                                <option value="1">2-3 Days</option>
-                                                                                <option value="2">In Stock</option>
-                                                                                <option value="3">Out Of Stock</option>
-                                                                                <option value="4">Pre-Order</option>
-                                                                                <option value="5">Others</option>
-                                                                            </select>
+                                                                        <div class="row mb-3 required">
+                                                                            <label for="input-meta-title-1"
+                                                                                class="col-sm-4 col-form-label">Out Of Stock
+                                                                                Status</label>
+                                                                            <div class="col-sm-8">
+                                                                                <select class="form-select form-select-sm"
+                                                                                    aria-label=".form-select-sm example"
+                                                                                    v-model="insertdata.stock_status">
+                                                                                    <option selected>Select</option>
+                                                                                    <!-- categories -->
+                                                                                    <option value="1">2-3 Days</option>
+                                                                                    <option value="2">In Stock</option>
+                                                                                    <option value="3">Out Of Stock</option>
+                                                                                    <option value="4">Pre-Order</option>
+                                                                                    <option value="5">Others</option>
+                                                                                </select>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <hr />
-                                                                    <div class="row mb-3 required">
-                                                                        <label for="input-meta-title-1" class="col-sm-4 col-form-label">Free Shipping</label>
-                                                                        <div class="col-sm-8">
-                                                                            <select class="form-select form-select-sm" aria-label=".form-select-sm example" v-model="insertdata.free_shopping">
-                                                                                <option selected>Select</option>
-                                                                                <option value="0">No</option>
-                                                                                <option value="1">Yes</option>
-                                                                            </select>
+                                                                        <hr />
+                                                                        <div class="row mb-3 required">
+                                                                            <label for="input-meta-title-1"
+                                                                                class="col-sm-4 col-form-label">Free
+                                                                                Shipping</label>
+                                                                            <div class="col-sm-8">
+                                                                                <select class="form-select form-select-sm"
+                                                                                    aria-label=".form-select-sm example"
+                                                                                    v-model="insertdata.free_shopping">
+                                                                                    <option selected>Select</option>
+                                                                                    <option value="0">No</option>
+                                                                                    <option value="1">Yes</option>
+                                                                                </select>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="row mb-3 required">
-                                                                        <label for="input-meta-title-1" class="col-sm-4 col-form-label">Flat Rate</label>
-                                                                        <div class="col-sm-4">
-                                                                            <select class="form-select" aria-label=".form-select-sm example" v-model="insertdata.flat_rate_status">
-                                                                                <option selected>Select</option>
-                                                                                <option value="0">No</option>
-                                                                                <option value="1">Yes</option>
-                                                                            </select>
+                                                                        <div class="row mb-3 required">
+                                                                            <label for="input-meta-title-1"
+                                                                                class="col-sm-4 col-form-label">Flat
+                                                                                Rate</label>
+                                                                            <div class="col-sm-4">
+                                                                                <select class="form-select"
+                                                                                    aria-label=".form-select-sm example"
+                                                                                    v-model="insertdata.flat_rate_status">
+                                                                                    <option selected>Select</option>
+                                                                                    <option value="0">No</option>
+                                                                                    <option value="1">Yes</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="col-sm-4">
+                                                                                <input type="text"
+                                                                                    v-model="insertdata.flat_rate_price"
+                                                                                    class="form-control"
+                                                                                    @input="validateInput" />
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="col-sm-4">
-                                                                            <input type="text" v-model="insertdata.flat_rate_price" class="form-control" @input="validateInput" />
+                                                                        <hr />
+                                                                        <div class="row mb-3 required">
+                                                                            <label for="input-meta-title-1"
+                                                                                class="col-sm-4 col-form-label">Shipping
+                                                                                Days</label>
+                                                                            <div class="col-sm-4">
+                                                                                <input type="text"
+                                                                                    v-model="insertdata.shipping_days"
+                                                                                    class="form-control"
+                                                                                    @input="validateInput" />
+                                                                                <span class="text-danger"
+                                                                                    v-if="errors.shipping_days">{{
+                                                                                        errors.shipping_days[0] }}</span>
+                                                                            </div>
+                                                                            <div class="col-sm-4">
+                                                                                Days
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <hr />
-                                                                    <div class="row mb-3 required">
-                                                                        <label for="input-meta-title-1" class="col-sm-4 col-form-label">Shipping Days</label>
-                                                                        <div class="col-sm-4">
-                                                                            <input type="text" v-model="insertdata.shipping_days" class="form-control" @input="validateInput" />
-                                                                            <span class="text-danger" v-if="errors.shipping_days">{{ errors.shipping_days[0] }}</span>
+                                                                        <hr />
+                                                                        <div class="row mb-3 required">
+                                                                            <label for="input-meta-title-1"
+                                                                                class="col-sm-4 col-form-label">Vat</label>
+                                                                            <div class="col-sm-4">
+                                                                                <input type="text" v-model="insertdata.vat"
+                                                                                    class="form-control"
+                                                                                    @input="validateInput" />
+                                                                            </div>
+                                                                            <div class="col-sm-4">
+                                                                                <select class="form-select"
+                                                                                    aria-label=".form-select-sm example"
+                                                                                    v-model="insertdata.vat_status">
+                                                                                    <option selected>Select</option>
+                                                                                    <option value="1">Flat</option>
+                                                                                    <option value="2">Percent</option>
+                                                                                </select>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="col-sm-4">
-                                                                            Days
+                                                                        <div class="row mb-3 required">
+                                                                            <label for="input-meta-title-1"
+                                                                                class="col-sm-4 col-form-label">Tax</label>
+                                                                            <div class="col-sm-4">
+                                                                                <input type="text" v-model="insertdata.tax"
+                                                                                    class="form-control"
+                                                                                    @input="validateInput" />
+                                                                            </div>
+                                                                            <div class="col-sm-4">
+                                                                                <select class="form-select"
+                                                                                    aria-label=".form-select-sm example"
+                                                                                    v-model="insertdata.tax_status">
+                                                                                    <option selected>Select</option>
+                                                                                    <option value="1">Flat</option>
+                                                                                    <option value="2">Percent</option>
+                                                                                </select>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <hr />
-                                                                    <div class="row mb-3 required">
-                                                                        <label for="input-meta-title-1" class="col-sm-4 col-form-label">Vat</label>
-                                                                        <div class="col-sm-4">
-                                                                            <input type="text" v-model="insertdata.vat" class="form-control" @input="validateInput" />
-                                                                        </div>
-                                                                        <div class="col-sm-4">
-                                                                            <select class="form-select" aria-label=".form-select-sm example" v-model="insertdata.vat_status">
-                                                                                <option selected>Select</option>
-                                                                                <option value="1">Flat</option>
-                                                                                <option value="2">Percent</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row mb-3 required">
-                                                                        <label for="input-meta-title-1" class="col-sm-4 col-form-label">Tax</label>
-                                                                        <div class="col-sm-4">
-                                                                            <input type="text" v-model="insertdata.tax" class="form-control" @input="validateInput" />
-                                                                        </div>
-                                                                        <div class="col-sm-4">
-                                                                            <select class="form-select" aria-label=".form-select-sm example" v-model="insertdata.tax_status">
-                                                                                <option selected>Select</option>
-                                                                                <option value="1">Flat</option>
-                                                                                <option value="2">Percent</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <hr />
-                                                                    <div class="row mb-3 required">
-                                                                        <label for="input-meta-title-1" class="col-sm-4 col-form-label">Tax. Status</label>
-                                                                        <div class="col-sm-4">
-                                                                            <select class="form-select" aria-label=".form-select-sm example" v-model="insertdata.cash_dev_status">
-                                                                                <option selected>Select</option>
-                                                                                <option value="1">Yes</option>
-                                                                                <option value="2">No</option>
-                                                                            </select>
+                                                                        <hr />
+                                                                        <div class="row mb-3 required">
+                                                                            <label for="input-meta-title-1"
+                                                                                class="col-sm-4 col-form-label">Tax.
+                                                                                Status</label>
+                                                                            <div class="col-sm-4">
+                                                                                <select class="form-select"
+                                                                                    aria-label=".form-select-sm example"
+                                                                                    v-model="insertdata.cash_dev_status">
+                                                                                    <option selected>Select</option>
+                                                                                    <option value="1">Yes</option>
+                                                                                    <option value="2">No</option>
+                                                                                </select>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="primary-pills-contact" role="tabpanel">
-                                                            <!-- SEO -->
-                                                            <div class="card">
-                                                                <div class="card-body">
-                                                                    <div class="row mb-3">
-                                                                        <label for="input-meta-description-1" class="col-sm-2 col-form-label">Manufacturer</label>
-                                                                        <div class="col-sm-10">
+                                                            <div class="tab-pane fade" id="primary-pills-contact"
+                                                                role="tabpanel">
+                                                                <!-- SEO -->
+                                                                <div class="card">
+                                                                    <div class="card-body">
+                                                                        <div class="row mb-3">
+                                                                            <label for="input-meta-description-1"
+                                                                                class="col-sm-2 col-form-label">Manufacturer</label>
+                                                                            <div class="col-sm-10">
 
-                                                                            <select v-model="insertdata.manufacturer" class="form-select manufacturer">
-                                                                                <option value="" selected>Select</option>
-                                                                                <option v-for='data in manufrresults' :value='data.id'>{{data.name}}</option>
-                                                                            </select>
+                                                                                <select v-model="insertdata.manufacturer"
+                                                                                    class="form-select manufacturer">
+                                                                                    <option value="" selected>Select
+                                                                                    </option>
+                                                                                    <option v-for='data in manufrresults'
+                                                                                        :value='data.id'>{{ data.name }}
+                                                                                    </option>
+                                                                                </select>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="row mb-3">
-                                                                        <label for="input-meta-description-1" class="col-sm-2 col-form-label required-label">Categories</label>
-                                                                        <div class="col-sm-10">
-                                                                            <div>
-                                                                                <input v-model="categories" @input="search" class="form-control" placeholder="Search..." />
-                                                                                <ul v-if="searchResults.length">
-                                                                                    <li v-for="result in searchResults" :key="result.name" class="custom-list">
-                                                                                        {{ result.category }} <a href="javascript:void(0);" @click="addToSelected(result)"><i class="fa-solid fa-circle-plus"></i></a>
-                                                                                    </li>
-                                                                                </ul>
-                                                                                <div v-else>
-                                                                                    <!-- <small>No results found.</small> -->
+                                                                        <div class="row mb-3">
+                                                                            <label for="input-meta-description-1"
+                                                                                class="col-sm-2 col-form-label required-label">Categories</label>
+                                                                            <div class="col-sm-10">
+                                                                                <div>
+                                                                                    <input v-model="categories"
+                                                                                        @input="search" class="form-control"
+                                                                                        placeholder="Search..." />
+                                                                                    <ul v-if="searchResults.length">
+                                                                                        <li v-for="result in searchResults"
+                                                                                            :key="result.name"
+                                                                                            class="custom-list">
+                                                                                            {{ result.category }} <a
+                                                                                                href="javascript:void(0);"
+                                                                                                @click="addToSelected(result)"><i
+                                                                                                    class="fa-solid fa-circle-plus"></i></a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                    <div v-else>
+                                                                                        <!-- <small>No results found.</small> -->
+                                                                                    </div>
+                                                                                    <span class="text-danger"
+                                                                                        v-if="errors.category">{{
+                                                                                            errors.category[0] }}</span>
+                                                                                    <span class="d-none">
+                                                                                        <textarea v-model="multi_categories"
+                                                                                            placeholder="Selected Value"
+                                                                                            class="w-100"></textarea>
+                                                                                    </span>
+                                                                                    <div v-if="selectedItems.length"
+                                                                                        class="bgColor">
+                                                                                        <hr />
+                                                                                        <div v-for="item in selectedItems"
+                                                                                            :key="item.id">
+                                                                                            {{ item.category }} <a
+                                                                                                href="javascript:void(0);"
+                                                                                                @click="removeFromSelected(item)"><i
+                                                                                                    class="fa-solid fa-circle-minus"></i></a>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <span class="text-danger" v-if="errors.category">{{ errors.category[0] }}</span>
-                                                                                <span class="d-none">
-                                                                                    <textarea v-model="multi_categories" placeholder="Selected Value" class="w-100"></textarea>
-                                                                                </span>
-                                                                                <div v-if="selectedItems.length" class="bgColor">
-                                                                                    <hr />
-                                                                                    <div v-for="item in selectedItems" :key="item.id">
-                                                                                        {{ item.category }} <a href="javascript:void(0);" @click="removeFromSelected(item)"><i class="fa-solid fa-circle-minus"></i></a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row mb-3">
+                                                                            <label for="input-meta-description-1"
+                                                                                class="col-sm-2 col-form-label">Download
+                                                                                Link</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text" name="keyword" value
+                                                                                    placeholder="Download"
+                                                                                    v-model="insertdata.download_link"
+                                                                                    class="form-control" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <!-- <button type="submit" class="btn btn-success px-5 w-100"><i class="bx bx-check-circle mr-1"></i> Submit</button> -->
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="tab-pane fade" id="image" role="tabpanel">
+                                                                <div class="alert alert-info" bis_skin_checked="1"><i
+                                                                        class="fas fa-info-circle"></i> Must Upload Products
+                                                                    Images 300x300px</div>
+                                                                <div class="row mb-3 required">
+                                                                    <label for="input-meta-description-1"
+                                                                        class="col-sm-2 col-form-label required-label">Thumbnail
+                                                                        Image</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="file" value class="form-control"
+                                                                            accept="image/png,image/jpeg" ref="files"
+                                                                            @change="previewImage" />
+                                                                        <span class="text-danger" v-if="errors.files">{{
+                                                                            errors.files[0] }}</span>
+                                                                        <img v-if="previewUrl" :src="previewUrl"
+                                                                            alt="Preview" class="img-fluids" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mb-3">
+                                                                    <label for="input-meta-description-1"
+                                                                        class="col-sm-2 col-form-label">Additional
+                                                                        Image</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="file" multiple class="form-control"
+                                                                            accept="image/png,image/jpeg"
+                                                                            @change="handleImageUpload" ref="images" />
+                                                                        <div class="row mt-3">
+                                                                            <div class="col-md-3"
+                                                                                v-for="(image, index) in images"
+                                                                                :key="index">
+                                                                                <div class="card">
+                                                                                    <img :src="image.url"
+                                                                                        class="card-img-top img-fluid"
+                                                                                        alt="Preview" />
+                                                                                    <div class="card-body">
+                                                                                        <button type="button"
+                                                                                            class="btn btn-danger btn-sm"
+                                                                                            @click="removeImage(index)">Remove</button>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="row mb-3">
-                                                                        <label for="input-meta-description-1" class="col-sm-2 col-form-label">Download Link</label>
-                                                                        <div class="col-sm-10">
-                                                                            <input type="text" name="keyword" value placeholder="Download" v-model="insertdata.download_link" class="form-control" />
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- <button type="submit" class="btn btn-success px-5 w-100"><i class="bx bx-check-circle mr-1"></i> Submit</button> -->
                                                                 </div>
+                                                                <button type="submit" class="btn btn-success px-5 w-100"><i
+                                                                        class="bx bx-check-circle mr-1"></i> Save &
+                                                                    Next</button>
                                                             </div>
-                                                        </div>
-
-                                                        <div class="tab-pane fade" id="image" role="tabpanel">
-                                                            <div class="alert alert-info" bis_skin_checked="1"><i class="fas fa-info-circle"></i> Must Upload Products Images 300x300px</div>
-                                                            <div class="row mb-3 required">
-                                                                <label for="input-meta-description-1" class="col-sm-2 col-form-label required-label">Thumbnail Image</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="file" value class="form-control" accept="image/png,image/jpeg" ref="files" @change="previewImage" />
-                                                                    <span class="text-danger" v-if="errors.files">{{ errors.files[0] }}</span>
-                                                                    <img v-if="previewUrl" :src="previewUrl" alt="Preview" class="img-fluids" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="row mb-3">
-                                                                <label for="input-meta-description-1" class="col-sm-2 col-form-label">Additional Image</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="file" multiple class="form-control" accept="image/png,image/jpeg" @change="handleImageUpload" ref="images" />
-                                                                    <div class="row mt-3">
-                                                                        <div class="col-md-3" v-for="(image, index) in images" :key="index">
-                                                                            <div class="card">
-                                                                                <img :src="image.url" class="card-img-top img-fluid" alt="Preview" />
-                                                                                <div class="card-body">
-                                                                                    <button type="button" class="btn btn-danger btn-sm" @click="removeImage(index)">Remove</button>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <button type="submit" class="btn btn-success px-5 w-100"><i class="bx bx-check-circle mr-1"></i> Save & Next</button>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </form>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -398,16 +576,15 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- END Main Section here -->
-    <!-- back to top button  -->
-    <div class="back_top">
-        <a href="#top"><i class="fa-solid fa-angle-up"></i></a>
+        <!-- END Main Section here -->
+        <!-- back to top button  -->
+        <div class="back_top">
+            <a href="#top"><i class="fa-solid fa-angle-up"></i></a>
+        </div>
+        <Footer />
     </div>
-    <Footer />
-</div>
 </template>
 
 <script>
@@ -714,8 +891,8 @@ export default {
             };
             this.$axios.post('/product/save',
                 formData, {
-                    headers
-                }).then((res) => {
+                headers
+            }).then((res) => {
                 $('#formrest')[0].reset();
                 this.success_noti();
                 const product_id = res.data.product_id;

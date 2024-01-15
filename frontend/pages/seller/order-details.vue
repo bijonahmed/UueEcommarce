@@ -1,110 +1,148 @@
 <template>
-<div>
-    <LogoAndPayment />
-    <!-- navbar section start here  -->
-    <section class="search_bar">
-        <div class="container">
-            <div class="row justify-content-between align-items-center">
-                <div class="col-lg-3 col-md-4 col-4">
-                    <div class="logo nav_tab">
-                        <!-- mobile view sidebar  -->
-                        <button type="button" class="btn_menu mobile_view" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i class="fa-solid fa-bars-staggered"></i></button>
-                        <!-- sidebar offcanvas  -->
-                        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-                            <div class="offcanvas-header">
-                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Ecommerce</h5>
+    <div>
+        <LogoAndPayment />
+        <!-- navbar section start here  -->
+        <section class="search_bar">
+            <div class="container">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-lg-3 col-md-4 col-4">
+                        <div class="logo nav_tab">
+                            <!-- mobile view sidebar  -->
+                            <button type="button" class="btn_menu mobile_view" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i
+                                    class="fa-solid fa-bars-staggered"></i></button>
+                            <!-- sidebar offcanvas  -->
+                            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+                                aria-labelledby="offcanvasExampleLabel">
+                                <div class="offcanvas-header">
+                                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                        aria-label="Close"></button>
+                                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Ecommerce</h5>
+                                </div>
+                                <div class="offcanvas-body">
+                                    <!-- offf canvas start here  -->
+                                    <Common_MobileSidebar />
+                                </div>
                             </div>
-                            <div class="offcanvas-body">
-                                <!-- offf canvas start here  -->
-                                <Common_MobileSidebar />
-                            </div>
+                            <!-- mini tab view navbar here  -->
+                            <Common_MiniTabNavbar />
+                            <!-- nav end  -->
+                            <Nuxt-link to="/">Ecommerce <i class=" fa-regular fa-star"></i></Nuxt-link>
                         </div>
-                        <!-- mini tab view navbar here  -->
-                        <Common_MiniTabNavbar />
-                        <!-- nav end  -->
-                        <Nuxt-link to="/">Ecommerce <i class=" fa-regular fa-star"></i></Nuxt-link>
                     </div>
-                </div>
-                <div class="col-6 desktop_view mini_tab_hide">
-                    <form action="" class="">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" name="" id="" placeholder="Search Product" class="form-control"> <button type="button">Search</button>
-                    </form>
-                </div>
-                <!-- desktop_view options  -->
-                <DesktopViewOption />
-                <!-- mobile view options  -->
-                <div class="col-4 ms-auto  mobile_view">
-                    <div class="mobile_nav_option">
-                        <a class="search_form"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    <div class="col-6 desktop_view mini_tab_hide">
+                        <form action="" class="">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" name="" id="" placeholder="Search Product" class="form-control"> <button
+                                type="button">Search</button>
+                        </form>
                     </div>
+                    <!-- desktop_view options  -->
+                    <DesktopViewOption />
+                    <!-- mobile view options  -->
+                    <div class="col-4 ms-auto  mobile_view">
+                        <div class="mobile_nav_option">
+                            <a class="search_form"><i class="fa-solid fa-magnifying-glass"></i></a>
+                        </div>
+                    </div>
+                    <!-- search modal  -->
+                    <Common_MobileSearchProduct />
                 </div>
-                <!-- search modal  -->
-                <Common_MobileSearchProduct />
             </div>
-        </div>
-    </section>
-    <!-- Main section start here  -->
+        </section>
+        <!-- Main section start here  -->
 
-    <!-- Main section start here  -->
-    <section class="main_content ">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <SellerLeftsidebar />
-                </div>
-                <div class="col-md-8">
-                    <center><nuxt-link to='/seller/seller-orders'>Back to order list</nuxt-link></center>
-                    <div class="loading-indicator" v-if="loading">
-                        <div class="loader-container">
-                            <center class="loader-text">Loading...</center>
-                            <img src="/loader/loader.gif" alt="Loader" />
-                        </div>
+        <!-- Main section start here  -->
+        <section class="main_content ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <SellerLeftsidebar />
                     </div>
-                    <div class="main_profile">
-                        <div class="">
-
-                            <div class="row">
-
-                                <div class="col">
-                                    <h4>Orders Details </h4>
-                                </div>
-
-                                <div class="col">
-                                    <strong>Order Status: {{ orderstatus }}</strong>
-                                </div>
-
+                    <div class="col-md-8">
+                        <center><nuxt-link to='/seller/seller-orders'>Back to order list</nuxt-link></center>
+                        <div class="loading-indicator" v-if="loading">
+                            <div class="loader-container">
+                                <center class="loader-text">Loading...</center>
+                                <img src="/loader/loader.gif" alt="Loader" />
                             </div>
+                        </div>
+                        <div class="main_profile">
+                            <div class="">
 
-                            <table width="100%" border="0" class="table table-bordered hover">
-                                <tr>
-                                    <td width="22">#</td>
-                                    <td width="916">Item Description </td>
-                                    <td width="63">
-                                        <div align="center">Qty</div>
-                                    </td>
-                                    <td width="80">
-                                        <div align="center">Price</div>
-                                    </td>
-                                    <td width="80">
-                                        <div align="center">Total</div>
-                                    </td>
-                                </tr>
-                                <tr v-for="(order, index) in orders" :key="index">
-                                    <td>{{ index + 1 }}</td>
-                                    <td>{{ order.product_name }}</td>
-                                    <td>
-                                        <div align="center">{{ order.quantity }}</div>
-                                    </td>
-                                    <td>
-                                        <div align="center">{{ order.price }}</div>
-                                    </td>
-                                    <td>
-                                        <div align="center">{{ order.total }}</div>
-                                    </td>
-                                </tr>
-                                <tr>
+
+
+                                <div>
+                                    <div class="d-flex justify-content-between">
+                                        <nuxt-link to='/seller/seller-orders' class="btn_edit"> <i class="fa-solid fa-arrow-left"></i> </nuxt-link>
+                                        <!-- <button class="btn_cart" style="visibility: unset; max-width: 80px;">Update</button> -->
+                                        <form action="">
+                                            <div class="input-group">
+                                                <select name="" id="" class="form-control">
+                                                    <option value="">Order Placed</option>
+                                                    <option value="">Order Approve</option>
+                                                    <option value="">Order Delivered</option>
+                                                    <option value="">Order Canceled</option>
+                                                </select>
+                                                <input type="submit" value="Update Order" class="btn_primary">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <hr>
+                                    <h4 class="text-center" style="text-transform: uppercase;">Orders Details </h4>
+                                    <ul class="ms-auto">
+                                        <li class="d-flex justify-content-start">
+                                            <strong style="min-width: 100px;">Order Status:</strong>
+                                            <strong>{{ orderstatus }}</strong>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="row my-2">
+
+                                    <div class="col-4">
+                                        <!-- <form action="">
+                                            <div class="input-group">
+                                                <select name="" id="" class="form-control">
+                                                    <option value="">Order Placed</option>
+                                                    <option value="">Order Approve</option>
+                                                    <option value="">Order Delivered</option>
+                                                    <option value="">Order Canceled</option>
+                                                </select>
+                                                <input type="submit" value="Update Order" class="btn_primary">
+                                            </div>
+                                        </form> -->
+                                    </div>
+
+                                </div>
+
+                                <table width="100%" border="0" class="table table-bordered hover">
+                                    <tr>
+                                        <th width="30px">#</th>
+                                        <th width="916">Item Description </th>
+                                        <th width="63">
+                                            <div align="center">Qty</div>
+                                        </th>
+                                        <th width="80">
+                                            <div align="center">Price</div>
+                                        </th>
+                                        <th width="80">
+                                            <div align="center">Total</div>
+                                        </th>
+                                    </tr>
+                                    <tr v-for="(order, index) in orders" :key="index">
+                                        <th>{{ index + 1 }}</th>
+                                        <td>{{ order.product_name }}</td>
+                                        <td>
+                                            <div align="center">{{ order.quantity }}</div>
+                                        </td>
+                                        <td>
+                                            <div align="center">{{ order.price }}</div>
+                                        </td>
+                                        <td>
+                                            <div align="center">{{ order.total }}</div>
+                                        </td>
+                                    </tr>
+                                    <!-- <tr>
                                     <td>&nbsp;</td>
                                     <td>
                                         <div align="right">Total</div>
@@ -118,23 +156,35 @@
                                     <td>
                                         <div align="center">{{ totalAmount }}</div>
                                     </td>
-                                </tr>
-                            </table>
+                                </tr> -->
+                                </table>
+                                <div class="text-end">
+                                    <ul class="ms-auto">
+                                        <li class="d-flex justify-content-end">
+                                            <strong>Total Quantity:</strong>
+                                            <strong style="min-width: 100px;">{{ totalQuantity }}</strong>
+                                        </li>
+                                        <li class="d-flex justify-content-end">
+                                            <strong>Total Ammount:</strong>
+                                            <strong style="min-width: 100px;">{{ totalAmount }}</strong>
+                                        </li>
+                                    </ul>
+                                </div>
 
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- END Main Section here -->
-    <!-- back to top button  -->
-    <div class="back_top">
-        <a href="#top"><i class="fa-solid fa-angle-up"></i></a>
+        <!-- END Main Section here -->
+        <!-- back to top button  -->
+        <div class="back_top">
+            <a href="#top"><i class="fa-solid fa-angle-up"></i></a>
+        </div>
+        <Footer />
     </div>
-    <Footer />
-</div>
 </template>
 
 <script>
@@ -184,9 +234,9 @@ export default {
             this.loading = true;
             const orderId = this.$route.query.orderId;
             await this.$axios.get(`/order/orderDetails/${orderId}`).then(response => {
-                    this.orders = response.data.orderdata;
-                    this.orderstatus = response.data.orderrow;
-                })
+                this.orders = response.data.orderdata;
+                this.orderstatus = response.data.orderrow;
+            })
                 .catch(error => {
                     // Handle error
                 })

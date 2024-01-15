@@ -86,6 +86,7 @@
                         </div>
                     </div>
                     <div class="main_profile">
+                        
                         <div class="recent_orders">
                             <h4>Orders </h4>
                             <table class="table">
@@ -104,7 +105,7 @@
                                         <td>{{ order.placeOn }}</td>
                                         <td>{{ order.total }}</td>
                                         <td>{{ order.name }}</td>
-                                        <td><button class="btn btn-primary" @click="orderDetails(order.orderId)"><i class="fas fa-search-plus"></i></button></td>
+                                        <td><button class="btn btn_edit_nxt" @click="orderDetails(order.orderId)"><i class="fas fa-search-plus"></i></button></td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -162,9 +162,10 @@ class AuthController extends Controller
                 'phone_number'              => $request->phone_number,
                 'business_owner_name'       => $request->business_owner_name,
                 'business_name'             => $request->business_name,
+                'business_name_slug'        => Str::slug($request->business_name), // Add this line for the slug
                 'business_register_num'     => $request->business_register_num,
                 'business_address'          => $request->business_address,
-                'business_warehouse_address' => $request->business_warehouse_address,
+                'business_warehouse_address'=> $request->business_warehouse_address,
                 'business_email'            => $request->business_email,
                 'business_phone'            => $request->business_phone,
                 'business_return_name'      => $request->business_return_name,

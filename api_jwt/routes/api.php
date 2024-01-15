@@ -46,7 +46,7 @@ Route::group([
     Route::post('updateBusinessprofile', [AuthController::class, 'updateBusinessprofile']);
     Route::post('updatePassword', [AuthController::class, 'changesPassword']);
     Route::get('showProfileData', [AuthController::class, 'showProfileData']);
- 
+
     Route::post('password/email', [ForgotPasswordController::class, 'sendPasswordResetEmail']);
     Route::post('password/reset', [ResetPasswordController::class, 'updatePassword']);
 });
@@ -125,7 +125,7 @@ Route::group([
     'middleware' => 'api',
     'prefix' => 'product'
 ], function () {
- 
+
     Route::post('save', [ProductController::class, 'save']);
     Route::post('product-update', [ProductController::class, 'productUpdate']);
     Route::post('insertVarientGroup', [ProductController::class, 'insertVarientGroup']);
@@ -141,7 +141,6 @@ Route::group([
     Route::get('deleteCategory', [ProductController::class, 'deleteCategory']);
     Route::get('getVarientHistory', [ProductController::class, 'getVarientHistory']);
     Route::get('removeProducts/{id}', [ProductController::class, 'removeProducts']);
-
 });
 
 Route::group([
@@ -183,8 +182,6 @@ Route::group([
     Route::get('documents-row/{id}', [DocumentsController::class, 'editId']);
 });
 
-
-
 Route::group([
     'prefix' => 'order'
 ], function () {
@@ -202,7 +199,6 @@ Route::group([
     Route::get('allOrdersAdmin', [OrderController::class, 'allOrdersAdmin']);
     Route::post('update_order_status', [OrderController::class, 'update_order_status']);
 });
-
 
 Route::group([
     //'middleware' => 'api',
@@ -223,6 +219,7 @@ Route::group([
     Route::get('getCategoryList', [UnauthenticatedController::class, 'allCategory']);
     Route::get('findCategorys/{slug}', [UnauthenticatedController::class, 'findCategorys']);
     Route::get('productSlug/{slug}', [UnauthenticatedController::class, 'findProductSlug']);
+    Route::get('getSeller/{slug}', [UnauthenticatedController::class, 'getSeller']);
 });
 
 Route::group([

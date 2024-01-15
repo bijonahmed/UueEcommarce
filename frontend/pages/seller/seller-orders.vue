@@ -129,7 +129,7 @@
                                         <td>
                                             <center>
 
-                                                <span><button type="button" @click="orderDetails(product.orderId)"><i class="fa-solid fa-magnifying-glass-plus"></i></button></span>
+                                                <span><button type="button" class="btn_edit_nxt" @click="orderDetails(product.orderId)"><i class="fa-solid fa-magnifying-glass-plus"></i></button></span>
                                             </center>
                                         </td>
                                     </tr>

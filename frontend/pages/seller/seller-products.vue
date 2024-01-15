@@ -145,12 +145,10 @@
                                         <td>{{ product.sku }}</td>
                                         <td>{{ `${product.price}TK` }}</td>
                                         <td>{{ product.status }}</td>
-                                        <td>
-                                            <center>
-                                                <span @click="edit(product.id)"><button type="button"><i class="fa-solid fa-pen-to-square"></i></button></span>
+                                        <td >
+                                                <span @click="edit(product.id)"><button type="button" class="btn_edit_nxt" ><i class="fa-solid fa-pen-to-square"></i></button></span>
                                                 <!-- <span @click="deleteProduct(product.id)"><button type="button"><i class="fa-solid fa-trash"></i></button></span> -->
-                                                <span @click="preview(product.id)"><button type="button"><i class="fa-solid fa-magnifying-glass-plus"></i></button></span>
-                                            </center>
+                                                <span @click="preview(product.id)"><button type="button" class="btn_edit_nxt" ><i class="fa-solid fa-magnifying-glass-plus"></i></button></span>
                                         </td>
                                     </tr>
 

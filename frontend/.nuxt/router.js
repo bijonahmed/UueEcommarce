@@ -54,6 +54,7 @@ const _744f3ace = () => interopDefault(import('..\\pages\\seller\\products\\prod
 const _f212544c = () => interopDefault(import('..\\pages\\seller\\products\\product-varient.vue' /* webpackChunkName: "pages/seller/products/product-varient" */))
 const _4f6caec4 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 const _ad1c1ed8 = () => interopDefault(import('..\\pages\\user\\invite-user\\_id.vue' /* webpackChunkName: "pages/user/invite-user/_id" */))
+const _21a69c88 = () => interopDefault(import('..\\pages\\business\\_slug.vue' /* webpackChunkName: "pages/business/_slug" */))
 const _6d4f62b8 = () => interopDefault(import('..\\pages\\product-details\\_slug.vue' /* webpackChunkName: "pages/product-details/_slug" */))
 
 const emptyFn = () => {}
@@ -267,6 +268,10 @@ export const routerOptions = {
     path: "/user/invite-user/:id?",
     component: _ad1c1ed8,
     name: "user-invite-user-id"
+  }, {
+    path: "/business/:slug?",
+    component: _21a69c88,
+    name: "business-slug"
   }, {
     path: "/product-details/:slug?",
     component: _6d4f62b8,
