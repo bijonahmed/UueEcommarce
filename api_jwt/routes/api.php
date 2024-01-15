@@ -131,6 +131,7 @@ Route::group([
     Route::post('insertVarientGroup', [ProductController::class, 'insertVarientGroup']);
     Route::get('getProductList', [ProductController::class, 'getProductList']);
     Route::get('sellerProductList', [ProductController::class, 'sellerProductList']);
+    Route::get('sellerOrderProductList', [ProductController::class, 'sellerOrderProductList']);
     Route::get('insertProductAttrAndValues', [ProductController::class, 'insertProductAttrAndValues']);
     Route::get('insertProductVarient', [ProductController::class, 'insertProductVarient']);
     Route::get('deleteValrient', [ProductController::class, 'deleteValrient']);

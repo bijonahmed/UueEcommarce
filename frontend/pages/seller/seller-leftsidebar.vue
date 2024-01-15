@@ -12,9 +12,9 @@
                 <li :class="{ active: $route.path === '/seller/seller-orders' }">
                     <Nuxt-link to="/seller/seller-orders" exact>Orders </Nuxt-link>
                 </li>
-                <li :class="{ active: $route.path === '/seller/seller-wallet' }">
+                <!-- <li :class="{ active: $route.path === '/seller/seller-wallet' }">
                     <Nuxt-link to="/seller/seller-wallet" exact>Wallet</Nuxt-link>
-                </li>
+                </li> -->
                 <li :class="{ active: $route.path === '/seller/seller-profile' }">
                     <Nuxt-link to="/seller/seller-profile" exact>Profile information</Nuxt-link>
                 </li>

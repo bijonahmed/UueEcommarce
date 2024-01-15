@@ -52,7 +52,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                   <SellerLeftsidebar/>
+                    <SellerLeftsidebar />
                 </div>
                 <div class="col-md-8">
 
@@ -91,142 +91,60 @@
                     <div class="top_search_box">
                         <form action="">
                             <div class="row">
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6">
-                                    <input type="text" placeholder="Order Number">
+                                <div class="col-xl-8 col-lg-4 col-md-6 col-sm-6 col-6">
+                                    <input type="text" placeholder="Order Id" v-model="orderId" @change="applyFilters">
                                 </div>
+
                                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6">
-                                    <input type="text" placeholder="Customer">
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6">
-                                    <input type="text" placeholder="Product">
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6">
-                                    <select name="" id="">
-                                        <option value="">Product Tag</option>
-                                        <option value="">Global Collection</option>
-                                    </select>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6">
-                                    <input type="text" placeholder="Seller SKU">
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6">
-                                    <input type="text" placeholder="Payment">
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6">
-                                    <input type="text" placeholder="Fullfilment">
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6">
-                                    <input type="text" placeholder="Delivery Option">
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6">
-                                    <input type="text" placeholder="Start date" onfocus="(this.type='date')">
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6">
-                                    <input type="text" placeholder="End date" onfocus="(this.type='date')">
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6">
-                                    <button type="submit" class="btn_cart" style="visibility: unset; color: #fff; width: fit-content;">Search </button>
+                                    <button type="button" class="btn_cart" style="visibility: unset; color: #fff; width: fit-content;" @click="applyFilters">Search </button>
                                 </div>
 
                             </div>
                         </form>
                     </div>
+                    <div class="loading-indicator" v-if="loading">
+                        <div class="loader-container">
+                            <center class="loader-text">Loading...</center>
+                            <img src="/loader/loader.gif" alt="Loader" />
+                        </div>
+                    </div>
                     <div class="main_profile">
                         <div class="user_details order_details_table">
-                            <div class="d-flex align-items-center justify-content-between mb-3">
-                                <h4>Orders list </h4>
-
-                            </div>
-
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Document</th>
-                                        <th>Order No.</th>
-                                        <th>Order date</th>
-                                        <th>Update date</th>
-                                        <th>Payment method</th>
-                                        <th>Retail Price</th>
+                                        <th>#</th>
+                                        <th>Order ID</th>
+                                        <th>Total</th>
                                         <th>Status</th>
-                                        <th>Printed</th>
-                                        <th>Action</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>#994433</td>
-                                        <td>#1232</td>
-                                        <td>19-8-23</td>
-                                        <td>19-8-23</td>
-                                        <td>Bkash</td>
-                                        <td>199TK</td>
-                                        <td>Pending</td>
-                                        <td>Printed</td>
-                                        <td><a href="seller-manage-order.html" class="btn_edit"><i class="fa-solid fa-pen"></i></a></td>
+                                    <tr v-for="(product, index) in products" :key="index">
+                                        <td>{{ index+1 }}</td>
+                                        <td>{{ product.orderId }}</td>
+                                        <td>{{ `${product.total}TK` }}</td>
+                                        <td>{{ product.order_status }}</td>
+                                        <td>
+                                            <center>
+
+                                                <span><button type="button" @click="orderDetails(product.orderId)"><i class="fa-solid fa-magnifying-glass-plus"></i></button></span>
+                                            </center>
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td>#994433</td>
-                                        <td>#1232</td>
-                                        <td>19-8-23</td>
-                                        <td>19-8-23</td>
-                                        <td>Bkash</td>
-                                        <td>199TK</td>
-                                        <td>Pending</td>
-                                        <td>Printed</td>
-                                        <td><a href="seller-manage-order.html" class="btn_edit"><i class="fa-solid fa-pen"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>#994433</td>
-                                        <td>#1232</td>
-                                        <td>19-8-23</td>
-                                        <td>19-8-23</td>
-                                        <td>Bkash</td>
-                                        <td>199TK</td>
-                                        <td>Pending</td>
-                                        <td>Printed</td>
-                                        <td><a href="seller-manage-order.html" class="btn_edit"><i class="fa-solid fa-pen"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>#994433</td>
-                                        <td>#1232</td>
-                                        <td>19-8-23</td>
-                                        <td>19-8-23</td>
-                                        <td>Bkash</td>
-                                        <td>199TK</td>
-                                        <td>Pending</td>
-                                        <td>Printed</td>
-                                        <td><a href="seller-manage-order.html" class="btn_edit"><i class="fa-solid fa-pen"></i></a></td>
-                                    </tr>
+
                                 </tbody>
                             </table>
                             <!-- pagination -->
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="pagination">
-                                        <ul>
-                                            <li>
-                                                <a href="#"> prv </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="active"> 1 </a>
-                                            </li>
-                                            <li>
-                                                <a href="#"> 2 </a>
-                                            </li>
-                                            <li>
-                                                <a href="#"> 3 </a>
-                                            </li>
-                                            <li>
-                                                <a href="#"> next </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
+                            <center>
+                                <button class="btn_cart" style="visibility: unset; color: #fff; width: fit-content;" @click="loadMore" :disabled="loading">
+                                    <span v-if="loading">Loading...</span>
+                                    <span v-else>Load More...</span>
+                                </button>
+                            </center>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -258,6 +176,135 @@ export default {
     head: {
         title: 'Orders',
     },
+    data() {
+        return {
+            loading: false,
+            searchCriteria: {
+                productName: '', // Add other filter criteria as needed
+            },
+            notifmsg: '',
+            products: [],
+            errors: {},
+            //
+            currentPage: 1,
+            totalPages: 1,
+            orderId: null,
+            productName: null,
+            sku: null,
+
+        }
+    },
+    async mounted() {
+        await this.defaultLoading();
+    },
+    methods: {
+
+        orderDetails(orderId) {
+            this.$router.push({
+                path: '/seller/order-details',
+                query: {
+                    orderId: orderId
+                }
+            })
+
+        },
+
+        async defaultLoading() {
+            this.loading = true;
+            try {
+                const response = await this.fetchProducts();
+                this.products = response.data.data;
+                this.currentPage = response.data.current_page;
+                this.totalPages = response.data.last_page;
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            } finally {
+                this.loading = false;
+            }
+        },
+        async fetchProducts() {
+            const params = {
+                page: this.currentPage,
+                orderId: this.orderId,
+                productName: this.productName,
+                sku: this.sku,
+            };
+
+            return this.$axios.get('/product/sellerOrderProductList', {
+                params
+            });
+        },
+        async loadMore() {
+            if (this.currentPage < this.totalPages) {
+                this.loading = true;
+                try {
+                    this.currentPage += 1;
+                    const response = await this.fetchProducts();
+                    this.products = [...this.products, ...response.data.data];
+                } catch (error) {
+                    console.error('Error fetching more data:', error);
+                } finally {
+                    this.loading = false;
+                }
+            }
+        },
+        applyFilters() {
+            this.currentPage = 1; // Reset page when filters change
+            this.defaultLoading();
+        },
+    },
+    computed: {
+        hasMorePages() {
+            return this.currentPage < this.totalPages;
+        },
+    },
 
 }
 </script>
+
+<style scoped>
+.top_search_box {
+    background: #fff;
+    box-shadow: 0 0 20px #ededed;
+    padding: 0px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.loading-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* For Loader */
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+.loader-text {
+    margin: 0;
+    /* Remove default margin */
+}
+
+.loader-top {
+    top: 0;
+}
+
+.loader-bottom {
+    bottom: 0;
+}
+</style>

@@ -33,6 +33,7 @@ const _6042b4bd = () => interopDefault(import('..\\pages\\category\\all-category
 const _b287192e = () => interopDefault(import('..\\pages\\category\\category-grid.vue' /* webpackChunkName: "pages/category/category-grid" */))
 const _3807a67e = () => interopDefault(import('..\\pages\\category\\category-list.vue' /* webpackChunkName: "pages/category/category-list" */))
 const _b32bea2a = () => interopDefault(import('..\\pages\\seller\\change-password.vue' /* webpackChunkName: "pages/seller/change-password" */))
+const _36b12254 = () => interopDefault(import('..\\pages\\seller\\order-details.vue' /* webpackChunkName: "pages/seller/order-details" */))
 const _2756255f = () => interopDefault(import('..\\pages\\seller\\seller-account-setting.vue' /* webpackChunkName: "pages/seller/seller-account-setting" */))
 const _35a8adb5 = () => interopDefault(import('..\\pages\\seller\\seller-customer-returns.vue' /* webpackChunkName: "pages/seller/seller-customer-returns" */))
 const _44dcf5b8 = () => interopDefault(import('..\\pages\\seller\\seller-leftsidebar.vue' /* webpackChunkName: "pages/seller/seller-leftsidebar" */))
@@ -182,6 +183,10 @@ export const routerOptions = {
     path: "/seller/change-password",
     component: _b32bea2a,
     name: "seller-change-password"
+  }, {
+    path: "/seller/order-details",
+    component: _36b12254,
+    name: "seller-order-details"
   }, {
     path: "/seller/seller-account-setting",
     component: _2756255f,

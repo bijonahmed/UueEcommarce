@@ -271,7 +271,13 @@ class OrderController extends Controller
 
         $itemtotal = 0;
         foreach ($cartData as $cartItem) {
-            $productid = $cartItem['product']['id'];
+            $pid = $cartItem['product']['id'];
+
+            $chkpost = Product::where('id',$pid)->select('seller_id')->first();
+            $seller_id = !empty($chkpost) ? $chkpost->seller_id : 1 ;
+
+
+            $productid = $pid;
             $quantity  = $cartItem['quantity'];
             $price     = str_replace(',', '', $cartItem['product']['price']); // Remove commas
             $price     = floatval($price); // Convert to float
@@ -281,6 +287,7 @@ class OrderController extends Controller
             $itemtotal += $subtotal;
             $order_history                  = new OrderHistory();
             $order_history->order_id        = $lastOrderId;
+            $order_history->seller_id       = $seller_id;
             $order_history->product_id      = $productid;
             $order_history->quantity        = $quantity;
             $order_history->price           = $price;

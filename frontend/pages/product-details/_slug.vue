@@ -454,7 +454,7 @@
                             </div>
 
                         </div>
-                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 ">
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 d-none">
                             <div class="sidebar_here">
                                 <div id="list-example" class="list-group id_list">
                                     <a class="list-group-item list-group-item-action active" href="#details"><i class="fa-regular fa-file-lines"></i>Product details </a>

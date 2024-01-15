@@ -203,6 +203,13 @@
     "_name": "_b32bea2a"
   },
   {
+    "name": "seller-order-details",
+    "path": "/seller/order-details",
+    "component": "F:\\\\Server\\\\htdocs\\\\dubail_ecommarce\\\\frontend\\\\pages\\\\seller\\\\order-details.vue",
+    "chunkName": "pages/seller/order-details",
+    "_name": "_36b12254"
+  },
+  {
     "name": "seller-seller-account-setting",
     "path": "/seller/seller-account-setting",
     "component": "F:\\\\Server\\\\htdocs\\\\dubail_ecommarce\\\\frontend\\\\pages\\\\seller\\\\seller-account-setting.vue",
