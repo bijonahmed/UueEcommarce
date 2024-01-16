@@ -46,7 +46,14 @@
         </div>
     </section>
     <!-- Main section start here  -->
-
+    <center>
+        <div class="loading-indicator" v-if="loading">
+            <div class="loader-container">
+                <center class="loader-text">Loading...</center>
+                <img src="/loader/loader.gif" alt="Loader" />
+            </div>
+        </div>
+    </center>
     <!-- Main section start here  -->
     <section class="main_content ">
         <div class="container">
@@ -62,46 +69,69 @@
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-business" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Login Information</button>
                         </li>
+
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-ads-tab" data-bs-toggle="pill" data-bs-target="#pills-ads" type="button" role="tab" aria-controls="pills-ads" aria-selected="false">Business Pages Banner Setting</button>
+                        </li>
+
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="seller_account" role="tabpanel" aria-labelledby="pills-here-tab">
                             <div class="main_profile">
-                                <div class="user_details">
-                                    <div class="d-flex align-items-center justify-content-between mb-3">
-                                        <h4>Profile image and Logo </h4>
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <h4>Profile image and Logo </h4>
+                                </div>
+                                <form @submit.prevent="updateLogo()" id="userSubmitFrm" class="forms-sample" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div>
+                                                <h6>Preview Image</h6>
+                                                <div>
+                                                    <img :src="profileLogo" alt="Profile Logo" class="img-thumbnail custom-image-effect" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div>
+                                                <div>
+                                                    <label for="">Upload Profile Image</label>
+                                                    <input id="uploadFile" type="file" ref="file" @change="onFileSelected" class="img form-control uploadFile " accept="image/gif, image/jpeg, image/png" />
+
+                                                </div>
+                                            </div>
+                                        </div>
 
                                     </div>
+                                    <button type="submit" class="btn_cart w-100" style="visibility: unset; width: fit-content; margin-top: 10px;">Upload</button>
+                                </form>
+                                <hr />
+                                <form @submit.prevent="updateLogo()" id="userSubmitFrm" class="forms-sample" enctype="multipart/form-data">
 
-                                    <form @submit.prevent="updateLogo()" id="userSubmitFrm" class="forms-sample" enctype="multipart/form-data">
-                                        <div>
-                                            <h6>Profile Image</h6>
-                                            <!-- <p>{{ message }}</p> -->
-                                            <div class="imagePreview" id="imagePreview"></div>
+                                    <div class="row">
+                                        <div class="col-md-4">
                                             <div>
-                                                <label for="">Upload Profile Image</label>
-                                                <input id="uploadFile" type="file" ref="file" @change="onFileSelected" class="img form-control uploadFile " accept="image/gif, image/jpeg, image/png" />
-                                                <img :src="profileLogo" alt="Profile Logo" style="height:80px;width:100px;" />
+                                                <h6>Business Preview Image</h6>
+                                                <div>
+                                                    <img :src="businessLogo" alt="Business Logo" class="img-thumbnail custom-image-effect" />
+                                                </div>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn_cart" style="visibility: unset; width: fit-content; margin-top: 10px;">Upload</button>
-                                    </form>
 
-                                    <form @submit.prevent="updateLogo()" id="userSubmitFrm" class="forms-sample" enctype="multipart/form-data">
-                                        <div class="mt-4">
-                                            <h6>Business Logo</h6>
-                                            <div class="imagePreview1" id="imagePreview"></div>
-
+                                        <div class="col-md-6">
                                             <div>
-                                                <label for="">Upload Profile Image</label>
-                                                <input id="uploadFile1" type="file" ref="business_logo" @change="onFileSelectedbusiness" class="img form-control uploadFile1" accept="image/gif, image/jpeg, image/png" />
-                                                <img :src="businessLogo" alt="Business Logo" style="height:80px;width:100px;" />
+                                                <div>
+                                                    <label for="">Upload Business Image</label>
+                                                    <input id="uploadFile1" type="file" ref="business_logo" @change="onFileSelectedbusiness" class="img form-control uploadFile1" accept="image/gif, image/jpeg, image/png" />
+
+                                                </div>
                                             </div>
-                                            <button type="submit" class="btn_cart" style="visibility: unset; width: fit-content; margin-top: 10px;">--Upload</button>
-
                                         </div>
-                                    </form>
 
-                                </div>
+                                    </div>
+                                    <button type="submit" class="btn_cart w-100" style="visibility: unset; width: fit-content; margin-top: 10px;">Upload</button>
+                                </form>
+
                             </div>
                         </div>
                         <div class="tab-pane fade" id="pills-business" role="tabpanel" aria-labelledby="pills-profile-tab">
@@ -154,6 +184,130 @@
                                     </div>
 
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="pills-ads" role="tabpanel" aria-labelledby="pills-ads-tab">
+                            <div class="main_profile">
+                                <form @submit.prevent="updateLogo()" id="userSubmitFrm" class="forms-sample" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div>
+                                                <h6>Top Banner</h6>
+                                                <div>
+                                                    <img src="/images/Slider_fold.jpg" alt="Business Logo" class="img-thumbnail custom-image-effect" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-10">
+                                            <div>
+                                                <div>
+                                                    <label for="" style="color:red;"><small>Top Banner (Must upload size Width:1168px Height:384px)</small></label>
+                                                    <input id="uploadFile1" type="file" ref="business_logo" @change="onFileSelectedbusiness" class="img form-control uploadFile1" accept="image/gif, image/jpeg, image/png" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <button type="submit" class="btn_cart w-100" style="visibility: unset; width: fit-content; margin-top: 10px;">Upload</button>
+                                </form>
+                                <hr />
+
+                                <form @submit.prevent="updateLogo()" id="userSubmitFrm" class="forms-sample" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div>
+                                                <h6>Banner-1</h6>
+                                                <div>
+                                                    <img src="/images/images_global.jpg" alt="Business Logo" class="img-thumbnail custom-image-effect" />
+                                                </div>
+                                                <label for="" style="color:red;"><small>width:572px Height:250px</small></label>
+                                                <input id="uploadFile1" type="file" ref="business_logo" @change="onFileSelectedbusiness" class="img form-control uploadFile1" accept="image/gif, image/jpeg, image/png" />
+                                                <button type="submit" class="btn_cart w-100" style="visibility: unset; width: fit-content; margin-top: 10px;">Upload</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div>
+                                                <h6>Banner-2</h6>
+                                                <div>
+                                                    <img src="/images/images_global.jpg" alt="Business Logo" class="img-thumbnail custom-image-effect" />
+                                                </div>
+                                                <label for="" style="color:red;"><small>width:572px Height:250px</small></label>
+                                                <input id="uploadFile1" type="file" ref="business_logo" @change="onFileSelectedbusiness" class="img form-control uploadFile1" accept="image/gif, image/jpeg, image/png" />
+                                                <button type="submit" class="btn_cart w-100" style="visibility: unset; width: fit-content; margin-top: 10px;">Upload</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div>
+                                                <h6>Banner-3</h6>
+                                                <div>
+                                                    <img src="/images/images_global.jpg" alt="Business Logo" class="img-thumbnail custom-image-effect" />
+                                                </div>
+                                                <label for="" style="color:red;"><small>width:572px Height:250px</small></label>
+                                                <input id="uploadFile1" type="file" ref="business_logo" @change="onFileSelectedbusiness" class="img form-control uploadFile1" accept="image/gif, image/jpeg, image/png" />
+                                                <button type="submit" class="btn_cart w-100" style="visibility: unset; width: fit-content; margin-top: 10px;">Upload</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </form>
+
+                                <hr />
+
+                                <form @submit.prevent="updateLogo()" id="userSubmitFrm" class="forms-sample" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div>
+                                                <h6>Banner-4</h6>
+                                                <div>
+                                                    <img src="/images/images_global.jpg" alt="Business Logo" class="img-thumbnail custom-image-effect" />
+                                                </div>
+                                                <label for="" style="color:red;"><small>width:572px Height:250px</small></label>
+                                                <input id="uploadFile1" type="file" ref="business_logo" @change="onFileSelectedbusiness" class="img form-control uploadFile1" accept="image/gif, image/jpeg, image/png" />
+                                                <button type="submit" class="btn_cart w-100" style="visibility: unset; width: fit-content; margin-top: 10px;">Upload</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div>
+                                                <h6>Banner-5</h6>
+                                                <div>
+                                                    <img src="/images/images_global.jpg" alt="Business Logo" class="img-thumbnail custom-image-effect" />
+                                                </div>
+                                                <label for="" style="color:red;"><small>width:572px Height:250px</small></label>
+                                                <input id="uploadFile1" type="file" ref="business_logo" @change="onFileSelectedbusiness" class="img form-control uploadFile1" accept="image/gif, image/jpeg, image/png" />
+                                                <button type="submit" class="btn_cart w-100" style="visibility: unset; width: fit-content; margin-top: 10px;">Upload</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </form>
+
+                                <hr />
+
+                                <form @submit.prevent="updateLogo()" id="userSubmitFrm" class="forms-sample" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div>
+                                                <h6>Video </h6>
+                                                <div class="video_ads">
+                                                    <iframe src="https://www.youtube.com/embed/0pTqynKiki4" frameborder="0"></iframe>
+                                                </div>
+                                                <input type="text" class="form-control w-100" placeholder="Youtube link" />
+                                                <button type="submit" class="btn_cart w-100" style="visibility: unset; width: fit-content; margin-top: 10px;">Upload</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </form>
+
                             </div>
                         </div>
                     </div>
@@ -372,5 +526,13 @@ export default {
 
 .loader-bottom {
     bottom: 0;
+}
+
+.custom-image-effect {
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.custom-image-effect:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 </style>

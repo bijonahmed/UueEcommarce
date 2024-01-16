@@ -149,12 +149,57 @@ class UnauthenticatedController extends Controller
     }
 
 
-    public function getSeller($slug){
 
-        $row    = User::where('business_name_slug',$slug)->first();
+    public function getSellerCategoryFilter($category_id)
+    {
 
-        $sliderImg = Product::where('seller_id',$row->id)->where('status',1)->limit(12)->get();
+        $allProducts = ProductCategory::join('product', 'produc_categories.product_id', '=', 'product.id')
+            ->where('produc_categories.category_id', $category_id)
+            ->select('product.id as product_id', 'product.name as product_name', 'product.thumnail_img','product.slug','product.price','product.discount','produc_categories.category_id')
+            ->get();
 
+        foreach ($allProducts as $v) {
+            $products[] = [
+                'id'           => $v->product_id,
+                'name'         => substr($v->product_name, 0, 12) . '...',
+                'thumnail'     => !empty($v->thumnail_img) ? url($v->thumnail_img) : "",
+                'slug'         => $v->slug,
+                'price'        => $v->price,
+                'discount'     => $v->discount,
+            ];
+        }
+        $data['products']                = !empty($products) ? $products : "";
+
+        // dd($data['products']);
+        return response()->json($data);
+    }
+
+
+
+
+
+    public function getSeller($slug)
+    {
+
+        $row    = User::where('business_name_slug', $slug)->first();
+
+        $sliderImg   = Product::where('seller_id', $row->id)->where('status', 1)->limit(12)->get();
+        $allProducts = Product::where('seller_id', $row->id)->where('status', 1)->get();
+
+        $findCategory = $allProducts;
+        $categoryList = [];
+        foreach ($findCategory as $v) {
+            $category = ProductCategory::where('product_id', $v->id)->select('category_id')->first();
+            if ($category) {
+                $catName = Categorys::where('id', $category->category_id)->select('name')->first();
+                if ($catName) {
+                    $categoryList[] = [
+                        'name' => $catName->name,
+                        'id'   => $category->category_id,
+                    ];
+                }
+            }
+        }
         foreach ($sliderImg as $v) {
             $slidersImg[] = [
                 'id'           => $v->id,
@@ -166,7 +211,16 @@ class UnauthenticatedController extends Controller
             ];
         }
 
-
+        foreach ($allProducts as $v) {
+            $products[] = [
+                'id'           => $v->id,
+                'name'         => substr($v->name, 0, 12) . '...',
+                'thumnail'     => !empty($v->thumnail_img) ? url($v->thumnail_img) : "",
+                'slug'         => $v->slug,
+                'price'        => $v->price,
+                'discount'     => $v->discount,
+            ];
+        }
 
         $businessLogog = !empty($row) ? url($row->business_logo) : "";
         $data['business_owner_name']     = !empty($row) ? $row->business_owner_name : "";
@@ -175,9 +229,11 @@ class UnauthenticatedController extends Controller
         $data['business_register_num']   = !empty($row) ? $row->business_register_num : "";
         $data['business_email']          = !empty($row) ? $row->business_email : "";
         $data['business_phone']          = !empty($row) ? $row->business_phone : "";
-
         $data['business_logo']           = $businessLogog;
-        $data['slidersImg']              = !empty($slidersImg) ? $slidersImg : "";  
+        $data['slidersImg']              = !empty($slidersImg) ? $slidersImg : "";
+        $data['products']                = !empty($products) ? $products : "";
+        $data['categoryList']            = !empty($categoryList) ? $categoryList : "";
+        // dd($data['products']);
         return response()->json($data);
     }
 

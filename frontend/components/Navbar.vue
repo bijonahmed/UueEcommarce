@@ -85,7 +85,7 @@
                                         <li :key="category.id" v-if="index < limit">
                                             <a href="#" class="d-flex justify-content-between align-items-center" @click="redirectCategory(category.slug)">
                                                 <div class="d-flex align-items-center">
-                                                    <i class="fa-solid fa-angle-right"></i>
+                                                    <i class="fa-solid fa-list"></i>
                                                     {{ category.name }}</div> <i class="fa-solid fa-angle-right"></i>
                                             </a>
                                             <div class="sub_menu">

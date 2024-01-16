@@ -220,6 +220,7 @@ Route::group([
     Route::get('findCategorys/{slug}', [UnauthenticatedController::class, 'findCategorys']);
     Route::get('productSlug/{slug}', [UnauthenticatedController::class, 'findProductSlug']);
     Route::get('getSeller/{slug}', [UnauthenticatedController::class, 'getSeller']);
+    Route::get('getSellerCategoryFilter/{id}', [UnauthenticatedController::class, 'getSellerCategoryFilter']);
 });
 
 Route::group([
