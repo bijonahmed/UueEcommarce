@@ -11,6 +11,7 @@ use Helper;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Sliders;
+use App\Models\SellerAds;
 use App\Models\ProductCategory;
 use App\Models\ProductAdditionalImg;
 use App\Models\Categorys;
@@ -233,7 +234,24 @@ class UnauthenticatedController extends Controller
         $data['slidersImg']              = !empty($slidersImg) ? $slidersImg : "";
         $data['products']                = !empty($products) ? $products : "";
         $data['categoryList']            = !empty($categoryList) ? $categoryList : "";
-        // dd($data['products']);
+
+        //ads banner 
+        $topBanner      = SellerAds::where('seller_id', $row->id)->where('position', 'top_banner_img')->first();
+        $bannerAds_1    = SellerAds::where('seller_id', $row->id)->where('position', 'banner_1')->first();
+        $bannerAds_2    = SellerAds::where('seller_id', $row->id)->where('position', 'banner_2')->first();
+        $bannerAds_3    = SellerAds::where('seller_id', $row->id)->where('position', 'banner_3')->first();
+        $bannerAds_4    = SellerAds::where('seller_id', $row->id)->where('position', 'banner_4')->first();
+        $bannerAds_5    = SellerAds::where('seller_id', $row->id)->where('position', 'banner_5')->first();
+        $youtube_ads    = SellerAds::where('seller_id', $row->id)->where('position', 'youtube_videos')->first();
+       // dd($youtube_ads->file_name);
+        $data['top_banner_img']       = !empty($topBanner) ? url($topBanner->file_name) : "";
+        $data['banner1']              = !empty($bannerAds_1) ? url($bannerAds_1->file_name) : "";
+        $data['banner2']              = !empty($bannerAds_2) ? url($bannerAds_2->file_name) : "";
+        $data['banner3']              = !empty($bannerAds_3) ? url($bannerAds_3->file_name) : "";
+        $data['banner4']              = !empty($bannerAds_4) ? url($bannerAds_4->file_name) : "";
+        $data['banner5']              = !empty($bannerAds_5) ? url($bannerAds_5->file_name) : "";
+        $data['file_name']            = !empty($youtube_ads) ? $youtube_ads->file_name : "";
+        //END baner 
         return response()->json($data);
     }
 

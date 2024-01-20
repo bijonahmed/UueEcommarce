@@ -704,7 +704,6 @@ class UserController extends Controller
         $bannerAds_5    = SellerAds::where('seller_id', $id)->where('position', 'banner_5')->first();
         $youtube_ads    = SellerAds::where('seller_id', $id)->where('position', 'youtube_videos')->first();
        // dd($youtube_ads->file_name);
-
         $data['top_banner_img']       = !empty($topBanner) ? url($topBanner->file_name) : "";
         $data['banner1']              = !empty($bannerAds_1) ? url($bannerAds_1->file_name) : "";
         $data['banner2']              = !empty($bannerAds_2) ? url($bannerAds_2->file_name) : "";

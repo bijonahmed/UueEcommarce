@@ -28,6 +28,10 @@
                 <li :class="{ active: $route.path === '/seller/seller-account-setting' }">
                     <Nuxt-link to="/seller/seller-account-setting" exact>Account Settings</Nuxt-link>
                 </li>
+
+                <li :class="{ active: $route.path === '/seller/seller-customer-returns' }">
+                    <Nuxt-link to="/seller/seller-customer-returns" exact>Returns</Nuxt-link>
+                </li>
                 <!-- <li :class="{ active: $route.path === '/seller/seller-message' }">
                     <Nuxt-link to="/seller/seller-message" exact>Massages</Nuxt-link>
                 </li> -->

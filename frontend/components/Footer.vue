@@ -193,10 +193,10 @@
                         <h6>Seller Dashboard</h6>
                         <ul>
                             <li>
-                                <Nuxt-link to="/seller/seller-inventories">Seller Inventories</Nuxt-link>
+                                <Nuxt-link to="/seller/seller-products">Seller Products</Nuxt-link>
                             </li>
                             <li>
-                                <Nuxt-link to="/seller/seller-inventory-post">Add Inventories</Nuxt-link>
+                                <Nuxt-link to="/seller/seller-products-post">Add Products</Nuxt-link>
                             </li>
                             <li>
                                 <Nuxt-link to="/Seller/seller-orders">Seller Orders</Nuxt-link>

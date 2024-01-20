@@ -51,18 +51,27 @@
         <div class="container">
 
             <h2 class="text-center">{{ business_name }}</h2>
+
+            <center v-if="loggedIn">
+                <nuxt-link to="/seller/seller-account-setting"><button class="form-control" style="width: 30%;">Back to Dashboard</button></nuxt-link>
+            </center>
             <!-- bannar slider  -->
             <div class="store_bannar">
-                <img src="/images/Slider_fold.jpg" class="img-fluid" alt="">
+
+                <span v-if="top_banner_img">
+                    <img :src="top_banner_img" class="img-fluid" alt="">
+                </span>
+                <span v-else>
+                    <img src="/images/Slider_fold.jpg" class="img-fluid" alt="">
+                </span>
+
                 <div class="store_details">
                     <div class="row">
                         <div class="col-sm-3 text-center m-auto justify-content-center">
                             <div class="img_box">
-
-                                <span v-if="isObjectNotEmpty(business_logo)">
+                                <span v-if="business_logo">
                                     <img :src="business_logo" class="img-fluid" alt="">
                                 </span>
-                                <!-- If business_logo is an empty object or not provided, show a default image -->
                                 <span v-else>
                                     <img src="/images/user-100.png" class="img-fluid" alt="">
                                 </span>
@@ -140,17 +149,32 @@
                         <div class="row">
                             <div class="col-4">
                                 <a href="#">
-                                    <img src="/images/deal(1).jpg" class="img-fluid" alt="">
+                                    <span v-if="banner1">
+                                        <img :src="banner1" class="img-fluid" alt="">
+                                    </span>
+                                    <span v-else>
+                                        <img src="/images/images_global.jpg" class="img-fluid" alt="">
+                                    </span>
                                 </a>
                             </div>
                             <div class="col-4">
                                 <a href="#">
-                                    <img src="/images/deal(2).jpg" class="img-fluid" alt="">
+                                    <span v-if="banner2">
+                                        <img :src="banner2" class="img-fluid" alt="">
+                                    </span>
+                                    <span v-else>
+                                        <img src="/images/images_global.jpg" class="img-fluid" alt="">
+                                    </span>
                                 </a>
                             </div>
                             <div class="col-4">
                                 <a href="#">
-                                    <img src="/images/deal(1).jpg" class="img-fluid" alt="">
+                                    <span v-if="banner3">
+                                        <img :src="banner3" class="img-fluid" alt="">
+                                    </span>
+                                    <span v-else>
+                                        <img src="/images/images_global.jpg" class="img-fluid" alt="">
+                                    </span>
                                 </a>
                             </div>
                         </div>
@@ -165,12 +189,22 @@
                         <div class="row">
                             <div class="col-6">
                                 <a href="#">
-                                    <img src="/images/deal(1).jpg" class="img-fluid" alt="">
+                                    <span v-if="banner4">
+                                        <img :src="banner4" class="img-fluid" alt="">
+                                    </span>
+                                    <span v-else>
+                                        <img src="/images/images_global.jpg" class="img-fluid" alt="">
+                                    </span>
                                 </a>
                             </div>
                             <div class="col-6">
                                 <a href="#">
-                                    <img src="/images/deal(2).jpg" class="img-fluid" alt="">
+                                    <span v-if="banner5">
+                                        <img :src="banner5" class="img-fluid" alt="">
+                                    </span>
+                                    <span v-else>
+                                        <img src="/images/images_global.jpg" class="img-fluid" alt="">
+                                    </span>
                                 </a>
                             </div>
                         </div>
@@ -179,7 +213,13 @@
             </div>
             <!-- video ads section  -->
             <div class="video_ads">
-                <iframe src="https://www.youtube.com/embed/0pTqynKiki4" frameborder="0"></iframe>
+                <span v-if="file_name">
+                    <iframe :src="getVideoUrl()" frameborder="0"></iframe>
+                </span>
+                <span v-else>
+                    <iframe src="https://www.youtube.com/embed/0pTqynKiki4" frameborder="0"></iframe>
+                </span>
+
             </div>
 
             <!-- product grid part start here  -->
@@ -194,7 +234,7 @@
                                         <h6>Category</h6>
                                         <ul>
                                             <li v-for="uniqueCategory in uniqueCategories" :key="uniqueCategory.id">
-                                                <i class="fa fa-list-alt" aria-hidden="true"></i>  <a :href="'#'" v-text="uniqueCategory.name" @click.prevent="filterCategory(uniqueCategory.id)"></a>
+                                                <i class="fa fa-list-alt" aria-hidden="true"></i> <a :href="'#'" v-text="uniqueCategory.name" @click.prevent="filterCategory(uniqueCategory.id)"></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -304,6 +344,13 @@ export default {
             business_logo: '',
             business_email: '',
             business_phone: '',
+            top_banner_img: '',
+            banner1: '',
+            banner2: '',
+            banner3: '',
+            banner4: '',
+            banner5: '',
+            file_name: '',
             slidersImg: [],
             categories: [],
             products: [],
@@ -317,6 +364,9 @@ export default {
         this.fetchDataCategory();
     },
     computed: {
+        loggedIn() {
+            return this.$auth.loggedIn;
+        },
         uniqueCategories() {
             const uniqueSet = new Set(this.categoryList.map(category => category.id));
             return Array.from(uniqueSet).map(id => {
@@ -325,7 +375,9 @@ export default {
         },
     },
     methods: {
-
+        getVideoUrl() {
+            return `https://www.youtube.com/embed/${this.file_name}`;
+        },
         async filterCategory(category_id) {
             console.log(category_id);
             this.loading = true;
@@ -419,6 +471,13 @@ export default {
             this.slidersImg = response.data.slidersImg;
             this.products = response.data.products;
             this.categoryList = response.data.categoryList;
+            this.top_banner_img = response.data.top_banner_img;
+            this.banner1 = response.data.banner1;
+            this.banner2 = response.data.banner2;
+            this.banner3 = response.data.banner3;
+            this.banner4 = response.data.banner4;
+            this.banner5 = response.data.banner5;
+            this.file_name = response.data.file_name;
             this.loading = false;
         },
 
