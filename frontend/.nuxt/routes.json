@@ -273,6 +273,13 @@
     "_name": "_45085fcc"
   },
   {
+    "name": "seller-seller-wishlist",
+    "path": "/seller/seller-wishlist",
+    "component": "F:\\\\Server\\\\htdocs\\\\dubail_ecommarce\\\\frontend\\\\pages\\\\seller\\\\seller-wishlist.vue",
+    "chunkName": "pages/seller/seller-wishlist",
+    "_name": "_78a40da6"
+  },
+  {
     "name": "user-my-reviews",
     "path": "/user/my-reviews",
     "component": "F:\\\\Server\\\\htdocs\\\\dubail_ecommarce\\\\frontend\\\\pages\\\\user\\\\my-reviews.vue",

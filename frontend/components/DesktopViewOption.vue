@@ -23,9 +23,13 @@
                 <li v-if="loggedIn && userRole === 2">
                     <Nuxt-link class="dropdown-item" to="/user/user-orders">Orders</Nuxt-link>
                 </li>
-                <li v-if="loggedIn">
+                <li v-if="loggedIn && userRole === 2">
                     <Nuxt-link class="dropdown-item" to="/user/user-whichlist">Wishlist</Nuxt-link>
                 </li>
+
+                <li v-if="loggedIn && userRole === 3">
+                                    <Nuxt-link class="dropdown-item" to="/seller/seller-wishlist">Wishlist</Nuxt-link>
+                                </li>
 
             </ul>
         </div>

@@ -43,6 +43,7 @@ const _70717c76 = () => interopDefault(import('..\\pages\\seller\\seller-product
 const _15306358 = () => interopDefault(import('..\\pages\\seller\\seller-products-post.vue' /* webpackChunkName: "pages/seller/seller-products-post" */))
 const _0efc92d8 = () => interopDefault(import('..\\pages\\seller\\seller-profile.vue' /* webpackChunkName: "pages/seller/seller-profile" */))
 const _45085fcc = () => interopDefault(import('..\\pages\\seller\\seller-wallet.vue' /* webpackChunkName: "pages/seller/seller-wallet" */))
+const _78a40da6 = () => interopDefault(import('..\\pages\\seller\\seller-wishlist.vue' /* webpackChunkName: "pages/seller/seller-wishlist" */))
 const _5a7f1743 = () => interopDefault(import('..\\pages\\user\\my-reviews.vue' /* webpackChunkName: "pages/user/my-reviews" */))
 const _e0c774ec = () => interopDefault(import('..\\pages\\user\\order-details.vue' /* webpackChunkName: "pages/user/order-details" */))
 const _0754d196 = () => interopDefault(import('..\\pages\\user\\user-mlm.vue' /* webpackChunkName: "pages/user/user-mlm" */))
@@ -224,6 +225,10 @@ export const routerOptions = {
     path: "/seller/seller-wallet",
     component: _45085fcc,
     name: "seller-seller-wallet"
+  }, {
+    path: "/seller/seller-wishlist",
+    component: _78a40da6,
+    name: "seller-seller-wishlist"
   }, {
     path: "/user/my-reviews",
     component: _5a7f1743,

@@ -157,9 +157,9 @@
                             <li>
                                 <Nuxt-link to="/official-store">Offical Store</Nuxt-link>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <Nuxt-link to="/customer-review">Customer Review</Nuxt-link>
-                            </li>
+                            </li> -->
 
                         </ul>
                     </div>
@@ -175,9 +175,9 @@
                             <li>
                                 <Nuxt-link to="/user/user-whichlist">User Wishlist</Nuxt-link>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <Nuxt-link to="/user/user-review">User Reviews</Nuxt-link>
-                            </li>
+                            </li> -->
                         </ul>
                         <h6>Policy </h6>
                         <ul>
@@ -210,12 +210,12 @@
                             <li>
                                 <Nuxt-link to="/seller/seller-account-setting">Account Settings</Nuxt-link>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <Nuxt-link to="/seller/seller-wallet">Wallet</Nuxt-link>
                             </li>
                             <li>
                                 <Nuxt-link to="/seller/seller-message">Seller Massage</Nuxt-link>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                     <div class="col-md-3 col-6">

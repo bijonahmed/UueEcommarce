@@ -99,6 +99,14 @@ Route::group([
     Route::get('chkContractAggData', [CircumstancesController::class, 'chkContractAggData']);
     Route::get('selectOrganisationProfile', [UserController::class, 'selectOrganisationProfile']);
     Route::post('organisationUpdateprofile', [UserController::class, 'organisationUpdateprofile']);
+    Route::post('updateTopbanner', [UserController::class, 'updateTopbanner']);
+    Route::post('updatebannerOne', [UserController::class, 'updatebannerOne']);
+    Route::post('updatebannerTwo', [UserController::class, 'updatebannerTwo']);
+    Route::post('updatebannerThree', [UserController::class, 'updatebannerThree']);
+    Route::post('updatebannerFour', [UserController::class, 'updatebannerFour']);
+    Route::post('updatebannerFive', [UserController::class, 'updatebannerFive']);
+    Route::post('updateYAds', [UserController::class, 'updateYAds']);
+    Route::post('getSellerAds', [UserController::class, 'getSellerAds']);
 });
 Route::group([
     'middleware' => 'api',

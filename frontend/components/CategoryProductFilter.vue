@@ -291,6 +291,7 @@
                                             <h4>${{ item.price }}</h4>
                                             <h4 class="disabled" v-if="item.discount !==0"><strike>${{ item.discount }}</strike><span>-45%</span></h4>
                                             <button type="button" class="btn_cart" style="display: block;visibility: unset;" @click="addToCart(item.id)">Add to cart</button>
+                                            <!-- <button type="button" class="btn_cart" @click="addToCart(item.id)">Add to cart </button> -->
                                             <!-- <button type="button" disabled class="btn_sold " style="display: block;visibility: unset;">Sold Out</button> -->
                                         </div>
                                     </div>
@@ -321,6 +322,7 @@ export default {
             cart: [],
             updatedQuantity: 0,
             prouducts: [],
+            product: [],
             subtotal: 0,
             categories: [],
             pro_count: 0,
@@ -331,13 +333,15 @@ export default {
     },
 
     async mounted() {
-        const paramSlug = this.$route.query.slug;
+        // const paramSlug = this.$route.query.slug;
         this.calculateSubtotal();
-        this.loadCart();
+        //   this.loadCart();
         this.cartItemCount();
+        const paramSlug = this.$route.query.slug;
+        //alert(paramSlug);
         this.fetchData(paramSlug);
         await this.fetchDataCategory();
-        this.subtotal = this.calculateSubtotal(); // Calculate the subtotal and store it in a data property
+
     },
     methods: {
         loadCart() {
@@ -357,7 +361,7 @@ export default {
         cartItemCount() {
             let itemCount = 0;
             this.cart.forEach((item) => {
-                itemCount += parseInt(item.quantity);
+                itemCount += item.quantity;
             });
             this.itemCount = itemCount;
             console.log('Emitting cartItemCountUpdated event with itemCount:', this.itemCount);
@@ -449,19 +453,20 @@ export default {
                     this.prouducts = response.data.result;
                     this.pro_count = response.data.pro_count;
                     this.categoryname = response.data.categoryname;
+
                 })
                 .catch(error => {
                     // Handle error
                 })
                 .finally(() => {
                     this.loading = false; // Hide loader after response
-                });
+                });;;
 
         },
 
         async fetchDataCategory() {
-                this.loading = true;
-                await this.$axios.get(`/unauthenticate/filterCategorys`).then(response => {
+            this.loading = true;
+            await this.$axios.get(`/unauthenticate/filterCategorys`).then(response => {
                     this.categories = response.data;
                 })
                 .catch(error => {

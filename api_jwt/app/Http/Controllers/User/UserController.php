@@ -1,11 +1,14 @@
 <?php
+
 namespace App\Http\Controllers\User;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use Validator;
 use Helper;
 use App\Models\User;
+use App\Models\SellerAds;
 use App\Models\Profile;
 use Illuminate\Support\Str;
 use App\Rules\MatchOldPassword;
@@ -14,6 +17,7 @@ use DB;
 use File;
 use PhpParser\Node\Stmt\TryCatch;
 use function Ramsey\Uuid\v1;
+
 class UserController extends Controller
 {
     protected $frontend_url;
@@ -165,7 +169,7 @@ class UserController extends Controller
         }
         return response()->json($response, 200);
     }
-    
+
     public function editUserId($id)
     {
         $data = User::checkUserRow($id);
@@ -190,18 +194,18 @@ class UserController extends Controller
             'other_upload_documents' => !empty($data->other_upload_documents) ? url($data->other_upload_documents) : "",
             'message' => 'success'
         ];
-       
+
         return response()->json($response, 200);
     }
 
-  public function selectOrganisationProfile()
+    public function selectOrganisationProfile()
     {
         $email = auth('api')->user()->email;
         $data       = User::orgProfile();
         //dd($data);
         $data_two   = User::orgProfiletwo();
         $data_three = User::orgProfilethree();
-        
+
         $response = [
             'data'                => $data,
             'email'               => $email,
@@ -235,8 +239,6 @@ class UserController extends Controller
         return response()->json($response, 200);
     }
 
-
-    
     public function roleCheck($id)
     {
         $data = User::checkRoleRow($id);
@@ -434,7 +436,6 @@ class UserController extends Controller
             $file_url = $uploadPath . $path;
             $data['image'] = $file_url;
         }
-
 
         $userId = DB::table('users')->insertGetId($data);
 
@@ -691,6 +692,345 @@ class UserController extends Controller
         ];
         return response()->json($response);
     }
+
+    public function getSellerAds()
+    {
+        $id = auth('api')->user()->id;
+        $topBanner      = SellerAds::where('seller_id', $id)->where('position', 'top_banner_img')->first();
+        $bannerAds_1    = SellerAds::where('seller_id', $id)->where('position', 'banner_1')->first();
+        $bannerAds_2    = SellerAds::where('seller_id', $id)->where('position', 'banner_2')->first();
+        $bannerAds_3    = SellerAds::where('seller_id', $id)->where('position', 'banner_3')->first();
+        $bannerAds_4    = SellerAds::where('seller_id', $id)->where('position', 'banner_4')->first();
+        $bannerAds_5    = SellerAds::where('seller_id', $id)->where('position', 'banner_5')->first();
+        $youtube_ads    = SellerAds::where('seller_id', $id)->where('position', 'youtube_videos')->first();
+       // dd($youtube_ads->file_name);
+
+        $data['top_banner_img']       = !empty($topBanner) ? url($topBanner->file_name) : "";
+        $data['banner1']              = !empty($bannerAds_1) ? url($bannerAds_1->file_name) : "";
+        $data['banner2']              = !empty($bannerAds_2) ? url($bannerAds_2->file_name) : "";
+        $data['banner3']              = !empty($bannerAds_3) ? url($bannerAds_3->file_name) : "";
+        $data['banner4']              = !empty($bannerAds_4) ? url($bannerAds_4->file_name) : "";
+        $data['banner5']              = !empty($bannerAds_5) ? url($bannerAds_5->file_name) : "";
+        $data['file_name']            = !empty($youtube_ads) ? $youtube_ads->file_name : "";
+        return response()->json($data);
+    }
+
+
+
+
+    public function updateYAds(Request $request){
+
+        $id = auth('api')->user()->id;
+
+        $validator  = Validator::make($request->all(), [
+            'file_name'        => 'required',
+
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $data = array(
+            'file_name'  => $request->file_name,
+            'seller_id'  => $id,
+            'position'   => 'youtube_videos',
+
+        );
+
+        $chkpoint = SellerAds::where('seller_id', $id)->where('position', 'youtube_videos')->first();
+        if (empty($chkpoint)) {
+            SellerAds::insert($data);
+        } else {
+            $ads_id = $chkpoint->id;
+            SellerAds::where('id', $ads_id)->where('seller_id', $id)->delete();
+            SellerAds::insert($data);
+        }
+
+        $response = [
+            'file_name' => $request->file_name,
+            'message' => 'Successfully upload',
+        ];
+        return response()->json($response);
+
+
+    }
+    public function updatebannerFive(Request $request)
+    {
+
+        $id = auth('api')->user()->id;
+        $validator = Validator::make($request->all(), [
+            'banner5' => 'required|file|mimes:jpeg,png,gif|dimensions:min_width=572,min_height=250',
+        ], [
+            'banner5.dimensions' => 'Banner-5 image must have dimensions of at least 572x250 pixels.',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $data = array(
+            'seller_id'  => $id,
+            'position'   => 'banner_5',
+        );
+
+        if (!empty($request->file('banner5'))) {
+            $documents = $request->file('banner5');
+            $fileName = Str::random(20);
+            $ext = strtolower($documents->getClientOriginalExtension());
+            $path = $fileName . '.' . $ext;
+            $uploadPath = '/backend/files/';
+            $upload_url = $uploadPath . $path;
+            $documents->move(public_path('/backend/files/'), $upload_url);
+            $data['file_name'] = $upload_url;
+        }
+
+        $chkpoint = SellerAds::where('seller_id', $id)->where('position', 'banner_5')->first();
+        if (empty($chkpoint)) {
+            SellerAds::insert($data);
+        } else {
+            $ads_id = $chkpoint->id;
+            SellerAds::where('id', $ads_id)->where('seller_id', $id)->delete();
+            SellerAds::insert($data);
+        }
+
+        $response = [
+            'banner5' => url($data['file_name']),
+            'message' => 'Successfully upload',
+        ];
+        return response()->json($response);
+    }
+
+    public function updatebannerFour(Request $request)
+    {
+
+        $id = auth('api')->user()->id;
+        $validator = Validator::make($request->all(), [
+            'banner4' => 'required|file|mimes:jpeg,png,gif|dimensions:min_width=572,min_height=250',
+        ], [
+            'banner4.dimensions' => 'Banner-4 image must have dimensions of at least 572x250 pixels.',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $data = array(
+            'seller_id'  => $id,
+            'position'   => 'banner_4',
+        );
+
+        if (!empty($request->file('banner4'))) {
+            $documents = $request->file('banner4');
+            $fileName = Str::random(20);
+            $ext = strtolower($documents->getClientOriginalExtension());
+            $path = $fileName . '.' . $ext;
+            $uploadPath = '/backend/files/';
+            $upload_url = $uploadPath . $path;
+            $documents->move(public_path('/backend/files/'), $upload_url);
+            $data['file_name'] = $upload_url;
+        }
+
+        $chkpoint = SellerAds::where('seller_id', $id)->where('position', 'banner_4')->first();
+        if (empty($chkpoint)) {
+            SellerAds::insert($data);
+        } else {
+            $ads_id = $chkpoint->id;
+            SellerAds::where('id', $ads_id)->where('seller_id', $id)->delete();
+            SellerAds::insert($data);
+        }
+
+        $response = [
+            'banner4' => url($data['file_name']),
+            'message' => 'Successfully upload',
+        ];
+        return response()->json($response);
+    }
+
+
+    public function updatebannerThree(Request $request)
+    {
+
+        $id = auth('api')->user()->id;
+        $validator = Validator::make($request->all(), [
+            'banner3' => 'required|file|mimes:jpeg,png,gif|dimensions:min_width=572,min_height=250',
+        ], [
+            'banner3.dimensions' => 'Banner-3 image must have dimensions of at least 572x250 pixels.',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $data = array(
+            'seller_id'  => $id,
+            'position'   => 'banner_3',
+        );
+
+        if (!empty($request->file('banner3'))) {
+            $documents = $request->file('banner3');
+            $fileName = Str::random(20);
+            $ext = strtolower($documents->getClientOriginalExtension());
+            $path = $fileName . '.' . $ext;
+            $uploadPath = '/backend/files/';
+            $upload_url = $uploadPath . $path;
+            $documents->move(public_path('/backend/files/'), $upload_url);
+            $data['file_name'] = $upload_url;
+        }
+
+        $chkpoint = SellerAds::where('seller_id', $id)->where('position', 'banner_3')->first();
+        if (empty($chkpoint)) {
+            SellerAds::insert($data);
+        } else {
+            $ads_id = $chkpoint->id;
+            SellerAds::where('id', $ads_id)->where('seller_id', $id)->delete();
+            SellerAds::insert($data);
+        }
+
+        $response = [
+            'banner3' => url($data['file_name']),
+            'message' => 'Successfully upload',
+        ];
+        return response()->json($response);
+    }
+
+    public function updatebannerTwo(Request $request)
+    {
+
+        $id = auth('api')->user()->id;
+        $validator = Validator::make($request->all(), [
+            'banner2' => 'required|file|mimes:jpeg,png,gif|dimensions:min_width=572,min_height=250',
+        ], [
+            'banner2.dimensions' => 'Banner-3 image must have dimensions of at least 572x250 pixels.',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $data = array(
+            'seller_id'  => $id,
+            'position'   => 'banner_2',
+        );
+
+        if (!empty($request->file('banner2'))) {
+            $documents = $request->file('banner2');
+            $fileName = Str::random(20);
+            $ext = strtolower($documents->getClientOriginalExtension());
+            $path = $fileName . '.' . $ext;
+            $uploadPath = '/backend/files/';
+            $upload_url = $uploadPath . $path;
+            $documents->move(public_path('/backend/files/'), $upload_url);
+            $data['file_name'] = $upload_url;
+        }
+
+        $chkpoint = SellerAds::where('seller_id', $id)->where('position', 'banner_2')->first();
+        if (empty($chkpoint)) {
+            SellerAds::insert($data);
+        } else {
+            $ads_id = $chkpoint->id;
+            SellerAds::where('id', $ads_id)->where('seller_id', $id)->delete();
+            SellerAds::insert($data);
+        }
+
+        $response = [
+            'banner2' => url($data['file_name']),
+            'message' => 'Successfully upload',
+        ];
+        return response()->json($response);
+    }
+
+
+    public function updatebannerOne(Request $request)
+    {
+
+        $id = auth('api')->user()->id;
+        $validator = Validator::make($request->all(), [
+            'banner1' => 'required|file|mimes:jpeg,png,gif|dimensions:min_width=572,min_height=250',
+        ], [
+            'banner1.dimensions' => 'The top banner image must have dimensions of at least 572x250 pixels.',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $data = array(
+            'seller_id'  => $id,
+            'position'   => 'banner_1',
+        );
+
+        if (!empty($request->file('banner1'))) {
+            $documents = $request->file('banner1');
+            $fileName = Str::random(20);
+            $ext = strtolower($documents->getClientOriginalExtension());
+            $path = $fileName . '.' . $ext;
+            $uploadPath = '/backend/files/';
+            $upload_url = $uploadPath . $path;
+            $documents->move(public_path('/backend/files/'), $upload_url);
+            $data['file_name'] = $upload_url;
+        }
+
+        $chkpoint = SellerAds::where('seller_id', $id)->where('position', 'banner_1')->first();
+        if (empty($chkpoint)) {
+            SellerAds::insert($data);
+        } else {
+            $ads_id = $chkpoint->id;
+            SellerAds::where('id', $ads_id)->where('seller_id', $id)->delete();
+            SellerAds::insert($data);
+        }
+
+        $response = [
+            'banner1' => url($data['file_name']),
+            'message' => 'Successfully upload',
+        ];
+        return response()->json($response);
+    }
+    public function updateTopbanner(Request $request)
+    {
+
+        $id = auth('api')->user()->id;
+        $validator = Validator::make($request->all(), [
+            'top_banner_img' => 'required|file|mimes:jpeg,png,gif|dimensions:min_width=1168,min_height=384',
+        ], [
+            'top_banner_img.dimensions' => 'The top banner image must have dimensions of at least 1168x384 pixels.',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $data = array(
+            'seller_id'  => $id,
+            'position'   => 'top_banner_img',
+        );
+
+        if (!empty($request->file('top_banner_img'))) {
+            $documents = $request->file('top_banner_img');
+            $fileName = Str::random(20);
+            $ext = strtolower($documents->getClientOriginalExtension());
+            $path = $fileName . '.' . $ext;
+            $uploadPath = '/backend/files/';
+            $upload_url = $uploadPath . $path;
+            $documents->move(public_path('/backend/files/'), $upload_url);
+            $data['file_name'] = $upload_url;
+        }
+
+
+        $chkpoint = SellerAds::where('seller_id', $id)->where('position', 'top_banner_img')->first();
+        if (empty($chkpoint)) {
+            SellerAds::insert($data);
+        } else {
+            $ads_id = $chkpoint->id;
+            SellerAds::where('id', $ads_id)->where('seller_id', $id)->delete();
+            SellerAds::insert($data);
+        }
+        $response = [
+            'top_banner_img' => url($data['file_name']),
+            'message' => 'Successfully upload',
+        ];
+        return response()->json($response);
+    }
+
     public function organisationUpdateprofile(Request $request)
     {
         // dd($request->all());
@@ -796,7 +1136,7 @@ class UserController extends Controller
             $file_url = $uploadPath . $path;
             $data['level_1_prof_id'] = $file_url;
         }
-        
+
         DB::table('orgainsation_profile_1')->where('id', $request->id)->update($data);
         $data_two = array(
             'mon_status'                        => !empty($request->mon_status) ? $request->mon_status : "",
