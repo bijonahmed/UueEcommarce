@@ -45,6 +45,7 @@ Route::group([
     Route::post('updateprofile', [AuthController::class, 'updateprofile']);
     Route::post('updateBusinessprofile', [AuthController::class, 'updateBusinessprofile']);
     Route::post('updatePassword', [AuthController::class, 'changesPassword']);
+  
     Route::get('showProfileData', [AuthController::class, 'showProfileData']);
 
     Route::post('password/email', [ForgotPasswordController::class, 'sendPasswordResetEmail']);
@@ -56,6 +57,7 @@ Route::group([
 ], function () {
 
     Route::get('getmlmReport', [CustomerController::class, 'getmlmReport']);
+    Route::get('cateCommissionHistReport', [CustomerController::class, 'cateCommissionHistReport']);
     Route::get('getCustomerLevel', [CustomerController::class, 'getCustomerLevel']);
     Route::post('getCustomerCalculateLev', [CustomerController::class, 'getCustomerCalculateLev']);
     Route::post('getCustomerCalculateLevAd', [CustomerController::class, 'getCustomerCalculateLevAd']);
@@ -113,10 +115,13 @@ Route::group([
     'prefix' => 'category'
 ], function () {
     Route::post('save', [CategoryController::class, 'save']);
+    Route::post('categoryProSlidersave', [CategoryController::class, 'categoryProSlidersave']);
     Route::post('saveAttribute', [CategoryController::class, 'saveAttribute']);
     Route::post('saveAttributeVal', [CategoryController::class, 'saveAttributeVal']);
     Route::get('getCategoryList', [CategoryController::class, 'allCategory']);
     Route::get('getInacCategoryList', [CategoryController::class, 'allInacCategory']);
+    Route::get('getProductCategoryList', [CategoryController::class, 'getProductCategoryList']);
+    Route::get('removeProctCategory', [CategoryController::class, 'removeProctCategory']);
     Route::get('categoryRow/{id}', [CategoryController::class, 'findCategoryRow']);
     Route::get('getCategoryListParent', [CategoryController::class, 'getCategoryListParent']);
     Route::get('getSubCategoryChild/{id}', [CategoryController::class, 'getSubCategoryChild']);
@@ -198,6 +203,7 @@ Route::group([
     Route::get('getOrder', [OrderController::class, 'getOrder']);
     Route::get('allOrders', [OrderController::class, 'allOrders']);
     Route::get('orderDetails/{orderid}', [OrderController::class, 'orderDetails']);
+    Route::post('updateOrderStatus', [OrderController::class, 'updateOrderStatus']);
     Route::get('addtowish/{slug}', [OrderController::class, 'addtowish']);
     Route::get('allWishList/', [OrderController::class, 'allWishList']);
     Route::get('removeWishList/{productid}', [OrderController::class, 'removeWishList']);
@@ -229,6 +235,10 @@ Route::group([
     Route::get('productSlug/{slug}', [UnauthenticatedController::class, 'findProductSlug']);
     Route::get('getSeller/{slug}', [UnauthenticatedController::class, 'getSeller']);
     Route::get('getSellerCategoryFilter/{id}', [UnauthenticatedController::class, 'getSellerCategoryFilter']);
+    Route::post('forgetpassword', [UnauthenticatedController::class, 'forgetpassword']);
+    Route::post('getresetPasswords', [UnauthenticatedController::class, 'getresetPasswords']);
+    Route::post('updatePassword', [UnauthenticatedController::class, 'updatePassword']);
+    Route::get('allsellers', [UnauthenticatedController::class, 'allsellers']);
 });
 
 Route::group([

@@ -33,6 +33,7 @@ class User extends Authenticatable implements JWTSubject
     'business_phone',
     'business_return_name',
     'business_return_address',
+    'remember_token',
     'business_return_phone',
     'password',
   ];

@@ -165,7 +165,7 @@ class AuthController extends Controller
                 'business_name_slug'        => Str::slug($request->business_name), // Add this line for the slug
                 'business_register_num'     => $request->business_register_num,
                 'business_address'          => $request->business_address,
-                'business_warehouse_address'=> $request->business_warehouse_address,
+                'business_warehouse_address' => $request->business_warehouse_address,
                 'business_email'            => $request->business_email,
                 'business_phone'            => $request->business_phone,
                 'business_return_name'      => $request->business_return_name,
@@ -247,6 +247,8 @@ class AuthController extends Controller
         ], 200);
     }
 
+ 
+
     public function updateBusinessprofile(Request $request)
     {
 
@@ -276,7 +278,7 @@ class AuthController extends Controller
         ];
         return response()->json($response);
     }
- 
+
 
     public function updateLogo(Request $request)
     {

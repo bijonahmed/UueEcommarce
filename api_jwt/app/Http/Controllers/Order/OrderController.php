@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Order;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categorys;
 use Illuminate\Http\Request;
 use App\Models\Product;
 //use Darryldecode\Cart\Cart;
@@ -11,6 +12,8 @@ use App\Models\Order;
 use Validator;
 use App\Models\OrderStatus;
 use App\Models\OrderHistory;
+use App\Models\ProductCategory;
+use App\Models\CategoryCommissionHistory;
 use App\Models\WishList;
 use App\Models\User;
 
@@ -99,7 +102,10 @@ class OrderController extends Controller
 
     function allWishList()
     {
-        $rows = WishList::join('product', 'product.id', '=', 'wishlist.id')->select('wishlist.id as wishid', 'product.thumnail_img', 'product.slug', 'product.name', 'price', 'product.id')->get();
+
+
+
+        $rows = WishList::join('product', 'product.id', '=', 'wishlist.product_id')->where('wishlist.customer_id', $this->userid)->select('wishlist.id as wishid', 'product.thumnail_img', 'product.slug', 'product.name', 'price', 'product.id')->get();
         $products = [];
         foreach ($rows as $key => $v) {
             $products[] = [
@@ -160,6 +166,17 @@ class OrderController extends Controller
         Order::where('orderId', $request->orderId)->update($data);
         return response()->json("update successfully", 200);
     }
+
+
+    public function updateOrderStatus(Request $request)
+    {
+        $orderId = $request->orderId;
+        $status_id = (int) $request->selectedOrderStatus;
+        $data['order_status'] = $status_id;
+        Order::where('orderId', $orderId)->update($data);
+        return response()->json("update successfully", 200);
+    }
+
     public function orderDetails($order_id)
     {
 
@@ -183,9 +200,10 @@ class OrderController extends Controller
         $order['customeremail'] = !empty($findCustomer->email) ? $findCustomer->email : "";
         $order['orderdata']     = $orders;
         $order['orderrow']      = !empty($findorder->orderstatus) ? $findorder->orderstatus : "";
+        $order['order_status']  = !empty($findorder->order_status) ? $findorder->order_status : "";
         $order['orderstatus_id'] = !empty($findorder->orderstatus_id) ? $findorder->orderstatus_id : "";
         $order['OrderStatus']   = $orderStatus;
-        //dd($data['orderStatus']);
+       // dd($order['order_status']);
         return response()->json($order, 200);
     }
     public function allOrders()
@@ -194,6 +212,7 @@ class OrderController extends Controller
         $data['orders']  = Order::join('order_status', 'orders.order_status', '=', 'order_status.id')
             ->select('orders.*', 'order_status.name')
             ->where('orders.customer_id', $this->userid)
+            ->orderBy('created_at', 'desc') 
             ->get(); //Order::where('customer_id', $this->userid)->get();
         foreach ($data['orders'] as $v) {
             $orders[] = [
@@ -272,16 +291,29 @@ class OrderController extends Controller
         $itemtotal = 0;
         foreach ($cartData as $cartItem) {
             $pid = $cartItem['product']['id'];
-
-            $chkpost = Product::where('id',$pid)->select('seller_id')->first();
-            $seller_id = !empty($chkpost) ? $chkpost->seller_id : 1 ;
-
-
+            $chkpost = Product::where('id', $pid)->select('seller_id')->first();
+            $seller_id = !empty($chkpost) ? $chkpost->seller_id : 1;
             $productid = $pid;
             $quantity  = $cartItem['quantity'];
             $price     = str_replace(',', '', $cartItem['product']['price']); // Remove commas
             $price     = floatval($price); // Convert to float
-
+            $chkCat    = ProductCategory::where('product_id',$productid)->first();
+            $categories = explode(',', $chkCat->parent_id);
+            $parentCategoryId = isset($categories[0]) ? $categories[0] : null;
+            $catrow     = Categorys::where('id',$categories)->first();
+            $commission = !empty($catrow->commission) ? $catrow->commission : 0;
+            //Insert into CategoryCommissionHistory
+            $categoryHistory = new CategoryCommissionHistory();
+            $categoryHistory->customer_id         = $this->userid;
+            $categoryHistory->seller_id           = $seller_id;
+            $categoryHistory->product_qty         = $quantity;
+            $categoryHistory->product_price       = $price;
+            $categoryHistory->product_id          = $productid;
+            $categoryHistory->category_id         = $parentCategoryId;
+            $categoryHistory->category_percetage  = $commission;
+            $categoryHistory->admin_get_amount    = ($price * $commission) / 100;
+            $categoryHistory->save();
+            //End 
             $subtotal = $quantity * $price;
             // Add the subtotal to the total
             $itemtotal += $subtotal;
@@ -294,6 +326,8 @@ class OrderController extends Controller
             $order_history->total           = $itemtotal;
             $order_history->save();
         }
+
+
         return response()->json("Your order successfully done!", 200);
     }
 }

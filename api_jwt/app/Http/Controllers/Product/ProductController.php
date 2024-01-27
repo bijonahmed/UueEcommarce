@@ -38,7 +38,6 @@ class ProductController extends Controller
         $this->userid = $user->id;
     }
 
-
     public function productUpdate(Request $request)
     {
 
@@ -516,50 +515,52 @@ class ProductController extends Controller
         return response()->json($modifiedCollection, 200);
     }
 
-
-
-
-    public function sellerOrderProductList(Request $request){
+    public function sellerOrderProductList(Request $request)
+    {
 
         $seller_id = $this->userid;
         $query = OrderHistory::leftJoin('orders', 'orders.id', '=', 'order_history.order_id')
-            ->select('order_id', 'orderId', 'seller_id', 'orders.total')
+            ->select('order_id', 'orderId', 'seller_id', 'orders.total', 'order_status')
             ->where('seller_id', $seller_id);
-        
+
         // Apply filters
         if ($request->has('orderId')) {
             $query->where('orderId', $request->input('orderId'));
         }
-        
+
         if ($request->has('productName')) {
             $productName = $request->input('productName');
             $query->whereHas('product', function ($subQuery) use ($productName) {
                 $subQuery->where('name', 'like', '%' . $productName . '%');
             });
         }
-        
+
         if ($request->has('sku')) {
             $sku = $request->input('sku');
             $query->whereHas('product', function ($subQuery) use ($sku) {
                 $subQuery->where('sku', 'like', '%' . $sku . '%');
             });
         }
-        
+
+        $query->groupBy('orders.orderId');
+
         $perPage = 12;
         $page = $request->input('page', 1);
         $orders = $query->paginate($perPage, ['*'], 'page', $page);
-        
+
         $modifiedCollection = $orders->getCollection()->map(function ($item) {
+        $statusCheck =  OrderStatus::where('id', $item->order_status)->first();
+
             return [
                 'order_id'    => $item->order_id,
                 'orderId'     => $item->orderId,
                 'product_id'  => $item->product_id,
                 'seller_id'   => $item->seller_id,
                 'total'       => $item->total,
-                'order_status'=> $item->status == 1 ? "Active" : "Inactive",
+                'order_status' => !empty($statusCheck->name) ? $statusCheck->name : "",
             ];
         });
-        
+
         $response = new LengthAwarePaginator(
             $modifiedCollection,
             $orders->total(),
@@ -567,16 +568,9 @@ class ProductController extends Controller
             $page,
             ['path' => url()->current()]
         );
-        
+
         return response()->json($response, 200);
-        
-
-
-
     }
-
-
-
 
     public function sellerProductList(Request $request)
     {
@@ -591,7 +585,6 @@ class ProductController extends Controller
             $productName = $request->input('productName');
             $query->where('name', 'like', '%' . $productName . '%');
         }
-
 
         if ($request->has('sku')) {
             $sku = $request->input('sku');
@@ -627,10 +620,6 @@ class ProductController extends Controller
 
         return response()->json($response, 200);
     }
-
-
-
-
 
     public function removeProducts($id)
     {

@@ -16,6 +16,7 @@ use App\Models\SubAttribute;
 use App\Models\ProductAttributes;
 use App\Models\ProductAttributeValue;
 use App\Models\Product;
+use App\Models\HomeAroductSliderCategory;
 use Illuminate\Support\Str;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
@@ -36,6 +37,66 @@ class CategoryController extends Controller
         $categories = Categorys::with('children.children.children.children.children')->select('name')->where('parent_id', 0)->get();
         return response()->json($categories);
     }
+
+    public function removeProctCategory(Request $request)
+    {
+       // dd($request->all());
+       HomeAroductSliderCategory::where('id', $request->id)->delete();
+       $response = [
+        'message' => 'Successfully remove.',
+    ];
+    return response()->json($response);
+    }
+
+    public function categoryProSlidersave(Request $request)
+    {
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'category_id' => 'required',
+                'status' => 'required',
+            ],
+            [
+                'category_id' => 'Name is required',
+                'status' => 'Status is required',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $existingRecord = HomeAroductSliderCategory::where('category_id', $request->category_id)->first();
+
+        if (!empty($existingRecord)) {
+            HomeAroductSliderCategory::where('category_id', $request->category_id)->delete();
+        }
+        $data = [
+            'category_id' => $request->category_id,
+            'status' => $request->status,
+            // Add other fields as needed
+        ];
+
+        if (empty($request->id)) {
+            // Insert new record
+            HomeAroductSliderCategory::create($data);
+        } else {
+            // Update existing record if ID is provided
+            $existingRecord = HomeAroductSliderCategory::find($request->id);
+
+            if ($existingRecord) {
+                $existingRecord->update($data);
+            } else {
+                return response()->json(['error' => 'Record not found'], 404);
+            }
+        }
+        $response = [
+            'message' => 'Successfull',
+        ];
+        return response()->json($response);
+    }
+
     public function saveAttribute(Request $request)
     {
         $validator = Validator::make(
@@ -96,42 +157,7 @@ class CategoryController extends Controller
         ];
         return response()->json($response);
     }
-    public function saveAttributeVal(Request $request)
-    {
-        $validator = Validator::make(
-            $request->all(),
-            [
-                'name'          => 'required',
-                'status'        => 'required',
-            ],
-            [
-                'name'            => 'Name is required',
-                'status'          => 'Status is required',
-            ]
-        );
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-        $data = array(
-            // 'attributes_id'              => $request->attributes_id,
-            'name'                       => $request->name,
-            'status'                     => $request->status,
-            'entry_by'                   => $this->userid
-        );
-        if (empty($request->id)) {
-            AttributeValues::insertGetId($data);
-        } else {
-            $data = AttributeValues::find($request->id);
-            // $data->attributes_id     =  $request->input('attributes_id');
-            $data->name              =  $request->input('name');
-            $data->status            =  $request->input('status');
-            $data->save();
-        }
-        $response = [
-            'message' => 'Successfull',
-        ];
-        return response()->json($response);
-    }
+
     public function save(Request $request)
     {
         //dd($request->all());
@@ -233,6 +259,25 @@ class CategoryController extends Controller
         try {
             $categories = Categorys::where('status', 0)->get();
             return response()->json($categories);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function getProductCategoryList(Request $request)
+    {
+        try {
+            $categories = HomeAroductSliderCategory::join('categorys', 'home_product_slider_category.category_id', '=', 'categorys.id')
+                ->select('categorys.name', 'categorys.status', 'home_product_slider_category.id', 'home_product_slider_category.category_id')
+                ->get();
+            //dd($categories);
+
+            $subcategories = Categorys::select('name', 'id')->where('parent_id', '!=', 0)->get();
+
+            $data['category'] = $categories;
+            $data['subcategories'] = $subcategories;
+
+            return response()->json($data);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }

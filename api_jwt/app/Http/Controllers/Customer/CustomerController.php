@@ -9,7 +9,10 @@ use Validator;
 use Helper;
 use App\Models\User;
 use App\Models\Customer;
+use App\Models\CategoryCommissionHistory;
 use App\Models\Profile;
+use App\Models\Categorys;
+use App\Models\Product;
 use Illuminate\Support\Str;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
@@ -24,6 +27,40 @@ class CustomerController extends Controller
         $id = auth('api')->user();
         $user = User::find($id->id);
         $this->userid = $user->id;
+    }
+
+
+    public function cateCommissionHistReport(Request $request)
+    {
+
+        //this admin panel 
+        $frm_date    =  !empty($request->frm_date) ? date("Y-m-d", strtotime($request->frm_date)) : "";
+        $to_date     =  !empty($request->to_date) ? date("Y-m-d", strtotime($request->to_date)) : "";
+        $customer_id =  !empty($request->customer_id) ? $request->customer_id : "";
+        //echo "$frm_date-----$to_date---$customer_id"; exit;
+
+
+        $query = CategoryCommissionHistory::where('customer_id', $customer_id);
+
+        if (!empty($frm_date) && !empty($to_date)) {
+            $query->whereBetween('created_at', [$frm_date, $to_date]);
+        }
+        $query->join('product', 'category_commission_history.product_id', '=', 'product.id');
+        $query->join('categorys', 'category_commission_history.category_id', '=', 'categorys.id');
+        $query->select(
+            'product.name as product_name',
+            'category_commission_history.category_id',
+            'categorys.name as category_name',
+            'product_qty',
+            'product_price',
+            'category_percetage',
+            'admin_get_amount',
+            \DB::raw('DATE(category_commission_history.created_at) as created_date')
+        );
+
+        $data = $query->get();
+        $result['data']= $data; 
+        return response()->json($result);
     }
 
     public function getmlmReport(Request $request)
@@ -192,9 +229,6 @@ class CustomerController extends Controller
         $userL8 = getLevelsAd($userL7, 5);
         $userL9 = getLevelsAd($userL8, 5);
         $userL10 = getLevelsAd($userL9, 5);
-
-
-
 
         $levels = [];
         $levelNumber = $request->params;

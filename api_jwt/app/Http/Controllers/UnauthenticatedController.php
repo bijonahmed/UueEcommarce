@@ -15,6 +15,8 @@ use App\Models\SellerAds;
 use App\Models\ProductCategory;
 use App\Models\ProductAdditionalImg;
 use App\Models\Categorys;
+use App\Models\Setting;
+use App\Models\HomeAroductSliderCategory;
 use App\Models\User as ModelsUser;
 use Illuminate\Support\Str;
 use App\Rules\MatchOldPassword;
@@ -22,6 +24,8 @@ use Illuminate\Support\Facades\Hash;
 use DB;
 use File;
 use PhpParser\Node\Stmt\TryCatch;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ExampleEmail;
 //use User;
 use Workbench\App\Models\User as AppModelsUser;
 
@@ -55,7 +59,6 @@ class UnauthenticatedController extends Controller
         //dd($modifiedCollection);
         return response()->json($modifiedCollection, 200);
     }
-
 
     public function pagniatedProducts(Request $request)
     {
@@ -119,44 +122,68 @@ class UnauthenticatedController extends Controller
     public function productCategory(Request $request)
     {
 
-        $category_id = $request->category_id;
-        $category    = Categorys::find($category_id);
-        $categorys   = ProductCategory::join('product', 'product.id', '=', 'produc_categories.product_id')
-            ->select('produc_categories.product_id', 'product.name', 'product.slug', 'product.thumnail_img')
-            ->where('produc_categories.category_id', $category_id)
+
+        $catIds = HomeAroductSliderCategory::where('status', 1)->pluck('category_id')->toArray();
+        $commaSeparatedIds = implode(',', $catIds);
+        // dd($commaSeparatedIds);
+        $category_id  = $commaSeparatedIds; //"25,318,26";
+        $category_ids = explode(',', $category_id);
+        $categorys = ProductCategory::join('product', 'product.id', '=', 'produc_categories.product_id')
+            ->join('categorys', 'categorys.id', '=', 'produc_categories.category_id')
+            ->select('produc_categories.product_id', 'product.name', 'product.slug', 'product.thumnail_img', 'categorys.name as cate_name', 'categorys.slug as catslug')
+            ->whereIn('produc_categories.category_id', $category_ids)
             ->orderByDesc('product.id')
             ->limit(10)
             ->get();
-
-        foreach ($categorys as $v) {
-            $result[] = [
-                'product_id'   => $v->product_id,
-                'name'         => substr($v->name, 0, 12) . '...',
-                'thumnail'     => !empty($v->thumnail_img) ? url($v->thumnail_img) : "",
-                'slug'         => $v->slug,
+        // Group the results by category name
+        $groupedCategories = $categorys->groupBy('cate_name');
+        // Initialize the array for the final result
+        $categories = [];
+        // Iterate through the grouped categories
+        foreach ($groupedCategories as $categoryName => $categoryGroup) {
+            // Initialize the array for the products in each category
+            $products = [];
+            // Iterate through products in the category group
+            foreach ($categoryGroup as $v) {
+                $products[] = [
+                    'product_id' => $v->product_id,
+                    'name' => substr($v->name, 0, 12) . '...',
+                    'thumnail' => !empty($v->thumnail_img) ? url($v->thumnail_img) : "",
+                    'slug' => $v->slug,
+                ];
+            }
+            // Add the category and its products to the final result
+            $categories[] = [
+                'name' => $categoryName,
+                'slug' => $categoryGroup->first()->catslug, // Assuming the slug is the same for all products in the category
+                'products' => $products,
             ];
         }
-
-        $data['result']  = !empty($result) ? $result : "";
-        $data['name']    = $category->name;
-        $data['catslug'] = $category->slug;
+        $data['result']  = !empty($categories) ? $categories : "";
         return response()->json($data, 200);
     }
 
     public function filterCategory(Request $request)
     {
-        $categories = Categorys::where('status', 1)->orderBy("name", "asc")->get();;
-        return response()->json($categories);
+
+        $categorys = ProductCategory::join('categorys', 'categorys.id', '=', 'produc_categories.category_id')
+            ->select('produc_categories.product_id', 'categorys.name', 'categorys.slug', 'produc_categories.category_id')
+            ->where('status', 1)
+            ->groupBy('produc_categories.category_id')
+            ->orderBy("categorys.name", "asc")
+            ->get();
+
+        //dd($categorys);
+        //$categorys = Categorys::where('status', 1)->orderBy("name", "asc")->get();;
+        return response()->json($categorys);
     }
-
-
 
     public function getSellerCategoryFilter($category_id)
     {
 
         $allProducts = ProductCategory::join('product', 'produc_categories.product_id', '=', 'product.id')
             ->where('produc_categories.category_id', $category_id)
-            ->select('product.id as product_id', 'product.name as product_name', 'product.thumnail_img','product.slug','product.price','product.discount','produc_categories.category_id')
+            ->select('product.id as product_id', 'product.name as product_name', 'product.thumnail_img', 'product.slug', 'product.price', 'product.discount', 'produc_categories.category_id')
             ->get();
 
         foreach ($allProducts as $v) {
@@ -175,9 +202,108 @@ class UnauthenticatedController extends Controller
         return response()->json($data);
     }
 
+    // Encryption function
+    public function encryptText($plaintext, $key, $iv)
+    {
+        $cipher = "aes-256-cbc";
+        $options = OPENSSL_RAW_DATA;
+        $encrypted = openssl_encrypt($plaintext, $cipher, $key, $options, $iv);
+        return base64_encode($encrypted);
+    }
+
+    // Decryption function
+    public function decryptText($ciphertext, $key, $iv)
+    {
+        $cipher = "aes-256-cbc";
+        $options = OPENSSL_RAW_DATA;
+        $decrypted = openssl_decrypt(base64_decode($ciphertext), $cipher, $key, $options, $iv);
+        return $decrypted;
+    }
 
 
+    public function updatePassword(Request $request)
+    {
 
+        //  dd($request->all());
+        $reset_token = $request->reset_token;
+        $chkrem_token = User::where('remember_token', $reset_token)->first();
+
+        if (!empty($chkrem_token)) {
+            // dd($chkrem_token);
+            $id  =  $chkrem_token->id;
+            // echo $id; 
+            $validator = Validator::make($request->all(), [
+                'password' => 'min:2|required_with:password_confirmation|same:password_confirmation',
+                'password_confirmation' => 'min:2'
+            ]);
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()], 422);
+            }
+
+            $user = User::find($id);
+            $user->password = Hash::make($request->password);
+            $user->show_password = $request->password;
+            $user->save();
+            $response = "Password successfully changed!";
+            return response()->json($response);
+        }
+    }
+
+    public function forgetpassword(Request $request)
+    {
+
+        $hostname = $request->hostname;
+        $validator = Validator::make($request->all(), [
+            // 'email'       => 'required',
+            'email' => 'required|email|exists:users,email',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $email = $request->email;
+
+        // Example usage
+        $originalText = $email;
+        $encryptionKey = "yourSecretKey"; // Replace with your actual encryption key
+        $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length("aes-256-cbc"));
+        $encryptedText = $this->encryptText($originalText, $encryptionKey, $iv);
+        $cleanedEncryptedText = str_replace(['\\', '/'], '', $encryptedText);
+        //echo "Cleaned Encrypted Text: " . $cleanedEncryptedText . "\n";
+
+        //echo $encryptedText;exit; 
+        $resetlink = "$hostname/resetpassword/$cleanedEncryptedText";
+
+        $user = User::where('email', $email)->first();
+        if (!empty($user)) {
+            // Update the email
+            $user->update(['remember_token' => $cleanedEncryptedText]);
+            // Optionally, you can retrieve the updated user data
+            //$updatedUser = User::find($user->id);
+        }
+
+        // You can pass data to the email view if needed
+        $to = $email;
+        $subject = "Forget Password (Ahmed Ecommarce)";
+
+        // Concatenate the message with the reset link text
+        $message = "We received a request to reset your password. Click the link below to reset it. If you didn't request this, you can safely ignore this email.\n\n";
+        $message .= 'Reset Password: ' . $resetlink;
+        //  echo $message;
+        //  exit;
+
+        // Set additional headers for HTML content
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+        // Send the email
+        mail($to, $subject, $message, $headers);
+
+        $response = [
+            'message' => "Thank you! We've sent you an email with further instructions. Please check your inbox. If you don't find it there, kindly check your spam or junk folder."
+        ];
+        return response()->json($response);
+    }
 
     public function getSeller($slug)
     {
@@ -216,8 +342,9 @@ class UnauthenticatedController extends Controller
             $products[] = [
                 'id'           => $v->id,
                 'name'         => substr($v->name, 0, 12) . '...',
-                'thumnail'     => !empty($v->thumnail_img) ? url($v->thumnail_img) : "",
+                'thumnail_img' => !empty($v->thumnail_img) ? url($v->thumnail_img) : "",
                 'slug'         => $v->slug,
+                'quantity'     => 1,
                 'price'        => $v->price,
                 'discount'     => $v->discount,
             ];
@@ -243,7 +370,7 @@ class UnauthenticatedController extends Controller
         $bannerAds_4    = SellerAds::where('seller_id', $row->id)->where('position', 'banner_4')->first();
         $bannerAds_5    = SellerAds::where('seller_id', $row->id)->where('position', 'banner_5')->first();
         $youtube_ads    = SellerAds::where('seller_id', $row->id)->where('position', 'youtube_videos')->first();
-       // dd($youtube_ads->file_name);
+        // dd($youtube_ads->file_name);
         $data['top_banner_img']       = !empty($topBanner) ? url($topBanner->file_name) : "";
         $data['banner1']              = !empty($bannerAds_1) ? url($bannerAds_1->file_name) : "";
         $data['banner2']              = !empty($bannerAds_2) ? url($bannerAds_2->file_name) : "";
@@ -255,16 +382,42 @@ class UnauthenticatedController extends Controller
         return response()->json($data);
     }
 
-    public function findProductSlug($slug)
+    public function allsellers()
     {
 
-        $data['pro_row']  = Product::where('product.slug', $slug)
-            ->select('product.id', 'product.id as product_id', 'product.name', 'product.slug as pro_slug', 'product.thumnail_img', 'description', 'product.price', 'product.discount', 'product.stock_qty', 'product.stock_mini_qty')
-            ->first();
+        $find_sellers  = User::where('role_id', 3)->select('id', 'business_name', 'business_logo', 'business_name_slug')->limit(12)->orderBy('id', 'desc')->get();
+
+        foreach ($find_sellers as $v) {
+            $results[] = [
+                'id'           => $v->id,
+                'name'         => substr($v->business_name, 0, 12) . '...',
+                'thumnail'     => !empty($v->business_logo) ? url($v->business_logo) : "",
+                'slug'         => $v->business_name_slug,
+            ];
+        }
 
 
+        return response()->json($results);
+    }
+    public function findProductSlug($slug)
+    {
+        $data['pro_row'] = Product::where('product.slug', $slug)
+        ->select(
+            'product.id',
+            'product.id as product_id',
+            'product.name as product_name',
+            'product.slug as pro_slug',
+            'product.thumnail_img',
+            'description',
+            DB::raw('CAST(product.price AS SIGNED) as price'), // Cast product.price as decimal
+            'product.discount',
+            'product.stock_qty',
+            'product.stock_mini_qty'
+        )
+        ->first();
+        //dd($data['pro_row']);
         $product_chk       = Product::where('product.slug', $slug)
-            ->select('product.id', 'product.id as product_id', 'product.name', 'product.slug as pro_slug', 'product.thumnail_img', 'description', 'product.price', 'product.discount', 'product.stock_qty', 'product.stock_mini_qty')
+            ->select('product.id', 'product.id as product_id', 'product.name as pro_name', 'product.slug as pro_slug', 'product.thumnail_img', 'description', 'product.price', 'product.discount', 'product.stock_qty', 'product.stock_mini_qty')
             ->get();
         $products = [];
         foreach ($product_chk as $key => $v) {
