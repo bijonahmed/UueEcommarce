@@ -467,7 +467,7 @@ export default {
             this.cart.forEach((item) => {
                 const product = item.product;
                 console.log(`Quantity: ${item.quantity}, Price: ${product.price}`);
-                const priceAsNumber = parseFloat(product.price.replace(/[^\d.]/g, '')); //510;//product.price;
+                const priceAsNumber = parseFloat(product.price);//parseFloat(product.price.replace(/[^\d.]/g, '')); //510;//product.price;
                 if (!isNaN(item.quantity) && !isNaN(priceAsNumber)) {
                     subtotal += item.quantity * priceAsNumber;
                 } else {

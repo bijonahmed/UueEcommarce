@@ -40,7 +40,7 @@
                                     <div class="loading-indicator" v-if="loading">
                                         <div class="loader-container">
                                             <center class="loader-text">Loading...</center>
-                                            <img src="/loader/loader.gif" alt="Loader" />
+                                            <img src="/loader/loader.gif" loading="lazy" alt="Loader" />
                                         </div>
                                     </div>
                                 </div>

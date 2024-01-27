@@ -108,7 +108,7 @@
                             </form>
                             <div class="text-end">
                                 <!-- <a href="forget-password.html">Forget Password?</a> -->
-                                <a href="#">Forget Password?</a>
+                                <nuxt-link to="/forget-password">Forget Password</nuxt-link>
                             </div>
 
                             <div class="social_login">
@@ -280,19 +280,12 @@ export default {
 
 
                 if (data.role_id === 3) {
-                    return this.$router.push('/seller/seller-profile');
+                    return this.$router.push('/seller/seller-dashboard');
                 } else if (data.role_id === 2) {
                     return this.$router.push('/user/user-profile');
                 } else {
                     console.warn('Unsupported role_id:', data.role_id);
                 }
-
-
-
-
-
-               // this.$router.push('/checkout');
-                //this.loginForm.reset();
 
             } catch (err) {
                 console.log(err)

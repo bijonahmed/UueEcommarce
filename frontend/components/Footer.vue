@@ -147,15 +147,15 @@
                             <li>
                                 <Nuxt-link to="/login">Login & Signup </Nuxt-link>
                             </li>
+                           
+                            <li>
+                                <Nuxt-link to="/sell-on-ecommerce">Sellon</Nuxt-link>
+                            </li>
                             <li>
                                 <Nuxt-link to="/seller-form">Seller Register </Nuxt-link>
                             </li>
-                           
                             <li>
-                                <Nuxt-link to="/flas-sale">Flash Sale</Nuxt-link>
-                            </li>
-                            <li>
-                                <Nuxt-link to="/official-store">Offical Store</Nuxt-link>
+                                <Nuxt-link to="#">Offical Store</Nuxt-link>
                             </li>
                             <!-- <li>
                                 <Nuxt-link to="/customer-review">Customer Review</Nuxt-link>

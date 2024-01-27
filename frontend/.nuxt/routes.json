@@ -14,6 +14,13 @@
     "_name": "_aedb276e"
   },
   {
+    "name": "changepassword copy",
+    "path": "/changepassword%20copy",
+    "component": "F:\\\\Server\\\\htdocs\\\\dubail_ecommarce\\\\frontend\\\\pages\\\\changepassword copy.vue",
+    "chunkName": "pages/changepassword copy",
+    "_name": "_9563a6c8"
+  },
+  {
     "name": "checkout",
     "path": "/checkout",
     "component": "F:\\\\Server\\\\htdocs\\\\dubail_ecommarce\\\\frontend\\\\pages\\\\checkout.vue",
@@ -217,11 +224,25 @@
     "_name": "_2756255f"
   },
   {
+    "name": "seller-seller-comission-history",
+    "path": "/seller/seller-comission-history",
+    "component": "F:\\\\Server\\\\htdocs\\\\dubail_ecommarce\\\\frontend\\\\pages\\\\seller\\\\seller-comission-history.vue",
+    "chunkName": "pages/seller/seller-comission-history",
+    "_name": "_94cb5654"
+  },
+  {
     "name": "seller-seller-customer-returns",
     "path": "/seller/seller-customer-returns",
     "component": "F:\\\\Server\\\\htdocs\\\\dubail_ecommarce\\\\frontend\\\\pages\\\\seller\\\\seller-customer-returns.vue",
     "chunkName": "pages/seller/seller-customer-returns",
     "_name": "_35a8adb5"
+  },
+  {
+    "name": "seller-seller-dashboard",
+    "path": "/seller/seller-dashboard",
+    "component": "F:\\\\Server\\\\htdocs\\\\dubail_ecommarce\\\\frontend\\\\pages\\\\seller\\\\seller-dashboard.vue",
+    "chunkName": "pages/seller/seller-dashboard",
+    "_name": "_d31fc6fa"
   },
   {
     "name": "seller-seller-leftsidebar",
@@ -243,6 +264,13 @@
     "component": "F:\\\\Server\\\\htdocs\\\\dubail_ecommarce\\\\frontend\\\\pages\\\\seller\\\\seller-orders.vue",
     "chunkName": "pages/seller/seller-orders",
     "_name": "_78878906"
+  },
+  {
+    "name": "seller-seller-payment-history",
+    "path": "/seller/seller-payment-history",
+    "component": "F:\\\\Server\\\\htdocs\\\\dubail_ecommarce\\\\frontend\\\\pages\\\\seller\\\\seller-payment-history.vue",
+    "chunkName": "pages/seller/seller-payment-history",
+    "_name": "_5530e3fc"
   },
   {
     "name": "seller-seller-products",
@@ -369,5 +397,12 @@
     "component": "F:\\\\Server\\\\htdocs\\\\dubail_ecommarce\\\\frontend\\\\pages\\\\product-details\\\\_slug.vue",
     "chunkName": "pages/product-details/_slug",
     "_name": "_6d4f62b8"
+  },
+  {
+    "name": "resetpassword-slug",
+    "path": "/resetpassword/:slug?",
+    "component": "F:\\\\Server\\\\htdocs\\\\dubail_ecommarce\\\\frontend\\\\pages\\\\resetpassword\\\\_slug.vue",
+    "chunkName": "pages/resetpassword/_slug",
+    "_name": "_685b6ade"
   }
 ]

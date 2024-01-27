@@ -5,17 +5,8 @@
   "BrandiOfficialStore": {
     "description": "Auto imported from components/BrandiOfficialStore.vue"
   },
-  "CategoryFive": {
-    "description": "Auto imported from components/CategoryFive.vue"
-  },
-  "CategoryFour": {
-    "description": "Auto imported from components/CategoryFour.vue"
-  },
   "CategoryMultipleProduct": {
     "description": "Auto imported from components/CategoryMultipleProduct.vue"
-  },
-  "CategoryOne": {
-    "description": "Auto imported from components/CategoryOne.vue"
   },
   "CategoryPart": {
     "description": "Auto imported from components/CategoryPart.vue"
@@ -29,11 +20,8 @@
   "CategoryRecentView": {
     "description": "Auto imported from components/CategoryRecentView.vue"
   },
-  "CategoryThree": {
-    "description": "Auto imported from components/CategoryThree.vue"
-  },
-  "CategoryTwo": {
-    "description": "Auto imported from components/CategoryTwo.vue"
+  "CategorySliders": {
+    "description": "Auto imported from components/CategorySliders.vue"
   },
   "CommonMiniTabNavbar": {
     "description": "Auto imported from components/Common_MiniTabNavbar.vue"
@@ -94,9 +82,6 @@
   },
   "PhoneSuperSales": {
     "description": "Auto imported from components/PhoneSuperSales.vue"
-  },
-  "PhoneTables": {
-    "description": "Auto imported from components/PhoneTables.vue"
   },
   "ProductListFilterGrid": {
     "description": "Auto imported from components/ProductListFilterGrid.vue"

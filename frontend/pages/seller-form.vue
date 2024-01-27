@@ -1,5 +1,13 @@
 <template>
-<div>
+    <div class="" style="
+    background: #b077d8;
+    background-image: url(../images/ECOMMERCE-cover-you-bg.jpg);
+    background-position: top;
+    margin-top: -25px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    min-height: 100vh;
+  ">
     <div class="container my-4">
         <div class="row">
             <div class="col-md-6 m-auto ">

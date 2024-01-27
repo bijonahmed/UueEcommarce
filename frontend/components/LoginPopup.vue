@@ -29,7 +29,7 @@
                         <div class="d-flex align-items-center d-none">
                             <input type="checkbox" id="remeber"><label for="remeber">Remember me</label>
                         </div>
-                        <a href="#">Forget Password</a>
+                        <nuxt-link to="/forget-password">Forget Password</nuxt-link>
                     </div>
                     <div>
                         <button class="btn_logins" type="submit">Login</button>
@@ -93,7 +93,7 @@ export default {
                 await this.$auth.setUserToken(data.access_token);
 
                 if (data.role_id === 3) {
-                    return this.$router.push('/seller/seller-profile');
+                    return this.$router.push('/seller/seller-dashboard');
                 } else if (data.role_id === 2) {
                     return this.$router.push('/user/user-profile');
                 } else {

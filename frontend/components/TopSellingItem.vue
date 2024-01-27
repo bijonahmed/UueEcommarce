@@ -18,10 +18,16 @@
                 </div>
                 <div class="slider-container">
                     <div class="slider" ref="slider">
+
                         <div class="slide" v-for="item in toproducts" :key="item.id">
-                            <img :src="item.thumnail" alt="" style="height: 150px;width: 150px;">
-                            <p class="text-center"><a href="#">{{ item.name }}</a></p>
+                            <nuxt-link :to="`/product-details/${item.slug}`">
+                                <img :src="item.thumnail" alt="" style="height: 150px;width: 150px;">
+                                <p class="text-center">
+                                    {{ item.name }}
+                                </p>
+                            </nuxt-link>
                         </div>
+
                         <div class="prev-slide" @click="scrollLeft">&lsaquo;</div>
                         <div class="next-slide" @click="scrollRight">&rsaquo;</div>
 

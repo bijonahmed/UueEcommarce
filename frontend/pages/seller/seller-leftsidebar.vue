@@ -6,6 +6,9 @@
                 <li>
                     <NuxtLink :to="'/business/' + business_name_slug" exact>My Shop</NuxtLink>
                 </li>
+                <li :class="{ active: $route.path === '/seller/seller-dashboard' }">
+                    <Nuxt-link to="/seller/seller-dashboard" exact>Dashboard </Nuxt-link>
+                </li>
                 <li :class="{ active: $route.path === '/seller/seller-products' }">
                     <Nuxt-link to="/seller/seller-products" exact>Products </Nuxt-link>
                 </li>
@@ -19,19 +22,28 @@
                 <li :class="{ active: $route.path === '/seller/seller-wishlist' }">
                     <Nuxt-link to="/seller/seller-wishlist" exact>Wishlist </Nuxt-link>
                 </li>
-                <!-- <li :class="{ active: $route.path === '/seller/seller-wallet' }">
+                <li :class="{ active: $route.path === '/seller/seller-wallet' }">
                     <Nuxt-link to="/seller/seller-wallet" exact>Wallet</Nuxt-link>
-                </li> -->
+                </li>
                 <li :class="{ active: $route.path === '/seller/seller-profile' }">
                     <Nuxt-link to="/seller/seller-profile" exact>Profile information</Nuxt-link>
                 </li>
+
+                <li :class="{ active: $route.path === '/seller/seller-comission-history' }">
+                    <Nuxt-link to="/seller/seller-comission-history" exact>Comission History</Nuxt-link>
+                </li>
+
+                <li :class="{ active: $route.path === '/seller/seller-payment-history' }">
+                    <Nuxt-link to="/seller/seller-payment-history" exact>Payment History</Nuxt-link>
+                </li>
+
                 <li :class="{ active: $route.path === '/seller/seller-account-setting' }">
                     <Nuxt-link to="/seller/seller-account-setting" exact>Account Settings</Nuxt-link>
                 </li>
 
-                <li :class="{ active: $route.path === '/seller/seller-customer-returns' }">
+                <!-- <li :class="{ active: $route.path === '/seller/seller-customer-returns' }">
                     <Nuxt-link to="/seller/seller-customer-returns" exact>Returns</Nuxt-link>
-                </li>
+                </li> -->
                 <!-- <li :class="{ active: $route.path === '/seller/seller-message' }">
                     <Nuxt-link to="/seller/seller-message" exact>Massages</Nuxt-link>
                 </li> -->
@@ -51,7 +63,7 @@ export default {
     data() {
         return {
             loading: false,
-            business_name_slug:'',
+            business_name_slug: '',
             notifmsg: '',
             orders: [],
             errors: {},

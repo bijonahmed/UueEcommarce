@@ -13,12 +13,9 @@
                 <TopSellingItem />
                 <!-- <FlashSelling /> -->
                 <DelasForYour />
-                <CategoryOne />
-                <CategoryTwo />
-                <CategoryThree />
-                <CategoryFour />
-                <CategoryFive />
-                <!-- <OfficialStoreDeals /> -->
+                <CategorySliders />
+                <OfficalStore/>
+                
 
             </div>
         </section>

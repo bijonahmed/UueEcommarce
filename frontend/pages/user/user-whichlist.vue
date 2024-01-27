@@ -116,7 +116,7 @@
                                     <div class="d-flex justify-content-between">
                                         <div><Button class="btn_cart" style="visibility: unset;" @click="remove(product.wishid)"><i class="fa-solid fa-trash-can"></i>Remove</Button></div>
                                         <div>
-                                            <button class="btn_cart" type="button" style="visibility: unset;" @click="addToCart(product.slug)"><i class="fa-solid fa-cart-shopping"></i> Details </button>
+                                            <nuxt-link :to="`/product-details/${product.slug}`"><button class="btn_cart" type="button" style="visibility: unset;"><i class="fa-solid fa-cart-shopping"></i> Details </button></nuxt-link>
                                         </div>
                                     </div>
                                 </li>
@@ -171,15 +171,7 @@ export default {
     },
     methods: {
 
-        addToCart(product_slug) {
-            this.$router.push({
-                path: '/product-details',
-                query: {
-                    slug: product_slug
-                }
-            })
-
-        },
+     
 
         async remove(productid) {
             this.loading = true;

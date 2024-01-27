@@ -6,6 +6,7 @@ import scrollBehavior from './router.scrollBehavior.js'
 
 const _4ec31e1e = () => interopDefault(import('..\\pages\\cart.vue' /* webpackChunkName: "pages/cart" */))
 const _aedb276e = () => interopDefault(import('..\\pages\\changepassword.vue' /* webpackChunkName: "pages/changepassword" */))
+const _9563a6c8 = () => interopDefault(import('..\\pages\\changepassword copy.vue' /* webpackChunkName: "pages/changepassword copy" */))
 const _02286b78 = () => interopDefault(import('..\\pages\\checkout.vue' /* webpackChunkName: "pages/checkout" */))
 const _647b9719 = () => interopDefault(import('..\\pages\\customer-review.vue' /* webpackChunkName: "pages/customer-review" */))
 const _4416316e = () => interopDefault(import('..\\pages\\flas-sale.vue' /* webpackChunkName: "pages/flas-sale" */))
@@ -35,10 +36,13 @@ const _3807a67e = () => interopDefault(import('..\\pages\\category\\category-lis
 const _b32bea2a = () => interopDefault(import('..\\pages\\seller\\change-password.vue' /* webpackChunkName: "pages/seller/change-password" */))
 const _36b12254 = () => interopDefault(import('..\\pages\\seller\\order-details.vue' /* webpackChunkName: "pages/seller/order-details" */))
 const _2756255f = () => interopDefault(import('..\\pages\\seller\\seller-account-setting.vue' /* webpackChunkName: "pages/seller/seller-account-setting" */))
+const _94cb5654 = () => interopDefault(import('..\\pages\\seller\\seller-comission-history.vue' /* webpackChunkName: "pages/seller/seller-comission-history" */))
 const _35a8adb5 = () => interopDefault(import('..\\pages\\seller\\seller-customer-returns.vue' /* webpackChunkName: "pages/seller/seller-customer-returns" */))
+const _d31fc6fa = () => interopDefault(import('..\\pages\\seller\\seller-dashboard.vue' /* webpackChunkName: "pages/seller/seller-dashboard" */))
 const _44dcf5b8 = () => interopDefault(import('..\\pages\\seller\\seller-leftsidebar.vue' /* webpackChunkName: "pages/seller/seller-leftsidebar" */))
 const _5f4aab94 = () => interopDefault(import('..\\pages\\seller\\seller-message.vue' /* webpackChunkName: "pages/seller/seller-message" */))
 const _78878906 = () => interopDefault(import('..\\pages\\seller\\seller-orders.vue' /* webpackChunkName: "pages/seller/seller-orders" */))
+const _5530e3fc = () => interopDefault(import('..\\pages\\seller\\seller-payment-history.vue' /* webpackChunkName: "pages/seller/seller-payment-history" */))
 const _70717c76 = () => interopDefault(import('..\\pages\\seller\\seller-products.vue' /* webpackChunkName: "pages/seller/seller-products" */))
 const _15306358 = () => interopDefault(import('..\\pages\\seller\\seller-products-post.vue' /* webpackChunkName: "pages/seller/seller-products-post" */))
 const _0efc92d8 = () => interopDefault(import('..\\pages\\seller\\seller-profile.vue' /* webpackChunkName: "pages/seller/seller-profile" */))
@@ -57,6 +61,7 @@ const _4f6caec4 = () => interopDefault(import('..\\pages\\index.vue' /* webpackC
 const _ad1c1ed8 = () => interopDefault(import('..\\pages\\user\\invite-user\\_id.vue' /* webpackChunkName: "pages/user/invite-user/_id" */))
 const _21a69c88 = () => interopDefault(import('..\\pages\\business\\_slug.vue' /* webpackChunkName: "pages/business/_slug" */))
 const _6d4f62b8 = () => interopDefault(import('..\\pages\\product-details\\_slug.vue' /* webpackChunkName: "pages/product-details/_slug" */))
+const _685b6ade = () => interopDefault(import('..\\pages\\resetpassword\\_slug.vue' /* webpackChunkName: "pages/resetpassword/_slug" */))
 
 const emptyFn = () => {}
 
@@ -77,6 +82,10 @@ export const routerOptions = {
     path: "/changepassword",
     component: _aedb276e,
     name: "changepassword"
+  }, {
+    path: "/changepassword%20copy",
+    component: _9563a6c8,
+    name: "changepassword copy"
   }, {
     path: "/checkout",
     component: _02286b78,
@@ -194,9 +203,17 @@ export const routerOptions = {
     component: _2756255f,
     name: "seller-seller-account-setting"
   }, {
+    path: "/seller/seller-comission-history",
+    component: _94cb5654,
+    name: "seller-seller-comission-history"
+  }, {
     path: "/seller/seller-customer-returns",
     component: _35a8adb5,
     name: "seller-seller-customer-returns"
+  }, {
+    path: "/seller/seller-dashboard",
+    component: _d31fc6fa,
+    name: "seller-seller-dashboard"
   }, {
     path: "/seller/seller-leftsidebar",
     component: _44dcf5b8,
@@ -209,6 +226,10 @@ export const routerOptions = {
     path: "/seller/seller-orders",
     component: _78878906,
     name: "seller-seller-orders"
+  }, {
+    path: "/seller/seller-payment-history",
+    component: _5530e3fc,
+    name: "seller-seller-payment-history"
   }, {
     path: "/seller/seller-products",
     component: _70717c76,
@@ -281,6 +302,10 @@ export const routerOptions = {
     path: "/product-details/:slug?",
     component: _6d4f62b8,
     name: "product-details-slug"
+  }, {
+    path: "/resetpassword/:slug?",
+    component: _685b6ade,
+    name: "resetpassword-slug"
   }],
 
   fallback: false

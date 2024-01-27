@@ -24,86 +24,7 @@
                                 </ul>
                             </div>
 
-                            <div class="delivery_list">
-                                <h6>Express delivery</h6>
-                                <ul>
-                                    <li>
-                                        <input type="checkbox"><label for="">DHL </label>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="delivery_list">
-                                <h6>Shipped from </h6>
-                                <ul>
-                                    <li>
-                                        <input type="checkbox"><label for="">From Bangladesh </label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox"><label for="">From Bangladesh </label>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="brands_list">
-                                <h6>Brand</h6>
-                                <div class="search_side">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                    <input type="text" class="form-control" placeholder="Search">
-                                </div>
-                                <ul class="brand_scroll">
-                                    <li>
-                                        <input type="checkbox"><label for="">Addidas </label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox"><label for="">AGM </label>
-                                    </li>
-
-                                </ul>
-                            </div>
-                            <div class="price_range">
-                                <div class="sidebr_title">
-                                    <h6>Price Range </h6>
-                                    <button type="button" class="btn_apply">Apply</button>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div id="slider-range" class="price-filter-range" name="rangeInput"></div>
-                                        <div class="d-flex" style="margin:10px auto">
-                                            <input type="number" style="width: 45%;margin: 0px 3px;" min=0 max="9900" oninput="validity.valid||(value='0');" id="min_price" class="price-range-field form-control" />
-                                            <input type="number" style="width: 45%;margin: 0px 3px" min=0 max="10000" oninput="validity.valid||(value='10000');" id="max_price" class="price-range-field form-control" />
-                                        </div>
-                                        <!-- <button class="price-range-search" id="price-range-submit">Search</button>
-                                        <div id="searchResults" class="search-results-block"></div> -->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="brands_list">
-                                <h6>size</h6>
-                                <div class="search_side">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                    <input type="text" class="form-control" placeholder="Search">
-                                </div>
-                                <ul class="brand_scroll">
-                                    <li>
-                                        <input type="checkbox"><label for="">XS</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox"><label for="">S</label>
-                                    </li>
-
-                                </ul>
-                            </div>
-                            <div class="brands_list">
-                                <h6>Gender</h6>
-                                <ul class="brand_scroll">
-                                    <li>
-                                        <input type="checkbox"><label for="">Boys</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox"><label for="">Girls</label>
-                                    </li>
-
-                                </ul>
-                            </div>
+                            
                         </div>
                     </div>
 
@@ -243,7 +164,7 @@
                                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6" v-for="item in prouducts" :key="item.id">
                                     <div class="product_grid" v-if="prouducts.length > 0">
                                         <nuxt-link :to="`/product-details/${item.pro_slug}`" v-if="prouducts.length > 0">
-                                            <img :src="item.thumnail_img" class="img-fluid">
+                                            <img :src="item.thumnail_img" class="img-fluid" loading="lazy">
                                         </Nuxt-link>
                                         <span>Free Delivery</span>
                                         <strong>Official Store </strong>

@@ -61,12 +61,12 @@
                                 <div class="loading-indicator" v-if="loading" style="text-align: center;">
                                     <div class="loader-container">
                                         <center class="loader-text">Loading...</center>
-                                        <img src="/loader/loader.gif" alt="Loader" />
+                                        <img src="/loader/loader.gif" loading="lazy" alt="Loader" />
                                     </div>
                                 </div>
                                 <section class="Slider">
                                     <div>
-                                        <img id="featuredImage" class="Slider-featuredImage sliderimg" :src="featuresimgs">
+                                        <img id="featuredImage" class="Slider-featuredImage sliderimg" loading="lazy" :src="featuresimgs">
                                     </div>
 
                                     <div class="Slider-thumbnails">
@@ -107,12 +107,12 @@
 
                                         </div>
                                         <div v-else>
-                                            <a href="#"><i class="fa-regular fa-heart"></i></a>
+                                            <a href="#" @click="login"><i class="fa-regular fa-heart"></i></a>
                                         </div>
 
                                     </div>
                                     <div class="details_title">
-                                        <h1>{{pro_row.name}}</h1>
+                                        <h1>{{pro_row.product_name}}</h1>
                                         <h6>Brand: <a href="#">Samsung</a>|<a href="#">Similer product from samsung </a></h6>
                                     </div>
                                     <div class="price_div">
@@ -527,6 +527,7 @@ export default {
     }) {
         const productSlug = params.slug;
         return {
+            
             //cart
             loading: false,
             cart: [],
@@ -554,9 +555,26 @@ export default {
         },
     },
     methods: {
+        login() {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "error",
+                title: "Please log in to your account to add items to your wishlist."
+            });
+        },
         async addtowishlist() {
             this.loading = true;
-            const productSlug = this.$route.query.slug;
+            const productSlug = this.$route.params.slug; //this.$route.query.slug;
             await this.$axios.get(`/order/addtowish/${productSlug}`).then(response => {
                     Swal.fire({
                         position: "top-end",
@@ -632,6 +650,9 @@ export default {
             const productToAdd = this.product.find((product) => product.id === productId);
             const existingItem = this.cart.find((item) => item.product.id === productId);
 
+            //console.log("------" + productToAdd.product_name);
+            //return false;
+
             if (existingItem) {
                 existingItem.quantity += 1;
             } else {
@@ -670,8 +691,8 @@ export default {
         },
 
         async fetchData() {
-            const prosulg = this.$route.params.slug;//this.$route.query.slug;
-            console.log("-----------" +  prosulg);
+            const prosulg = this.$route.params.slug; //this.$route.query.slug;
+            console.log("-----------" + prosulg);
             //return false; 
             this.loading = true;
             const response = await this.$axios.get(`/unauthenticate/productSlug/${prosulg}`);

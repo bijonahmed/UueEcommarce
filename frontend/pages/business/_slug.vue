@@ -62,7 +62,7 @@
                     <img :src="top_banner_img" class="img-fluid" alt="">
                 </span>
                 <span v-else>
-                    <img src="/images/Slider_fold.jpg" class="img-fluid" alt="">
+                    <img src="/images/Slider_fold.jpg" class="img-fluid" loading="lazy" alt="">
                 </span>
 
                 <div class="store_details">
@@ -73,7 +73,7 @@
                                     <img :src="business_logo" class="img-fluid" alt="">
                                 </span>
                                 <span v-else>
-                                    <img src="/images/user-100.png" class="img-fluid" alt="">
+                                    <img src="/images/user-100.png" loading="lazy" class="img-fluid" alt="">
                                 </span>
 
                             </div>
@@ -107,7 +107,7 @@
                 <div class="loading-indicator" v-if="loading">
                     <div class="loader-container">
                         <center class="loader-text">Loading...</center>
-                        <img src="/loader/loader.gif" alt="Loader" />
+                        <img src="/loader/loader.gif"  loading="lazy" alt="Loader" />
                     </div>
                 </div>
             </center>
@@ -153,7 +153,7 @@
                                         <img :src="banner1" class="img-fluid" alt="">
                                     </span>
                                     <span v-else>
-                                        <img src="/images/images_global.jpg" class="img-fluid" alt="">
+                                        <img src="/images/images_global.jpg" loading="lazy" class="img-fluid" alt="">
                                     </span>
                                 </a>
                             </div>
@@ -163,17 +163,17 @@
                                         <img :src="banner2" class="img-fluid" alt="">
                                     </span>
                                     <span v-else>
-                                        <img src="/images/images_global.jpg" class="img-fluid" alt="">
+                                        <img src="/images/images_global.jpg" loading="lazy" class="img-fluid" alt="">
                                     </span>
                                 </a>
                             </div>
                             <div class="col-4">
                                 <a href="#">
                                     <span v-if="banner3">
-                                        <img :src="banner3" class="img-fluid" alt="">
+                                        <img :src="banner3" class="img-fluid" loading="lazy" alt="">
                                     </span>
                                     <span v-else>
-                                        <img src="/images/images_global.jpg" class="img-fluid" alt="">
+                                        <img src="/images/images_global.jpg" loading="lazy" class="img-fluid" alt="">
                                     </span>
                                 </a>
                             </div>
@@ -263,7 +263,7 @@
                                         <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6" v-for="item in products" :key="item.id">
                                             <div class="product_grid">
                                                 <nuxt-link :to="`/product-details/${item.slug}`" v-if="products.length > 0">
-                                                    <img :src="item.thumnail" class="img-fluid" alt="">
+                                                    <img :src="item.thumnail_img" class="img-fluid" alt="">
                                                     <strong>Official Store </strong>
                                                     <h1>{{ item.name }}</h1>
                                                     <p>${{ item.price }}</p>
@@ -362,12 +362,24 @@ export default {
         this.loadCart();
         this.cartItemCount();
         this.fetchDataCategory();
+        this.calculateSubtotal();
     },
     computed: {
         loggedIn() {
             return this.$auth.loggedIn;
         },
         uniqueCategories() {
+            // const uniqueSet = new Set(this.categoryList.map(category => category.id));
+            // return Array.from(uniqueSet).map(id => {
+            //     return this.categoryList.find(category => category.id === id);
+            // });
+
+            // Check if this.categoryList is an array
+            if (!Array.isArray(this.categoryList)) {
+                console.error("this.categoryList is not an array");
+                return []; // or handle the error in a way that makes sense for your application
+            }
+
             const uniqueSet = new Set(this.categoryList.map(category => category.id));
             return Array.from(uniqueSet).map(id => {
                 return this.categoryList.find(category => category.id === id);
@@ -420,7 +432,41 @@ export default {
 
             this.saveCart();
             this.cartItemCount();
-            //   this.calculateSubtotal();
+            this.calculateSubtotal();
+        },
+
+        calculateSubtotal() {
+            let subtotal;
+            this.cart.forEach((item) => {
+                const product = item.product;
+                console.log(`Quantity: ${item.quantity}, Price: ${product.price}`);
+
+                if (typeof product.price === 'string') {
+                    const priceMatch = product.price.match(/[\d.]+/);
+                    if (priceMatch) {
+                        const priceAsNumber = parseFloat(priceMatch[0]);
+                        if (!isNaN(item.quantity) && !isNaN(priceAsNumber)) {
+                            subtotal += item.quantity * priceAsNumber;
+                        } else {
+                            console.error('Invalid quantity or price:', item.quantity, product.price);
+                        }
+                    } else {
+                        console.error('Invalid price format:', product.price);
+                    }
+                } else if (typeof product.price === 'number') {
+                    // Use the price directly if it's a number
+                    if (!isNaN(item.quantity) && !isNaN(product.price)) {
+                        subtotal += item.quantity * product.price;
+                    } else {
+                        console.error('Invalid quantity or price:', item.quantity, product.price);
+                    }
+                } else {
+                    console.error('Invalid price type:', typeof product.price);
+                }
+
+                // console.log(`Intermediate Subtotal: ${subtotal}`);
+            });
+
         },
 
         removeFromCart(product) {
@@ -434,7 +480,7 @@ export default {
                 }
 
                 this.saveCart();
-                // this.calculateSubtotal();
+                this.calculateSubtotal();
                 this.cartItemCount();
             }
         },
