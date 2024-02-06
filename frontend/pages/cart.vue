@@ -214,6 +214,7 @@ export default {
         return {
             loading: false,
             cart: [],
+            //    product:[],
             itemCount: 0,
             subtotal: 0,
             updatedQuantity: 0,
@@ -232,12 +233,13 @@ export default {
     },
     mounted() {
 
-        this.calculateSubtotal();
-        this.loadCart();
-        this.cartItemCount();
-        this.subtotal = this.calculateSubtotal();
-
         if (process.client) {
+
+            this.calculateSubtotal();
+            this.loadCart();
+            this.cartItemCount();
+            this.subtotal = this.calculateSubtotal();
+
             $(document).ready(function () {
                 $(".filter_btn").on('click', function () {
                     $(".filter_modal").show();
@@ -332,7 +334,9 @@ export default {
 
             let itemCount = 0;
             this.cart.forEach((item) => {
-                itemCount += parseInt(item.quantity);
+                if (item.product) { // Add a check to ensure item.product is defined
+                    itemCount += parseInt(item.quantity);
+                }
             });
             this.itemCount = itemCount;
             setTimeout(() => {

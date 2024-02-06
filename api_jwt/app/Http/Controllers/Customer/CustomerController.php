@@ -243,7 +243,7 @@ class CustomerController extends Controller
                     'id'      => $v->id,
                     'name'    => !empty($v->name) ? $v->name : "",
                     'profit'  => 0,
-                    'regDate' => date_format(date_create($v->created_at), "Y-m-d"),
+                    'regDate' => date("Y-m-d",strtotime($uplineQr->created_at)),
                     'upline'  => !empty($uplineQr->name) ? $uplineQr->name : "",
                     'status'  => $v->status,
                 ];
@@ -291,13 +291,13 @@ class CustomerController extends Controller
             $userLevel = ${"userL$levelNumber"};
 
             foreach ($userLevel as $v) {
-                $uplineQr = User::where('id', $v->join_id)->select('name', 'email')->first();
+                $uplineQr = User::where('id', $v->join_id)->select('created_at','name', 'email')->first();
 
                 $levels[] = [
                     'id'      => $v->id,
                     'name'    => !empty($v->name) ? $v->name : "",
                     'profit'  => 0,
-                    'regDate' => date_format(date_create($v->created_at), "Y-m-d"),
+                    'regDate' => date("Y-m-d",strtotime($uplineQr->created_at)),
                     'upline'  => !empty($uplineQr->name) ? $uplineQr->name : "",
                     'status'  => $v->status,
                 ];

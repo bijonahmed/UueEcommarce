@@ -201,9 +201,10 @@ class OrderController extends Controller
         $order['orderdata']     = $orders;
         $order['orderrow']      = !empty($findorder->orderstatus) ? $findorder->orderstatus : "";
         $order['order_status']  = !empty($findorder->order_status) ? $findorder->order_status : "";
-        $order['orderstatus_id'] = !empty($findorder->orderstatus_id) ? $findorder->orderstatus_id : "";
+        $order['orderstatus_id']= !empty($findorder->orderstatus_id) ? $findorder->orderstatus_id : "";
+        $order['orderData']     = !empty($findorder) ? $findorder : "";
         $order['OrderStatus']   = $orderStatus;
-       // dd($order['order_status']);
+        // dd($order['order_status']);
         return response()->json($order, 200);
     }
     public function allOrders()
@@ -212,7 +213,7 @@ class OrderController extends Controller
         $data['orders']  = Order::join('order_status', 'orders.order_status', '=', 'order_status.id')
             ->select('orders.*', 'order_status.name')
             ->where('orders.customer_id', $this->userid)
-            ->orderBy('created_at', 'desc') 
+            ->orderBy('created_at', 'desc')
             ->get(); //Order::where('customer_id', $this->userid)->get();
         foreach ($data['orders'] as $v) {
             $orders[] = [
@@ -252,18 +253,60 @@ class OrderController extends Controller
 
     public function submitOrder(Request $request)
     {
+        
+       //dd($request->all());
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'billing_name'          => 'required',
+                'billing_email'         => 'required',
+                'billing_phone_number'  => 'required',
+                'billing_address'       => 'required',
+                'billing_country'       => 'required',
+                'billing_city'       => 'required',
+            ],
+            [
+                'billing_name'         => 'Billing Name is required',
+                'billing_email'        => 'Billing email is required',
+                'billing_phone_number' => 'Billing Phone is required',
+                'billing_address'      => 'Billing address is required',
+                'billing_country'      => 'Billing country is required',
+                'billing_city'         => 'Billing city is required',
+            ]
+        );
 
-        // dd($request->all());
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        //Billing Info.
+        $billing_name         = $request->billing_name;
+        $billing_email        = $request->billing_email;
+        $billing_phone_number = $request->billing_phone_number;
+        $billing_address      = $request->billing_address;
+        $billing_country      = $request->billing_country;
+        $billing_city         = $request->billing_city;
+        //Shipping Info.
+        $shipper_name         = !empty($request->shipper_name) ? $request->shipper_name : "";
+        $shipper_email        = !empty($request->shipper_email) ? $request->shipper_email : "";
+        $shipper_phone_number = !empty($request->shipper_phone_number) ? $request->shipper_phone_number : "";
+        $shipper_address      = !empty($request->shipper_address) ? $request->shipper_address : "";
+        $shipper_country      = !empty($request->shipper_country) ? $request->shipper_country : "";
+        $shipper_city         = !empty($request->shipper_city) ? $request->shipper_city : "";
 
         $randomNum = $this->userid . $this->generateUniqueRandomNumber() . "-" . date("y");
 
-        $cartData = $request->input('cart');
-        // dd($cartData);
+        $cartData = json_decode($request->input('cart'));
+        if (is_object($cartData)) {
+            // Convert the stdClass object to an array
+            $cartData = [$cartData];
+        }
+       //dd($cartData);
         $total = 0;
         foreach ($cartData as $cartItem) {
-            $productid = $cartItem['product']['id'];
-            $quantity  = $cartItem['quantity'];
-            $price     = str_replace(',', '', $cartItem['product']['price']); // Remove commas
+            $productid = $cartItem->product->id;//$cartItem['product']['id'];
+            $quantity  = $cartItem->quantity;//$cartItem['quantity'];
+            $price     = str_replace(',', '', $cartItem->product->price);//$cartItem['product']['price']); // Remove commas
             $price     = floatval($price); // Convert to float
 
             if (!is_numeric($quantity) || !is_numeric($price)) {
@@ -281,6 +324,22 @@ class OrderController extends Controller
         $order->orderId         = $randomNum;
         $order->total           = $total;
         $order->subtotal        = $total;
+        //Billing Info
+        $order->billing_name          = $billing_name;
+        $order->billing_email         = $billing_email;
+        $order->billing_phone_number  = $billing_phone_number;
+        $order->billing_address       = $billing_address;
+        $order->billing_country       = $billing_country;
+        $order->billing_city          = $billing_city;
+        //Shipping Info
+        $order->shipper_name          = $shipper_name;
+        $order->shipper_email         = $shipper_email;
+        $order->shipper_phone_number  = $shipper_phone_number;
+        $order->shipper_address       = $shipper_address;
+        $order->shipper_country       = $shipper_country;
+        $order->shipper_city          = $shipper_city;
+        //END
+
         $order->customer_id     = $this->userid;
         $order->order_status    = 1; // Order Placed 
         $order->save();
@@ -290,17 +349,17 @@ class OrderController extends Controller
 
         $itemtotal = 0;
         foreach ($cartData as $cartItem) {
-            $pid = $cartItem['product']['id'];
+            $pid = $cartItem->product->id;//$cartItem['product']['id'];
             $chkpost = Product::where('id', $pid)->select('seller_id')->first();
             $seller_id = !empty($chkpost) ? $chkpost->seller_id : 1;
             $productid = $pid;
-            $quantity  = $cartItem['quantity'];
-            $price     = str_replace(',', '', $cartItem['product']['price']); // Remove commas
+            $quantity  = $cartItem->quantity;//$cartItem['quantity'];
+            $price     = str_replace(',', '', $cartItem->product->price);//$cartItem['product']['price']); // Remove commas
             $price     = floatval($price); // Convert to float
-            $chkCat    = ProductCategory::where('product_id',$productid)->first();
-            $categories = explode(',', $chkCat->parent_id);
+            $chkCat    = ProductCategory::where('product_id', $productid)->first();
+            $categories = !empty($chkCat->parent_id) ? explode(',', $chkCat->parent_id) : "";
             $parentCategoryId = isset($categories[0]) ? $categories[0] : null;
-            $catrow     = Categorys::where('id',$categories)->first();
+            $catrow     = Categorys::where('id', $categories)->first();
             $commission = !empty($catrow->commission) ? $catrow->commission : 0;
             //Insert into CategoryCommissionHistory
             $categoryHistory = new CategoryCommissionHistory();

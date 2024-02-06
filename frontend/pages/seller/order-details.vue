@@ -80,13 +80,35 @@
                                     </form>
                                 </div>
                                 <hr>
-                                <h4 class="text-center" style="text-transform: uppercase;">Orders Details </h4>
-                                <ul class="ms-auto">
-                                    <li class="d-flex justify-content-start">
-                                        <strong style="min-width: 100px;">Order Status:</strong>
-                                        <strong>{{ orderstatus }}</strong>
-                                    </li>
-                                </ul>
+                                <div class="text-center" style="text-transform: uppercase;">Orders Details </div>
+                                <br />
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <p style="font-size: 15px;"><b>Billing Details</b></p>
+                                        <p class="billing">{{ orderData.billing_name }}</p>
+                                        <p class="billing">{{ orderData.billing_email }}</p>
+                                        <p class="billing">{{ orderData.billing_phone_number }}</p>
+                                        <p class="billing">{{ orderData.billing_address }}</p>
+                                        <p class="billing">{{ orderData.billing_city }}</p> 
+                                        <p class="billing">{{ orderData.billing_country }}</p>
+                                
+                                    </div>
+                                    <div class="col-md-6 text-right">
+                                        <div align="right">
+                                            <p style="font-size: 15px;"><b>Shipping Details</b></p>
+                                            <p class="billing">{{ orderData.shipper_name }}</p>
+                                            <p class="billing">{{ orderData.shipper_email }}</p>
+                                            <p class="billing">{{ orderData.shipper_phone_number }}</p>
+                                            <p class="billing">{{ orderData.shipper_address }}</p>
+                                            <p class="billing">{{ orderData.shipper_city }}</p>
+                                            <p class="billing">{{ orderData.shipper_country }}</p>
+                                           
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <hr />
+                                </div>
                             </div>
                             <div class="row my-2">
 
@@ -202,6 +224,7 @@ export default {
             selectedOrderStatus: '',
             orderStatuses: [],
             orderstatus: '',
+            orderData: '',
             orders: [],
             errors: {},
         }
@@ -257,6 +280,7 @@ export default {
                     this.orders = response.data.orderdata;
                     this.orderStatuses = response.data.OrderStatus;
                     this.selectedOrderStatus = response.data.order_status;
+                    this.orderData = response.data.orderData;
                     //$(".orderstatus").val(response.data.order_status);
                 })
                 .catch(error => {
@@ -321,5 +345,9 @@ export default {
 
 .loader-bottom {
     bottom: 0;
+}
+
+.billing {
+    font-size: 13px;
 }
 </style>
