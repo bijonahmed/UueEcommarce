@@ -24,8 +24,10 @@ class BrandsController extends Controller
     {
         $this->middleware('auth:api');
         $id = auth('api')->user();
-        $user = User::find($id->id);
-        $this->userid = $user->id;
+        if (!empty($id)) {
+            $user = User::find($id->id);
+            $this->userid = $user->id;
+        }
     }
 
     public function save(Request $request)
@@ -33,6 +35,7 @@ class BrandsController extends Controller
         //dd($request->all());
         $validator = Validator::make($request->all(), [
             'name'           => 'required',
+            'image'         => 'mimes:jpg,png,jpeg,gif,webp|required',
             'status'         => 'required',
         ]);
         if ($validator->fails()) {
@@ -40,9 +43,14 @@ class BrandsController extends Controller
         }
         $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $request->input('name'))));
 
+        $image = $request->image;
+        $imageName = "/backend/brandimage/".time() . "." . $image->getClientOriginalExtension();
+        $image->move(public_path("backend/brandimage"), $imageName);
+
         $data = array(
             'name'                       => $request->name,
             'slug'                       => $slug,
+            'image'                      => $imageName,
             'status'                     => !empty($request->status) ? $request->status : "",
 
         );
@@ -83,8 +91,10 @@ class BrandsController extends Controller
 
         try {
             $row = Brands::find($id);
+            $imagesUrl = !empty($row->image) ? url($row->image) : "";
             $response = [
                 'data' => $row,
+                'image' => $imagesUrl,
                 'message' => 'success'
             ];
         } catch (\Throwable $th) {

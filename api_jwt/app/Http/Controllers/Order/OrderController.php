@@ -25,8 +25,10 @@ class OrderController extends Controller
     {
         $this->middleware('auth:api');
         $id = auth('api')->user();
-        $user = User::find($id->id);
-        $this->userid = $user->id;
+        if (!empty($id)) {
+            $user = User::find($id->id);
+            $this->userid = $user->id;
+        }
     }
 
     public function orderStatusRow($id)
@@ -105,16 +107,17 @@ class OrderController extends Controller
 
 
 
-        $rows = WishList::join('product', 'product.id', '=', 'wishlist.product_id')->where('wishlist.customer_id', $this->userid)->select('wishlist.id as wishid', 'product.thumnail_img', 'product.slug', 'product.name', 'price', 'product.id')->get();
+        $rows = WishList::join('product', 'product.id', '=', 'wishlist.product_id')->where('wishlist.customer_id', $this->userid)->select('wishlist.id as wishid', 'product.thumnail_img', 'product.slug', 'product.name', 'price','product.discount', 'product.id')->get();
         $products = [];
         foreach ($rows as $key => $v) {
             $products[] = [
-                'id'           => $v->id,
-                'product_name' => $v->name,
-                'wishid'       => $v->wishid,
-                'price'        => number_format($v->price, 2),
-                'thumnail_img' => url($v->thumnail_img),
-                'slug'         => $v->slug,
+                'id'                => $v->id,
+                'product_name'      => $v->name,
+                'wishid'            => $v->wishid,
+                'price'             => number_format($v->price, 2),
+                'discount'   => number_format($v->discount, 2),
+                'thumnail_img'      => url($v->thumnail_img),
+                'slug'              => $v->slug,
 
             ];
         }
@@ -144,6 +147,8 @@ class OrderController extends Controller
 
     public function getOrder()
     {
+
+        $orders=[];
 
         $data['orders']  = Order::where('customer_id', $this->userid)->where('order_status', 1)->limit(2)->get();
         foreach ($data['orders'] as $v) {

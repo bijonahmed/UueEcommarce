@@ -1,26 +1,35 @@
 <?php
+
 namespace App\Http\Controllers\Setting;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+
+use DB;
 use Auth;
-use Validator;
 use Helper;
 use App\Models\User;
-use App\Models\Setting;
 use App\Models\Profile;
+use App\Models\Setting;
+use App\Models\students;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Models\topHeaderBanner;
 use App\Rules\MatchOldPassword;
+use App\Http\Controllers\Controller;
+use App\Models\dealsbanner;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
-use DB;
+use Illuminate\Support\Facades\Validator;
+
 class SettingController extends Controller
 {
     protected $userid;
     public function __construct()
     {
-        $this->middleware('auth:api');
-        $id = auth('api')->user();
-        $user = User::find($id->id);
-        $this->userid = $user->id;
+        // $this->middleware('auth:api');
+        // $id = auth('api')->user();
+        // if (!empty($id)) {
+        //     $user = User::find($id->id);
+        //     $this->userid = $user->id;
+        // }
     }
     public function insertEmployeeType(Request $request)
     {
@@ -494,5 +503,158 @@ class SettingController extends Controller
             'message' => 'success'
         ];
         return response()->json($response, 200);
+    }
+
+    // brands part start here 
+    public function addbrands()
+    {
+    }
+    // ads part start here 
+
+    public function getbannerTop()
+    {
+
+        $banner    = topHeaderBanner::first();
+        $imagesUrl = !empty($banner->image) ? url($banner->image) : "";
+
+        if ($banner->count() > 0) {
+            return response()->json([
+                'status' => 200,
+                'images' => $imagesUrl
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 202,
+                'message' => "Banner Not Found"
+            ], 202);
+        }
+    }
+    public function updatebannerTop(Request $request)
+    {
+
+        $messages = [
+            'image' => 'Image size must be 640x33 and jpg,png,jpeg,gif',
+        ];
+        $validator = Validator::make($request->all(), [
+            'image'     => 'mimes:jpg,png,jpeg,gif,webp|dimensions:min_width=640,min_height=33,max_width=640,max_height=33',
+            // |dimensions:min_width=640,min_height=33,max_width=640,max_height=33
+            'status'    => 'string',
+        ], $messages);
+
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        } else {
+            if ($request->hasFile("image")) {
+
+                $bannerAdd = topHeaderBanner::first();
+
+                $image = $request->image;
+                $imageName = "/bannerImage/" . time() . "." . $image->getClientOriginalExtension();
+                $image->move(public_path("bannerImage"), $imageName);
+
+                if (!empty($bannerAdd->image) && File::exists(public_path($bannerAdd->image))) {
+                    File::delete(public_path($bannerAdd->image));
+                }
+
+                // $bannerAdd = topHeaderBanner::create([               
+                $bannerAdd->update([
+                    "image" => $imageName,
+                    "status" => $request->status,
+                ]);
+                // ]);
+
+                if ($bannerAdd) {
+
+                    $images = url($imageName);
+
+                    return response()->json([
+                        "status" => 200,
+                        "images" => $images,
+
+                    ], 200);
+                } else {
+                    return response()->json([
+                        "status" => 500,
+                        "errors" => "Something went wrong"
+                    ], 500);
+                }
+            }
+        }
+    }
+    public function updatedealsbannner(request $request)
+    {
+        $messages = [
+            'imageOne' => 'Image size must be 572x250 and jpg,png,jpeg,gif',
+            'imageTwo' => 'Image size must be 572x250 and jpg,png,jpeg,gif',
+        ];
+        $validator = Validator::make($request->all(), [
+            'imageOne' => 'mimes:jpg,png,jpeg,gif,webp|dimensions:min_width=572,min_height=250,max_width=572,max_height=250',
+            'imageTwo' => 'mimes:jpg,png,jpeg,gif,webp|dimensions:min_width=572,min_height=250,max_width=572,max_height=250',
+        ], $messages);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $dealsBanner = dealsbanner::first();
+
+        if ($request->hasFile('imageOne')) {
+            $image = $request->imageOne;
+            $imageName = "/bannerImage/" . time() . "img." . $image->getClientOriginalExtension();
+            $image->move(public_path("bannerImage"), $imageName);
+            // Delete previous image if it exists
+            if (!empty($dealsBanner->imageOne) && File::exists(public_path($dealsBanner->imageOne))) {
+                File::delete(public_path($dealsBanner->imageOne));
+            }
+            $dealsBanner->update(["imageOne" => $imageName]);
+        }
+
+        if ($request->hasFile('imageTwo')) {
+            $imageTwo = $request->imageTwo;
+            $imageNameTwo = "/bannerImage/" . time() . "." . $imageTwo->getClientOriginalExtension();
+            $imageTwo->move(public_path("bannerImage"), $imageNameTwo);
+            // Delete previous image if it exists
+            if (!empty($dealsBanner->imageTwo) && File::exists(public_path($dealsBanner->imageTwo))) {
+                File::delete(public_path($dealsBanner->imageTwo));
+            }
+            $dealsBanner->update(["imageTwo" => $imageNameTwo]);
+        }
+
+        if ($dealsBanner->count() > 0) {
+            $imageOne = $dealsBanner->imageOne ? url($dealsBanner->imageOne) : null;
+            $imageTwo = $dealsBanner->imageTwo ? url($dealsBanner->imageTwo) : null;
+            return response()->json([
+                'status' => 200,
+                'imageOne' => $imageOne,
+                'imageTwo' => $imageTwo
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 202,
+                'message' => "Banner Not Found"
+            ], 202);
+        }
+    }
+
+    public function getdealsbanners()
+    {
+
+        $dealbanner    = dealsbanner::first();
+        // $imagesUrlone = !empty($dealbanner->image) ? url($dealbanner->imageOne) : "";
+        // $imagesUrltwo = !empty($dealbanner->image) ? url($dealbanner->imageTwo) : "";
+
+        if ($dealbanner->count() > 0) {
+            return response()->json([
+                'status' => 200,
+                'imageone' => url($dealbanner->imageOne),
+                'imagetwo' => url($dealbanner->imageTwo),
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 202,
+                'message' => "Banner Not Found"
+            ], 202);
+        }
     }
 }

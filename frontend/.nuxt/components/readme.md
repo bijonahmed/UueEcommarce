@@ -50,3 +50,4 @@ You can directly use them in pages and other components without the need to impo
 - `<TopSellingItem>` | `<top-selling-item>` (components/TopSellingItem.vue)
 - `<TopSellingItemBackup>` | `<top-selling-item-backup>` (components/TopSellingItemBackup.vue)
 - `<Tutorial>` | `<tutorial>` (components/Tutorial.vue)
+- `<UserSidebar>` | `<user-sidebar>` (components/userSidebar.vue)

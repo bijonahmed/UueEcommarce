@@ -19,8 +19,10 @@ class OrganogramController extends Controller
     {
         $this->middleware('auth:api');
         $id = auth('api')->user();
-        $user = User::find($id->id);
-        $this->userid = $user->id;
+        if (!empty($id)) {
+            $user = User::find($id->id);
+            $this->userid = $user->id;
+        }
     }
     public function saveLevel(Request $request)
     {

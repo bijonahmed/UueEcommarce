@@ -18,7 +18,6 @@
                 </div>
                 <div class="slider-container">
                     <div class="slider" ref="slider">
-
                         <div class="slide" v-for="item in toproducts" :key="item.id">
                             <nuxt-link :to="`/product-details/${item.slug}`">
                                 <img :src="item.thumnail" alt="" style="height: 150px;width: 150px;">

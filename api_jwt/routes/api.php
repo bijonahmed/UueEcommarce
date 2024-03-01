@@ -45,7 +45,7 @@ Route::group([
     Route::post('updateprofile', [AuthController::class, 'updateprofile']);
     Route::post('updateBusinessprofile', [AuthController::class, 'updateBusinessprofile']);
     Route::post('updatePassword', [AuthController::class, 'changesPassword']);
-  
+
     Route::get('showProfileData', [AuthController::class, 'showProfileData']);
 
     Route::post('password/email', [ForgotPasswordController::class, 'sendPasswordResetEmail']);
@@ -170,6 +170,7 @@ Route::group([
     'prefix' => 'brands'
 ], function () {
     Route::post('save', [BrandsController::class, 'save']);
+    Route::post('update', [BrandsController::class, 'update']);
     Route::get('allbrandlist', [BrandsController::class, 'allbrandlist']);
     Route::get('brandrow/{id}', [BrandsController::class, 'brandrow']);
     // Route::get('searchmodels', [BrandsController::class, 'searchmodels']);
@@ -239,7 +240,13 @@ Route::group([
     Route::post('getresetPasswords', [UnauthenticatedController::class, 'getresetPasswords']);
     Route::post('updatePassword', [UnauthenticatedController::class, 'updatePassword']);
     Route::get('allsellers', [UnauthenticatedController::class, 'allsellers']);
+    Route::get('countrylist', [UnauthenticatedController::class, 'countrylist']);
+    Route::get('allbrandsList', [UnauthenticatedController::class, 'allbrandlist']);
+    Route::get('allsellerList', [UnauthenticatedController::class, 'getallsellerList']);
+
+
 });
+
 
 Route::group([
     'middleware' => 'api',
@@ -281,7 +288,16 @@ Route::group([
     Route::post('insertPayItem', [SettingController::class, 'insertPayItem']);
     Route::get('getPayItemList', [SettingController::class, 'getPayItemList']);
     Route::get('checkPayItemRow/{id}', [SettingController::class, 'checkPayItemRow']);
+    //Ads management  
+    Route::get('bannerTopget', [SettingController::class, 'getbannerTop']);
+    Route::post('bannerTop', [SettingController::class, 'updatebannerTop']);
+    Route::post('dealsbannner', [SettingController::class, 'updatedealsbannner']);
+    
+    Route::get('getdealsbanner', [SettingController::class, 'getdealsbanners']);
 });
+
+
+
 Route::group([
     'middleware' => 'api',
     'prefix' => 'holiday'

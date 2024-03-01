@@ -299,6 +299,22 @@
 
                 </ul>
             </li>
+            <li>
+                <a href="#" class="has-arrow nav-link dropdown-toggle" id="submenuDropdown_4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bx bx-category"></i>
+                    <div class="menu-title">Settings</div>
+                </a>
+                <ul class="menu dropdown-menu" aria-labelledby="submenuDropdown_4" style="width:100%;">
+                    <li>
+                        <Nuxt-link to="/setting/ads-management"><i class="bx bx-right-arrow-alt"></i>Ads Management</Nuxt-link>
+                    </li>
+
+                    <li>
+                        <Nuxt-link to="/user/user_list"><i class="bx bx-right-arrow-alt"></i>User List</Nuxt-link>
+                    </li>
+
+                </ul>
+            </li>
         </span>
         <span v-else-if="user.role_id==2">
             <li>

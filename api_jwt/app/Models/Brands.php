@@ -14,6 +14,7 @@ class Brands extends Authenticatable
     protected $fillable = [
         'name',
         'slug',
+        'image',
         'status',
     ];
 }

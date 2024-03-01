@@ -42,6 +42,7 @@ export { default as TopDeals } from '../..\\components\\TopDeals.vue'
 export { default as TopSellingItem } from '../..\\components\\TopSellingItem.vue'
 export { default as TopSellingItemBackup } from '../..\\components\\TopSellingItemBackup.vue'
 export { default as Tutorial } from '../..\\components\\Tutorial.vue'
+export { default as UserSidebar } from '../..\\components\\userSidebar.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

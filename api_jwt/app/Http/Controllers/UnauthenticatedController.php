@@ -2,34 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
-use Illuminate\Http\Request;
-use Auth;
-use Validator;
-use Helper;
-use App\Models\Product;
-use App\Models\User;
-use App\Models\Sliders;
-use App\Models\SellerAds;
-use App\Models\ProductCategory;
-use App\Models\ProductAdditionalImg;
-use App\Models\Categorys;
-use App\Models\Setting;
-use App\Models\HomeAroductSliderCategory;
-use App\Models\User as ModelsUser;
-use Illuminate\Support\Str;
-use App\Rules\MatchOldPassword;
-use Illuminate\Support\Facades\Hash;
 use DB;
+use Auth;
 use File;
-use PhpParser\Node\Stmt\TryCatch;
-use Illuminate\Support\Facades\Mail;
+use Helper;
+use Validator;
+use App\Models\User;
+use App\Models\Brands;
+use App\Models\Country;
+use App\Models\Product;
+use App\Models\Setting;
+use App\Models\Sliders;
+use App\Models\Category;
+use App\Models\Categorys;
+use App\Models\SellerAds;
 use App\Mail\ExampleEmail;
-//use User;
-use Workbench\App\Models\User as AppModelsUser;
-
+use App\Models\dealsbanner;
+use Illuminate\Support\Str;
 use function Ramsey\Uuid\v1;
+use Illuminate\Http\Request;
+use App\Models\ProductCategory;
+use App\Rules\MatchOldPassword;
+use PhpParser\Node\Stmt\TryCatch;
+use App\Models\User as ModelsUser;
+use App\Http\Controllers\Controller;
+//use User;
+use App\Models\ProductAdditionalImg;
+
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Models\HomeAroductSliderCategory;
+use Workbench\App\Models\User as AppModelsUser;
 
 class UnauthenticatedController extends Controller
 {
@@ -402,19 +405,19 @@ class UnauthenticatedController extends Controller
     public function findProductSlug($slug)
     {
         $data['pro_row'] = Product::where('product.slug', $slug)
-        ->select(
-            'product.id',
-            'product.id as product_id',
-            'product.name as product_name',
-            'product.slug as pro_slug',
-            'product.thumnail_img',
-            'description',
-            DB::raw('CAST(product.price AS SIGNED) as price'), // Cast product.price as decimal
-            'product.discount',
-            'product.stock_qty',
-            'product.stock_mini_qty'
-        )
-        ->first();
+            ->select(
+                'product.id',
+                'product.id as product_id',
+                'product.name as product_name',
+                'product.slug as pro_slug',
+                'product.thumnail_img',
+                'description',
+                DB::raw('CAST(product.price AS SIGNED) as price'), // Cast product.price as decimal
+                'product.discount',
+                'product.stock_qty',
+                'product.stock_mini_qty'
+            )
+            ->first();
         //dd($data['pro_row']);
         $product_chk       = Product::where('product.slug', $slug)
             ->select('product.id', 'product.id as product_id', 'product.name as pro_name', 'product.slug as pro_slug', 'product.thumnail_img', 'description', 'product.price', 'product.discount', 'product.stock_qty', 'product.stock_mini_qty')
@@ -473,5 +476,79 @@ class UnauthenticatedController extends Controller
         $data['pro_count']     = count($result);
         $data['categoryname']  = $chkCategory->name;
         return response()->json($data, 200);
+    }
+    public function countrylist()
+    {
+        $countries = Country::all();
+        return response()->json(['countries' => $countries]);
+    }
+    public function allbrandlist()
+    {
+
+        $arrData = Brands::all();
+        // $imagesUrl = !empty($rows->image) ? url($rows->image) : "";
+        // $response = [
+        //     'data' => $rows,
+        //     'image' => $imagesUrl,
+        //     'message' => 'success'
+        // ];
+        $formatedData = [];
+        foreach ($arrData as $Key => $value) {
+            $formatedData[] = [
+                'id'       => $value->id,
+                'name'      => $value->name,
+                'slug'      => $value->slug,
+                'image'         => !empty($value->image) ? url($value->image) : "",
+            ];
+        }
+        return response()->json($formatedData, 200);
+    }
+    public function getdealsbannersads(){
+        $dealbanner    = dealsbanner::all();
+
+        $formatedData = [];
+        foreach ($dealbanner as $Key => $value) {
+            $formatedData[] = [
+                'id'       => $value->id,
+                'name'      => $value->name,
+                'imageOne'         => !empty($value->imageOne) ? url($value->imageOne) : "",
+                'imageTwo'         => !empty($value->imageTwo) ? url($value->imageTwo) : "",
+            ];
+        }
+        return response()->json($formatedData, 200);
+        // return 0;
+    }
+    public function getallsellerList(Request $request)
+    {
+        // try {
+        //     $rows = User::allUseers($request->all());
+        //     $response = [
+        //         'data' => $rows,
+        //         'message' => 'success'
+        //     ];
+        // } catch (\Throwable $th) {
+        //     $response = [
+        //         'data' => [],
+        //         'message' => 'failed'
+        //     ];
+        // }
+        // return response()->json($response, 200);
+        // $sellershop    = User::all();
+        $sellershop = User::where('role_id', 3) ->where('status', 1) ->get();
+
+
+        $formatedData = [];
+        foreach ($sellershop as $Key => $value) {
+            $formatedData[] = [
+                'id'                => $value->id,
+                'role'              => $value->role_id,
+                'businessName'      => $value->business_name,
+                'slug'      => $value->business_name_slug,
+                'businessLogo'      => !empty($value->business_logo) ? url($value->business_logo) : "",
+                // 'role'         => !empty($value->imageOne) ? url($value->role_id) : "",
+                // 'business_name'         => !empty($value->business_logo) ? url($value->business_logo) : "",
+            ];
+        }
+        return response()->json($formatedData, 200);
     }
 }

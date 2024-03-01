@@ -25,8 +25,10 @@ class CircumstancesController extends Controller
         $this->middleware('auth:api');
         $id = auth('api')->user();
         $user = User::find($id->id);
-        $this->userid = $user->id;
-        $this->role_id = $user->role_id;
+        if (!empty($id)) {
+            $user = User::find($id->id);
+            $this->userid = $user->id;
+        }
     }
     public function circumstancesRow($id)
     {

@@ -138,7 +138,8 @@
                                     <button class="drop_btn" type="button" @click="logout">Sign Out</button>
                                 </span>
                                 <span v-else>
-                                    <button class="drop_btn" type="button" @click="openLoginModal">Sign In</button>
+                                    <button class="drop_btn" type="button" @click="openLoginModal">SignIn</button>
+                                    <nuxt-link to="/login" style="color: #fff;" class="drop_btn" type="button" >Signup</nuxt-link>
                                 </span>
 
                                 <li v-if="loggedIn">
