@@ -153,6 +153,23 @@
 
                 </ul>
             </li>
+            
+
+            <li>
+                <a href="#" class="has-arrow nav-link dropdown-toggle" id="submenuDropdown_34" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bx bx-category"></i>
+                    <div class="menu-title">Coupons</div>
+                </a>
+                <ul class="menu dropdown-menu" aria-labelledby="submenuDropdown_34" style="width:100%;">
+                    <li>
+                        <Nuxt-link to="/coupons/new-coupons"><i class="bx bx-right-arrow-alt"></i>Add New Coupons</Nuxt-link>
+                    </li>
+                    <li>
+                        <Nuxt-link to="/mlm/report"><i class="bx bx-right-arrow-alt"></i>MLM</Nuxt-link>
+                    </li>
+
+                </ul>
+            </li>
 
             <li>
                 <a href="#" class="has-arrow nav-link dropdown-toggle" id="submenuDropdown_34" role="button" data-bs-toggle="dropdown" aria-expanded="false">

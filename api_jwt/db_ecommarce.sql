@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2024 at 08:21 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Mar 02, 2024 at 07:40 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -313,10 +313,23 @@ CREATE TABLE `brands` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `slug` varchar(255) DEFAULT NULL,
+  `image` text NOT NULL,
   `status` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `brands`
+--
+
+INSERT INTO `brands` (`id`, `name`, `slug`, `image`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Ford', 'ford', '/backend/brandimage/1709112624.webp', 1, '2024-02-28 13:02:21', '2024-02-28 09:30:24'),
+(2, 'Chevrolet', 'chevrolet', '/backend/brandimage/1709112652.webp', 1, '2024-02-28 14:12:23', '2024-02-28 09:30:52'),
+(3, 'Hundai', 'hundai', '/backend/brandimage/1709112667.webp', 1, '2024-02-28 15:24:37', '2024-02-28 09:31:07'),
+(4, 'Audi', 'audi', '/backend/brandimage/1709112691.webp', 1, '2024-02-28 15:31:31', '2024-02-28 15:31:31'),
+(5, 'Addidas', 'addidas', '/backend/brandimage/1709127557.png', 1, '2024-02-28 19:27:00', '2024-02-28 13:39:17'),
+(6, 'Nestle', 'nestle', '/backend/brandimage/1709127896.png', 1, '2024-02-28 19:44:56', '2024-02-28 19:44:56');
 
 -- --------------------------------------------------------
 
@@ -733,7 +746,8 @@ INSERT INTO `category_commission_history` (`id`, `customer_id`, `seller_id`, `pr
 (21, 2, 66, 187, 1, 100.00, 21, 7, 7.00, NULL, '2024-02-06 17:38:29', '2024-02-06 17:38:29'),
 (22, 2, 66, 190, 1, 75.00, 20, 5, 3.75, NULL, '2024-02-06 17:38:29', '2024-02-06 17:38:29'),
 (23, 2, 66, 160, 1, 10.00, 22, 10, 1.00, NULL, '2024-02-06 17:38:29', '2024-02-06 17:38:29'),
-(24, 2, 4, 132, 5, 340.00, 14, 10, 34.00, NULL, '2024-02-06 19:13:47', '2024-02-06 19:13:47');
+(24, 2, 4, 132, 5, 340.00, 14, 10, 34.00, NULL, '2024-02-06 19:13:47', '2024-02-06 19:13:47'),
+(25, 5, 4, 187, 2, 100.00, 21, 7, 7.00, NULL, '2024-02-24 13:37:55', '2024-02-24 13:37:55');
 
 -- --------------------------------------------------------
 
@@ -1159,6 +1173,28 @@ CREATE TABLE `customer` (
   `status` int(11) DEFAULT 1,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dealsbanners`
+--
+
+CREATE TABLE `dealsbanners` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `imageOne` text NOT NULL,
+  `imageTwo` text NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dealsbanners`
+--
+
+INSERT INTO `dealsbanners` (`id`, `name`, `imageOne`, `imageTwo`, `updated_at`, `created_at`) VALUES
+(1, 'DealsAdsBanner', '/bannerImage/1709234862img.jpg', '/bannerImage/1709234862.jpg', '2024-02-29 13:27:42', '2024-02-29 19:22:16');
 
 -- --------------------------------------------------------
 
@@ -1753,7 +1789,8 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`id`, `orderId`, `customer_id`, `total`, `subtotal`, `order_status`, `billing_name`, `billing_email`, `billing_phone_number`, `billing_address`, `billing_country`, `billing_city`, `shipper_name`, `shipper_email`, `shipper_phone_number`, `shipper_address`, `shipper_country`, `shipper_city`, `created_at`, `updated_at`) VALUES
 (1, '294250-24', 2, 4685.00, 4685.00, 1, 'roman', 'roman@gmail.com', '01815728983', 'Mirpur-1, Govt, Bangla College D-type Quater', 'Bangladesh', 'Dhaka', 'roman', 'roman@gmail.com', '01815728983', 'Mirpur-1, Govt, Bangla College D-type Quater', 'Bangladesh', 'City', '2024-02-06 11:38:29', '2024-02-06 17:38:29'),
-(2, '215860-24', 2, 1700.00, 1700.00, 7, 'roman', 'roman@gmail.com', '01815728983', 'Dhaka, Bangladesh', 'Bangladesh', 'Dhaka', 'roman', 'roman@gmail.com', '01815728983', 'Dhaka, Bangladesh', 'Bangladesh', 'Dhaka', '2024-02-06 13:13:47', '2024-02-06 19:17:28');
+(2, '215860-24', 2, 1700.00, 1700.00, 7, 'roman', 'roman@gmail.com', '01815728983', 'Dhaka, Bangladesh', 'Bangladesh', 'Dhaka', 'roman', 'roman@gmail.com', '01815728983', 'Dhaka, Bangladesh', 'Bangladesh', 'Dhaka', '2024-02-06 13:13:47', '2024-02-06 19:17:28'),
+(3, '550717-24', 5, 200.00, 200.00, 1, 'pronay', 'pronay@mail.com', '111', '017600750', 'jaskldfasdf', 'sadfasd', 'pronay', 'pronay@mail.com', '111', '017600750', 'jaskldfasdf', 'sadfasd', '2024-02-24 07:37:55', '2024-02-24 13:37:55');
 
 -- --------------------------------------------------------
 
@@ -1782,7 +1819,8 @@ INSERT INTO `order_history` (`id`, `order_id`, `product_id`, `seller_id`, `quant
 (2, 1, 187, 66, 1, 100, 4600.00, '2024-02-06 17:38:29', '2024-02-06 11:38:29'),
 (3, 1, 190, 66, 1, 75, 4675.00, '2024-02-06 17:38:29', '2024-02-06 11:38:29'),
 (4, 1, 160, 66, 1, 10, 4685.00, '2024-02-06 17:38:29', '2024-02-06 11:38:29'),
-(5, 2, 132, 4, 5, 340, 1700.00, '2024-02-06 19:13:47', '2024-02-06 13:13:47');
+(5, 2, 132, 4, 5, 340, 1700.00, '2024-02-06 19:13:47', '2024-02-06 13:13:47'),
+(6, 3, 187, 4, 2, 100, 200.00, '2024-02-24 13:37:55', '2024-02-24 07:37:55');
 
 -- --------------------------------------------------------
 
@@ -2165,7 +2203,7 @@ INSERT INTO `product` (`id`, `seller_id`, `name`, `slug`, `description`, `meta_t
 (194, 4, 'testing product', 'testing-product', '<p>testing product</p>', '', '', '', '', 0, NULL, '', 2, 5400, '', 1, 1, 1, 0, '', 0.00, 1, 1, 0, 0, 0.00000, '0', 1, '0', 1, '/backend/files/WWlFbrF7gRN0Eq1V0qFR.jpg', 1, 1, NULL, NULL),
 (198, 4, 'SProduct', 'sproduct-198', '', 'sdf', 'sf', 's', 'as, asdf, sdf, sfsf', 0, NULL, '', 2, 2222, '', 1, 1, 1, 0, '', 0.00, 1, 1, 0, 0, 0.00000, '0', 1, '0', 1, '/backend/files/W8sEVa16r4qNQPuR36yD.jpg', 1, 66, NULL, NULL),
 (199, 4, 'Iphone 15 Pro', 'iphone-15-pro-199', '', '', '', '', '', 0, '1482582', '', 2, 36332, '', 1, 1, 1, 0, '', 0.00, 1, 1, 0, 0, 0.00000, '0', 1, '0', 1, '/backend/files/EHt7UaBtMjT6Uo6nLmSp.jpg', 1, 66, NULL, NULL),
-(200, 68, 'Iphone 5+', 'iphone-5--200', '', 'tes', 'test', 'test', 'sdf, sf, sdf, s', 0, '4888', 'http://localhost:3000/seller/seller-products-post', 2, 4500, '', 1, 1, 1, 0, '', 0.00, 1, 1, 0, 0, 0.00000, '0', 1, '0', 1, '/backend/files/Zt6kVVbjIctBsysY1w1B.jpg', 1, 68, NULL, NULL);
+(200, 68, 'Iphone 5+', 'iphone-5--200', '', 'tes', 'test', 'test', 'sdf, sf, sdf, s', 0, '4888', 'http://localhost:3000/seller/seller-products-post', 2, 4500, '', 1, 1, 1, 0, '', 100.00, 1, 1, 0, 0, 0.00000, '0', 1, '0', 1, '/backend/files/Zt6kVVbjIctBsysY1w1B.jpg', 1, 68, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -11857,7 +11895,8 @@ INSERT INTO `seller_ads` (`id`, `seller_id`, `file_name`, `position`, `created_a
 (6, 4, '/backend/files/JM8dyKtFKWvUBIFRTecQ.jpg', 'banner_2', '2024-01-20 02:06:07', '2024-01-20 02:06:07'),
 (7, 4, '/backend/files/dFItl6zBIJT9Jx0BjxxH.jpg', 'banner_1', '2024-01-20 02:06:11', '2024-01-20 02:06:11'),
 (8, 4, '/backend/files/bg0ut0ILPRGO4lEIjGt5.jpg', 'top_banner_img', '2024-01-20 02:06:17', '2024-01-20 02:06:17'),
-(9, 4, '0pTqynKiki4', 'youtube_videos', '2024-01-20 05:59:13', '2024-01-20 05:59:13');
+(9, 4, '0pTqynKiki4', 'youtube_videos', '2024-01-20 05:59:13', '2024-01-20 05:59:13'),
+(10, 7, '/backend/files/HjxjoOkWcG8rwuWmyRo9.jpg', 'banner_1', '2024-03-01 15:24:06', '2024-03-01 15:24:06');
 
 -- --------------------------------------------------------
 
@@ -11912,6 +11951,19 @@ INSERT INTO `sliders` (`id`, `images`, `status`) VALUES
 (3, '/backend/slider_imaes/3.jpg', 1),
 (4, '/backend/slider_imaes/4.jpg', 1),
 (5, '/backend/slider_imaes/5.jpg', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `students`
+--
+
+CREATE TABLE `students` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -12006,6 +12058,27 @@ INSERT INTO `tbl_setting` (`name`, `frontend_website`, `deposit_service_charge`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `topheaderbanner`
+--
+
+CREATE TABLE `topheaderbanner` (
+  `id` int(255) NOT NULL,
+  `image` text NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `topheaderbanner`
+--
+
+INSERT INTO `topheaderbanner` (`id`, `image`, `status`, `updated_at`, `created_at`) VALUES
+(18, '/bannerImage/1709228515.gif', 'published', '2024-02-29 11:41:55', '2024-02-27 02:36:11');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -12020,12 +12093,22 @@ CREATE TABLE `users` (
   `f_name` varchar(255) DEFAULT NULL,
   `l_name` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
+  `gender` int(255) NOT NULL COMMENT '1=male, 2=female, 3= others',
+  `birthdate` date DEFAULT NULL,
   `image` varchar(225) DEFAULT NULL,
   `phone_number` varchar(225) DEFAULT NULL,
+  `phone_number2` int(255) DEFAULT NULL,
   `address` varchar(225) DEFAULT NULL,
   `address_1` text DEFAULT NULL,
-  `address_2` text DEFAULT NULL,
-  `address_3` text DEFAULT NULL,
+  `country_1` text DEFAULT NULL,
+  `city_1` text DEFAULT NULL,
+  `landmark_1` varchar(255) DEFAULT NULL,
+  `phone_1` int(11) DEFAULT NULL,
+  `country_2` varchar(255) DEFAULT NULL,
+  `city_2` varchar(255) DEFAULT NULL,
+  `address_2` varchar(255) DEFAULT NULL,
+  `landmark_2` varchar(255) DEFAULT NULL,
+  `phone_2` int(255) DEFAULT NULL,
   `website` varchar(225) DEFAULT NULL,
   `github` varchar(225) DEFAULT NULL,
   `twitter` varchar(225) DEFAULT NULL,
@@ -12060,11 +12143,16 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `role_id`, `employee_id`, `invite_code`, `reffer_bonus`, `join_id`, `name`, `f_name`, `l_name`, `email`, `image`, `phone_number`, `address`, `address_1`, `address_2`, `address_3`, `website`, `github`, `twitter`, `instagram`, `facebook`, `dob`, `user_type`, `business_owner_name`, `business_name`, `business_name_slug`, `business_register_num`, `business_address`, `business_warehouse_address`, `business_email`, `business_phone`, `business_return_name`, `business_return_email`, `business_return_address`, `business_return_phone`, `business_logo`, `show_password`, `email_verified_at`, `password`, `remember_token`, `entry_by`, `created_at`, `updated_at`, `status`) VALUES
-(1, 1, NULL, NULL, 75, 2, 'admin', NULL, NULL, 'admin@gmail.com', '/backend/files/QghrRIJF2QIUpvBdeuQj.png', '01815728982', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', NULL, '$2a$12$w3Sd7LSp69CLMh.xMEcXoux6NAwPlS2xqZAFsTg328wwSQH4g97Lu', NULL, NULL, '2023-12-17 02:13:10', '2023-12-17 02:13:10', 1),
-(2, 2, NULL, '1702800790', 75, 2, 'roman', NULL, NULL, 'roman@gmail.com', NULL, '01815728983', '', 'null', 'null', 'null', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'roman@gmail.com', NULL, '$2y$10$TZX9JkWAq2JPWhoAZ7Zks.JU1OaoA/ml63uoirZKpl6GJyWlim9S6', NULL, NULL, '2023-12-17 02:13:10', '2023-12-17 02:13:10', 1),
-(3, 2, NULL, NULL, NULL, NULL, 'jonsjonahmed', 'jons', 'jonahmed', 'jonsahmed@gmail.com', NULL, '01815728984', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-25', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ddd', NULL, '$2y$10$K7J1BHoWu..R9duZU1XD8uxRWgPral2obdJv6G.XTXDM84cru/wiG', NULL, NULL, '2024-01-28 12:41:51', '2024-01-28 12:41:51', 1),
-(4, 3, NULL, NULL, NULL, NULL, 'Smart', 'Business', 'jonahmed', 'seller@gmail.com', NULL, '018157289896', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-25', 1, NULL, 'Smart Business', 'smart-business', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'seller@gmail.com', NULL, '$2a$12$k8cfe4KxPdNFqINEkeNGn.GMt8WbV3TSqzTcL6JIxA3JtrLR4FbMG', NULL, NULL, '2024-01-28 12:41:51', '2024-01-28 12:41:51', 1);
+INSERT INTO `users` (`id`, `role_id`, `employee_id`, `invite_code`, `reffer_bonus`, `join_id`, `name`, `f_name`, `l_name`, `email`, `gender`, `birthdate`, `image`, `phone_number`, `phone_number2`, `address`, `address_1`, `country_1`, `city_1`, `landmark_1`, `phone_1`, `country_2`, `city_2`, `address_2`, `landmark_2`, `phone_2`, `website`, `github`, `twitter`, `instagram`, `facebook`, `dob`, `user_type`, `business_owner_name`, `business_name`, `business_name_slug`, `business_register_num`, `business_address`, `business_warehouse_address`, `business_email`, `business_phone`, `business_return_name`, `business_return_email`, `business_return_address`, `business_return_phone`, `business_logo`, `show_password`, `email_verified_at`, `password`, `remember_token`, `entry_by`, `created_at`, `updated_at`, `status`) VALUES
+(1, 1, NULL, NULL, 75, 2, 'admin', NULL, NULL, 'admin@gmail.com', 0, NULL, '/backend/files/QghrRIJF2QIUpvBdeuQj.png', '01815728982', 0, '', '', '', '', '0', 0, '', '', '', '', 0, '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', NULL, '$2a$12$w3Sd7LSp69CLMh.xMEcXoux6NAwPlS2xqZAFsTg328wwSQH4g97Lu', NULL, NULL, '2023-12-17 02:13:10', '2023-12-17 02:13:10', 1),
+(2, 2, NULL, '1702800790', 75, 2, 'roman', NULL, NULL, 'roman@gmail.com', 0, NULL, NULL, '01815728983', 0, '', 'null', 'null', 'null', '0', 0, '', '', '', '', 0, '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'roman@gmail.com', NULL, '$2y$10$TZX9JkWAq2JPWhoAZ7Zks.JU1OaoA/ml63uoirZKpl6GJyWlim9S6', NULL, NULL, '2023-12-17 02:13:10', '2023-12-17 02:13:10', 1),
+(3, 2, NULL, NULL, NULL, NULL, 'jonsjonahmed', 'jons', 'jonahmed', 'jonsahmed@gmail.com', 0, NULL, NULL, '01815728984', 0, NULL, NULL, NULL, NULL, '0', 0, '', '', '', '', 0, NULL, NULL, NULL, NULL, NULL, '2024-01-25', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ddd', NULL, '$2y$10$K7J1BHoWu..R9duZU1XD8uxRWgPral2obdJv6G.XTXDM84cru/wiG', NULL, NULL, '2024-01-28 12:41:51', '2024-01-28 12:41:51', 1),
+(4, 3, NULL, NULL, NULL, NULL, 'Smart', 'Business', 'jonahmed', 'seller@gmail.com', 0, NULL, '/backend/files/0xBrxFppCY98eooLcNn4.png', '018157289896', 0, NULL, NULL, NULL, NULL, '0', 0, '', '', '', '', 0, NULL, NULL, NULL, NULL, NULL, '2024-01-25', 1, NULL, 'Smart Business', 'smart-business', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '/backend/files/u1zzzSmCJC3ajUgYEDf4.png', 'seller@gmail.com', NULL, '$2a$12$k8cfe4KxPdNFqINEkeNGn.GMt8WbV3TSqzTcL6JIxA3JtrLR4FbMG', NULL, NULL, '2024-01-28 12:41:51', '2024-01-28 12:41:51', 1),
+(5, 2, NULL, '1708347175', NULL, 0, 'pronay', NULL, NULL, 'pronay@mail.com', 1, '2024-02-05', NULL, '111', 0, NULL, 'address_1', 'ALA', 'address_1', 'v-model=\"userdata.phone_number2\"', 1, 'ARG', 'address_2', 'address_2', 'v-model=\"userdata.phone_number2\"', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Farabi Enterprise', 'farabi-enterprise', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'pronay', NULL, '$2y$10$lx1NyNHvL/iHVkfC/xQtfe.369SX8NubpkXrPjMSmKUrvyeXlhaeO', NULL, NULL, '2024-02-19 06:52:55', '2024-02-19 06:52:55', 1),
+(6, 3, NULL, '1709304531', NULL, 0, 'seller1', NULL, NULL, 'seller1@mail.com', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Addidas', 'addidas', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '/backend/files/gVnjAIZldHPUdJ5YuDhK.png', 'seller1@mail.com', NULL, '$2y$10$U18qj4tts.F5YYRuuf2Po.vyqm4PwQ75r7RB0ukziIDKkOch4fyky', NULL, NULL, '2024-03-01 08:48:51', '2024-03-01 08:48:51', 1),
+(7, 3, NULL, '1709304609', NULL, 0, 'seller2@mail.com', NULL, NULL, 'seller2@mail.com', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Araimo', 'araimo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '/backend/files/moCasKo80D02cz9rIW4x.png', 'seller2@mail.com', NULL, '$2y$10$.gIvIpeUMxT1ZTDGoO4GmOnruzHbHeqYeE.cgXJYIV6CWTbgoHWWa', NULL, NULL, '2024-03-01 08:50:09', '2024-03-01 08:50:09', 1),
+(8, 3, NULL, '1709304668', NULL, 0, 'seller3@mail.com', NULL, NULL, 'seller3@mail.com', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'addidas', 'addidass', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '/backend/files/4oW3oxnoU2BsLfm6QTJD.png', 'seller3@mail.com', NULL, '$2y$10$QbrGqRyYKEKQGLESZv0yEOLI4XlpduU4PrMElP52LP2hbnrpXTJxq', NULL, NULL, '2024-03-01 08:51:08', '2024-03-01 08:51:08', 1),
+(9, 3, NULL, '1709305088', NULL, 0, 'seller3@gmail.com', NULL, NULL, 'seller3@gmail.com', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Daraz', 'Daraz', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '/backend/files/EPaRPHg9yJXvnlTJQYLn.png', 'seller3@gmail.com', NULL, '$2y$10$boOQJlK0uXhraNOxy8OWGuQ9NC69uhYrQPce3QNVDPnEvS50j9TOK', NULL, NULL, '2024-03-01 08:58:08', '2024-03-01 08:58:08', 1);
 
 -- --------------------------------------------------------
 
@@ -12088,7 +12176,8 @@ INSERT INTO `wishlist` (`id`, `customer_id`, `product_id`, `created_at`, `update
 (1, 3, 19, '2024-01-27 05:05:08', '2024-01-27 05:05:08'),
 (3, 66, 192, '2024-01-27 05:15:48', '2024-01-27 05:15:48'),
 (4, 2, 14, '2024-02-06 17:32:16', '2024-02-06 17:32:16'),
-(5, 2, 160, '2024-02-06 17:37:35', '2024-02-06 17:37:35');
+(5, 2, 160, '2024-02-06 17:37:35', '2024-02-06 17:37:35'),
+(10, 5, 200, '2024-02-25 19:59:41', '2024-02-25 19:59:41');
 
 --
 -- Indexes for dumped tables
@@ -12164,6 +12253,12 @@ ALTER TABLE `country`
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `dealsbanners`
+--
+ALTER TABLE `dealsbanners`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -12400,6 +12495,12 @@ ALTER TABLE `sliders`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `students`
+--
+ALTER TABLE `students`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tasks`
 --
 ALTER TABLE `tasks`
@@ -12410,6 +12511,12 @@ ALTER TABLE `tasks`
 --
 ALTER TABLE `tbl_setting`
   ADD PRIMARY KEY (`setting_id`);
+
+--
+-- Indexes for table `topheaderbanner`
+--
+ALTER TABLE `topheaderbanner`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -12469,7 +12576,7 @@ ALTER TABLE `bank_short_code`
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `categorys`
@@ -12481,7 +12588,7 @@ ALTER TABLE `categorys`
 -- AUTO_INCREMENT for table `category_commission_history`
 --
 ALTER TABLE `category_commission_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `circumstances`
@@ -12500,6 +12607,12 @@ ALTER TABLE `country`
 --
 ALTER TABLE `customer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `dealsbanners`
+--
+ALTER TABLE `dealsbanners`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `department`
@@ -12607,13 +12720,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `order_history`
 --
 ALTER TABLE `order_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `order_status`
@@ -12709,7 +12822,7 @@ ALTER TABLE `rule`
 -- AUTO_INCREMENT for table `seller_ads`
 --
 ALTER TABLE `seller_ads`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `send_message`
@@ -12724,6 +12837,12 @@ ALTER TABLE `sliders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `students`
+--
+ALTER TABLE `students`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
@@ -12736,16 +12855,22 @@ ALTER TABLE `tbl_setting`
   MODIFY `setting_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `topheaderbanner`
+--
+ALTER TABLE `topheaderbanner`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -189,7 +189,7 @@ export default {
             const formData = new FormData();
             formData.append('imageOne', this.$refs.imageOne.files[0]);
             formData.append('imageTwo', this.$refs.imageTwo.files[0]);
-            console.log(formData);
+            // console.log(formData);
 
             // Make a POST request to your API endpoint
             this.$axios.post('/setting/dealsbannner', formData)
