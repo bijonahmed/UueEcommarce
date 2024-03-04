@@ -303,7 +303,7 @@ export default {
         },
         redirectCategory(slug) {
             this.$router.push({
-                path: '/category/category-list',
+                path: '/category/category-grid',
                 query: {
                     slug: slug
                 }

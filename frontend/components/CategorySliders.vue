@@ -9,7 +9,7 @@
                             <h5>{{ category.name }}</h5>
                         </div>
                         <div>
-                            <nuxt-link :to="'category/category-list?slug=' + category.slug">See All<i class="fas fa-arrow-right"></i></nuxt-link>
+                            <nuxt-link :to="'category/category-grid?slug=' + category.slug" class="catLink">See All<i class="fas fa-arrow-right"></i></nuxt-link>
                         </div>
                     </div>
                 </div>
@@ -138,3 +138,12 @@ export default {
     },
 };
 </script>
+<style>
+.catLink{
+    font-size: 14px;
+
+}
+.catLink i{
+    margin-left: 5px;
+}
+</style>

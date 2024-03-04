@@ -242,7 +242,15 @@ Route::group([
     Route::get('allsellers', [UnauthenticatedController::class, 'allsellers']);
     Route::get('countrylist', [UnauthenticatedController::class, 'countrylist']);
     Route::get('allbrandsList', [UnauthenticatedController::class, 'allbrandlist']);
+    
     Route::get('allsellerList', [UnauthenticatedController::class, 'getallsellerList']);
+    Route::get('allsellerListadmin', [UnauthenticatedController::class, 'allsellerListadmin']);
+
+    Route::get('readcoupons', [UnauthenticatedController::class, 'featchcoupon']);
+    Route::get('alldealsads', [UnauthenticatedController::class, 'getdealsbannersads']);
+    Route::get('headerbanner', [UnauthenticatedController::class, 'getbanner']);
+    
+    Route::get('getAdsbanner', [UnauthenticatedController::class, 'topadsbanner']);
 
 
 });
@@ -291,10 +299,27 @@ Route::group([
     //Ads management  
     Route::get('bannerTopget', [SettingController::class, 'getbannerTop']);
     Route::post('bannerTop', [SettingController::class, 'updatebannerTop']);
-    Route::post('dealsbannner', [SettingController::class, 'updatedealsbannner']);
-    
+    Route::post('dealsbannner', [SettingController::class, 'updatedealsbannner']);    
     Route::get('getdealsbanner', [SettingController::class, 'getdealsbanners']);
+    Route::post('sliderLeftads', [SettingController::class, 'updatesliderLeftads']);  
+    Route::get('getadsbannerreq', [SettingController::class , 'getadsbanner']);
+
+    // coupons 
+    Route::post('addcoupons', [SettingController::class, 'savecoupons']);
+    Route::get('couponsList', [SettingController::class, 'couponsList']);
+    Route::post('updatecoupon', [SettingController::class, 'updatecoupon']);
+    Route::get('getcoupons/{id}', [SettingController::class, 'getcoupons']);
+
+    // seller status 
+    
+    Route::get('editseller/{id}', [SettingController::class, 'editseller']);
+    Route::post('updateSeller', [SettingController::class, 'updateSeller']);
+
+    
 });
+
+
+
 
 
 

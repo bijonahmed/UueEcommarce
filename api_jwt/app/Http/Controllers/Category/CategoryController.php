@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers\Category;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Auth;
-use Validator;
-use Helper;
-use App\Models\User;
-use App\Models\Categorys;
-use App\Category;
-use App\Models\AttributeValues;
-use App\Models\Attribute;
-use App\Models\SubAttribute;
-use App\Models\ProductAttributes;
-use App\Models\ProductAttributeValue;
-use App\Models\Product;
-use App\Models\HomeAroductSliderCategory;
-use Illuminate\Support\Str;
-use App\Rules\MatchOldPassword;
-use Illuminate\Support\Facades\Hash;
 use DB;
+use Auth;
+use Helper;
+use App\Category;
+use App\Models\User;
+use App\Models\Product;
+use App\Models\Attribute;
+use App\Models\Categorys;
+use Illuminate\Support\Str;
+use App\Models\SubAttribute;
+use Illuminate\Http\Request;
+use App\Models\AttributeValues;
+use App\Rules\MatchOldPassword;
+use App\Models\ProductAttributes;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use App\Models\ProductAttributeValue;
+use App\Models\HomeAroductSliderCategory;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -164,6 +164,24 @@ class CategoryController extends Controller
     {
         //dd($request->all());
         ///exit; 
+        $validator = Validator::make(
+                $request->all(),
+                [
+                    'name'      => 'required|unique:categorys,name',
+                    'status'    => 'required',
+                ],
+                [
+                    //'name'   => 'Category name is required',
+                    'status' => 'Status is required',
+                ]
+            );
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()], 422);
+            }
+
+
+        
+        
         if (empty($request->id)) {
             $validator = Validator::make(
                 $request->all(),
@@ -207,6 +225,7 @@ class CategoryController extends Controller
                 'meta_keyword'      => $request->input('meta_keyword'),
                 'parent_id'         => $request->input('parent_id') ? $request->input('parent_id') : 0,
                 'status'            => $request->input('status'),
+                'home_status'       => $request->home_status,
                 'commission'        => $request->input('commission'),
                 'keyword'           => $request->input('keyword'),
                 'mobile_view_class' => $request->input('mobile_view_class'),
@@ -235,11 +254,13 @@ class CategoryController extends Controller
             $data->meta_keyword      =  $request->input('meta_keyword');
             $data->parent_id         =  $request->input('parent_id');
             $data->status            =  $request->input('status');
+            $data->home_status       =  $request->home_status;
             $data->commission        =  $request->input('commission');
             $data->keyword           =  $request->input('keyword');
             $data->mobile_view_class =  $request->input('mobile_view_class');
             $data->save();
         }
+        
         $response = [
             'message' => 'Successfull',
         ];

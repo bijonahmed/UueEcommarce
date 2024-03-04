@@ -48,6 +48,7 @@ export default {
             this.loading = true;
             await this.$axios.get(`/unauthenticate/allsellers`).then(response => {
                     this.sellers = response.data;
+                    // console.log(response.data);
                 })
                 .catch(error => {
                     // Handle error

@@ -369,7 +369,7 @@ export default {
         },
         defaultLoadingData() {
             this.$axios.get('/auth/showProfileData').then(response => {
-                console.log(response.data.data.name)
+                // console.log(response.data.data.name)
                 $('#nav_dataimages').append('<img class="user-img"  src="' + response.data.dataImg + '" />');
             });
         },

@@ -56,7 +56,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 class="text-center">Under constructions...</h2>
+                        <div class="maintanance_box">
+                            <img src="/images/maintenance.png" class="img-fluid" loading="lazy" alt="">
+                            <h2 class="text-center">Under constructions...</h2>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

@@ -57,7 +57,41 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="couponsList">
-                            <div class="coupon">
+                            <div v-for="(coupon, index) in coupons" :key="index" class="coupon">
+                                <div class="ctop">
+                                    <h3>Active ecommerce <a :href="coupon.store_link">Visit Store</a></h3>
+                                    <p v-if="coupon.d_percent !== null && coupon.d_percent !== undefined && coupon.d_percent !== 0">
+                                        ${{ coupon.d_percent }}.00 OFF
+                                    </p>
+                                    <p v-if="coupon.d_fvalue !== null && coupon.d_fvalue !== undefined && coupon.d_fvalue !== 0">
+                                        {{ coupon.d_fvalue }}% OFF
+                                    </p>
+                                </div>
+                                <div class="cmiddle">
+                                    <span class="middleCircleLeft"></span>
+                                    <hr class="dashLine">
+                                    <span class="middleCircleRight"></span>
+                                </div>
+                                <div class="cbottom">
+                                    <p>Min Spend <strong>${{ coupon.min_shopping }}</strong> to get 
+                                        <span v-if="coupon.d_percent !== null && coupon.d_percent !== undefined && coupon.d_percent !== 0">
+                                        ${{ coupon.d_percent }}.00
+                                    </span>
+                                    <span v-if="coupon.d_fvalue !== null && coupon.d_fvalue !== undefined && coupon.d_fvalue !== 0">
+                                        {{ coupon.d_fvalue }}%
+                                    </span>
+                                        OFF on total orders
+                                    
+                                    </p>
+                                    <div class="copyCode">
+                                        <p>Code: <strong>{{ coupon.promocode }}</strong></p>
+                                        <button @click="copyCode(coupon.promocode)" class="btn_copy"><i
+                                                class="fa-regular fa-copy"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="coupon">
                                 <div class="ctop">
                                     <h3>Filon Asset Store <a href="#">Visit Store</a></h3>
                                     <p>20% OFF</p>
@@ -268,7 +302,7 @@
                                                 class="fa-regular fa-copy"></i></button>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -279,10 +313,14 @@
         <div class="back_top">
             <a href="#top"><i class="fa-solid fa-angle-up"></i></a>
         </div>
+        <!-- Success message -->
+        <div v-if="showSuccessMessage" class="success-message">
+            Code copied successfully!
+        </div>
         <Footer />
     </div>
 </template>
-    
+
 <script>
 import $ from 'jquery';
 import Common_MobileSidebar from '~/components/Common_MobileSidebar.vue';
@@ -309,11 +347,16 @@ export default {
     },
     data() {
         return {
-            coupcode: "MAS500"
+            coupcode: "MAS500",
+            coupons: [],
+            showSuccessMessage: false,
         }
+
+
     },
     mounted() {
         // this.copyTestingCode();
+        this.getData();
     },
     methods: {
         copyCode(code) {
@@ -323,9 +366,35 @@ export default {
             tempInput.select();
             document.execCommand('copy');
             document.body.removeChild(tempInput);
-            alert('Code copied to clipboard: ' + code);
+
+            this.showSuccessMessage = true;
+            setTimeout(() => {
+                this.showSuccessMessage = false;
+            }, 3000); // Hide success message after 3 seconds
+
+        },
+        getData() {
+            console.log(this.$route.params.id);
+            let id = this.$route.params.id;
+            this.$axios.get(`/unauthenticate/readcoupons`).then(response => {
+                this.coupons = response.data.reverse();
+            });
+
         },
     },
 }
 </script>
-    
+
+<style>
+/* Style the success message */
+.success-message {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    z-index: 99999999;
+}
+</style>

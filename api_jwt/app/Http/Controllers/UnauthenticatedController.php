@@ -10,6 +10,7 @@ use Validator;
 use App\Models\User;
 use App\Models\Brands;
 use App\Models\Country;
+use App\Models\coupons;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\Sliders;
@@ -25,13 +26,15 @@ use App\Models\ProductCategory;
 use App\Rules\MatchOldPassword;
 use PhpParser\Node\Stmt\TryCatch;
 use App\Models\User as ModelsUser;
-use App\Http\Controllers\Controller;
 //use User;
-use App\Models\ProductAdditionalImg;
+use App\Http\Controllers\Controller;
 
+use App\Models\ProductAdditionalImg;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Models\HomeAroductSliderCategory;
+use App\Models\sliderSideAdsModel;
+use App\Models\topheaderbanner;
 use Workbench\App\Models\User as AppModelsUser;
 
 class UnauthenticatedController extends Controller
@@ -388,7 +391,7 @@ class UnauthenticatedController extends Controller
     public function allsellers()
     {
 
-        $find_sellers  = User::where('role_id', 3)->select('id', 'business_name', 'business_logo', 'business_name_slug')->limit(12)->orderBy('id', 'desc')->get();
+        $find_sellers  = User::where('role_id', 3)->where('status', 1)->where('home_status', 1)->select('id', 'business_name', 'business_logo', 'business_name_slug')->limit(12)->orderBy('id', 'desc')->get();
 
         foreach ($find_sellers as $v) {
             $results[] = [
@@ -520,35 +523,96 @@ class UnauthenticatedController extends Controller
     }
     public function getallsellerList(Request $request)
     {
-        // try {
-        //     $rows = User::allUseers($request->all());
-        //     $response = [
-        //         'data' => $rows,
-        //         'message' => 'success'
-        //     ];
-        // } catch (\Throwable $th) {
-        //     $response = [
-        //         'data' => [],
-        //         'message' => 'failed'
-        //     ];
-        // }
-        // return response()->json($response, 200);
-        // $sellershop    = User::all();
-        $sellershop = User::where('role_id', 3) ->where('status', 1) ->get();
-
-
+        $sellershop = User::where('role_id', 3)->where('status', 1)->get();
         $formatedData = [];
         foreach ($sellershop as $Key => $value) {
             $formatedData[] = [
                 'id'                => $value->id,
                 'role'              => $value->role_id,
                 'businessName'      => $value->business_name,
+                'name'      => $value->business_name,
                 'slug'      => $value->business_name_slug,
                 'businessLogo'      => !empty($value->business_logo) ? url($value->business_logo) : "",
-                // 'role'         => !empty($value->imageOne) ? url($value->role_id) : "",
-                // 'business_name'         => !empty($value->business_logo) ? url($value->business_logo) : "",
+                'status'              => $value->status,
+                'home_status'              => $value->home_status,
             ];
         }
         return response()->json($formatedData, 200);
+    }
+    public function allsellerListadmin (Request $request)
+    {
+        $sellershop = User::where('role_id', 3)->get();
+        $formatedData = [];
+        foreach ($sellershop as $Key => $value) {
+            $formatedData[] = [
+                'id'                => $value->id,
+                'role'              => $value->role_id,
+                'businessName'      => $value->business_name,
+                'name'      => $value->business_name,
+                'slug'      => $value->business_name_slug,
+                'businessLogo'      => !empty($value->business_logo) ? url($value->business_logo) : "",
+                'status'              => $value->status,
+                'home_status'              => $value->home_status,
+            ];
+        }
+        return response()->json($formatedData, 200);
+    }
+    
+    public function featchcoupon(){
+        
+        $coupons = coupons::all();
+        $formatedData = [];
+        foreach ($coupons as $Key => $value) {
+            $formatedData[] = [
+                
+                'id'            => $value->id,                
+                'name'          => $value->name,
+                'slug'          => $value->slug,
+                'promocode'     => $value->promocode,
+                'code_type'     => $value->code_type,
+                'min_shopping'  => $value->min_shopping,
+                'status'        => $value->status,
+                'd_percent'     => $value->d_percent,
+                'd_fvalue'      => $value->d_fvalue,
+            ];
+        }
+        return response()->json($formatedData, 200);
+    }
+    public function getbanner(){
+
+        $banner = topheaderbanner::first();
+
+
+        if ($banner->count() > 0) {
+            $image = $banner->image ? url($banner->image) : null;
+            return response()->json([
+                'status' => 200,
+                'image' => $image,
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 202,
+                'message' => "Banner Not Found"
+            ], 202);
+        }
+    }
+    public function topadsbanner(){
+        $adsBannder = sliderSideAdsModel::first();
+
+        if ($adsBannder->count() > 0) {
+            $image1 = $adsBannder->adsOne ? url($adsBannder->adsOne) : null;
+            $image2 = $adsBannder->adsTwo ? url($adsBannder->adsTwo) : null;
+            return response()->json([
+                'status' => 200,
+                'image1' => $image1,
+                'image2' => $image2,
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 202,
+                'message' => "Banner Not Found"
+            ], 202);
+        }
+
     }
 }

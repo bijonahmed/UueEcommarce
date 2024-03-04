@@ -141,8 +141,17 @@
                                                             <div class="row mb-3">
                                                                 <label for="input-meta-description-1" class="col-sm-2 col-form-label">Status</label>
                                                                 <div class="col-sm-10">
-                                                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="status" id="status">
-                                                                        <option selected value="1">Active</option>
+                                                                    <select class="form-select form-select-sm" v-model="insertdata.status" aria-label=".form-select-sm example" name="status" id="status">
+                                                                        <option value="1">Active</option>
+                                                                        <option value="0">Inactive</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <label for="home_status" class="col-sm-2 col-form-label">Home Status</label>
+                                                                <div class="col-sm-10">
+                                                                    <select  class="form-select form-select-sm" v-model="insertdata.home_status" aria-label=".form-select-sm example" name="home_status" id="home_status">
+                                                                        <option value="1" selected>Active</option>
                                                                         <option value="0">Inactive</option>
                                                                     </select>
                                                                 </div>
@@ -218,6 +227,7 @@ export default {
                 mobile_view_class: '',
                 keyword: '',
                 status: 1,
+                home_status: 0,
             },
             categories: [],
             notifmsg: '',
@@ -274,8 +284,10 @@ export default {
             formData.append('commission', this.insertdata.commission);
             formData.append('parent_id', this.insertdata.parent_id);
             formData.append('status', this.insertdata.status);
+            formData.append('home_status', this.insertdata.home_status);
             formData.append('keyword', this.insertdata.keyword);
             // formData.append('status', this.insertdata.status);
+            // console.log(formData);
             const headers = {
                 'Content-Type': 'multipart/form-data'
             };
@@ -285,7 +297,7 @@ export default {
                 }).then((res) => {
                 $('#formrest')[0].reset();
                 this.success_noti();
-                this.$router.push('/ecommarce/category-list');
+                // this.$router.push('/ecommarce/category-list');
             }).catch(error => {
                 if (error.response.status === 422) {
                     this.errors = error.response.data.errors;

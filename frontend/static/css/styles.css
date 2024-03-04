@@ -9539,6 +9539,33 @@ select:valid {
   border: #d5d5d5;
 }
 
+.maintanance_box{
 
+border: 1px solid #900c3f;
+
+text-align: center;
+
+/* width: fit-content; */
+
+margin: auto;
+
+padding: 30px;
+
+border-radius: 10px;
+}
+.maintanance_box img{
+
+width: 100px;
+}
+.maintanance_box h2{
+  
+font-size: 20px;
+  
+margin-top: 10px;
+  
+padding: 5px;
+  
+color: #900c3f;
+}
 
 /* coupons page end here  */

@@ -6,7 +6,7 @@
         <LogoAndPayment />
         <Navbar />
         <!-- Main section start here  -->
-        <section class="main_content mainContent">
+        <section class="main_content mainContent pt-2">
             <div class="container">
                 <NavSlider />
                 <CategoryPart />
