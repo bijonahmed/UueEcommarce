@@ -30,7 +30,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group mb-2">
-                                    <label for="" class="text-dark fs-6">Home View Status <span
+                                    <label for="" class="text-dark fs-6">Top Stores Status <span
                                             class="text-danger">*</span></label>
                                     <select name="status" v-model="insertdata.home_status" id=""
                                         class="form-control">

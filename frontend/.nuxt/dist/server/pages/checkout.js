@@ -1,14 +1,14 @@
-exports.ids = [64,14,15,16,18,22,24,25,37];
+exports.ids = [66,15,16,17,19,23,25,26,38];
 exports.modules = {
 
-/***/ 207:
+/***/ 208:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/checkout.vue?vue&type=template&id=7c6733f8&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/checkout.vue?vue&type=template&id=bf48cf6e&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -37,14 +37,15 @@ var render = function render() {
     }, [_vm._v(_vm._s(item.product.product_name))])], 1), _vm._ssrNode(" <td><img" + _vm._ssrAttr("src", item.product.thumnail_img) + " class=\"img-thumbnail\" style=\"width: 50px; height:10%;\"></td> <td>" + _vm._ssrEscape(_vm._s(item.quantity) + " x $" + _vm._s(item.product.price)) + "</td> <td><button type=\"button\"><i class=\"fa-solid fa-trash-can\"></i></button></td>")], 2);
   }), 0)], 2)], 2)]), _vm._ssrNode(" <div class=\"sub_total\"><div class=\"row\"><div class=\"col-12\"><div class=\"s_item_sub\"><p>" + _vm._ssrEscape(_vm._s(_vm.itemCount) + " item(s). Subtotal: " + _vm._s(_vm.subtotal) + " TK") + "</p></div></div></div></div>")], 2), _vm._ssrNode(" <div class=\"delivery_addreess\"><strong>BILLING DETAILS</strong> " + (_vm.errors ? "<div style=\"text-align: center;\"><ul style=\"font-size: 14px;\">" + _vm._ssrList(_vm.errors, function (error, field) {
     return "<li><span class=\"text-danger\">" + _vm._ssrEscape(_vm._s(error[0])) + "</span></li>";
-  }) + "</ul></div>" : "<!---->") + " <div class=\"row\"><div class=\"col-md-6\"><div class=\"group\"><input type=\"text\"" + _vm._ssrAttr("value", _vm.insertdata.name) + " class=\"input\"> " + (_vm.errors.name ? "<span class=\"text-danger\"><small>" + _vm._ssrEscape(_vm._s(_vm.errors.name[0])) + "</small></span>" : "<!---->") + " <span class=\"highlight\"></span> <span class=\"bar\"></span> <label>Name</label></div></div> <div class=\"col-md-6\"><div class=\"group\"><input type=\"text\"" + _vm._ssrAttr("value", _vm.insertdata.email) + " class=\"input\"> " + (_vm.errors.email ? "<span class=\"text-danger\"><small>" + _vm._ssrEscape(_vm._s(_vm.errors.email[0])) + "</small></span>" : "<!---->") + " <span class=\"highlight\"></span> <span class=\"bar\"></span> <label>Email</label></div></div> <div class=\"col-md-12\"><div class=\"group\"><input type=\"text\"" + _vm._ssrAttr("value", _vm.insertdata.phone_number) + " class=\"input\"> " + (_vm.errors.phone_number ? "<span class=\"text-danger\"><small>" + _vm._ssrEscape(_vm._s(_vm.errors.phone_number[0])) + "</small></span>" : "<!---->") + " <span class=\"highlight\"></span> <span class=\"bar\"></span> <label>Phone</label></div></div> <div class=\"col-md-12\"><div class=\"group\"><input type=\"text\"" + _vm._ssrAttr("value", _vm.insertdata.address) + " class=\"input\"> " + (_vm.errors.address ? "<span class=\"text-danger\"><small>" + _vm._ssrEscape(_vm._s(_vm.errors.address[0])) + "</small></span>" : "<!---->") + " <span class=\"highlight\"></span> <span class=\"bar\"></span> <label>Address</label></div></div> <div class=\"col-md-6\"><div class=\"group\"><input type=\"text\"" + _vm._ssrAttr("value", _vm.insertdata.country) + " class=\"input\"> " + (_vm.errors.country ? "<span class=\"text-danger\"><small>" + _vm._ssrEscape(_vm._s(_vm.errors.country[0])) + "</small></span>" : "<!---->") + " <span class=\"highlight\"></span> <span class=\"bar\"></span> <label>Country</label></div></div> <div class=\"col-md-6\"><div class=\"group\"><input type=\"text\"" + _vm._ssrAttr("value", _vm.insertdata.city) + " class=\"input\"> " + (_vm.errors.city ? "<span class=\"text-danger\"><small>" + _vm._ssrEscape(_vm._s(_vm.errors.city[0])) + "</small></span>" : "<!---->") + " <span class=\"highlight\"></span> <span class=\"bar\"></span> <label>City</label></div></div></div> <hr> <div class=\"different-address-form-trigger\"><input type=\"checkbox\" id=\"direrent-address-toggle\"" + _vm._ssrAttr("checked", Array.isArray(_vm.showDifferentAddress) ? _vm._i(_vm.showDifferentAddress, null) > -1 : _vm.showDifferentAddress) + " class=\"sn-checkbox\"> <label for=\"direrent-address-toggle\">SHIP TO DIFFERENT ADDRESS</label> <hr> " + (_vm.showDifferentAddress ? "<div class=\"row\"><div class=\"col-md-6\"><div class=\"group\"><input type=\"text\"" + _vm._ssrAttr("value", _vm.insertdata.shipper_name) + " class=\"input\"> <span class=\"highlight\"></span> <span class=\"bar\"></span> <label>Name</label></div></div> <div class=\"col-md-6\"><div class=\"group\"><input type=\"text\"" + _vm._ssrAttr("value", _vm.insertdata.shipper_email) + " class=\"input\"> <span class=\"highlight\"></span> <span class=\"bar\"></span> <label>Email</label></div></div> <div class=\"col-md-12\"><div class=\"group\"><input type=\"text\"" + _vm._ssrAttr("value", _vm.insertdata.shipper_phone_number) + " class=\"input\"> <span class=\"highlight\"></span> <span class=\"bar\"></span> <label>Phone</label></div></div> <div class=\"col-md-12\"><div class=\"group\"><input type=\"text\"" + _vm._ssrAttr("value", _vm.insertdata.shipper_address) + " class=\"input\"> <span class=\"highlight\"></span> <span class=\"bar\"></span> <label>Address</label></div></div> <div class=\"col-md-6\"><div class=\"group\"><input type=\"text\"" + _vm._ssrAttr("value", _vm.insertdata.shipper_country) + " class=\"input\"> <span class=\"highlight\"></span> <span class=\"bar\"></span> <label>Country</label></div></div> <div class=\"col-md-6\"><div class=\"group\"><input type=\"text\"" + _vm._ssrAttr("value", _vm.insertdata.shipper_city) + " class=\"input\"> <span class=\"highlight\"></span> <span class=\"bar\"></span> <label>City</label></div></div></div>" : "<!---->") + "</div></div>")], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"col-md-4\">", "</div>", [_vm._ssrNode("<div class=\"cart_sidebar\">", "</div>", [_vm._ssrNode("<div class=\"pirce_summary\">", "</div>", [_vm._ssrNode("<table class=\"table\"><tbody><tr><td><strong>Order Summary</strong></td> <td></td></tr> <tr><td><strong>Items Total</strong></td> <td>" + _vm._ssrEscape(_vm._s(_vm.itemCount)) + "</td></tr> <tr><td><strong>Delivery Fee </strong></td> <td>100 TK</td></tr> <tr><td><strong>Total Payment</strong></td> <td>" + _vm._ssrEscape(_vm._s(_vm.subtotal + 100) + " TK") + "</td></tr></tbody></table> "), _vm.cart.length > 0 ? _vm._ssrNode("<span>", "</span>", [_vm._ssrNode("<button type=\"submit\" class=\"btn_cart text-center\" style=\"visibility: unset; background-color: #900C3F; color: #fff; margin-top: 10px;\">Place Order</button>")], 2) : _vm._ssrNode("<span>", "</span>", [_c('center', [_vm._v("Please add to cart.")])], 1)], 2)])])], 2)])])]), _vm._ssrNode(" <div class=\"back_top\"><a href=\"#top\"><i class=\"fa-solid fa-angle-up\"></i></a></div> "), _c('Footer')], 2);
+  }) + "</ul></div>" : "<!---->") + " <div class=\"row\"><div class=\"col-md-6\"><div class=\"group\"><input type=\"text\"" + _vm._ssrAttr("value", _vm.insertdata.name) + " class=\"input\"> " + (_vm.errors.name ? "<span class=\"text-danger\"><small>" + _vm._ssrEscape(_vm._s(_vm.errors.name[0])) + "</small></span>" : "<!---->") + " <span class=\"highlight\"></span> <span class=\"bar\"></span> <label>Name</label></div></div> <div class=\"col-md-6\"><div class=\"group\"><input type=\"text\"" + _vm._ssrAttr("value", _vm.insertdata.email) + " class=\"input\"> " + (_vm.errors.email ? "<span class=\"text-danger\"><small>" + _vm._ssrEscape(_vm._s(_vm.errors.email[0])) + "</small></span>" : "<!---->") + " <span class=\"highlight\"></span> <span class=\"bar\"></span> <label>Email</label></div></div> <div class=\"col-md-12\"><div class=\"group\"><input type=\"text\"" + _vm._ssrAttr("value", _vm.insertdata.phone_number) + " class=\"input\"> " + (_vm.errors.phone_number ? "<span class=\"text-danger\"><small>" + _vm._ssrEscape(_vm._s(_vm.errors.phone_number[0])) + "</small></span>" : "<!---->") + " <span class=\"highlight\"></span> <span class=\"bar\"></span> <label>Phone</label></div></div> <div class=\"col-md-12\"><div class=\"group\"><input type=\"text\"" + _vm._ssrAttr("value", _vm.insertdata.address) + " class=\"input\"> " + (_vm.errors.address ? "<span class=\"text-danger\"><small>" + _vm._ssrEscape(_vm._s(_vm.errors.address[0])) + "</small></span>" : "<!---->") + " <span class=\"highlight\"></span> <span class=\"bar\"></span> <label>Address</label></div></div> <div class=\"col-md-6\"><div class=\"group\"><input type=\"text\"" + _vm._ssrAttr("value", _vm.insertdata.country) + " class=\"input\"> " + (_vm.errors.country ? "<span class=\"text-danger\"><small>" + _vm._ssrEscape(_vm._s(_vm.errors.country[0])) + "</small></span>" : "<!---->") + " <span class=\"highlight\"></span> <span class=\"bar\"></span> <label>Country</label></div></div> <div class=\"col-md-6\"><div class=\"group\"><input type=\"text\"" + _vm._ssrAttr("value", _vm.insertdata.city) + " class=\"input\"> " + (_vm.errors.city ? "<span class=\"text-danger\"><small>" + _vm._ssrEscape(_vm._s(_vm.errors.city[0])) + "</small></span>" : "<!---->") + " <span class=\"highlight\"></span> <span class=\"bar\"></span> <label>City</label></div></div></div> <hr> <div class=\"different-address-form-trigger\"><input type=\"checkbox\" id=\"direrent-address-toggle\"" + _vm._ssrAttr("checked", Array.isArray(_vm.showDifferentAddress) ? _vm._i(_vm.showDifferentAddress, null) > -1 : _vm.showDifferentAddress) + " class=\"sn-checkbox\"> <label for=\"direrent-address-toggle\">SHIP TO DIFFERENT ADDRESS</label> <hr> " + (_vm.showDifferentAddress ? "<div class=\"row\"><div class=\"col-md-6\"><div class=\"group\"><input type=\"text\"" + _vm._ssrAttr("value", _vm.insertdata.shipper_name) + " class=\"input\"> <span class=\"highlight\"></span> <span class=\"bar\"></span> <label>Name</label></div></div> <div class=\"col-md-6\"><div class=\"group\"><input type=\"text\"" + _vm._ssrAttr("value", _vm.insertdata.shipper_email) + " class=\"input\"> <span class=\"highlight\"></span> <span class=\"bar\"></span> <label>Email</label></div></div> <div class=\"col-md-12\"><div class=\"group\"><input type=\"text\"" + _vm._ssrAttr("value", _vm.insertdata.shipper_phone_number) + " class=\"input\"> <span class=\"highlight\"></span> <span class=\"bar\"></span> <label>Phone</label></div></div> <div class=\"col-md-12\"><div class=\"group\"><input type=\"text\"" + _vm._ssrAttr("value", _vm.insertdata.shipper_address) + " class=\"input\"> <span class=\"highlight\"></span> <span class=\"bar\"></span> <label>Address</label></div></div> <div class=\"col-md-6\"><div class=\"group\"><input type=\"text\"" + _vm._ssrAttr("value", _vm.insertdata.shipper_country) + " class=\"input\"> <span class=\"highlight\"></span> <span class=\"bar\"></span> <label>Country</label></div></div> <div class=\"col-md-6\"><div class=\"group\"><input type=\"text\"" + _vm._ssrAttr("value", _vm.insertdata.shipper_city) + " class=\"input\"> <span class=\"highlight\"></span> <span class=\"bar\"></span> <label>City</label></div></div></div>" : "<!---->") + "</div></div>")], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"col-md-4\">", "</div>", [_vm._ssrNode("<div class=\"cart_sidebar\">", "</div>", [_vm._ssrNode("<div class=\"d-flex align-items-center justify-content-between\"><p>Ecommerce Voucher</p></div> <form id=\"coupon\" action><div class=\"d-flex align-items-center\"><input type=\"text\" placeholder=\"Enter Your Promo Code \"" + _vm._ssrAttr("value", _vm.coupons.couponCode) + " class=\"form-control me-2 rounded-0\" style=\"font-size: 12px;border: none !important; border-bottom: 1px solid #900C3F !important;\"> <button class=\"btn_confirm h-100 rounded-0\" style=\"border: 1px solid;\">Submit</button></div> <p class=\"text-success msg mt-2\" style=\"font-size: 12px;\">Valid</p></form> "), _vm._ssrNode("<div class=\"pirce_summary\">", "</div>", [_vm._ssrNode("<table class=\"table\"><tbody><tr><td><strong>Order Summary</strong></td> <td></td></tr> <tr><td><strong>Items Total</strong></td> <td>" + _vm._ssrEscape(_vm._s(_vm.itemCount)) + "</td></tr> <tr><td><strong>Delivery Fee </strong></td> <td>100 TK</td></tr> <tr><td><strong>Total Payment</strong></td> <td>" + _vm._ssrEscape(_vm._s(_vm.subtotal + 100) + " TK") + "</td></tr></tbody></table> "), _vm.cart.length > 0 ? _vm._ssrNode("<span>", "</span>", [_vm._ssrNode("<button type=\"submit\" class=\"btn_cart text-center\" style=\"visibility: unset; background-color: #900C3F; color: #fff; margin-top: 10px;\">Place\n                                        Order</button>")], 2) : _vm._ssrNode("<span>", "</span>", [_c('center', [_vm._v("Please add to cart.")])], 1)], 2)], 2)])], 2)])])]), _vm._ssrNode(" <div class=\"back_top\"><a href=\"#top\"><i class=\"fa-solid fa-angle-up\"></i></a></div> "), _c('Footer')], 2);
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/checkout.vue?vue&type=template&id=7c6733f8&
+// CONCATENATED MODULE: ./pages/checkout.vue?vue&type=template&id=bf48cf6e&
 
 // EXTERNAL MODULE: external "jquery"
 var external_jquery_ = __webpack_require__(32);
+var external_jquery_default = /*#__PURE__*/__webpack_require__.n(external_jquery_);
 
 // EXTERNAL MODULE: ./components/Common_MobileSidebar.vue + 4 modules
 var Common_MobileSidebar = __webpack_require__(58);
@@ -92,6 +93,9 @@ var RecentView = __webpack_require__(62);
         shipper_country: '',
         shipper_city: ''
       },
+      coupons: {
+        couponCode: ''
+      },
       loading: false,
       email: '',
       showDifferentAddress: false,
@@ -104,7 +108,8 @@ var RecentView = __webpack_require__(62);
       itemCount: 0,
       subtotal: 0,
       updatedQuantity: 0,
-      customer_id: ''
+      customer_id: '',
+      coupon: ''
     };
   },
   computed: {
@@ -123,10 +128,27 @@ var RecentView = __webpack_require__(62);
     this.loadCart();
     this.cartItemCount();
     this.subtotal = this.calculateSubtotal();
+    this.openPromo();
     if (false) {}
   },
 
   methods: {
+    getCouponData() {
+      const formData = new FormData();
+      formData.append('couponCode', this.coupons.couponCode);
+      this.$axios.get(`/unauthenticate/readcoupons/${this.coupons.couponCode}`).then(response => {
+        this.coupon = response.data.data;
+        external_jquery_default()('.msg').fadeIn();
+      });
+    },
+    openPromo() {
+      external_jquery_default()(".btn_promo").on("click", function () {
+        external_jquery_default()(".promo").fadeIn();
+      });
+      external_jquery_default()(".modal_close").on("click", function () {
+        external_jquery_default()(".promo").fadeOut();
+      });
+    },
     copybillingAddress() {
       this.insertdata.shipper_name = this.insertdata.name;
       this.insertdata.shipper_email = this.insertdata.email;

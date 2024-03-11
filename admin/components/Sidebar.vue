@@ -144,9 +144,9 @@
                         <div class="menu-title">Sellers</div>
                     </a>
                     <ul class="menu dropdown-menu" aria-labelledby="submenuDropdown_34" style="width:100%;">
-                        <li>
+                        <!-- <li>
                             <Nuxt-link to="/seller/allseller"><i class="bx bx-right-arrow-alt"></i>All Sellers</Nuxt-link>
-                        </li>
+                        </li> -->
                         <!-- <li>
                             <Nuxt-link to="#"><i class="bx bx-right-arrow-alt"></i>Payouts</Nuxt-link>
                         </li>
@@ -360,8 +360,11 @@
                         </li>
 
                         <li>
-                            <Nuxt-link to="/user/user_list"><i class="bx bx-right-arrow-alt"></i>User List</Nuxt-link>
+                            <Nuxt-link to="/seller/allseller"><i class="bx bx-right-arrow-alt"></i>Top {{ count }} Store List</Nuxt-link>
                         </li>
+                        <!-- <li>
+                            <Nuxt-link to="/ecommarce/category-list#productsliders"><i class="bx bx-right-arrow-alt"></i>Speacial Category</Nuxt-link>
+                        </li> -->
 
                     </ul>
                 </li>
@@ -381,6 +384,7 @@
                             <Nuxt-link to="/employee/leave-approval-list"><i class="bx bx-right-arrow-alt"></i>Leave
                                 Approval List</Nuxt-link>
                         </li>
+                        
                     </ul>
                 </li>
             </span>
@@ -399,6 +403,7 @@ export default {
             user: {
                 role_id: '',
             },
+            count: '',
         }
     },
     mounted() {
@@ -418,6 +423,16 @@ export default {
                 console.log(response.data.data.role_id)
                 this.user.role_id = response.data.data.role_id;
             });
+        },
+        async fetchData() {
+            try {
+                const response = await this.$axios.get(`/unauthenticate/allsellerListadmin`);
+                // this.data = response.data.data;
+                this.count = response.data.active_data;
+                // console.log(response.data.active_data);
+            } catch (error) {
+                console.error(error);
+            }
         },
     },
 };

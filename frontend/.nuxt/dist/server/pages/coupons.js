@@ -1,26 +1,26 @@
-exports.ids = [65,14,15,16,18,20,22,24,25,31,37];
+exports.ids = [67,15,16,17,19,21,23,25,26,32,38];
 exports.modules = {
 
-/***/ 139:
+/***/ 140:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_coupons_vue_vue_type_style_index_0_id_1a3a1db0_prod_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(92);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_coupons_vue_vue_type_style_index_0_id_1a3a1db0_prod_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_coupons_vue_vue_type_style_index_0_id_1a3a1db0_prod_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_coupons_vue_vue_type_style_index_0_id_1a3a1db0_prod_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_coupons_vue_vue_type_style_index_0_id_1a3a1db0_prod_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_coupons_vue_vue_type_style_index_0_id_70bb6aa5_prod_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(92);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_coupons_vue_vue_type_style_index_0_id_70bb6aa5_prod_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_coupons_vue_vue_type_style_index_0_id_70bb6aa5_prod_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_coupons_vue_vue_type_style_index_0_id_70bb6aa5_prod_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_coupons_vue_vue_type_style_index_0_id_70bb6aa5_prod_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 140:
+/***/ 141:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(8);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".success-message{background-color:#4caf50;border-radius:5px;bottom:20px;color:#fff;left:20px;padding:15px;position:fixed;z-index:99999999}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".pagination{margin-top:20px}.pagination button{background-color:#f8f8f8;border:1px solid #900c3f;cursor:pointer;margin:0 5px;padding:5px 10px}.pagination button.active{background-color:#900c3f;border-color:#900c3f;color:#fff}.pagination button:disabled{background-color:#ffaecd;border-color:#d69cb2;color:#fff}.success-message{background-color:#4caf50;border-radius:5px;bottom:20px;color:#fff;left:20px;padding:15px;position:fixed;z-index:99999999}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
@@ -28,14 +28,14 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 208:
+/***/ 209:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/coupons.vue?vue&type=template&id=1a3a1db0&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/coupons.vue?vue&type=template&id=70bb6aa5&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -45,13 +45,17 @@ var render = function render() {
     }
   }, [_vm._v("Ecommerce "), _c('i', {
     staticClass: "fa-regular fa-star"
-  })])], 2)]), _vm._ssrNode(" <div class=\"col-6 desktop_view mini_tab_hide\"><form action><i class=\"fa-solid fa-magnifying-glass\"></i> <input type=\"text\" name id placeholder=\"Search Product\" class=\"form-control\"> <button type=\"button\">Search</button></form></div> "), _c('DesktopViewOption'), _vm._ssrNode(" <div class=\"col-4 ms-auto mobile_view\"><div class=\"mobile_nav_option\"><a class=\"search_form\"><i class=\"fa-solid fa-magnifying-glass\"></i></a></div></div> "), _c('Common_MobileSearchProduct')], 2)])]), _vm._ssrNode(" <section class=\"main_content mt-3\"><div class=\"container\"><div class=\"row\"><div class=\"col-md-12\"><div class=\"couponsList\">" + _vm._ssrList(_vm.coupons, function (coupon, index) {
-    return "<div class=\"coupon\"><div class=\"ctop\"><h3>Active ecommerce <a" + _vm._ssrAttr("href", coupon.store_link) + ">Visit Store</a></h3> " + (coupon.d_percent !== null && coupon.d_percent !== undefined && coupon.d_percent !== 0 ? "<p>" + _vm._ssrEscape("\n                                    $" + _vm._s(coupon.d_percent) + ".00 OFF\n                                ") + "</p>" : "<!---->") + " " + (coupon.d_fvalue !== null && coupon.d_fvalue !== undefined && coupon.d_fvalue !== 0 ? "<p>" + _vm._ssrEscape("\n                                    " + _vm._s(coupon.d_fvalue) + "% OFF\n                                ") + "</p>" : "<!---->") + "</div> <div class=\"cmiddle\"><span class=\"middleCircleLeft\"></span> <hr class=\"dashLine\"> <span class=\"middleCircleRight\"></span></div> <div class=\"cbottom\"><p>Min Spend <strong>" + _vm._ssrEscape("$" + _vm._s(coupon.min_shopping)) + "</strong> to get \n                                    " + (coupon.d_percent !== null && coupon.d_percent !== undefined && coupon.d_percent !== 0 ? "<span>" + _vm._ssrEscape("\n                                    $" + _vm._s(coupon.d_percent) + ".00\n                                ") + "</span>" : "<!---->") + " " + (coupon.d_fvalue !== null && coupon.d_fvalue !== undefined && coupon.d_fvalue !== 0 ? "<span>" + _vm._ssrEscape("\n                                    " + _vm._s(coupon.d_fvalue) + "%\n                                ") + "</span>" : "<!---->") + "\n                                    OFF on total orders\n                                \n                                </p> <div class=\"copyCode\"><p>Code: <strong>" + _vm._ssrEscape(_vm._s(coupon.promocode)) + "</strong></p> <button class=\"btn_copy\"><i class=\"fa-regular fa-copy\"></i></button></div></div></div>";
-  }) + "</div></div></div></div></section> <div class=\"back_top\"><a href=\"#top\"><i class=\"fa-solid fa-angle-up\"></i></a></div> " + (_vm.showSuccessMessage ? "<div class=\"success-message\">\n        Code copied successfully!\n    </div>" : "<!---->") + " "), _c('Footer')], 2);
+  })])], 2)]), _vm._ssrNode(" <div class=\"col-6 desktop_view mini_tab_hide\"><form action><i class=\"fa-solid fa-magnifying-glass\"></i> <input type=\"text\" name id placeholder=\"Search Product\" class=\"form-control\"> <button type=\"button\">Search</button></form></div> "), _c('DesktopViewOption'), _vm._ssrNode(" <div class=\"col-4 ms-auto mobile_view\"><div class=\"mobile_nav_option\"><a class=\"search_form\"><i class=\"fa-solid fa-magnifying-glass\"></i></a></div></div> "), _c('Common_MobileSearchProduct')], 2)])]), _vm._ssrNode(" <section class=\"main_content mt-3\"><div class=\"container\"><div class=\"row\"><div class=\"col-md-12\"><div class=\"couponsList\">" + _vm._ssrList(_vm.paginatedCoupons, function (coupon, index) {
+    return "<div class=\"coupon\"><div class=\"ctop\"><h3 class=\"fw-bold\">ECOMMERCE</h3> " + (coupon.d_percent !== null && coupon.d_percent !== undefined && coupon.d_percent !== 0 ? "<p>" + _vm._ssrEscape("\n                                    $" + _vm._s(coupon.d_percent) + ".00 OFF\n                                ") + "</p>" : "<!---->") + " " + (coupon.d_fvalue !== null && coupon.d_fvalue !== undefined && coupon.d_fvalue !== 0 ? "<p>" + _vm._ssrEscape("\n                                    " + _vm._s(coupon.d_fvalue) + "% OFF\n                                ") + "</p>" : "<!---->") + "</div> <div class=\"cmiddle\"><span class=\"middleCircleLeft\"></span> <hr class=\"dashLine\"> <span class=\"middleCircleRight\"></span></div> <div class=\"cbottom\"><p>Min Spend <strong>" + _vm._ssrEscape("$" + _vm._s(coupon.min_shopping)) + "</strong> to get\n                                    " + (coupon.d_percent !== null && coupon.d_percent !== undefined && coupon.d_percent !== 0 ? "<span>" + _vm._ssrEscape("\n                                        $" + _vm._s(coupon.d_percent) + ".00\n                                    ") + "</span>" : "<!---->") + " " + (coupon.d_fvalue !== null && coupon.d_fvalue !== undefined && coupon.d_fvalue !== 0 ? "<span>" + _vm._ssrEscape("\n                                        " + _vm._s(coupon.d_fvalue) + "%\n                                    ") + "</span>" : "<!---->") + "\n                                    OFF on total orders\n\n                                </p> <div class=\"copyCode\"><p>Code: <strong>" + _vm._ssrEscape(_vm._s(coupon.promocode)) + "</strong></p> <button class=\"btn_copy\"><i class=\"fa-regular fa-copy\"></i></button></div></div></div>";
+  }) + "</div> <div class=\"pagination\"><button" + _vm._ssrAttr("disabled", _vm.currentPage === 1) + ">Prev</button> " + (_vm.currentPage > 2 ? "<button>First</button>" : "<!---->") + " " + _vm._ssrList(_vm.visiblePages, function (page) {
+    return "<button" + _vm._ssrClass(null, {
+      active: _vm.currentPage === page
+    }) + ">" + _vm._ssrEscape(_vm._s(page)) + "</button>";
+  }) + " " + (_vm.visiblePages.length < _vm.totalPages ? "<span>...</span>" : "<!---->") + " " + (_vm.currentPage !== _vm.totalPages ? "<button>Last</button>" : "<!---->") + " <button" + _vm._ssrAttr("disabled", _vm.currentPage === _vm.totalPages) + ">Next</button></div></div></div></div></section> <div class=\"back_top\"><a href=\"#top\"><i class=\"fa-solid fa-angle-up\"></i></a></div> " + (_vm.showSuccessMessage ? "<div class=\"success-message\">\n        Code copied successfully!\n    </div>" : "<!---->") + " "), _c('Footer')], 2);
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/coupons.vue?vue&type=template&id=1a3a1db0&
+// CONCATENATED MODULE: ./pages/coupons.vue?vue&type=template&id=70bb6aa5&
 
 // EXTERNAL MODULE: external "jquery"
 var external_jquery_ = __webpack_require__(32);
@@ -96,13 +100,52 @@ var OfficialStoreProductList = __webpack_require__(67);
   },
   data() {
     return {
-      coupcode: "MAS500",
       coupons: [],
+      // Array to store coupons data
+      currentPage: 1,
+      // Current page number
+      itemsPerPage: 18,
+      // Number of items per page
+      paginationSize: 3,
+      // Number of pages to show in pagination
+      coupcode: "",
       showSuccessMessage: false
     };
   },
+  computed: {
+    paginatedCoupons() {
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      return this.coupons.slice(startIndex, endIndex);
+    },
+    totalPages() {
+      return Math.ceil(this.coupons.length / this.itemsPerPage);
+    },
+    // visiblePages() {
+    //     const startPage = Math.max(1, this.currentPage - Math.floor(this.paginationSize / 2));
+    //     const endPage = Math.min(this.totalPages, startPage + this.paginationSize - 1);
+
+    //     let pages = [];
+    //     for (let i = startPage; i <= endPage; i++) {
+    //         pages.push(i);
+    //     }
+    //     return pages;
+    // }
+    visiblePages() {
+      const startPage = Math.max(1, this.currentPage - Math.floor(this.paginationSize / 2));
+      const endPage = Math.min(this.totalPages, startPage + this.paginationSize - 1);
+      let pages = [];
+      if (startPage > 1) {
+        pages.push(1); // Add "First" page button
+      }
+
+      for (let i = startPage; i <= endPage; i++) {
+        pages.push(i);
+      }
+      return pages;
+    }
+  },
   mounted() {
-    // this.copyTestingCode();
     this.getData();
   },
   methods: {
@@ -120,11 +163,22 @@ var OfficialStoreProductList = __webpack_require__(67);
     },
 
     getData() {
-      console.log(this.$route.params.id);
-      let id = this.$route.params.id;
       this.$axios.get(`/unauthenticate/readcoupons`).then(response => {
         this.coupons = response.data.reverse();
       });
+    },
+    changePage(page) {
+      this.currentPage = page;
+    },
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+      }
+    },
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
     }
   }
 });
@@ -139,7 +193,7 @@ var componentNormalizer = __webpack_require__(2);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(139)
+  var style0 = __webpack_require__(140)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -1863,14 +1917,14 @@ var component = Object(componentNormalizer["a" /* default */])(
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(140);
+var content = __webpack_require__(141);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
 var add = __webpack_require__(9).default
 module.exports.__inject__ = function (context) {
-  add("138f4d52", content, true, context)
+  add("06074a39", content, true, context)
 };
 
 /***/ })

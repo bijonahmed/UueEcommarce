@@ -1,14 +1,14 @@
-exports.ids = [57,14,15,16,18,22,24,25,37];
+exports.ids = [59,15,16,17,19,23,25,26,38];
 exports.modules = {
 
-/***/ 203:
+/***/ 204:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/cart.vue?vue&type=template&id=6f8429e6&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/cart.vue?vue&type=template&id=43fafe60&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -18,7 +18,7 @@ var render = function render() {
     }
   }, [_vm._v("Ecommerce "), _c('i', {
     staticClass: "fa-regular fa-star"
-  })])], 2)]), _vm._ssrNode(" <div class=\"col-6 desktop_view mini_tab_hide\"><form action><i class=\"fa-solid fa-magnifying-glass\"></i> <input type=\"text\" name id placeholder=\"Search Product\" class=\"form-control\"> <button type=\"button\">Search</button></form></div> "), _c('DesktopViewOption'), _vm._ssrNode(" <div class=\"col-4 ms-auto mobile_view\"><div class=\"mobile_nav_option\"><a class=\"search_form\"><i class=\"fa-solid fa-magnifying-glass\"></i></a></div></div> "), _c('Common_MobileSearchProduct')], 2)])]), _vm._ssrNode(" "), _vm._ssrNode("<section class=\"main_content\">", "</section>", [_vm._ssrNode("<div class=\"container\">", "</div>", [_vm._ssrNode("<div class=\"row\">", "</div>", [_vm._ssrNode("<div class=\"col-xl-8 col-lg-8 col-md-12\">", "</div>", [_vm._ssrNode("<div class=\"cart\">", "</div>", [_vm._ssrNode((_vm.itemCount !== 0 ? "<div class=\"side_title\"><h5>" + _vm._ssrEscape("Cart(" + _vm._s(_vm.itemCount) + ")") + "</h5></div>" : "<!---->") + " "), _vm.loading ? _vm._ssrNode("<div class=\"loading-indicator text-center\">", "</div>", [_vm._ssrNode("<div class=\"lodcontainer\">", "</div>", [_c('center', {
+  })])], 2)]), _vm._ssrNode(" <div class=\"col-6 desktop_view mini_tab_hide\"><form action><i class=\"fa-solid fa-magnifying-glass\"></i> <input type=\"text\" name id placeholder=\"Search Product\" class=\"form-control\"> <button type=\"button\">Search</button></form></div> "), _c('DesktopViewOption'), _vm._ssrNode(" <div class=\"col-4 ms-auto mobile_view\"><div class=\"mobile_nav_option\"><a class=\"search_form\"><i class=\"fa-solid fa-magnifying-glass\"></i></a></div></div> "), _c('Common_MobileSearchProduct')], 2)])]), _vm._ssrNode(" "), _vm._ssrNode("<section class=\"main_content\">", "</section>", [_vm._ssrNode("<div class=\"container\">", "</div>", [_vm._ssrNode("<div class=\"row\">", "</div>", [_vm._ssrNode("<div class=\"col-xl-8 col-lg-8 col-md-12\">", "</div>", [_vm.itemCount !== 0 ? _vm._ssrNode("<div class=\"cart\">", "</div>", [_vm._ssrNode((_vm.itemCount !== 0 ? "<div class=\"side_title\"><h5>" + _vm._ssrEscape("Cart(" + _vm._s(_vm.itemCount) + ")") + "</h5></div>" : "<!---->") + " "), _vm.loading ? _vm._ssrNode("<div class=\"loading-indicator text-center\">", "</div>", [_vm._ssrNode("<div class=\"lodcontainer\">", "</div>", [_c('center', {
     staticClass: "loader-text"
   }, [_vm._v("Loading...")]), _vm._ssrNode(" <img src=\"/loader/loader.gif\" alt=\"Loader\">")], 2)]) : _vm._e(), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"card_porduct\">", "</div>", [_vm._ssrNode("<ul>", "</ul>", _vm._l(_vm.cart, function (item) {
     return _vm._ssrNode("<li>", "</li>", [_vm._ssrNode("<div class=\"row\">", "</div>", [_vm._ssrNode("<div class=\"col-8\">", "</div>", [_vm._ssrNode("<div class=\"img_title\">", "</div>", [_vm._ssrNode("<img" + _vm._ssrAttr("src", item.product.thumnail_img) + " alt class=\"img-fluid\"> "), _vm._ssrNode("<div>", "</div>", [_vm._ssrNode("<h1>", "</h1>", [_c('Nuxt-Link', {
@@ -37,7 +37,7 @@ var render = function render() {
       }
     }, [_c('i', {
       staticClass: "fa-solid fa-trash-can"
-    }), _vm._v("Remove")])], 1), _vm._ssrNode(" "), _vm._ssrNode("<div>", "</div>", [_vm._ssrNode("<div class=\"number\"><input type=\"number\"" + _vm._ssrAttr("value", item.updatedQuantity) + " class=\"updatedQuantity\"></div> "), _c('Button', {
+    }), _vm._v("Remove")])], 1), _vm._ssrNode(" "), _vm._ssrNode("<div>", "</div>", [_vm._ssrNode("<div class=\"number\"><input type=\"number\"" + _vm._ssrAttr("value", item.quantity) + " class=\"quantity\"></div> "), _c('Button', {
       staticClass: "btn_cart mt-2",
       staticStyle: {
         "visibility": "unset",
@@ -45,7 +45,7 @@ var render = function render() {
       },
       on: {
         "click": function ($event) {
-          return _vm.updateQuantity(item.product.id, item.updatedQuantity);
+          return _vm.updateQuantity(item.product.id, item.quantity);
         }
       }
     }, [_vm._v("Update")])], 2)], 2)], 2);
@@ -60,7 +60,7 @@ var render = function render() {
         return _vm.clearCart();
       }
     }
-  }, [_vm._v("Clear Cart")])], 1) : _vm._e()], 2)], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"col-xl-4 .col-lg-4 .col-md-12\" style=\"position: sticky;top: 60px;height: fit-content;\">", "</div>", [_vm._ssrNode("<div class=\"cart_summary\"><div class=\"side_title\"><h5>Card Summary</h5></div> <div class=\"d-flex justify-content-between\"><h3>Subtotal</h3> <h2>" + _vm._ssrEscape("$" + _vm._s(_vm.subtotal)) + "</h2></div> <p>Delivery fees not included yet.</p> " + (_vm.loggedIn ? "<span><a class=\"btn_cart\" style=\"visibility: unset;width: 100%; display: block;text-align: center;\">" + _vm._ssrEscape("CheckOut ($" + _vm._s(_vm.subtotal) + ")") + "</a></span>" : "<span><a class=\"btn_cart\" style=\"visibility: unset;width: 100%; display: block;text-align: center;\">" + _vm._ssrEscape("CheckOut ($" + _vm._s(_vm.subtotal) + ")") + "</a></span>") + "</div> "), _vm._ssrNode("<div class=\"de_returns\">", "</div>", [_vm._ssrNode("<h3>Returns are easy</h3> "), _vm._ssrNode("<p>", "</p>", [_vm._ssrNode("Free return within 15 days for Official Store items and 7 days for other eligible items "), _c('Nuxt-link', {
+  }, [_vm._v("Clear Cart")])], 1) : _vm._e()], 2)], 2) : _vm._ssrNode("<div class=\"cart d-flex justify-content-center align-items-center\" style=\"min-height: 95%;\"><div class=\"blank_data text-center\"><i class=\"fa-solid fa-triangle-exclamation\"></i> <p>No Data</p></div></div>")]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"col-xl-4 .col-lg-4 .col-md-12\" style=\"position: sticky;top: 60px;height: fit-content;\">", "</div>", [_vm._ssrNode("<div class=\"cart_summary\"><div class=\"side_title\"><h5>Card Summary</h5></div> <div class=\"d-flex justify-content-between\"><h3>Subtotal</h3> <h2>" + _vm._ssrEscape("$" + _vm._s(_vm.subtotal)) + "</h2></div> <p>Delivery fees not included yet.</p> " + (_vm.loggedIn ? "<span><a class=\"btn_cart\" style=\"visibility: unset;width: 100%; display: block;text-align: center;\">" + _vm._ssrEscape("CheckOut ($" + _vm._s(_vm.subtotal) + ")") + "</a></span>" : "<span><a class=\"btn_cart\" style=\"visibility: unset;width: 100%; display: block;text-align: center;\">" + _vm._ssrEscape("CheckOut ($" + _vm._s(_vm.subtotal) + ")") + "</a></span>") + "</div> "), _vm._ssrNode("<div class=\"de_returns\">", "</div>", [_vm._ssrNode("<h3>Returns are easy</h3> "), _vm._ssrNode("<p>", "</p>", [_vm._ssrNode("Free return within 15 days for Official Store items and 7 days for other eligible items\n                            "), _c('Nuxt-link', {
     attrs: {
       "to": "/refund"
     }
@@ -76,7 +76,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/cart.vue?vue&type=template&id=6f8429e6&
+// CONCATENATED MODULE: ./pages/cart.vue?vue&type=template&id=43fafe60&
 
 // EXTERNAL MODULE: external "jquery"
 var external_jquery_ = __webpack_require__(32);
@@ -114,7 +114,7 @@ var RecentView = __webpack_require__(62);
       //    product:[],
       itemCount: 0,
       subtotal: 0,
-      updatedQuantity: 0,
+      quantity: '',
       login: {
         email: '',
         password: ''
@@ -268,24 +268,26 @@ var RecentView = __webpack_require__(62);
       this.$eventBus.$emit('cartItemCountUpdated', this.itemCount);
     },
     calculateSubtotal() {
-      //  this.loading = true;
       let subtotal = 0;
       this.cart.forEach(item => {
         const product = item.product;
         console.log(`Quantity: ${item.quantity}, Price: ${product.price}`);
-        const priceWithoutCommas = product.price.replace(/,/g, '');
+        let priceWithoutCommas;
+        if (typeof product.price === 'string') {
+          priceWithoutCommas = product.price.replace(/,/g, '');
+        } else {
+          // If product.price is not a string, use it as is
+          priceWithoutCommas = product.price;
+        }
         const priceAsNumber = parseFloat(priceWithoutCommas);
         if (!isNaN(item.quantity) && !isNaN(priceAsNumber)) {
           subtotal += item.quantity * priceAsNumber;
         } else {
           console.error('Invalid quantity or price:', item.quantity, product.price);
         }
-        // console.log(`Intermediate Subtotal: ${subtotal}`);
       });
-
-      //console.log(`Final Subtotal: ${subtotal}`);
-      return this.subtotal = subtotal;
-      //return subtotal;
+      this.subtotal = subtotal;
+      return subtotal;
     }
   }
 });

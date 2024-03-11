@@ -11,9 +11,9 @@
                         </div>
                     </div>
                     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 col-3" v-for="item in prouducts" :key="item.id">
-                        <Nuxt-link :to="`/product-details/${item.slug}`">
+                        <Nuxt-link :to="`/category/category-grid?slug=${item.slug}`"> 
                             <div class="cat_div">
-                                <img :src="item.thumnail" class="img-fluid" loading="lazy" >
+                                <img :src="item.image" class="img-fluid" loading="lazy" >
                                 <p>{{ item.name }}</p>
                             </div>
                         </Nuxt-link>
@@ -42,8 +42,8 @@ export default {
 
         async fetchDefaultProduct() {
             this.loading = true;
-            await this.$axios.get(`/unauthenticate/limitedProducts`).then(response => {
-                    this.prouducts = response.data;
+            await this.$axios.get(`/unauthenticate/speacialCategory`).then(response => {
+                    this.prouducts = response.data.data;
                 })
                 .catch(error => {
                     // Handle error

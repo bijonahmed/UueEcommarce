@@ -299,6 +299,7 @@ export default {
             }
         },
         addToCart(productId) {
+            
             const productToAdd = this.prouducts.find((product) => product.id === productId);
             const existingItem = this.cart.find((item) => item.product.id === productId);
 

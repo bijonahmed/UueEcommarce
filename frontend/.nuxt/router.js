@@ -38,6 +38,7 @@ const _66eaf24e = () => interopDefault(import('..\\pages\\affiliate\\affiliate-d
 const _24a9bdd2 = () => interopDefault(import('..\\pages\\affiliate\\affiliate-programe.vue' /* webpackChunkName: "pages/affiliate/affiliate-programe" */))
 const _5f236cc9 = () => interopDefault(import('..\\pages\\affiliate\\affiliate-programe-register.vue' /* webpackChunkName: "pages/affiliate/affiliate-programe-register" */))
 const _21bd51a1 = () => interopDefault(import('..\\pages\\affiliate\\affiliate-transfer.vue' /* webpackChunkName: "pages/affiliate/affiliate-transfer" */))
+const _7094e144 = () => interopDefault(import('..\\pages\\brand-product\\brand-grid.vue' /* webpackChunkName: "pages/brand-product/brand-grid" */))
 const _42bf1c18 = () => interopDefault(import('..\\pages\\category\\all-categorys.vue' /* webpackChunkName: "pages/category/all-categorys" */))
 const _251a30a0 = () => interopDefault(import('..\\pages\\category\\category-grid.vue' /* webpackChunkName: "pages/category/category-grid" */))
 const _6259e9f8 = () => interopDefault(import('..\\pages\\category\\category-list.vue' /* webpackChunkName: "pages/category/category-list" */))
@@ -225,6 +226,10 @@ export const routerOptions = {
     path: "/affiliate/affiliate-transfer",
     component: _21bd51a1,
     name: "affiliate-affiliate-transfer"
+  }, {
+    path: "/brand-product/brand-grid",
+    component: _7094e144,
+    name: "brand-product-brand-grid"
   }, {
     path: "/category/all-categorys",
     component: _42bf1c18,

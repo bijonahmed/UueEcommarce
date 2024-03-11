@@ -119,6 +119,8 @@ Route::group([
     Route::post('saveAttribute', [CategoryController::class, 'saveAttribute']);
     Route::post('saveAttributeVal', [CategoryController::class, 'saveAttributeVal']);
     Route::get('getCategoryList', [CategoryController::class, 'allCategory']);
+    Route::get('getSpeacialCategoryList', [CategoryController::class, 'getSpeacialCategoryList']);
+
     Route::get('getInacCategoryList', [CategoryController::class, 'allInacCategory']);
     Route::get('getProductCategoryList', [CategoryController::class, 'getProductCategoryList']);
     Route::get('removeProctCategory', [CategoryController::class, 'removeProctCategory']);
@@ -131,7 +133,8 @@ Route::group([
     Route::get('search', [CategoryController::class, 'searchCategory']);
     Route::get('attributes', [CategoryController::class, 'getAttribute']);
     Route::get('attributes-list', [CategoryController::class, 'getAttributeList']);
-    Route::get('attributes-val-list', [CategoryController::class, 'getAttributeValList']);
+    Route::get('attributes-val-list', [CategoryController::class, 'getAttributeValList']);    
+    Route::post('speacialCatSave', [CategoryController::class, 'speacialCatSave']);
 });
 
 Route::group([
@@ -247,10 +250,13 @@ Route::group([
     Route::get('allsellerListadmin', [UnauthenticatedController::class, 'allsellerListadmin']);
 
     Route::get('readcoupons', [UnauthenticatedController::class, 'featchcoupon']);
+    Route::get('readcoupons/{code}', [UnauthenticatedController::class, 'getCoupon']);
     Route::get('alldealsads', [UnauthenticatedController::class, 'getdealsbannersads']);
-    Route::get('headerbanner', [UnauthenticatedController::class, 'getbanner']);
+    Route::get('headerbanner', [UnauthenticatedController::class, 'getbanner']);  
     
     Route::get('getAdsbanner', [UnauthenticatedController::class, 'topadsbanner']);
+    Route::get('brandproductList/{slug}', [UnauthenticatedController::class, 'getbrandproductList']);
+    Route::get('speacialCategory', [UnauthenticatedController::class, 'getSpeacialCatList']);
 
 
 });

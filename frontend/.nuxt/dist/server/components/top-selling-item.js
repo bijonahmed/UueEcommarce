@@ -1,14 +1,14 @@
-exports.ids = [42];
+exports.ids = [43];
 exports.modules = {
 
-/***/ 128:
+/***/ 129:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/TopSellingItem.vue?vue&type=template&id=6a93645e&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/TopSellingItem.vue?vue&type=template&id=1a2b0f7c&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -19,23 +19,23 @@ var render = function render() {
       attrs: {
         "to": `/product-details/${item.slug}`
       }
-    }, [_c('img', {
-      staticStyle: {
-        "height": "150px",
-        "width": "150px"
-      },
+    }, [_c('div', {
+      staticClass: "sell_itm text-start",
       attrs: {
-        "src": item.thumnail,
-        "alt": ""
+        "bis_skin_checked": "1"
       }
-    }), _vm._v(" "), _c('p', {
-      staticClass: "text-center"
-    }, [_vm._v("\r\n                                    " + _vm._s(item.name) + "\r\n                                ")])])], 1);
+    }, [_c('img', {
+      staticClass: "img-fluid",
+      attrs: {
+        "src": item.thumnail_img,
+        "alt": "product-image"
+      }
+    }), _vm._v(" "), _c('span', [_vm._v(_vm._s(item.discount) + "%")]), _vm._v(" "), _c('h5', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('h6', [_vm._v(" " + _vm._s(item.price - item.price * item.discount / 100) + " USD")]), _vm._v(" "), _c('h6', [_c('strike', [_vm._v(" " + _vm._s(item.price) + " USD")])], 1)])])], 1);
   }), _vm._ssrNode(" <div class=\"prev-slide\">‹</div> <div class=\"next-slide\">›</div>")], 2)])], 2)])])]);
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/TopSellingItem.vue?vue&type=template&id=6a93645e&
+// CONCATENATED MODULE: ./components/TopSellingItem.vue?vue&type=template&id=1a2b0f7c&
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/TopSellingItem.vue?vue&type=script&lang=js&
 /* harmony default export */ var TopSellingItemvue_type_script_lang_js_ = ({
@@ -78,6 +78,7 @@ var staticRenderFns = [];
       this.loading = true;
       await this.$axios.get(`/unauthenticate/topSellingProducts`).then(response => {
         this.toproducts = response.data;
+        // console.log(response.data);
       }).catch(error => {
         // Handle error
       }).finally(() => {

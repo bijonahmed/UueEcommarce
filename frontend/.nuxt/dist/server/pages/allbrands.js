@@ -1,14 +1,14 @@
-exports.ids = [52,14,15,16,18,20,22,24,25,31,37];
+exports.ids = [53,15,16,17,19,21,23,25,26,32,38];
 exports.modules = {
 
-/***/ 199:
+/***/ 200:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/allbrands.vue?vue&type=template&id=58066e96&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/allbrands.vue?vue&type=template&id=65af7886&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -18,25 +18,13 @@ var render = function render() {
     }
   }, [_vm._v("Ecommerce "), _c('i', {
     staticClass: "fa-regular fa-star"
-  })])], 2)]), _vm._ssrNode(" <div class=\"col-6 desktop_view mini_tab_hide\"><form action><i class=\"fa-solid fa-magnifying-glass\"></i> <input type=\"text\" name id placeholder=\"Search Product\" class=\"form-control\"> <button type=\"button\">Search</button></form></div> "), _c('DesktopViewOption'), _vm._ssrNode(" <div class=\"col-4 ms-auto mobile_view\"><div class=\"mobile_nav_option\"><a class=\"search_form\"><i class=\"fa-solid fa-magnifying-glass\"></i></a></div></div> "), _c('Common_MobileSearchProduct')], 2)])]), _vm._ssrNode(" "), _vm._ssrNode("<section class=\"container\">", "</section>", [_vm._ssrNode("<div class=\"row\">", "</div>", [_vm._ssrNode("<div class=\"col-md-12\"><div class=\"page_title\"><h4>All Brands</h4></div></div> "), _vm._ssrNode("<div class=\"col-md-12\">", "</div>", [_vm._ssrNode("<div class=\"brandContainer\">", "</div>", _vm._l(_vm.brands, function (brand, index) {
-    return _c('nuxt-link', {
-      key: index,
-      staticClass: "brandBox",
-      attrs: {
-        "to": `/brand/${brand.id}`
-      }
-    }, [_c('img', {
-      staticClass: "img-fluid",
-      attrs: {
-        "src": brand.image,
-        "alt": brand.name
-      }
-    }), _vm._v(" "), _c('p', [_vm._v(_vm._s(brand.name))])]);
-  }), 1)])], 2)]), _vm._ssrNode(" <div class=\"back_top\"><a href=\"#top\"><i class=\"fa-solid fa-angle-up\"></i></a></div> "), _c('Footer')], 2);
+  })])], 2)]), _vm._ssrNode(" <div class=\"col-6 desktop_view mini_tab_hide\"><form action><i class=\"fa-solid fa-magnifying-glass\"></i> <input type=\"text\" name id placeholder=\"Search Product\" class=\"form-control\"> <button type=\"button\">Search</button></form></div> "), _c('DesktopViewOption'), _vm._ssrNode(" <div class=\"col-4 ms-auto mobile_view\"><div class=\"mobile_nav_option\"><a class=\"search_form\"><i class=\"fa-solid fa-magnifying-glass\"></i></a></div></div> "), _c('Common_MobileSearchProduct')], 2)])]), _vm._ssrNode(" <section class=\"container\"><div class=\"row\"><div class=\"col-md-12\"><div class=\"page_title\"><h4>All Brands</h4></div></div> <div class=\"col-md-12\"><div class=\"brandContainer\">" + _vm._ssrList(_vm.brands, function (brand, index) {
+    return "<a class=\"brandBox\"><img" + _vm._ssrAttr("src", brand.image) + _vm._ssrAttr("alt", brand.name) + " class=\"img-fluid\"> <p>" + _vm._ssrEscape(_vm._s(brand.name)) + "</p></a>";
+  }) + "</div></div></div></section> <div class=\"back_top\"><a href=\"#top\"><i class=\"fa-solid fa-angle-up\"></i></a></div> "), _c('Footer')], 2);
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/allbrands.vue?vue&type=template&id=58066e96&
+// CONCATENATED MODULE: ./pages/allbrands.vue?vue&type=template&id=65af7886&
 
 // EXTERNAL MODULE: external "jquery"
 var external_jquery_ = __webpack_require__(32);
@@ -88,6 +76,14 @@ var OfficialStoreProductList = __webpack_require__(67);
     this.dataload();
   },
   methods: {
+    redirectbrandlist(slug) {
+      this.$router.push({
+        path: '/brand-product/brand-grid',
+        query: {
+          slug: slug
+        }
+      });
+    },
     async dataload() {
       this.loading = true;
       try {

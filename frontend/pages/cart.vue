@@ -1,200 +1,227 @@
 <template>
-<div>
-    <LogoAndPayment />
-    <!-- navbar section start here  -->
-    <section class="search_bar">
-        <div class="container">
-            <div class="row justify-content-between align-items-center">
-                <div class="col-lg-3 col-md-4 col-4">
-                    <div class="logo nav_tab">
-                        <!-- mobile view sidebar  -->
-                        <button type="button" class="btn_menu mobile_view" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i class="fa-solid fa-bars-staggered"></i></button>
-                        <!-- sidebar offcanvas  -->
-                        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-                            <div class="offcanvas-header">
-                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Ecommerce</h5>
+    <div>
+        <LogoAndPayment />
+        <!-- navbar section start here  -->
+        <section class="search_bar">
+            <div class="container">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-lg-3 col-md-4 col-4">
+                        <div class="logo nav_tab">
+                            <!-- mobile view sidebar  -->
+                            <button type="button" class="btn_menu mobile_view" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i
+                                    class="fa-solid fa-bars-staggered"></i></button>
+                            <!-- sidebar offcanvas  -->
+                            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+                                aria-labelledby="offcanvasExampleLabel">
+                                <div class="offcanvas-header">
+                                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                        aria-label="Close"></button>
+                                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Ecommerce</h5>
+                                </div>
+                                <div class="offcanvas-body">
+                                    <!-- offf canvas start here  -->
+                                    <Common_MobileSidebar />
+                                </div>
                             </div>
-                            <div class="offcanvas-body">
-                                <!-- offf canvas start here  -->
-                                <Common_MobileSidebar />
-                            </div>
+                            <!-- mini tab view navbar here  -->
+                            <Common_MiniTabNavbar />
+                            <!-- nav end  -->
+                            <Nuxt-link to="/">Ecommerce <i class=" fa-regular fa-star"></i></Nuxt-link>
                         </div>
-                        <!-- mini tab view navbar here  -->
-                        <Common_MiniTabNavbar />
-                        <!-- nav end  -->
-                        <Nuxt-link to="/">Ecommerce <i class=" fa-regular fa-star"></i></Nuxt-link>
                     </div>
-                </div>
-                <div class="col-6 desktop_view mini_tab_hide">
-                    <form action="" class="">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" name="" id="" placeholder="Search Product" class="form-control"> <button type="button">Search</button>
-                    </form>
-                </div>
-                <!-- desktop_view options  -->
-                <DesktopViewOption />
-                <!-- mobile view options  -->
-                <div class="col-4 ms-auto  mobile_view">
-                    <div class="mobile_nav_option">
-                        <a class="search_form"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    <div class="col-6 desktop_view mini_tab_hide">
+                        <form action="" class="">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" name="" id="" placeholder="Search Product" class="form-control"> <button
+                                type="button">Search</button>
+                        </form>
                     </div>
+                    <!-- desktop_view options  -->
+                    <DesktopViewOption />
+                    <!-- mobile view options  -->
+                    <div class="col-4 ms-auto  mobile_view">
+                        <div class="mobile_nav_option">
+                            <a class="search_form"><i class="fa-solid fa-magnifying-glass"></i></a>
+                        </div>
+                    </div>
+                    <!-- search modal  -->
+                    <Common_MobileSearchProduct />
                 </div>
-                <!-- search modal  -->
-                <Common_MobileSearchProduct />
             </div>
-        </div>
-    </section>
-    <!-- Main section start here  -->
-    <section class="main_content ">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-8 col-lg-8 col-md-12">
-                    <div class="cart">
+        </section>
+        <!-- Main section start here  -->
+        <section class="main_content ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-8 col-lg-8 col-md-12">
+                        <div class="cart" v-if="itemCount !== 0">
 
-                        <div class="side_title" v-if="itemCount !==0">
-                            <h5>Cart({{ itemCount }})</h5>
-                        </div>
-                        <div class="loading-indicator text-center" v-if="loading">
-                            <div class="lodcontainer">
-                                <center class="loader-text">Loading...</center>
-                                <img src="/loader/loader.gif" alt="Loader" />
+                            <div class="side_title" v-if="itemCount !== 0">
+                                <h5>Cart({{ itemCount }})</h5>
                             </div>
-                        </div>
-                        <div class="card_porduct">
-                            <ul>
-                                <li v-for="item in cart" :key="item.product.id">
-                                    <div class="row">
-                                        <div class="col-8">
-                                            <div class="img_title">
-                                                <img :src="item.product.thumnail_img" class="img-fluid" alt="">
-                                                <div>
-                                                    <h1>
-                                                        <Nuxt-Link to="/product-details">{{ item.product.product_name }}</Nuxt-Link>
-                                                    </h1>
-                                                    <p>Seller: Ecommerce</p>
-                                                    <span>In stock </span>
+                            <div class="loading-indicator text-center" v-if="loading">
+                                <div class="lodcontainer">
+                                    <center class="loader-text">Loading...</center>
+                                    <img src="/loader/loader.gif" alt="Loader" />
+                                </div>
+                            </div>
+                            <div class="card_porduct">
+                                <ul>
+                                    <li v-for="item in cart" :key="item.product.id">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <div class="img_title">
+                                                    <img :src="item.product.thumnail_img" class="img-fluid" alt="">
+                                                    <div>
+                                                        <h1>
+                                                            <Nuxt-Link to="/product-details">{{
+                            item.product.product_name }}</Nuxt-Link>
+                                                        </h1>
+                                                        <p>Seller: Ecommerce</p>
+                                                        <span>In stock </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="cart_price">
+                                                    <small>(Qty: {{ item.quantity }})</small> x <strong>${{
+                            item.product.price }}</strong>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-4">
-                                            <div class="cart_price">
-                                                <small>(Qty: {{ item.quantity }})</small> x <strong>${{ item.product.price }}</strong>
+                                        <div class="d-flex justify-content-between align-items-end">
+                                            <div class=" p- me-1">
+                                                <Button class="btn_cart" style="visibility: unset;"
+                                                    @click="removeFromCart(item.product)"><i
+                                                        class="fa-solid fa-trash-can"></i>Remove</Button>
+                                            </div>
+                                            <div>
+                                                <div class="number">
+                                                    <!-- <span class="minus" @click="decrement">-</span> -->
+                                                    <input v-model="item.quantity" class="quantity"
+                                                        type="number" @keypress="allowOnlyNumbers" />
+                                                    <!-- <span class="plus" @click="increment">+</span> -->
+                                                </div>
+                                                <Button class="btn_cart mt-2"
+                                                    style="visibility: unset; background-color: #0C356A;"
+                                                    @click="updateQuantity(item.product.id, item.quantity)">Update</Button>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-end">
-                                        <div class=" p- me-1">
-                                            <Button class="btn_cart" style="visibility: unset;" @click="removeFromCart(item.product)"><i class="fa-solid fa-trash-can"></i>Remove</Button>
-                                        </div>
-                                        <div>
-                                            <div class="number">
-                                                <!-- <span class="minus" @click="decrement">-</span> -->
-                                                <input v-model="item.updatedQuantity" class="updatedQuantity" type="number" @keypress="allowOnlyNumbers" />
-                                                <!-- <span class="plus" @click="increment">+</span> -->
-                                            </div>
-                                            <Button class="btn_cart mt-2" style="visibility: unset; background-color: #0C356A;" @click="updateQuantity(item.product.id, item.updatedQuantity)">Update</Button>
-                                        </div>
-                                    </div>
-                                </li>
+                                    </li>
 
-                            </ul>
+                                </ul>
 
-                            <div v-if="itemCount !==0">
+                                <div v-if="itemCount !== 0">
 
-                                <Button class="btn_cart mt-2" style="visibility: unset; background-color: #0C356A;" @click="clearCart()">Clear Cart</Button>
+                                    <Button class="btn_cart mt-2" style="visibility: unset; background-color: #0C356A;"
+                                        @click="clearCart()">Clear Cart</Button>
+                                </div>
+
                             </div>
 
                         </div>
-
-                    </div>
-                    <!-- not included part start here  -->
-
-                </div>
-                <div class="col-xl-4 .col-lg-4 .col-md-12 " style="position: sticky;top: 60px;height: fit-content;">
-                    <div class="cart_summary">
-                        <div class="side_title">
-                            <h5>Card Summary</h5>
+                        <div class="cart d-flex justify-content-center align-items-center" style="min-height: 95%;" v-else>
+                            <div class="blank_data text-center">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                <p>No Data</p>
+                            </div>
                         </div>
-                        <div class="d-flex justify-content-between">
-                            <h3>Subtotal</h3>
-                            <h2>${{ subtotal }}</h2>
-                        </div>
-                        <p>Delivery fees not included yet.</p>
-
-                        <span v-if="loggedIn">
-                            <a class="btn_cart" style="visibility: unset;width: 100%; display: block;text-align: center;" @click="gotoCheckOut">CheckOut (${{ subtotal }})</a>
-                        </span>
-                        <span v-else>
-                            <a class="btn_cart" style="visibility: unset;width: 100%; display: block;text-align: center;" @click="openLoginModal">CheckOut (${{ subtotal }})</a>
-                        </span>
+                        <!-- not included part start here  -->
 
                     </div>
-                    <div class="de_returns">
-                        <h3>Returns are easy</h3>
-                        <p>Free return within 15 days for Official Store items and 7 days for other eligible items <Nuxt-link to="/refund">See more</Nuxt-link>
-                        </p>
+                    <div class="col-xl-4 .col-lg-4 .col-md-12 " style="position: sticky;top: 60px;height: fit-content;">
+                        <div class="cart_summary">
+                            <div class="side_title">
+                                <h5>Card Summary</h5>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <h3>Subtotal</h3>
+                                <h2>${{ subtotal }}</h2>
+                            </div>
+                            <p>Delivery fees not included yet.</p>
+
+                            <span v-if="loggedIn">
+                                <a class="btn_cart"
+                                    style="visibility: unset;width: 100%; display: block;text-align: center;"
+                                    @click="gotoCheckOut">CheckOut (${{ subtotal }})</a>
+                            </span>
+                            <span v-else>
+                                <a class="btn_cart"
+                                    style="visibility: unset;width: 100%; display: block;text-align: center;"
+                                    @click="openLoginModal">CheckOut (${{ subtotal }})</a>
+                            </span>
+
+                        </div>
+                        <div class="de_returns">
+                            <h3>Returns are easy</h3>
+                            <p>Free return within 15 days for Official Store items and 7 days for other eligible items
+                                <Nuxt-link to="/refund">See more</Nuxt-link>
+                            </p>
+                        </div>
                     </div>
                 </div>
+                <!-- recent view part start here  -->
+                <RecentView />
+                <!-- recent view part end here  -->
             </div>
-            <!-- recent view part start here  -->
-            <RecentView />
-            <!-- recent view part end here  -->
+        </section>
+        <!-- END Main Section here -->
+        <!-- back to top button  -->
+        <div class="back_top">
+            <a href="#top"><i class="fa-solid fa-angle-up"></i></a>
         </div>
-    </section>
-    <!-- END Main Section here -->
-    <!-- back to top button  -->
-    <div class="back_top">
-        <a href="#top"><i class="fa-solid fa-angle-up"></i></a>
-    </div>
-    <Footer />
-    <!-- login popup  -->
-    <div class="login_popup">
-        <div class="popup_box_modal">
-            <div>
-                <div class="row">
-                    <div class="col-6 ms-auto text-end"> <button class="btn_edit close_login"><i class="fa-solid fa-x"></i></button></div>
+        <Footer />
+        <!-- login popup  -->
+        <div class="login_popup">
+            <div class="popup_box_modal">
+                <div>
+                    <div class="row">
+                        <div class="col-6 ms-auto text-end"> <button class="btn_edit close_login"><i
+                                    class="fa-solid fa-x"></i></button></div>
+                    </div>
                 </div>
-            </div>
-            <div class="popup_title">
-                <h1>Login</h1>
-                <p>Login and get access to all the features</p>
-            </div>
-            <div>
-                <center><span class="show_error text-danger"></span></center>
-                <form @submit.prevent="customerLogin()" id="formrest" class="forms-sample" enctype="multipart/form-data">
-                    <div class="input_group">
-                        <!-- <label for="">User Name </label> -->
-                        <span class="text-danger" v-if="errors.email">{{ errors.email[0] }}</span>
-                        <input type="text" placeholder="Email" v-model="login.email">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                    <div class="input_group">
-                        <span class="text-danger" v-if="errors.password">{{ errors.password[0] }}</span>
-                        <input type="password" placeholder="Password" v-model="login.password">
-                        <i class="toggle-password fa-solid fa-eye"></i>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center d-none">
-                        <div class="d-flex align-items-center">
-                            <input type="checkbox" id="remeber"><label for="remeber">Remember me</label>
+                <div class="popup_title">
+                    <h1>Login</h1>
+                    <p>Login and get access to all the features</p>
+                </div>
+                <div>
+                    <center><span class="show_error text-danger"></span></center>
+                    <form @submit.prevent="customerLogin()" id="formrest" class="forms-sample"
+                        enctype="multipart/form-data">
+                        <div class="input_group">
+                            <!-- <label for="">User Name </label> -->
+                            <span class="text-danger" v-if="errors.email">{{ errors.email[0] }}</span>
+                            <input type="text" placeholder="Email" v-model="login.email">
+                            <i class="fa-solid fa-user"></i>
                         </div>
-                        <a href="#">Forget Password</a>
-                        <!-- <a href="forget-password.html">Forget Password</a> -->
-                    </div>
-                    <div>
-                        <button class="btn_logins" type="submit">Login</button>
-                    </div>
-                    <div class="d-flex">
-                        <p style="font-size: 12px !important;">Don't have Account? <nuxt-link to="/login" class="btn_signup " type="button">SignUp</nuxt-link>
-                        </p>
-                    </div>
-                </form>
+                        <div class="input_group">
+                            <span class="text-danger" v-if="errors.password">{{ errors.password[0] }}</span>
+                            <input type="password" placeholder="Password" v-model="login.password">
+                            <i class="toggle-password fa-solid fa-eye"></i>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center d-none">
+                            <div class="d-flex align-items-center">
+                                <input type="checkbox" id="remeber"><label for="remeber">Remember me</label>
+                            </div>
+                            <a href="#">Forget Password</a>
+                            <!-- <a href="forget-password.html">Forget Password</a> -->
+                        </div>
+                        <div>
+                            <button class="btn_logins" type="submit">Login</button>
+                        </div>
+                        <div class="d-flex">
+                            <p style="font-size: 12px !important;">Don't have Account? <nuxt-link to="/login"
+                                    class="btn_signup " type="button">SignUp</nuxt-link>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+
             </div>
-
         </div>
-    </div>
 
-</div>
+    </div>
 </template>
 
 <script>
@@ -217,7 +244,7 @@ export default {
             //    product:[],
             itemCount: 0,
             subtotal: 0,
-            updatedQuantity: 0,
+            quantity: '',
             login: {
                 email: '',
                 password: '',
@@ -330,6 +357,7 @@ export default {
 
             if (savedCart) {
                 this.cart = JSON.parse(savedCart);
+                
             }
 
             let itemCount = 0;
@@ -403,25 +431,28 @@ export default {
 
         },
         calculateSubtotal() {
-            //  this.loading = true;
             let subtotal = 0;
             this.cart.forEach((item) => {
                 const product = item.product;
                 console.log(`Quantity: ${item.quantity}, Price: ${product.price}`);
-                const priceWithoutCommas = product.price.replace(/,/g, '');
+                let priceWithoutCommas;
+                if (typeof product.price === 'string') {
+                    priceWithoutCommas = product.price.replace(/,/g, '');
+                } else {
+                    // If product.price is not a string, use it as is
+                    priceWithoutCommas = product.price;
+                }
                 const priceAsNumber = parseFloat(priceWithoutCommas);
                 if (!isNaN(item.quantity) && !isNaN(priceAsNumber)) {
                     subtotal += item.quantity * priceAsNumber;
                 } else {
                     console.error('Invalid quantity or price:', item.quantity, product.price);
                 }
-                // console.log(`Intermediate Subtotal: ${subtotal}`);
             });
+            this.subtotal = subtotal;
+            return subtotal;
+        }
 
-            //console.log(`Final Subtotal: ${subtotal}`);
-            return this.subtotal = subtotal;
-            //return subtotal;
-        },
 
     },
 }

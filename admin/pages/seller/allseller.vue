@@ -12,7 +12,7 @@
                                     <router-link to="/hrm/dashboard"><a href="javascript:;"><i
                                                 class="bx bx-home-alt"></i></a></router-link>
                                 </li>
-                                <li class="breadcrumb-item active" aria-current="page">Seller List</li>
+                                <li class="breadcrumb-item active" aria-current="page">Store List</li>
                             </ol>
                         </nav>
                     </div>
@@ -28,17 +28,27 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-7">
+                            <div class="col-md-6">
                                 <div class="input-group mb-3">
                                     <input v-model="searchQuery.name" type="text" class="form-control name"
                                         placeholder="Business Name">
 
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="input-group mb-3">
                                     <select v-model="searchQuery.status" class="form-select form-select-solid status">
                                         <option value="" selected>All Status</option>
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group mb-3">
+                                    <select v-model="searchQuery.home_status" class="form-select form-select-solid status">
+                                        <option value="" selected>Top Store Status</option>
                                         <option value="1">Active</option>
                                         <option value="0">Inactive</option>
                                     </select>
@@ -62,21 +72,22 @@
                             <table class="table table-hover table-sm">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Role </th>
-                                        <th>Business Name</th>
-                                        <th>Logo</th>
+                                        <th class="text-center">SL.</th>
+                                        <!-- <th>Role </th> -->
+                                        <th class="text-center">Store Name</th>
+                                        <th class="text-center">Logo</th>
                                         <th class="text-center">Status</th>
-                                        <th class="text-center">Home View Status</th>
+                                        <th class="text-center">Top {{ count  }} Store status</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="item in paginatedData" :key="item.id">
-                                        <td>{{ item.id }}</td>
-                                        <td v-if="item.role == 3">Seller</td>
-                                        <td>{{ item.name }}</td>
-                                        <td><img :src="item.businessLogo" class="img-fluid rounded"
+                                    <tr v-for="(item, index) in paginatedData" :key="item.id">
+                                        <!-- <td>{{ item.id }}</td> -->
+                                        <td class="text-center">{{ index + 1 }}</td>
+                                        <!-- <td v-if="item.role == 3">Seller</td> -->
+                                        <td class="text-center">{{ item.name }}</td>
+                                        <td class="text-center"><img :src="item.businessLogo" class="img-fluid rounded"
                                                 style="object-fit: cover;" height="60px" width="60px" alt=""></td>
                                         <td class="text-center">
                                             <span v-if="(item.status == 1)"> <span
@@ -89,8 +100,7 @@
                                             <span v-else> <span class="badge bg-danger">Inactive</span> </span>
                                         </td>
                                         <td class="text-center">
-                                            <nuxt-link :to="`/seller/edit/${item.id}`"
-                                                variant="warning" size="sm">
+                                            <nuxt-link :to="`/seller/edit/${item.id}`" variant="warning" size="sm">
                                                 <i class="bx bx-edit"></i> EDIT
                                             </nuxt-link>
 
@@ -139,9 +149,11 @@ export default {
             notifmsg: '',
             errors: {},
             data: [],
+            count: '',
             searchQuery: {
                 name: '',
-                status: 1 // Default status is set to 1
+                status: '', // Default status is set to 1
+                home_status: '',
             },
             searchQueryPhone: '',
             currentPage: 1,
@@ -167,6 +179,11 @@ export default {
                     item.status == this.searchQuery.status
                 );
             }
+            if (this.searchQuery.home_status) {
+                result = result.filter(item =>
+                    item.home_status == this.searchQuery.home_status
+                );
+            }
             return result;
         },
 
@@ -179,8 +196,9 @@ export default {
         async fetchData() {
             try {
                 const response = await this.$axios.get(`/unauthenticate/allsellerListadmin`);
-                this.data = response.data;
-                // console.log(response.data.id);
+                this.data = response.data.data;
+                this.count = response.data.active_data;
+                // console.log(response.data.active_data);
             } catch (error) {
                 console.error(error);
             }

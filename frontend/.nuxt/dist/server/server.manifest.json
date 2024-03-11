@@ -2,6 +2,7 @@
   "entry": "server.js",
   "files": {
     "components/best-price.js": "components/best-price.js",
+    "components/brand-product-grid.js": "components/brand-product-grid.js",
     "components/brandi-official-store.js": "components/brandi-official-store.js",
     "components/category-five.js": "components/category-five.js",
     "components/category-four.js": "components/category-four.js",
@@ -56,6 +57,7 @@
     "pages/allshop.js": "pages/allshop.js",
     "pages/blog-details.js": "pages/blog-details.js",
     "pages/blog.js": "pages/blog.js",
+    "pages/brand-product/brand-grid.js": "pages/brand-product/brand-grid.js",
     "pages/business/_slug.js": "pages/business/_slug.js",
     "pages/cart.js": "pages/cart.js",
     "pages/category/all-categorys.js": "pages/category/all-categorys.js",
@@ -123,6 +125,7 @@
   },
   "maps": {
     "components/best-price.js": "components/best-price.js.map",
+    "components/brand-product-grid.js": "components/brand-product-grid.js.map",
     "components/brandi-official-store.js": "components/brandi-official-store.js.map",
     "components/category-five.js": "components/category-five.js.map",
     "components/category-four.js": "components/category-four.js.map",
@@ -177,6 +180,7 @@
     "pages/allshop.js": "pages/allshop.js.map",
     "pages/blog-details.js": "pages/blog-details.js.map",
     "pages/blog.js": "pages/blog.js.map",
+    "pages/brand-product/brand-grid.js": "pages/brand-product/brand-grid.js.map",
     "pages/business/_slug.js": "pages/business/_slug.js.map",
     "pages/cart.js": "pages/cart.js.map",
     "pages/category/all-categorys.js": "pages/category/all-categorys.js.map",

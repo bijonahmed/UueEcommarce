@@ -114,9 +114,9 @@
                                                             <div class="row mb-3 required">
                                                                 <label for="input-meta-title-1" class="col-sm-2 col-form-label">Brands</label>
                                                                 <div class="col-sm-10">
-                                                                    <!-- <input type="text" placeholder="Search Model..." id="model" v-model="insertdata.model" class="form-control" /> -->
+                                                                    
                                                                     <select v-model="insertdata.brand" class="form-select model">
-                                                                        <option value="" selected>Select</option>
+                                                                        <option value="" selected>Select one</option>
                                                                         <option v-for='data in modelresults' :value='data.id'>{{data.name}}</option>
                                                                     </select>
                                                                 </div>
@@ -447,6 +447,7 @@ export default {
                 status: '',
                 manufacturer: '',
                 download_link: '',
+                brand: '',
 
             },
             product_cat: [],
@@ -796,6 +797,7 @@ export default {
                 this.insertdata.status = response.data.product.status;
                 this.insertdata.manufacturer = response.data.product.manufacturer;
                 this.insertdata.download_link = response.data.product.download_link;
+                this.insertdata.brand = response.data.product.brand;
 
                 this.productImg = response.data.productImg;
                 this.productAddImgs = response.data.product_imgs;

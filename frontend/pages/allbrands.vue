@@ -62,12 +62,11 @@
                 <div class="col-md-12">
                     <!-- {{ brands }} -->
                     <div class="brandContainer">
-                        <nuxt-link v-for="(brand, index) in brands" :key="index" :to="`/brand/${brand.id}`"
-                            class="brandBox">
+                        <a v-for="(brand, index) in brands" :key="index"   @click="redirectbrandlist(brand.slug)"  class="brandBox">
                             <!-- <img :src="`/images/brands/brand(${brand.id}).webp`" :alt="brand.name" class="img-fluid"> -->
                             <img :src="brand.image" :alt="brand.name" class="img-fluid">
                             <p>{{ brand.name }}</p>
-                        </nuxt-link>
+                    </a>
                     </div>
                 </div>
             </div>
@@ -114,6 +113,14 @@ export default {
         this.dataload();
     },
     methods: {
+        redirectbrandlist(slug) {
+            this.$router.push({
+                path: '/brand-product/brand-grid',
+                query: {
+                    slug: slug
+                }
+            })
+        },
         async dataload() {
             this.loading = true;
             try {

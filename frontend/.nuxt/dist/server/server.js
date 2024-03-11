@@ -43,7 +43,7 @@ module.exports =
 /******/
 /******/ 		// "0" is the signal for "already loaded"
 /******/ 		if(installedChunks[chunkId] !== 0) {
-/******/ 			var chunk = require("./" + ({"1":"components/best-price","2":"components/brandi-official-store","3":"components/category-five","4":"components/category-four","5":"components/category-multiple-product","6":"components/category-one","7":"components/category-part","8":"components/category-product-filter","9":"components/category-product-filter-grid","10":"components/category-recent-view","11":"components/category-sliders","12":"components/category-three","13":"components/category-two","14":"components/common-mini-tab-navbar","15":"components/common-mobile-search-product","16":"components/common-mobile-sidebar","17":"components/delas-for-your","18":"components/desktop-view-option","19":"components/extra-discount","20":"components/flash-sale-filter","21":"components/flash-selling","22":"components/footer","23":"components/limited-stok-details","24":"components/login-popup","25":"components/logo-and-payment","26":"components/more-collection","27":"components/nav-slider","28":"components/navbar","29":"components/offical-store","30":"components/official-store-deals","31":"components/official-store-product-list","32":"components/phone-deals","33":"components/phone-super-sales","34":"components/phone-tables","35":"components/product-list-filter-grid","36":"components/product-list-filter-list","37":"components/recent-view","38":"components/shop-from-our-collection","39":"components/top-appliances-deals","40":"components/top-bannar-desktop-view","41":"components/top-deals","42":"components/top-selling-item","43":"components/top-selling-item-backup","44":"components/tutorial","45":"components/user-sidebar","46":"pages/OfficialStoreFilter","47":"pages/OfficialStoreFilterGrid","48":"pages/affiliate/affiliate-dashboard","49":"pages/affiliate/affiliate-programe","50":"pages/affiliate/affiliate-programe-register","51":"pages/affiliate/affiliate-transfer","52":"pages/allbrands","53":"pages/allshop","54":"pages/blog","55":"pages/blog-details","56":"pages/business/_slug","57":"pages/cart","58":"pages/category/all-categorys","59":"pages/category/category-grid","60":"pages/category/category-list","61":"pages/changepassword","62":"pages/changepassword copy","63":"pages/charity","64":"pages/checkout","65":"pages/coupons","66":"pages/customer-review","67":"pages/flas-sale","68":"pages/forget-password","69":"pages/index","70":"pages/login","71":"pages/official-store","72":"pages/official-store-grid","73":"pages/payment","74":"pages/product-details/_slug","75":"pages/product-grid","76":"pages/product-list","77":"pages/refund","78":"pages/required","79":"pages/resetpassword/_slug","80":"pages/return-and-replacement","81":"pages/sell-on-ecommerce","82":"pages/sell-on-filter","83":"pages/seller-form","84":"pages/seller/change-password","85":"pages/seller/order-details","86":"pages/seller/products/product-edit","87":"pages/seller/products/product-preview","88":"pages/seller/products/product-varient","89":"pages/seller/seller-account-setting","90":"pages/seller/seller-comission-history","91":"pages/seller/seller-customer-returns","92":"pages/seller/seller-dashboard","93":"pages/seller/seller-leftsidebar","94":"pages/seller/seller-message","95":"pages/seller/seller-orders","96":"pages/seller/seller-payment-history","97":"pages/seller/seller-products","98":"pages/seller/seller-products-post","99":"pages/seller/seller-profile","100":"pages/seller/seller-wallet","101":"pages/seller/seller-wishlist","102":"pages/service","103":"pages/today-deal","104":"pages/update-password","105":"pages/user/account-statement","106":"pages/user/invite-user/_id","107":"pages/user/my-reviews","108":"pages/user/mySalary","109":"pages/user/order-details","110":"pages/user/user-blogPost","111":"pages/user/user-dashborad","112":"pages/user/user-mlm","113":"pages/user/user-orders","114":"pages/user/user-profile","115":"pages/user/user-requireProduct","116":"pages/user/user-security","117":"pages/user/user-whichlist","118":"pages/user/user-withdrawal"}[chunkId]||chunkId) + ".js");
+/******/ 			var chunk = require("./" + ({"1":"components/best-price","2":"components/brand-product-grid","3":"components/brandi-official-store","4":"components/category-five","5":"components/category-four","6":"components/category-multiple-product","7":"components/category-one","8":"components/category-part","9":"components/category-product-filter","10":"components/category-product-filter-grid","11":"components/category-recent-view","12":"components/category-sliders","13":"components/category-three","14":"components/category-two","15":"components/common-mini-tab-navbar","16":"components/common-mobile-search-product","17":"components/common-mobile-sidebar","18":"components/delas-for-your","19":"components/desktop-view-option","20":"components/extra-discount","21":"components/flash-sale-filter","22":"components/flash-selling","23":"components/footer","24":"components/limited-stok-details","25":"components/login-popup","26":"components/logo-and-payment","27":"components/more-collection","28":"components/nav-slider","29":"components/navbar","30":"components/offical-store","31":"components/official-store-deals","32":"components/official-store-product-list","33":"components/phone-deals","34":"components/phone-super-sales","35":"components/phone-tables","36":"components/product-list-filter-grid","37":"components/product-list-filter-list","38":"components/recent-view","39":"components/shop-from-our-collection","40":"components/top-appliances-deals","41":"components/top-bannar-desktop-view","42":"components/top-deals","43":"components/top-selling-item","44":"components/top-selling-item-backup","45":"components/tutorial","46":"components/user-sidebar","47":"pages/OfficialStoreFilter","48":"pages/OfficialStoreFilterGrid","49":"pages/affiliate/affiliate-dashboard","50":"pages/affiliate/affiliate-programe","51":"pages/affiliate/affiliate-programe-register","52":"pages/affiliate/affiliate-transfer","53":"pages/allbrands","54":"pages/allshop","55":"pages/blog","56":"pages/blog-details","57":"pages/brand-product/brand-grid","58":"pages/business/_slug","59":"pages/cart","60":"pages/category/all-categorys","61":"pages/category/category-grid","62":"pages/category/category-list","63":"pages/changepassword","64":"pages/changepassword copy","65":"pages/charity","66":"pages/checkout","67":"pages/coupons","68":"pages/customer-review","69":"pages/flas-sale","70":"pages/forget-password","71":"pages/index","72":"pages/login","73":"pages/official-store","74":"pages/official-store-grid","75":"pages/payment","76":"pages/product-details/_slug","77":"pages/product-grid","78":"pages/product-list","79":"pages/refund","80":"pages/required","81":"pages/resetpassword/_slug","82":"pages/return-and-replacement","83":"pages/sell-on-ecommerce","84":"pages/sell-on-filter","85":"pages/seller-form","86":"pages/seller/change-password","87":"pages/seller/order-details","88":"pages/seller/products/product-edit","89":"pages/seller/products/product-preview","90":"pages/seller/products/product-varient","91":"pages/seller/seller-account-setting","92":"pages/seller/seller-comission-history","93":"pages/seller/seller-customer-returns","94":"pages/seller/seller-dashboard","95":"pages/seller/seller-leftsidebar","96":"pages/seller/seller-message","97":"pages/seller/seller-orders","98":"pages/seller/seller-payment-history","99":"pages/seller/seller-products","100":"pages/seller/seller-products-post","101":"pages/seller/seller-profile","102":"pages/seller/seller-wallet","103":"pages/seller/seller-wishlist","104":"pages/service","105":"pages/today-deal","106":"pages/update-password","107":"pages/user/account-statement","108":"pages/user/invite-user/_id","109":"pages/user/my-reviews","110":"pages/user/mySalary","111":"pages/user/order-details","112":"pages/user/user-blogPost","113":"pages/user/user-dashborad","114":"pages/user/user-mlm","115":"pages/user/user-orders","116":"pages/user/user-profile","117":"pages/user/user-requireProduct","118":"pages/user/user-security","119":"pages/user/user-whichlist","120":"pages/user/user-withdrawal"}[chunkId]||chunkId) + ".js");
 /******/ 			var moreModules = chunk.modules, chunkIds = chunk.ids;
 /******/ 			for(var moduleId in moreModules) {
 /******/ 				modules[moduleId] = moreModules[moduleId];
@@ -934,6 +934,7 @@ var components_namespaceObject = {};
 __webpack_require__.r(components_namespaceObject);
 __webpack_require__.d(components_namespaceObject, "BestPrice", function() { return BestPrice; });
 __webpack_require__.d(components_namespaceObject, "BrandiOfficialStore", function() { return BrandiOfficialStore; });
+__webpack_require__.d(components_namespaceObject, "BrandProductGrid", function() { return BrandProductGrid; });
 __webpack_require__.d(components_namespaceObject, "CategoryFive", function() { return CategoryFive; });
 __webpack_require__.d(components_namespaceObject, "CategoryFour", function() { return CategoryFour; });
 __webpack_require__.d(components_namespaceObject, "CategoryMultipleProduct", function() { return CategoryMultipleProduct; });
@@ -1705,79 +1706,80 @@ function shouldScrollToTop(route) {
 
 
 
-const _8bb4c0d4 = () => interopDefault(__webpack_require__.e(/* import() | pages/allbrands */ 52).then(__webpack_require__.bind(null, 199)));
-const _2f1f5440 = () => interopDefault(__webpack_require__.e(/* import() | pages/allshop */ 53).then(__webpack_require__.bind(null, 200)));
-const _f5f14c6e = () => interopDefault(__webpack_require__.e(/* import() | pages/blog */ 54).then(__webpack_require__.bind(null, 201)));
-const _7b75abbe = () => interopDefault(__webpack_require__.e(/* import() | pages/blog-details */ 55).then(__webpack_require__.bind(null, 202)));
-const _a64c9372 = () => interopDefault(__webpack_require__.e(/* import() | pages/cart */ 57).then(__webpack_require__.bind(null, 203)));
-const _f428b59c = () => interopDefault(__webpack_require__.e(/* import() | pages/changepassword */ 61).then(__webpack_require__.bind(null, 204)));
-const _64911d53 = () => interopDefault(__webpack_require__.e(/* import() | pages/changepassword copy */ 62).then(__webpack_require__.bind(null, 205)));
-const _0243657e = () => interopDefault(__webpack_require__.e(/* import() | pages/charity */ 63).then(__webpack_require__.bind(null, 206)));
-const _7b8fb426 = () => interopDefault(__webpack_require__.e(/* import() | pages/checkout */ 64).then(__webpack_require__.bind(null, 207)));
-const _b56b0b94 = () => interopDefault(__webpack_require__.e(/* import() | pages/coupons */ 65).then(__webpack_require__.bind(null, 208)));
-const _32497b50 = () => interopDefault(__webpack_require__.e(/* import() | pages/customer-review */ 66).then(__webpack_require__.bind(null, 209)));
-const _2b556a36 = () => interopDefault(__webpack_require__.e(/* import() | pages/flas-sale */ 67).then(__webpack_require__.bind(null, 210)));
-const _9bbb08b8 = () => interopDefault(__webpack_require__.e(/* import() | pages/forget-password */ 68).then(__webpack_require__.bind(null, 211)));
-const _7dd0bed2 = () => interopDefault(__webpack_require__.e(/* import() | pages/login */ 70).then(__webpack_require__.bind(null, 212)));
-const _39574f34 = () => interopDefault(__webpack_require__.e(/* import() | pages/official-store */ 71).then(__webpack_require__.bind(null, 213)));
-const _a6190e06 = () => interopDefault(__webpack_require__.e(/* import() | pages/official-store-grid */ 72).then(__webpack_require__.bind(null, 214)));
-const _14622ad7 = () => interopDefault(__webpack_require__.e(/* import() | pages/OfficialStoreFilter */ 46).then(__webpack_require__.bind(null, 132)));
-const _a7f46086 = () => interopDefault(__webpack_require__.e(/* import() | pages/OfficialStoreFilterGrid */ 47).then(__webpack_require__.bind(null, 133)));
-const _3d3d4aa2 = () => interopDefault(__webpack_require__.e(/* import() | pages/payment */ 73).then(__webpack_require__.bind(null, 215)));
-const _2cdd178b = () => interopDefault(__webpack_require__.e(/* import() | pages/product-grid */ 75).then(__webpack_require__.bind(null, 216)));
-const _6a1cd0e3 = () => interopDefault(__webpack_require__.e(/* import() | pages/product-list */ 76).then(__webpack_require__.bind(null, 217)));
-const _411546df = () => interopDefault(__webpack_require__.e(/* import() | pages/refund */ 77).then(__webpack_require__.bind(null, 218)));
-const _09f52fc6 = () => interopDefault(__webpack_require__.e(/* import() | pages/required */ 78).then(__webpack_require__.bind(null, 219)));
-const _98948b34 = () => interopDefault(__webpack_require__.e(/* import() | pages/return-and-replacement */ 80).then(__webpack_require__.bind(null, 220)));
-const _25e8a256 = () => interopDefault(__webpack_require__.e(/* import() | pages/sell-on-ecommerce */ 81).then(__webpack_require__.bind(null, 221)));
-const _08bb6d5c = () => interopDefault(__webpack_require__.e(/* import() | pages/sell-on-filter */ 82).then(__webpack_require__.bind(null, 122)));
-const _a7fe2f0a = () => interopDefault(__webpack_require__.e(/* import() | pages/seller-form */ 83).then(__webpack_require__.bind(null, 222)));
-const _6b7e0044 = () => interopDefault(__webpack_require__.e(/* import() | pages/service */ 102).then(__webpack_require__.bind(null, 223)));
-const _3c397142 = () => interopDefault(__webpack_require__.e(/* import() | pages/today-deal */ 103).then(__webpack_require__.bind(null, 224)));
-const _4e51ab70 = () => interopDefault(__webpack_require__.e(/* import() | pages/update-password */ 104).then(__webpack_require__.bind(null, 225)));
-const _66eaf24e = () => interopDefault(__webpack_require__.e(/* import() | pages/affiliate/affiliate-dashboard */ 48).then(__webpack_require__.bind(null, 226)));
-const _24a9bdd2 = () => interopDefault(__webpack_require__.e(/* import() | pages/affiliate/affiliate-programe */ 49).then(__webpack_require__.bind(null, 227)));
-const _5f236cc9 = () => interopDefault(__webpack_require__.e(/* import() | pages/affiliate/affiliate-programe-register */ 50).then(__webpack_require__.bind(null, 228)));
-const _21bd51a1 = () => interopDefault(__webpack_require__.e(/* import() | pages/affiliate/affiliate-transfer */ 51).then(__webpack_require__.bind(null, 229)));
-const _42bf1c18 = () => interopDefault(__webpack_require__.e(/* import() | pages/category/all-categorys */ 58).then(__webpack_require__.bind(null, 230)));
-const _251a30a0 = () => interopDefault(__webpack_require__.e(/* import() | pages/category/category-grid */ 59).then(__webpack_require__.bind(null, 231)));
-const _6259e9f8 = () => interopDefault(__webpack_require__.e(/* import() | pages/category/category-list */ 60).then(__webpack_require__.bind(null, 232)));
-const _24c7c822 = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/change-password */ 84).then(__webpack_require__.bind(null, 233)));
-const _621de466 = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/order-details */ 85).then(__webpack_require__.bind(null, 234)));
-const _744b2770 = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-account-setting */ 89).then(__webpack_require__.bind(null, 235)));
-const _77aef502 = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-comission-history */ 90).then(__webpack_require__.bind(null, 236)));
-const _67ad43ec = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-customer-returns */ 91).then(__webpack_require__.bind(null, 237)));
-const _386bf3a8 = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-dashboard */ 92).then(__webpack_require__.bind(null, 238)));
-const _3c17a88d = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-leftsidebar */ 93).then(__webpack_require__.bind(null, 65)));
-const _2f44ea1f = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-message */ 94).then(__webpack_require__.bind(null, 239)));
-const _62d127fd = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-orders */ 95).then(__webpack_require__.bind(null, 240)));
-const _1895aa36 = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-payment-history */ 96).then(__webpack_require__.bind(null, 241)));
-const _4624fefc = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-products */ 97).then(__webpack_require__.bind(null, 242)));
-const _2a895efe = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-products-post */ 98).then(__webpack_require__.bind(null, 273)));
-const _6de6d2c1 = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-profile */ 99).then(__webpack_require__.bind(null, 243)));
-const _707521de = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-wallet */ 100).then(__webpack_require__.bind(null, 244)));
-const _11fc6a46 = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-wishlist */ 101).then(__webpack_require__.bind(null, 245)));
-const _437d804d = () => interopDefault(__webpack_require__.e(/* import() | pages/user/account-statement */ 105).then(__webpack_require__.bind(null, 246)));
-const _466db9ec = () => interopDefault(__webpack_require__.e(/* import() | pages/user/my-reviews */ 107).then(__webpack_require__.bind(null, 247)));
-const _344df408 = () => interopDefault(__webpack_require__.e(/* import() | pages/user/mySalary */ 108).then(__webpack_require__.bind(null, 248)));
-const _3edf3641 = () => interopDefault(__webpack_require__.e(/* import() | pages/user/order-details */ 109).then(__webpack_require__.bind(null, 249)));
-const _32fd3622 = () => interopDefault(__webpack_require__.e(/* import() | pages/user/user-blogPost */ 110).then(__webpack_require__.bind(null, 250)));
-const _173f7bc6 = () => interopDefault(__webpack_require__.e(/* import() | pages/user/user-dashborad */ 111).then(__webpack_require__.bind(null, 251)));
-const _4ca25fc4 = () => interopDefault(__webpack_require__.e(/* import() | pages/user/user-mlm */ 112).then(__webpack_require__.bind(null, 252)));
-const _0fdfae25 = () => interopDefault(__webpack_require__.e(/* import() | pages/user/user-orders */ 113).then(__webpack_require__.bind(null, 253)));
-const _62a91199 = () => interopDefault(__webpack_require__.e(/* import() | pages/user/user-profile */ 114).then(__webpack_require__.bind(null, 254)));
-const _05baa08a = () => interopDefault(__webpack_require__.e(/* import() | pages/user/user-requireProduct */ 115).then(__webpack_require__.bind(null, 255)));
-const _475a1a00 = () => interopDefault(__webpack_require__.e(/* import() | pages/user/user-security */ 116).then(__webpack_require__.bind(null, 256)));
-const _202405aa = () => interopDefault(__webpack_require__.e(/* import() | pages/user/user-whichlist */ 117).then(__webpack_require__.bind(null, 257)));
-const _594f8bf5 = () => interopDefault(__webpack_require__.e(/* import() | pages/user/user-withdrawal */ 118).then(__webpack_require__.bind(null, 258)));
-const _cff8161c = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/products/product-edit */ 86).then(__webpack_require__.bind(null, 274)));
-const _eddf71e0 = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/products/product-preview */ 87).then(__webpack_require__.bind(null, 259)));
-const _4a2eba51 = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/products/product-varient */ 88).then(__webpack_require__.bind(null, 260)));
-const _97adc88a = () => interopDefault(__webpack_require__.e(/* import() | pages/index */ 69).then(__webpack_require__.bind(null, 261)));
-const _085c307d = () => interopDefault(__webpack_require__.e(/* import() | pages/user/invite-user/_id */ 106).then(__webpack_require__.bind(null, 262)));
-const _860ad41a = () => interopDefault(__webpack_require__.e(/* import() | pages/business/_slug */ 56).then(__webpack_require__.bind(null, 263)));
-const _28428e8d = () => interopDefault(__webpack_require__.e(/* import() | pages/product-details/_slug */ 74).then(__webpack_require__.bind(null, 264)));
-const _bd12ddf2 = () => interopDefault(__webpack_require__.e(/* import() | pages/resetpassword/_slug */ 79).then(__webpack_require__.bind(null, 265)));
+const _8bb4c0d4 = () => interopDefault(__webpack_require__.e(/* import() | pages/allbrands */ 53).then(__webpack_require__.bind(null, 200)));
+const _2f1f5440 = () => interopDefault(__webpack_require__.e(/* import() | pages/allshop */ 54).then(__webpack_require__.bind(null, 201)));
+const _f5f14c6e = () => interopDefault(__webpack_require__.e(/* import() | pages/blog */ 55).then(__webpack_require__.bind(null, 202)));
+const _7b75abbe = () => interopDefault(__webpack_require__.e(/* import() | pages/blog-details */ 56).then(__webpack_require__.bind(null, 203)));
+const _a64c9372 = () => interopDefault(__webpack_require__.e(/* import() | pages/cart */ 59).then(__webpack_require__.bind(null, 204)));
+const _f428b59c = () => interopDefault(__webpack_require__.e(/* import() | pages/changepassword */ 63).then(__webpack_require__.bind(null, 205)));
+const _64911d53 = () => interopDefault(__webpack_require__.e(/* import() | pages/changepassword copy */ 64).then(__webpack_require__.bind(null, 206)));
+const _0243657e = () => interopDefault(__webpack_require__.e(/* import() | pages/charity */ 65).then(__webpack_require__.bind(null, 207)));
+const _7b8fb426 = () => interopDefault(__webpack_require__.e(/* import() | pages/checkout */ 66).then(__webpack_require__.bind(null, 208)));
+const _b56b0b94 = () => interopDefault(__webpack_require__.e(/* import() | pages/coupons */ 67).then(__webpack_require__.bind(null, 209)));
+const _32497b50 = () => interopDefault(__webpack_require__.e(/* import() | pages/customer-review */ 68).then(__webpack_require__.bind(null, 210)));
+const _2b556a36 = () => interopDefault(__webpack_require__.e(/* import() | pages/flas-sale */ 69).then(__webpack_require__.bind(null, 211)));
+const _9bbb08b8 = () => interopDefault(__webpack_require__.e(/* import() | pages/forget-password */ 70).then(__webpack_require__.bind(null, 212)));
+const _7dd0bed2 = () => interopDefault(__webpack_require__.e(/* import() | pages/login */ 72).then(__webpack_require__.bind(null, 213)));
+const _39574f34 = () => interopDefault(__webpack_require__.e(/* import() | pages/official-store */ 73).then(__webpack_require__.bind(null, 214)));
+const _a6190e06 = () => interopDefault(__webpack_require__.e(/* import() | pages/official-store-grid */ 74).then(__webpack_require__.bind(null, 215)));
+const _14622ad7 = () => interopDefault(__webpack_require__.e(/* import() | pages/OfficialStoreFilter */ 47).then(__webpack_require__.bind(null, 133)));
+const _a7f46086 = () => interopDefault(__webpack_require__.e(/* import() | pages/OfficialStoreFilterGrid */ 48).then(__webpack_require__.bind(null, 134)));
+const _3d3d4aa2 = () => interopDefault(__webpack_require__.e(/* import() | pages/payment */ 75).then(__webpack_require__.bind(null, 216)));
+const _2cdd178b = () => interopDefault(__webpack_require__.e(/* import() | pages/product-grid */ 77).then(__webpack_require__.bind(null, 217)));
+const _6a1cd0e3 = () => interopDefault(__webpack_require__.e(/* import() | pages/product-list */ 78).then(__webpack_require__.bind(null, 218)));
+const _411546df = () => interopDefault(__webpack_require__.e(/* import() | pages/refund */ 79).then(__webpack_require__.bind(null, 219)));
+const _09f52fc6 = () => interopDefault(__webpack_require__.e(/* import() | pages/required */ 80).then(__webpack_require__.bind(null, 220)));
+const _98948b34 = () => interopDefault(__webpack_require__.e(/* import() | pages/return-and-replacement */ 82).then(__webpack_require__.bind(null, 221)));
+const _25e8a256 = () => interopDefault(__webpack_require__.e(/* import() | pages/sell-on-ecommerce */ 83).then(__webpack_require__.bind(null, 222)));
+const _08bb6d5c = () => interopDefault(__webpack_require__.e(/* import() | pages/sell-on-filter */ 84).then(__webpack_require__.bind(null, 122)));
+const _a7fe2f0a = () => interopDefault(__webpack_require__.e(/* import() | pages/seller-form */ 85).then(__webpack_require__.bind(null, 223)));
+const _6b7e0044 = () => interopDefault(__webpack_require__.e(/* import() | pages/service */ 104).then(__webpack_require__.bind(null, 224)));
+const _3c397142 = () => interopDefault(__webpack_require__.e(/* import() | pages/today-deal */ 105).then(__webpack_require__.bind(null, 225)));
+const _4e51ab70 = () => interopDefault(__webpack_require__.e(/* import() | pages/update-password */ 106).then(__webpack_require__.bind(null, 226)));
+const _66eaf24e = () => interopDefault(__webpack_require__.e(/* import() | pages/affiliate/affiliate-dashboard */ 49).then(__webpack_require__.bind(null, 227)));
+const _24a9bdd2 = () => interopDefault(__webpack_require__.e(/* import() | pages/affiliate/affiliate-programe */ 50).then(__webpack_require__.bind(null, 228)));
+const _5f236cc9 = () => interopDefault(__webpack_require__.e(/* import() | pages/affiliate/affiliate-programe-register */ 51).then(__webpack_require__.bind(null, 229)));
+const _21bd51a1 = () => interopDefault(__webpack_require__.e(/* import() | pages/affiliate/affiliate-transfer */ 52).then(__webpack_require__.bind(null, 230)));
+const _7094e144 = () => interopDefault(__webpack_require__.e(/* import() | pages/brand-product/brand-grid */ 57).then(__webpack_require__.bind(null, 231)));
+const _42bf1c18 = () => interopDefault(__webpack_require__.e(/* import() | pages/category/all-categorys */ 60).then(__webpack_require__.bind(null, 232)));
+const _251a30a0 = () => interopDefault(__webpack_require__.e(/* import() | pages/category/category-grid */ 61).then(__webpack_require__.bind(null, 233)));
+const _6259e9f8 = () => interopDefault(__webpack_require__.e(/* import() | pages/category/category-list */ 62).then(__webpack_require__.bind(null, 234)));
+const _24c7c822 = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/change-password */ 86).then(__webpack_require__.bind(null, 235)));
+const _621de466 = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/order-details */ 87).then(__webpack_require__.bind(null, 236)));
+const _744b2770 = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-account-setting */ 91).then(__webpack_require__.bind(null, 237)));
+const _77aef502 = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-comission-history */ 92).then(__webpack_require__.bind(null, 238)));
+const _67ad43ec = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-customer-returns */ 93).then(__webpack_require__.bind(null, 239)));
+const _386bf3a8 = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-dashboard */ 94).then(__webpack_require__.bind(null, 240)));
+const _3c17a88d = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-leftsidebar */ 95).then(__webpack_require__.bind(null, 65)));
+const _2f44ea1f = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-message */ 96).then(__webpack_require__.bind(null, 241)));
+const _62d127fd = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-orders */ 97).then(__webpack_require__.bind(null, 242)));
+const _1895aa36 = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-payment-history */ 98).then(__webpack_require__.bind(null, 243)));
+const _4624fefc = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-products */ 99).then(__webpack_require__.bind(null, 244)));
+const _2a895efe = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-products-post */ 100).then(__webpack_require__.bind(null, 275)));
+const _6de6d2c1 = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-profile */ 101).then(__webpack_require__.bind(null, 245)));
+const _707521de = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-wallet */ 102).then(__webpack_require__.bind(null, 246)));
+const _11fc6a46 = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/seller-wishlist */ 103).then(__webpack_require__.bind(null, 247)));
+const _437d804d = () => interopDefault(__webpack_require__.e(/* import() | pages/user/account-statement */ 107).then(__webpack_require__.bind(null, 248)));
+const _466db9ec = () => interopDefault(__webpack_require__.e(/* import() | pages/user/my-reviews */ 109).then(__webpack_require__.bind(null, 249)));
+const _344df408 = () => interopDefault(__webpack_require__.e(/* import() | pages/user/mySalary */ 110).then(__webpack_require__.bind(null, 250)));
+const _3edf3641 = () => interopDefault(__webpack_require__.e(/* import() | pages/user/order-details */ 111).then(__webpack_require__.bind(null, 251)));
+const _32fd3622 = () => interopDefault(__webpack_require__.e(/* import() | pages/user/user-blogPost */ 112).then(__webpack_require__.bind(null, 252)));
+const _173f7bc6 = () => interopDefault(__webpack_require__.e(/* import() | pages/user/user-dashborad */ 113).then(__webpack_require__.bind(null, 253)));
+const _4ca25fc4 = () => interopDefault(__webpack_require__.e(/* import() | pages/user/user-mlm */ 114).then(__webpack_require__.bind(null, 254)));
+const _0fdfae25 = () => interopDefault(__webpack_require__.e(/* import() | pages/user/user-orders */ 115).then(__webpack_require__.bind(null, 255)));
+const _62a91199 = () => interopDefault(__webpack_require__.e(/* import() | pages/user/user-profile */ 116).then(__webpack_require__.bind(null, 256)));
+const _05baa08a = () => interopDefault(__webpack_require__.e(/* import() | pages/user/user-requireProduct */ 117).then(__webpack_require__.bind(null, 257)));
+const _475a1a00 = () => interopDefault(__webpack_require__.e(/* import() | pages/user/user-security */ 118).then(__webpack_require__.bind(null, 258)));
+const _202405aa = () => interopDefault(__webpack_require__.e(/* import() | pages/user/user-whichlist */ 119).then(__webpack_require__.bind(null, 259)));
+const _594f8bf5 = () => interopDefault(__webpack_require__.e(/* import() | pages/user/user-withdrawal */ 120).then(__webpack_require__.bind(null, 260)));
+const _cff8161c = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/products/product-edit */ 88).then(__webpack_require__.bind(null, 276)));
+const _eddf71e0 = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/products/product-preview */ 89).then(__webpack_require__.bind(null, 261)));
+const _4a2eba51 = () => interopDefault(__webpack_require__.e(/* import() | pages/seller/products/product-varient */ 90).then(__webpack_require__.bind(null, 262)));
+const _97adc88a = () => interopDefault(__webpack_require__.e(/* import() | pages/index */ 71).then(__webpack_require__.bind(null, 263)));
+const _085c307d = () => interopDefault(__webpack_require__.e(/* import() | pages/user/invite-user/_id */ 108).then(__webpack_require__.bind(null, 264)));
+const _860ad41a = () => interopDefault(__webpack_require__.e(/* import() | pages/business/_slug */ 58).then(__webpack_require__.bind(null, 265)));
+const _28428e8d = () => interopDefault(__webpack_require__.e(/* import() | pages/product-details/_slug */ 76).then(__webpack_require__.bind(null, 266)));
+const _bd12ddf2 = () => interopDefault(__webpack_require__.e(/* import() | pages/resetpassword/_slug */ 81).then(__webpack_require__.bind(null, 267)));
 
 const emptyFn = () => {};
 external_vue_default.a.use(external_vue_router_default.a);
@@ -1923,6 +1925,10 @@ const routerOptions = {
     path: "/affiliate/affiliate-transfer",
     component: _21bd51a1,
     name: "affiliate-affiliate-transfer"
+  }, {
+    path: "/brand-product/brand-grid",
+    component: _7094e144,
+    name: "brand-product-brand-grid"
   }, {
     path: "/category/all-categorys",
     component: _42bf1c18,
@@ -2861,51 +2867,52 @@ function mergeProperty(storeModule, moduleData, property) {
   }
 }
 // CONCATENATED MODULE: ./.nuxt/components/index.js
-const BestPrice = () => __webpack_require__.e(/* import() | components/best-price */ 1).then(__webpack_require__.bind(null, 275)).then(c => wrapFunctional(c.default || c));
-const BrandiOfficialStore = () => __webpack_require__.e(/* import() | components/brandi-official-store */ 2).then(__webpack_require__.bind(null, 276)).then(c => wrapFunctional(c.default || c));
-const CategoryFive = () => __webpack_require__.e(/* import() | components/category-five */ 3).then(__webpack_require__.bind(null, 266)).then(c => wrapFunctional(c.default || c));
-const CategoryFour = () => __webpack_require__.e(/* import() | components/category-four */ 4).then(__webpack_require__.bind(null, 267)).then(c => wrapFunctional(c.default || c));
-const CategoryMultipleProduct = () => __webpack_require__.e(/* import() | components/category-multiple-product */ 5).then(__webpack_require__.bind(null, 74)).then(c => wrapFunctional(c.default || c));
-const CategoryOne = () => __webpack_require__.e(/* import() | components/category-one */ 6).then(__webpack_require__.bind(null, 268)).then(c => wrapFunctional(c.default || c));
-const CategoryPart = () => __webpack_require__.e(/* import() | components/category-part */ 7).then(__webpack_require__.bind(null, 127)).then(c => wrapFunctional(c.default || c));
-const CategoryProductFilter = () => __webpack_require__.e(/* import() | components/category-product-filter */ 8).then(__webpack_require__.bind(null, 72)).then(c => wrapFunctional(c.default || c));
-const CategoryProductFilterGrid = () => __webpack_require__.e(/* import() | components/category-product-filter-grid */ 9).then(__webpack_require__.bind(null, 123)).then(c => wrapFunctional(c.default || c));
-const CategoryRecentView = () => __webpack_require__.e(/* import() | components/category-recent-view */ 10).then(__webpack_require__.bind(null, 81)).then(c => wrapFunctional(c.default || c));
-const CategorySliders = () => __webpack_require__.e(/* import() | components/category-sliders */ 11).then(__webpack_require__.bind(null, 130)).then(c => wrapFunctional(c.default || c));
-const CategoryThree = () => __webpack_require__.e(/* import() | components/category-three */ 12).then(__webpack_require__.bind(null, 269)).then(c => wrapFunctional(c.default || c));
-const CategoryTwo = () => __webpack_require__.e(/* import() | components/category-two */ 13).then(__webpack_require__.bind(null, 270)).then(c => wrapFunctional(c.default || c));
-const CommonMiniTabNavbar = () => __webpack_require__.e(/* import() | components/common-mini-tab-navbar */ 14).then(__webpack_require__.bind(null, 59)).then(c => wrapFunctional(c.default || c));
-const CommonMobileSearchProduct = () => __webpack_require__.e(/* import() | components/common-mobile-search-product */ 15).then(__webpack_require__.bind(null, 60)).then(c => wrapFunctional(c.default || c));
-const CommonMobileSidebar = () => __webpack_require__.e(/* import() | components/common-mobile-sidebar */ 16).then(__webpack_require__.bind(null, 58)).then(c => wrapFunctional(c.default || c));
-const DelasForYour = () => __webpack_require__.e(/* import() | components/delas-for-your */ 17).then(__webpack_require__.bind(null, 129)).then(c => wrapFunctional(c.default || c));
-const DesktopViewOption = () => __webpack_require__.e(/* import() | components/desktop-view-option */ 18).then(__webpack_require__.bind(null, 57)).then(c => wrapFunctional(c.default || c));
-const ExtraDiscount = () => __webpack_require__.e(/* import() | components/extra-discount */ 19).then(__webpack_require__.bind(null, 73)).then(c => wrapFunctional(c.default || c));
-const FlashSaleFilter = () => __webpack_require__.e(/* import() | components/flash-sale-filter */ 20).then(__webpack_require__.bind(null, 69)).then(c => wrapFunctional(c.default || c));
-const FlashSelling = () => __webpack_require__.e(/* import() | components/flash-selling */ 21).then(__webpack_require__.bind(null, 277)).then(c => wrapFunctional(c.default || c));
-const Footer = () => __webpack_require__.e(/* import() | components/footer */ 22).then(__webpack_require__.bind(null, 52)).then(c => wrapFunctional(c.default || c));
-const LimitedStokDetails = () => __webpack_require__.e(/* import() | components/limited-stok-details */ 23).then(__webpack_require__.bind(null, 278)).then(c => wrapFunctional(c.default || c));
-const LoginPopup = () => __webpack_require__.e(/* import() | components/login-popup */ 24).then(__webpack_require__.bind(null, 53)).then(c => wrapFunctional(c.default || c));
-const LogoAndPayment = () => __webpack_require__.e(/* import() | components/logo-and-payment */ 25).then(__webpack_require__.bind(null, 56)).then(c => wrapFunctional(c.default || c));
-const MoreCollection = () => __webpack_require__.e(/* import() | components/more-collection */ 26).then(__webpack_require__.bind(null, 279)).then(c => wrapFunctional(c.default || c));
-const Navbar = () => __webpack_require__.e(/* import() | components/navbar */ 28).then(__webpack_require__.bind(null, 125)).then(c => wrapFunctional(c.default || c));
-const NavSlider = () => __webpack_require__.e(/* import() | components/nav-slider */ 27).then(__webpack_require__.bind(null, 126)).then(c => wrapFunctional(c.default || c));
-const OfficalStore = () => __webpack_require__.e(/* import() | components/offical-store */ 29).then(__webpack_require__.bind(null, 131)).then(c => wrapFunctional(c.default || c));
-const OfficialStoreDeals = () => __webpack_require__.e(/* import() | components/official-store-deals */ 30).then(__webpack_require__.bind(null, 280)).then(c => wrapFunctional(c.default || c));
-const OfficialStoreProductList = () => __webpack_require__.e(/* import() | components/official-store-product-list */ 31).then(__webpack_require__.bind(null, 67)).then(c => wrapFunctional(c.default || c));
-const PhoneDeals = () => __webpack_require__.e(/* import() | components/phone-deals */ 32).then(__webpack_require__.bind(null, 76)).then(c => wrapFunctional(c.default || c));
-const PhoneSuperSales = () => __webpack_require__.e(/* import() | components/phone-super-sales */ 33).then(__webpack_require__.bind(null, 281)).then(c => wrapFunctional(c.default || c));
-const PhoneTables = () => __webpack_require__.e(/* import() | components/phone-tables */ 34).then(__webpack_require__.bind(null, 282)).then(c => wrapFunctional(c.default || c));
-const ProductListFilterGrid = () => __webpack_require__.e(/* import() | components/product-list-filter-grid */ 35).then(__webpack_require__.bind(null, 134)).then(c => wrapFunctional(c.default || c));
-const ProductListFilterList = () => __webpack_require__.e(/* import() | components/product-list-filter-list */ 36).then(__webpack_require__.bind(null, 80)).then(c => wrapFunctional(c.default || c));
-const RecentView = () => __webpack_require__.e(/* import() | components/recent-view */ 37).then(__webpack_require__.bind(null, 62)).then(c => wrapFunctional(c.default || c));
-const ShopFromOurCollection = () => __webpack_require__.e(/* import() | components/shop-from-our-collection */ 38).then(__webpack_require__.bind(null, 283)).then(c => wrapFunctional(c.default || c));
-const TopAppliancesDeals = () => __webpack_require__.e(/* import() | components/top-appliances-deals */ 39).then(__webpack_require__.bind(null, 284)).then(c => wrapFunctional(c.default || c));
-const TopBannarDesktopView = () => __webpack_require__.e(/* import() | components/top-bannar-desktop-view */ 40).then(__webpack_require__.bind(null, 124)).then(c => wrapFunctional(c.default || c));
-const TopDeals = () => __webpack_require__.e(/* import() | components/top-deals */ 41).then(__webpack_require__.bind(null, 75)).then(c => wrapFunctional(c.default || c));
-const TopSellingItem = () => __webpack_require__.e(/* import() | components/top-selling-item */ 42).then(__webpack_require__.bind(null, 128)).then(c => wrapFunctional(c.default || c));
-const TopSellingItemBackup = () => __webpack_require__.e(/* import() | components/top-selling-item-backup */ 43).then(__webpack_require__.bind(null, 271)).then(c => wrapFunctional(c.default || c));
-const Tutorial = () => __webpack_require__.e(/* import() | components/tutorial */ 44).then(__webpack_require__.bind(null, 272)).then(c => wrapFunctional(c.default || c));
-const UserSidebar = () => __webpack_require__.e(/* import() | components/user-sidebar */ 45).then(__webpack_require__.bind(null, 66)).then(c => wrapFunctional(c.default || c));
+const BestPrice = () => __webpack_require__.e(/* import() | components/best-price */ 1).then(__webpack_require__.bind(null, 277)).then(c => wrapFunctional(c.default || c));
+const BrandiOfficialStore = () => __webpack_require__.e(/* import() | components/brandi-official-store */ 3).then(__webpack_require__.bind(null, 278)).then(c => wrapFunctional(c.default || c));
+const BrandProductGrid = () => __webpack_require__.e(/* import() | components/brand-product-grid */ 2).then(__webpack_require__.bind(null, 123)).then(c => wrapFunctional(c.default || c));
+const CategoryFive = () => __webpack_require__.e(/* import() | components/category-five */ 4).then(__webpack_require__.bind(null, 268)).then(c => wrapFunctional(c.default || c));
+const CategoryFour = () => __webpack_require__.e(/* import() | components/category-four */ 5).then(__webpack_require__.bind(null, 269)).then(c => wrapFunctional(c.default || c));
+const CategoryMultipleProduct = () => __webpack_require__.e(/* import() | components/category-multiple-product */ 6).then(__webpack_require__.bind(null, 74)).then(c => wrapFunctional(c.default || c));
+const CategoryOne = () => __webpack_require__.e(/* import() | components/category-one */ 7).then(__webpack_require__.bind(null, 270)).then(c => wrapFunctional(c.default || c));
+const CategoryPart = () => __webpack_require__.e(/* import() | components/category-part */ 8).then(__webpack_require__.bind(null, 128)).then(c => wrapFunctional(c.default || c));
+const CategoryProductFilter = () => __webpack_require__.e(/* import() | components/category-product-filter */ 9).then(__webpack_require__.bind(null, 72)).then(c => wrapFunctional(c.default || c));
+const CategoryProductFilterGrid = () => __webpack_require__.e(/* import() | components/category-product-filter-grid */ 10).then(__webpack_require__.bind(null, 124)).then(c => wrapFunctional(c.default || c));
+const CategoryRecentView = () => __webpack_require__.e(/* import() | components/category-recent-view */ 11).then(__webpack_require__.bind(null, 81)).then(c => wrapFunctional(c.default || c));
+const CategorySliders = () => __webpack_require__.e(/* import() | components/category-sliders */ 12).then(__webpack_require__.bind(null, 131)).then(c => wrapFunctional(c.default || c));
+const CategoryThree = () => __webpack_require__.e(/* import() | components/category-three */ 13).then(__webpack_require__.bind(null, 271)).then(c => wrapFunctional(c.default || c));
+const CategoryTwo = () => __webpack_require__.e(/* import() | components/category-two */ 14).then(__webpack_require__.bind(null, 272)).then(c => wrapFunctional(c.default || c));
+const CommonMiniTabNavbar = () => __webpack_require__.e(/* import() | components/common-mini-tab-navbar */ 15).then(__webpack_require__.bind(null, 59)).then(c => wrapFunctional(c.default || c));
+const CommonMobileSearchProduct = () => __webpack_require__.e(/* import() | components/common-mobile-search-product */ 16).then(__webpack_require__.bind(null, 60)).then(c => wrapFunctional(c.default || c));
+const CommonMobileSidebar = () => __webpack_require__.e(/* import() | components/common-mobile-sidebar */ 17).then(__webpack_require__.bind(null, 58)).then(c => wrapFunctional(c.default || c));
+const DelasForYour = () => __webpack_require__.e(/* import() | components/delas-for-your */ 18).then(__webpack_require__.bind(null, 130)).then(c => wrapFunctional(c.default || c));
+const DesktopViewOption = () => __webpack_require__.e(/* import() | components/desktop-view-option */ 19).then(__webpack_require__.bind(null, 57)).then(c => wrapFunctional(c.default || c));
+const ExtraDiscount = () => __webpack_require__.e(/* import() | components/extra-discount */ 20).then(__webpack_require__.bind(null, 73)).then(c => wrapFunctional(c.default || c));
+const FlashSaleFilter = () => __webpack_require__.e(/* import() | components/flash-sale-filter */ 21).then(__webpack_require__.bind(null, 69)).then(c => wrapFunctional(c.default || c));
+const FlashSelling = () => __webpack_require__.e(/* import() | components/flash-selling */ 22).then(__webpack_require__.bind(null, 279)).then(c => wrapFunctional(c.default || c));
+const Footer = () => __webpack_require__.e(/* import() | components/footer */ 23).then(__webpack_require__.bind(null, 52)).then(c => wrapFunctional(c.default || c));
+const LimitedStokDetails = () => __webpack_require__.e(/* import() | components/limited-stok-details */ 24).then(__webpack_require__.bind(null, 280)).then(c => wrapFunctional(c.default || c));
+const LoginPopup = () => __webpack_require__.e(/* import() | components/login-popup */ 25).then(__webpack_require__.bind(null, 53)).then(c => wrapFunctional(c.default || c));
+const LogoAndPayment = () => __webpack_require__.e(/* import() | components/logo-and-payment */ 26).then(__webpack_require__.bind(null, 56)).then(c => wrapFunctional(c.default || c));
+const MoreCollection = () => __webpack_require__.e(/* import() | components/more-collection */ 27).then(__webpack_require__.bind(null, 281)).then(c => wrapFunctional(c.default || c));
+const Navbar = () => __webpack_require__.e(/* import() | components/navbar */ 29).then(__webpack_require__.bind(null, 126)).then(c => wrapFunctional(c.default || c));
+const NavSlider = () => __webpack_require__.e(/* import() | components/nav-slider */ 28).then(__webpack_require__.bind(null, 127)).then(c => wrapFunctional(c.default || c));
+const OfficalStore = () => __webpack_require__.e(/* import() | components/offical-store */ 30).then(__webpack_require__.bind(null, 132)).then(c => wrapFunctional(c.default || c));
+const OfficialStoreDeals = () => __webpack_require__.e(/* import() | components/official-store-deals */ 31).then(__webpack_require__.bind(null, 282)).then(c => wrapFunctional(c.default || c));
+const OfficialStoreProductList = () => __webpack_require__.e(/* import() | components/official-store-product-list */ 32).then(__webpack_require__.bind(null, 67)).then(c => wrapFunctional(c.default || c));
+const PhoneDeals = () => __webpack_require__.e(/* import() | components/phone-deals */ 33).then(__webpack_require__.bind(null, 77)).then(c => wrapFunctional(c.default || c));
+const PhoneSuperSales = () => __webpack_require__.e(/* import() | components/phone-super-sales */ 34).then(__webpack_require__.bind(null, 283)).then(c => wrapFunctional(c.default || c));
+const PhoneTables = () => __webpack_require__.e(/* import() | components/phone-tables */ 35).then(__webpack_require__.bind(null, 284)).then(c => wrapFunctional(c.default || c));
+const ProductListFilterGrid = () => __webpack_require__.e(/* import() | components/product-list-filter-grid */ 36).then(__webpack_require__.bind(null, 135)).then(c => wrapFunctional(c.default || c));
+const ProductListFilterList = () => __webpack_require__.e(/* import() | components/product-list-filter-list */ 37).then(__webpack_require__.bind(null, 75)).then(c => wrapFunctional(c.default || c));
+const RecentView = () => __webpack_require__.e(/* import() | components/recent-view */ 38).then(__webpack_require__.bind(null, 62)).then(c => wrapFunctional(c.default || c));
+const ShopFromOurCollection = () => __webpack_require__.e(/* import() | components/shop-from-our-collection */ 39).then(__webpack_require__.bind(null, 285)).then(c => wrapFunctional(c.default || c));
+const TopAppliancesDeals = () => __webpack_require__.e(/* import() | components/top-appliances-deals */ 40).then(__webpack_require__.bind(null, 286)).then(c => wrapFunctional(c.default || c));
+const TopBannarDesktopView = () => __webpack_require__.e(/* import() | components/top-bannar-desktop-view */ 41).then(__webpack_require__.bind(null, 125)).then(c => wrapFunctional(c.default || c));
+const TopDeals = () => __webpack_require__.e(/* import() | components/top-deals */ 42).then(__webpack_require__.bind(null, 76)).then(c => wrapFunctional(c.default || c));
+const TopSellingItem = () => __webpack_require__.e(/* import() | components/top-selling-item */ 43).then(__webpack_require__.bind(null, 129)).then(c => wrapFunctional(c.default || c));
+const TopSellingItemBackup = () => __webpack_require__.e(/* import() | components/top-selling-item-backup */ 44).then(__webpack_require__.bind(null, 273)).then(c => wrapFunctional(c.default || c));
+const Tutorial = () => __webpack_require__.e(/* import() | components/tutorial */ 45).then(__webpack_require__.bind(null, 274)).then(c => wrapFunctional(c.default || c));
+const UserSidebar = () => __webpack_require__.e(/* import() | components/user-sidebar */ 46).then(__webpack_require__.bind(null, 66)).then(c => wrapFunctional(c.default || c));
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

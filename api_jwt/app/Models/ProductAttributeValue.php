@@ -27,5 +27,7 @@ class ProductAttributeValue extends Authenticatable
         return $this->hasMany(SubAttribute::class,'attributes_id');
     }
 
+  
+
 
 }

@@ -1,7 +1,7 @@
-exports.ids = [71,14,15,16,18,22,24,25,32,37,41,46];
+exports.ids = [73,15,16,17,19,23,25,26,33,38,42,47];
 exports.modules = {
 
-/***/ 132:
+/***/ 133:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56,7 +56,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 213:
+/***/ 214:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -95,13 +95,13 @@ var Common_MobileSearchProduct = __webpack_require__(60);
 var RecentView = __webpack_require__(62);
 
 // EXTERNAL MODULE: ./components/TopDeals.vue + 2 modules
-var TopDeals = __webpack_require__(75);
+var TopDeals = __webpack_require__(76);
 
 // EXTERNAL MODULE: ./components/PhoneDeals.vue + 2 modules
-var PhoneDeals = __webpack_require__(76);
+var PhoneDeals = __webpack_require__(77);
 
 // EXTERNAL MODULE: ./pages/OfficialStoreFilter.vue + 2 modules
-var OfficialStoreFilter = __webpack_require__(132);
+var OfficialStoreFilter = __webpack_require__(133);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/official-store.vue?vue&type=script&lang=js&
 
@@ -156,7 +156,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var official_store = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {LogoAndPayment: __webpack_require__(56).default,DesktopViewOption: __webpack_require__(57).default,TopDeals: __webpack_require__(75).default,PhoneDeals: __webpack_require__(76).default,RecentView: __webpack_require__(62).default,Footer: __webpack_require__(52).default})
+installComponents(component, {LogoAndPayment: __webpack_require__(56).default,DesktopViewOption: __webpack_require__(57).default,TopDeals: __webpack_require__(76).default,PhoneDeals: __webpack_require__(77).default,RecentView: __webpack_require__(62).default,Footer: __webpack_require__(52).default})
 
 
 /***/ }),
@@ -1171,7 +1171,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 75:
+/***/ 76:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1213,7 +1213,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 76:
+/***/ 77:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

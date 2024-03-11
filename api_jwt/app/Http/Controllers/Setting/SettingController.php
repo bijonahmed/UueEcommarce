@@ -689,7 +689,7 @@ class SettingController extends Controller
             'promocode'             => "required",
             'code_type'             => "required",
             'min_shopping'          => "required|numeric",
-            'd_percent'             => "",
+            'd_percent'             => "max:100",
             'd_fvalue'              => "",
             'status'                => "required",
         ]);

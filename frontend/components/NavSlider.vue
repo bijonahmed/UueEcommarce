@@ -58,7 +58,7 @@
             </div>
             <div class="col-xl-6 col-lg-9 col-md-12 col-sm-12 sec_One" v-if="sliders.length > 0">
 
-                <div id="carouselExample" class="carousel w-100 height_100" data-bs-ride="carousel"
+                <div id="carouselExample" class="carousel_nav carousel w-100 height_100" data-bs-ride="carousel"
                     data-bs-interval="3000">
                     <div class="carousel-indicators">
                         <button v-for="(item, index) in sliders" :key="index" type="button"
@@ -145,7 +145,7 @@ export default {
     methods: {
         handleCarouselSlide(event) {
             const carousel = event.target;
-            if (carousel.classList.contains('carousel')) {
+            if (carousel.classList.contains('carousel_nav')) {
                 if (carousel.querySelector('.carousel-inner .carousel-item:last-child').classList.contains('active')) {
                     carousel.querySelector('.carousel-control-next').click();
                 }

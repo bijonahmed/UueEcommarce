@@ -5,6 +5,9 @@
   "BrandiOfficialStore": {
     "description": "Auto imported from components/BrandiOfficialStore.vue"
   },
+  "BrandProductGrid": {
+    "description": "Auto imported from components/brandProductGrid.vue"
+  },
   "CategoryFive": {
     "description": "Auto imported from components/CategoryFive.vue"
   },

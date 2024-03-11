@@ -17,6 +17,7 @@ use App\Models\AttributeValues;
 use App\Rules\MatchOldPassword;
 use App\Models\ProductAttributes;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use App\Models\ProductAttributeValue;
 use App\Models\HomeAroductSliderCategory;
@@ -42,12 +43,12 @@ class CategoryController extends Controller
 
     public function removeProctCategory(Request $request)
     {
-       // dd($request->all());
-       HomeAroductSliderCategory::where('id', $request->id)->delete();
-       $response = [
-        'message' => 'Successfully remove.',
-    ];
-    return response()->json($response);
+        // dd($request->all());
+        HomeAroductSliderCategory::where('id', $request->id)->delete();
+        $response = [
+            'message' => 'Successfully remove.',
+        ];
+        return response()->json($response);
     }
 
     public function categoryProSlidersave(Request $request)
@@ -165,23 +166,23 @@ class CategoryController extends Controller
         //dd($request->all());
         ///exit; 
         $validator = Validator::make(
-                $request->all(),
-                [
-                    'name'      => 'required|unique:categorys,name',
-                    'status'    => 'required',
-                ],
-                [
-                    //'name'   => 'Category name is required',
-                    'status' => 'Status is required',
-                ]
-            );
-            if ($validator->fails()) {
-                return response()->json(['errors' => $validator->errors()], 422);
-            }
+            $request->all(),
+            [
+                'name'      => 'required|unique:categorys,name',
+                'status'    => 'required',
+            ],
+            [
+                //'name'   => 'Category name is required',
+                'status' => 'Status is required',
+            ]
+        );
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
 
 
-        
-        
+
+
         if (empty($request->id)) {
             $validator = Validator::make(
                 $request->all(),
@@ -260,7 +261,7 @@ class CategoryController extends Controller
             $data->mobile_view_class =  $request->input('mobile_view_class');
             $data->save();
         }
-        
+
         $response = [
             'message' => 'Successfull',
         ];
@@ -271,11 +272,42 @@ class CategoryController extends Controller
         try {
             $categories = Categorys::with('children.children.children.children.children')->where('parent_id', 0)->get();
             // dd($categories);
-            return response()->json($categories);
+            return response()->json(
+                $categories
+            );
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+    public function getSpeacialCategoryList(Request $request)
+    {
+        try {
+            $categories = Categorys::with('children.children.children.children.children')->where('parent_id', 0)->get();
+            $count = Categorys::where('speacial_status', 1)->count();
+
+            $products = [];
+            foreach ($categories as $v) {
+                $products[] = [
+
+                    'id'                => $v->id,
+                    'name'              => $v->name,
+                    'image'             => url($v->file),
+                    'speacial_status'   => $v->speacial_status,
+
+                ];
+            }
+
+            return response()->json([
+                'data'  => $products,
+                'count' => $count,
+
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    } 
+
 
     public function allInacCategory(Request $request)
     {
@@ -293,6 +325,7 @@ class CategoryController extends Controller
             $categories = HomeAroductSliderCategory::join('categorys', 'home_product_slider_category.category_id', '=', 'categorys.id')
                 ->select('categorys.name', 'categorys.status', 'home_product_slider_category.id', 'home_product_slider_category.category_id')
                 ->get();
+
             //dd($categories);
 
             $subcategories = Categorys::select('name', 'id')->where('parent_id', '!=', 0)->get();
@@ -466,5 +499,86 @@ class CategoryController extends Controller
             ];
         }
         return response()->json($formattedResults);
+    }
+
+    public function speacialCatSave(request $request)
+    {
+        $id = $request->category_id;
+        $category = Categorys::find($id);
+
+        
+
+
+        if ($request->hasFile("image")) {
+
+            $validator =  Validator::make(
+                $request->all(),
+                [
+                    'image'      => 'mimes:jpg,png,jpeg,gif,webp|dimensions:min_width=300,min_height=240,max_width=300,max_height=240',
+                ]
+            );
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()], 422);
+            }
+
+
+            $image = $request->image;
+            $imageName = "/upload/" . time() . "." . $image->getClientOriginalExtension();
+            $image->move(public_path("upload"), $imageName);
+
+            if (!empty($category->file) && File::exists(public_path($category->file))) {
+                File::delete(public_path($category->file));
+            }
+
+            $category->update([
+                'file' => $imageName,
+                'speacial_status' => $request->speacial_status,
+            ]);
+
+            if ($category) {
+
+                $images = url($imageName);
+
+                return response()->json([
+                    "status" => 200,
+                    "images" => $images,
+
+                ], 200);
+            } else {
+                return response()->json([
+                    "status" => 500,
+                    "errors" => "Something went wrong"
+                ], 500);
+            }
+        } else{
+
+            $validator =  Validator::make(
+                $request->all(),
+                [
+                    'speacial_status'    => 'required',
+                ]
+            );
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()], 422);
+            }
+            
+            $category->update([
+                'speacial_status' => $request->speacial_status,
+            ]);
+
+            if ($category) {
+
+                return response()->json([
+                    "status" => 200,
+                    "message" => "success",
+
+                ], 200);
+            } else {
+                return response()->json([
+                    "status" => 500,
+                    "errors" => "Something went wrong"
+                ], 500);
+            }
+        }
     }
 }

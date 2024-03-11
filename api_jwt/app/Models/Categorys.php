@@ -26,7 +26,7 @@ class Categorys extends Authenticatable
     'keyword',
     'sort_order',
     'status',
-    'home_status',
+    'speacial_status',
   ];
 
   public function categories()

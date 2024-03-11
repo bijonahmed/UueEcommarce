@@ -1,12 +1,12 @@
 <template>
 <div>
 
-    <body class="bgBackground">
+    <body class="bgBackground mainContent">
         <TopBannarDesktopView />
         <LogoAndPayment />
         <Navbar />
         <!-- Main section start here  -->
-        <section class="main_content mainContent pt-2">
+        <section class="main_content  pt-2">
             <div class="container">
                 <NavSlider />
                 <CategoryPart />
@@ -62,12 +62,12 @@ export default {
 
 <style>
 .bgBackground {
-    background-color: #b077d8;
+    background-color: #b077d8 !important;
 }
 
 .mainContent {
     background-image: url('/images/ECOMMERCE-cover-you-bg.jpeg');
-    background-size: inherit;
+    background-size: contain;
     background-position: top center;
     background-repeat: no-repeat;
 }

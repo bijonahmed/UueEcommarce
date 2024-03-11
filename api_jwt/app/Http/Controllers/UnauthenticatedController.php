@@ -15,26 +15,32 @@ use App\Models\Product;
 use App\Models\Setting;
 use App\Models\Sliders;
 use App\Models\Category;
+use App\Models\Attribute;
 use App\Models\Categorys;
 use App\Models\SellerAds;
 use App\Mail\ExampleEmail;
 use App\Models\dealsbanner;
 use Illuminate\Support\Str;
+use App\Models\OrderHistory;
 use function Ramsey\Uuid\v1;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
-use App\Rules\MatchOldPassword;
-use PhpParser\Node\Stmt\TryCatch;
-use App\Models\User as ModelsUser;
 //use User;
-use App\Http\Controllers\Controller;
+use App\Models\topHeaderBanner;
 
+use App\Rules\MatchOldPassword;
+use App\Models\ProductAttributes;
+use PhpParser\Node\Stmt\TryCatch;
+use App\Models\sliderSideAdsModel;
+use App\Models\User as ModelsUser;
+use App\Http\Controllers\Controller;
+use App\Models\AttributeValues;
 use App\Models\ProductAdditionalImg;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use App\Models\ProductAttributeValue;
+use App\Models\ProductVarrientHistory;
 use App\Models\HomeAroductSliderCategory;
-use App\Models\sliderSideAdsModel;
-use App\Models\topheaderbanner;
 use Workbench\App\Models\User as AppModelsUser;
 
 class UnauthenticatedController extends Controller
@@ -97,18 +103,35 @@ class UnauthenticatedController extends Controller
 
     public function topSellProducts()
     {
-        $data = Product::orderBy('id', 'desc')->select('id', 'name', 'thumnail_img', 'slug')->limit(12)->get();
-        foreach ($data as $v) {
-            $result[] = [
-                'id'   => $v->id,
-                'name' => substr($v->name, 0, 12) . '...',
-                'thumnail'  => !empty($v->thumnail_img) ? url($v->thumnail_img) : "",
-                'slug'     => $v->slug,
-            ];
+        // $data = Product::orderBy('id', 'desc')->select('id', 'name', 'thumnail_img', 'slug')->limit(12)->get();
+        // foreach ($data as $v) {
+        //     $result[] = [
+        //         'id'   => $v->id,
+        //         'name' => substr($v->name, 0, 12) . '...',
+        //         'thumnail'  => !empty($v->thumnail_img) ? url($v->thumnail_img) : "",
+        //         'slug'     => $v->slug,
+        //     ];
+        // }
+        $topSellingProducts = OrderHistory::selectRaw('product_id, SUM(quantity) as total_quantity')->groupBy('product_id')->orderBy('total_quantity', 'desc')->limit(20)->get();
+
+        foreach ($topSellingProducts as $product) {
+            $productDetails = Product::select('name', 'slug', 'thumnail_img', 'price', 'discount', 'flat_rate_price', 'free_shopping')
+                ->where('id', $product->product_id)
+                ->first();
+
+            $product->name                  = $productDetails->name;
+            $product->slug                  = $productDetails->slug;
+            $product->thumnail_img          = url($productDetails->thumnail_img);
+
+            $product->price                 = $productDetails->price;
+            $product->discount              = $productDetails->discount;
+            $product->flat_rate_price      = $productDetails->flat_rate_price;
+            $product->free_shopping         = $productDetails->free_shopping;
+            // $product->name          = $productDetails->name;
+            // $product->slug          = $productDetails->slug;
         }
 
-        // dd($result);
-        return response()->json($result, 200);
+        return response()->json($topSellingProducts, 200);
     }
 
     public function slidersImages()
@@ -136,26 +159,38 @@ class UnauthenticatedController extends Controller
         $category_ids = explode(',', $category_id);
         $categorys = ProductCategory::join('product', 'product.id', '=', 'produc_categories.product_id')
             ->join('categorys', 'categorys.id', '=', 'produc_categories.category_id')
-            ->select('produc_categories.product_id', 'product.name', 'product.slug', 'product.thumnail_img', 'categorys.name as cate_name', 'categorys.slug as catslug')
+            ->select('produc_categories.product_id', 'product.name', 'product.slug', 'product.thumnail_img', 'product.price', 'product.discount','product.discount_status', 'product.flat_rate_status', 'product.flat_rate_price', 'product.free_shopping', 'categorys.name as cate_name', 'categorys.slug as catslug')
             ->whereIn('produc_categories.category_id', $category_ids)
             ->orderByDesc('product.id')
             ->limit(10)
             ->get();
-        // Group the results by category name
+            
         $groupedCategories = $categorys->groupBy('cate_name');
-        // Initialize the array for the final result
         $categories = [];
-        // Iterate through the grouped categories
         foreach ($groupedCategories as $categoryName => $categoryGroup) {
-            // Initialize the array for the products in each category
             $products = [];
-            // Iterate through products in the category group
             foreach ($categoryGroup as $v) {
                 $products[] = [
-                    'product_id' => $v->product_id,
-                    'name' => substr($v->name, 0, 12) . '...',
-                    'thumnail' => !empty($v->thumnail_img) ? url($v->thumnail_img) : "",
-                    'slug' => $v->slug,
+                    'product_id'        => $v->product_id,
+                    'id'                => $v->product_id,
+                    'name'              => substr($v->name, 0, 12) . '...',
+                    'thumnail_img'      => !empty($v->thumnail_img) ? url($v->thumnail_img) : "",
+                    'thumnail'          => !empty($v->thumnail_img) ? url($v->thumnail_img) : "",
+                    'slug'              => $v->slug,
+                    'price'             => $v->price,
+                    'discount'          => $v->discount,
+                    'discount_status'          => $v->discount_status,
+                    'flat_rate_status'  => $v->flat_rate_status,
+                    'flat_rate_price'   => $v->flat_rate_price,
+                    'free_shopping'     => $v->free_shopping,
+
+                    'product_name'              => $v->name,
+                    'image'             => url($v->thumnail_img),
+                    'thumnail_img'             => url($v->thumnail_img),
+                    'business_name'     => $v->business_name,
+                    'stock_quantity'    => $v->stock_qty,
+                    'mini_quantity'     => $v->stock_mini_qty,
+
                 ];
             }
             // Add the category and its products to the final result
@@ -392,6 +427,7 @@ class UnauthenticatedController extends Controller
     {
 
         $find_sellers  = User::where('role_id', 3)->where('status', 1)->where('home_status', 1)->select('id', 'business_name', 'business_logo', 'business_name_slug')->limit(12)->orderBy('id', 'desc')->get();
+        $sellercount = User::where('role_id', 3)->where('status', 1)->where('home_status', 1)->count();
 
         foreach ($find_sellers as $v) {
             $results[] = [
@@ -403,7 +439,10 @@ class UnauthenticatedController extends Controller
         }
 
 
-        return response()->json($results);
+        return response()->json([
+            'data' => $results,
+            'data_count' => $sellercount,
+        ], 200);
     }
     public function findProductSlug($slug)
     {
@@ -417,24 +456,31 @@ class UnauthenticatedController extends Controller
                 'description',
                 DB::raw('CAST(product.price AS SIGNED) as price'), // Cast product.price as decimal
                 'product.discount',
+                'product.discount_status',
                 'product.stock_qty',
-                'product.stock_mini_qty'
+                'product.stock_mini_qty',
+                'product.free_shopping',
+                'product.brand',
+                "product.stock_status"
             )
             ->first();
         //dd($data['pro_row']);
         $product_chk       = Product::where('product.slug', $slug)
-            ->select('product.id', 'product.id as product_id', 'product.name as pro_name', 'product.slug as pro_slug', 'product.thumnail_img', 'description', 'product.price', 'product.discount', 'product.stock_qty', 'product.stock_mini_qty')
+            ->select('product.id', 'product.id as product_id', 'product.name as pro_name', 'product.slug as pro_slug', 'product.thumnail_img', 'description', 'product.price', 'product.discount', 'product.stock_qty', 'product.stock_mini_qty', 'product.free_shopping')
             ->get();
         $products = [];
+        // dd($product_chk);
+        // return false;
         foreach ($product_chk as $key => $v) {
             $products[] = [
-                'id'           => $v->id,
-                'product_id'   => $v->product_id,
-                'product_name' => $v->pro_name,
-                'discount'     => $v->discount,
-                'price'        => number_format($v->price, 2),
-                'thumnail_img' => url($v->thumnail_img),
-                'pro_slug'     => $v->pro_slug,
+                'id'                => $v->id,
+                'product_id'        => $v->product_id,
+                'product_name'      => $v->pro_name,
+                'discount'          => $v->discount,
+                'price'             => number_format($v->price, 2),
+                'thumnail_img'      => url($v->thumnail_img),
+                'pro_slug'          => $v->pro_slug,
+                'free_shopping'     => $v->free_shopping,
 
             ];
         }
@@ -446,10 +492,31 @@ class UnauthenticatedController extends Controller
                 'thumnail'     => !empty($v->images) ? url($v->images) : "",
             ];
         }
+
         $data['slider_img']    = !empty($mul_slider_img) ? $mul_slider_img : "";
         $data['featuredImage'] = url($findproductrow->thumnail_img);
         $data['product']      = $products;
-        return response()->json($data, 200);
+
+        // fetch brand 
+        $brand_id = $data['pro_row']->brand;
+
+        $brand = Brands::where('id', $brand_id)->first();
+        $formateBrand = [];
+        $formateBrand[] = [
+            "id"        => !empty($brand->id)? $brand->id : '',
+            "name"      => !empty($brand->name)? $brand->name : '', 
+            "slug"      => !empty($brand->slug)? $brand->slug : '', 
+            "image"     => !empty($brand->image) ? url($brand->image) : '',
+            "status"    => !empty($brand->status)? $brand->status : '',
+        ];
+
+        // dd($formateBrand);
+        // return false;
+
+        return response()->json([
+            'data' => $data,
+            'brand' => $formateBrand,
+        ], 200);
     }
 
     public function findCategorys($slug)
@@ -506,7 +573,8 @@ class UnauthenticatedController extends Controller
         }
         return response()->json($formatedData, 200);
     }
-    public function getdealsbannersads(){
+    public function getdealsbannersads()
+    {
         $dealbanner    = dealsbanner::all();
 
         $formatedData = [];
@@ -539,9 +607,12 @@ class UnauthenticatedController extends Controller
         }
         return response()->json($formatedData, 200);
     }
-    public function allsellerListadmin (Request $request)
+    public function allsellerListadmin(Request $request)
     {
         $sellershop = User::where('role_id', 3)->get();
+
+        $activeData = User::where('home_status', 1)->count();
+
         $formatedData = [];
         foreach ($sellershop as $Key => $value) {
             $formatedData[] = [
@@ -555,17 +626,21 @@ class UnauthenticatedController extends Controller
                 'home_status'              => $value->home_status,
             ];
         }
-        return response()->json($formatedData, 200);
+        return response()->json([
+            'data' => $formatedData,
+            'active_data' => $activeData,
+        ], 200);
     }
-    
-    public function featchcoupon(){
-        
+
+    public function featchcoupon()
+    {
+
         $coupons = coupons::all();
         $formatedData = [];
         foreach ($coupons as $Key => $value) {
             $formatedData[] = [
-                
-                'id'            => $value->id,                
+
+                'id'            => $value->id,
                 'name'          => $value->name,
                 'slug'          => $value->slug,
                 'promocode'     => $value->promocode,
@@ -578,9 +653,31 @@ class UnauthenticatedController extends Controller
         }
         return response()->json($formatedData, 200);
     }
-    public function getbanner(){
+    public function getCoupon(request $request, $code)
+    {
 
-        $banner = topheaderbanner::first();
+
+        $coupons = coupons::where('promocode', $code)->where('status', 1)->first();
+
+        // Check if coupon is not found or not active
+        if (!$coupons) {
+            // Send error response
+            return response()->json([
+                'status' => false,
+                'message' => 'Coupon not found or inactive.'
+            ], 404); // You can use any appropriate HTTP status code
+        }
+
+        return response()->json([
+            'status' => true,
+            'data' => $coupons,
+
+        ]);
+    }
+    public function getbanner()
+    {
+
+        $banner = topHeaderBanner::first();
 
 
         if ($banner->count() > 0) {
@@ -596,7 +693,8 @@ class UnauthenticatedController extends Controller
             ], 202);
         }
     }
-    public function topadsbanner(){
+    public function topadsbanner()
+    {
         $adsBannder = sliderSideAdsModel::first();
 
         if ($adsBannder->count() > 0) {
@@ -613,6 +711,67 @@ class UnauthenticatedController extends Controller
                 'message' => "Banner Not Found"
             ], 202);
         }
+    }
+    public function getbrandproductList($slug)
+    {
+        // $getbrands = $request->slug;
+        $getbrands = Brands::where("slug", $slug)->first();
 
+        $id = $getbrands->id;
+
+        $getProduct = Product::where("brand", $id)->where("status", 1)->get();
+
+        $products = [];
+        foreach ($getProduct as $v) {
+            $products[] = [
+
+                'id'                => $v->id,
+                'name'              => $v->name,
+                'product_name'              => $v->name,
+                'slug'              => $v->slug,
+                'image'             => url($v->thumnail_img),
+                'thumnail_img'             => url($v->thumnail_img),
+                'business_name'     => $v->business_name,
+                'price'             => $v->price,
+                'discount'          => $v->discount,
+                'stock_quantity'    => $v->stock_qty,
+                'mini_quantity'     => $v->stock_mini_qty,
+
+            ];
+        }
+
+        $data['products']                = !empty($products) ? $products : "";
+
+        // dd($data['products']);
+        return response()->json($data);
+    }
+
+    public function getSpeacialCatList(Request $request)
+    {
+        try {
+            $categories = Categorys::with('children.children.children.children.children')->where('speacial_status', 1)->where('parent_id', 0)->get();
+            $count = Categorys::where('speacial_status', 1)->count();
+
+            $products = [];
+            foreach ($categories as $v) {
+                $products[] = [
+
+                    'id'                => $v->id,
+                    'name'              => $v->name,
+                    'slug'              => $v->slug,
+                    'image'             => url($v->file),
+                    'speacial_status'   => $v->speacial_status,
+
+                ];
+            }
+
+            return response()->json([
+                'data'  => $products,
+                'count' => $count,
+
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }

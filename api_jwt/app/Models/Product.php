@@ -45,6 +45,7 @@ class Product extends Authenticatable
         'tax_status',
         'thumnail_img',
         'images',
+        'brand',
         'status'
     ];
 

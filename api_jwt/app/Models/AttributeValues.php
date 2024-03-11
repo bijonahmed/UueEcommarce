@@ -14,6 +14,7 @@ class AttributeValues extends Authenticatable
   use HasApiTokens, HasFactory, Notifiable;
   public $table = "attributes_values";
   protected $fillable = [
+    'id',
     'attributes_id',
     'name',
     'status',

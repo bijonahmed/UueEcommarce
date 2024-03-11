@@ -14,12 +14,14 @@
                                 <div class="form-group mb-2">
                                     <label for="" class="text-dark fs-6">Promo Name <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" name="name" id="" class="form-control" ref="name">
+                                    <input type="text" name="name" autocomplete="off" id="" class="form-control"
+                                        ref="name">
                                 </div>
                                 <div class="form-group mb-2">
                                     <label for="" class="text-dark fs-6">Promo Code <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" name="promocode" id="" class="form-control" ref="promocode">
+                                    <input type="text" name="promocode" autocomplete="off" id="" class="form-control"
+                                        ref="promocode">
                                 </div>
                                 <div class="form-group mb-2">
                                     <label for="" class="text-dark fs-6">Coupon type <span
@@ -32,20 +34,27 @@
                                 <div class="form-group mb-2">
                                     <label for="" class="text-dark fs-6">Min. Shopping Amount <span
                                             class="text-danger">*</span></label>
-                                    <input type="text" name="min_shopping" id="" class="form-control"
+                                    <input name="min_shopping" type="number" autocomplete="off" id="amountInput"
+                                        v-model.number="amount" @input="validateDiscount" class="form-control"
                                         ref="min_shopping">
                                 </div>
                                 <div class="form-group mb-2">
                                     <label for="" class="text-dark fs-6">Discount in percentage(%) <span
                                             class="text-secondary" style="font-size: 12px;">(If coupon type
                                             "Percentage")</span></label>
-                                    <input type="text" name="d_percent" id="" class="form-control" ref="d_percent">
+                                    <input type="text" name="d_percent" autocomplete="off" id="numericInput"
+                                        @input="validateNumber" v-model="enteredNumber" class="form-control"
+                                        ref="d_percent">
+                                    <p v-if="verrors" class="text-danger mt-1">{{ verrors }}</p>
+
                                 </div>
                                 <div class="form-group mb-2">
                                     <label for="" class="text-dark fs-6">Discount in Fixed amount($) <span
                                             class="text-secondary" style="font-size: 12px;">(If coupon type "Fiexed
                                             Amount")</span></label>
-                                    <input type="text" name="d_fvalue" id="" class="form-control" ref="d_fvalue">
+                                    <input type="number" id="discountInput" autocomplete="off" v-model.number="discount"
+                                        @input="validateDiscount" name="d_fvalue" class="form-control" ref="d_fvalue">
+                                    <p v-if="discountError" class="text-danger mt-1">{{ discountError }}</p>
                                 </div>
                                 <div class="form-group mb-2">
                                     <label for="" class="text-dark fs-6">Status <span
@@ -56,7 +65,8 @@
                                     </select>
                                 </div>
                                 <div class="form-group mb-2">
-                                    <button type="submit" class="btn-success w-100 py-1 border-0">
+                                    <button type="submit" :disabled="!!discountError || !!error"
+                                        class="btn-success subBTN w-100 py-1 border-0">
                                         <i class="bx bx-check-circle mr-1"></i>Submit
                                     </button>
                                 </div>
@@ -82,12 +92,44 @@ export default {
             promocode: null,
             status: "1",
             errors: {},
+            insertData: {
+                percentage: '',
+            },
+            enteredNumber: '',
+            amount: null,
+            discount: null,
+            discountError: '',
+            error: '',
+            
         };
     },
     mounted() {
     },
-    methods: {
 
+    methods: {
+        validateDiscount() {
+            if (this.discount > this.amount) {
+                this.discountError = 'Discount amount cannot be greater than the total amount.';
+            } else {
+                this.discountError = '';
+            }
+        },
+        validateNumber() {
+            const numericValue = parseFloat(this.enteredNumber);
+            if (isNaN(numericValue)) {
+                this.error = 'Please enter a valid number.';
+            } else {
+                // this.error = '';
+                // If you need to further validate against a maximum value, you can do it here
+                const maxValue = 100; // Example: Maximum allowed value
+                if (this.enteredNumber > maxValue) {
+                    this.error = 'Maximum Discount 99%.';
+                } else {
+                    this.error = '';
+                }
+            }
+
+        },
         savecoupon() {
             const formData = new FormData();
             formData.append('name', this.$refs.name.value);
@@ -131,3 +173,9 @@ export default {
     }
 };
 </script>
+
+<style>
+.subBTN:disabled {
+    background-color: lightgray;
+}
+</style>

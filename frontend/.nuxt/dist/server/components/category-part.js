@@ -1,14 +1,14 @@
-exports.ids = [7];
+exports.ids = [8];
 exports.modules = {
 
-/***/ 127:
+/***/ 128:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/CategoryPart.vue?vue&type=template&id=3c07e276&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/CategoryPart.vue?vue&type=template&id=32e991c8&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -17,14 +17,14 @@ var render = function render() {
   }, [_vm._v("Loading...")]), _vm._ssrNode(" <img src=\"/loader/loader.gif\" loading=\"lazy\" alt=\"Loader\">")], 2)]) : _vm._e(), _vm._ssrNode(" "), _vm._l(_vm.prouducts, function (item) {
     return _vm._ssrNode("<div class=\"col-xl-2 col-lg-3 col-md-3 col-sm-3 col-3\">", "</div>", [_c('Nuxt-link', {
       attrs: {
-        "to": `/product-details/${item.slug}`
+        "to": `/category/category-grid?slug=${item.slug}`
       }
     }, [_c('div', {
       staticClass: "cat_div"
     }, [_c('img', {
       staticClass: "img-fluid",
       attrs: {
-        "src": item.thumnail,
+        "src": item.image,
         "loading": "lazy"
       }
     }), _vm._v(" "), _c('p', [_vm._v(_vm._s(item.name))])])])], 1);
@@ -32,7 +32,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/CategoryPart.vue?vue&type=template&id=3c07e276&
+// CONCATENATED MODULE: ./components/CategoryPart.vue?vue&type=template&id=32e991c8&
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/CategoryPart.vue?vue&type=script&lang=js&
 /* harmony default export */ var CategoryPartvue_type_script_lang_js_ = ({
@@ -48,8 +48,8 @@ var staticRenderFns = [];
   methods: {
     async fetchDefaultProduct() {
       this.loading = true;
-      await this.$axios.get(`/unauthenticate/limitedProducts`).then(response => {
-        this.prouducts = response.data;
+      await this.$axios.get(`/unauthenticate/speacialCategory`).then(response => {
+        this.prouducts = response.data.data;
       }).catch(error => {
         // Handle error
       }).finally(() => {

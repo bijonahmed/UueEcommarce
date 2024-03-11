@@ -25,12 +25,24 @@ class ProductVarrientHistory extends Authenticatable
   }
   public static function getProductVarientHistory($product_id)
   {
-    $returnData = DB::select("SELECT product_variants_history.pro_varient_id,product_variants.file,product_variants_history.id, product_variants.sku, product_variants.qty, product_variants.price,product_variants_history.product_id,product_variants_history.id, product_variants_history.pro_varient_id,
+    $returnData = DB::select("SELECT 
+    product_variants_history.pro_varient_id,
+    product_variants.file,
+    product_variants_history.id,
+     product_variants.sku, 
+     product_variants.qty, 
+     product_variants.price,
+     product_variants_history.product_id,
+     product_variants_history.id, 
+     product_variants_history.pro_varient_id,
+     
+
                   GROUP_CONCAT(COALESCE(product_variants_history.varient_name,'') SEPARATOR '=>') as varient_name 
                   FROM `product_variants_history` 
                   LEFT JOIN product_variants ON (product_variants.id=product_variants_history.pro_varient_id)
                   where product_variants_history.product_id=$product_id 
                   group by product_variants_history.pro_varient_id");
+
     return $returnData;
   }
 }
